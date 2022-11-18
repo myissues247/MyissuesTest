@@ -1,0 +1,105 @@
+.tabs {
+        padding: 10px 0px; 
+   }
+   
+   
+    .card {
+         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+         overflow-x: auto;
+         overflow-y: hidden;
+    }
+
+
+   
+
+   :host ::ng-deep .p-card{
+           box-shadow: 0px 0px 4px  rgba(0, 0, 0, 0.3);
+       }
+   
+       :host ::ng-deep .p-steps{
+       width: 100%;
+       margin: 0 auto;
+       border-radius: 7px; }
+       :host ::ng-deep .p-steps-item{
+       padding-top: 5px;
+       padding-bottom: 5px;
+         overflow: hidden !important;
+     }
+     :host ::ng-deep .p-steps-current{
+       overflow: hidden !important;
+   
+       }
+       :host ::ng-deep .p-steps-item::before{
+         bottom: 0;
+         top:0;
+         background: #ccc;
+         opacity: 50%;
+         color: black;
+        
+     }
+    
+     :host ::ng-deep .p-steps-current::before{
+       content: '';
+       opacity: 0%;
+     }
+    
+     :host ::ng-deep .p-menuitem-link {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+    }
+    
+    :host ::ng-deep li.p-steps-item {
+        padding: 8px 0px !important;
+    }
+    
+    :host ::ng-deep span.p-steps-number {
+        margin-right: 10px;
+    }
+    
+   
+   @media screen and (max-width: 600px){
+     
+:host ::ng-deep .p-steps{
+         width:120% !important;
+}
+.py-3{
+       overflow: scroll !important;
+}
+   }
+     
+ 
+section {
+        width: 100%;
+        margin : 10px auto;
+}
+
+
+@media screen and (max-width: 700px) {
+        section {
+                width: 90%;
+                padding: 0px 3px;
+        }
+}
+
+@media screen and (max-width: 400px) {
+        section {
+                width: 100%;
+        }
+           
+}
+
+
+        .step-container::-webkit-scrollbar-thumb {
+                background: #00000017;
+            }
+        .step-container::-webkit-scrollbar {
+                height: 7px;
+                backface-visibility: visible;
+                opacity: 1;
+            }
+
+
+      
+      

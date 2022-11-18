@@ -1,0 +1,39 @@
+.p-2{
+    /* width: 150px; */
+    cursor: pointer;
+}
+.p-2:hover{
+    background-color: #036068;
+}
+
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary:focus,
+.btn.btn-outline-primary:active,
+.btn.btn-outline-primary.active {
+  color:white;
+  background-color:transparent;
+  border-color: #fdb934;
+}
+.btn.btn-outline-primary{
+   font-size: x-large;
+   border-radius: 7px;
+    color:white;
+    background-color: #fdb934;
+}
+
+.btn.btn-outline-success:hover,
+.btn.btn-outline-success:focus,
+.btn.btn-outline-success:active,
+.btn.btn-outline-success.active {
+  color:white;
+  border:#fdb934 2px solid;
+  background-color: transparent;
+  
+}
+.btn.btn-outline-success{
+    font-size: x-large;
+   border-radius: 7px;
+    color:white;
+    background-color: transparent;
+    border: thin;
+}

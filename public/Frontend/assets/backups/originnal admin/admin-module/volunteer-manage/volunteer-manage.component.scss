@@ -1,0 +1,12 @@
+
+@import '../../../assets/Stylesheets/responsive.scss';
+
+.checkmark.checked {
+    border-radius: 50%;
+    border: 2px solid #63889b;
+    background-color: transparent;
+}
+
+.checkmark.checked:after {
+    display: block;
+}

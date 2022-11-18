@@ -1,0 +1,58 @@
+<div class="filter-button">
+    <button pButton type="text" label='filter' (click)='display = true'  icon="pi pi-filter" class='p-button-warning'></button>
+</div>
+    <section class='container-fluid'>
+    <div class="row">
+        <div class="col-12">
+            <p-sidebar [(visible)]="display"> 
+                    <form class='filter'> 
+                        <h4><small>Select Location</small></h4>
+                        <div class="select select-country">
+                            <p-dropdown [options]="countries" [filter]='true' [(ngModel)]="selectedCountry" placeholder="Select a Country" optionLabel="countryName" optionValue="_id" [showClear]="true" (onChange)='change_country($event)' name='selectCountry'></p-dropdown>
+                        </div>
+                        <div class="select select-state" *ngIf='selectedCountry'>
+                            <p-dropdown [options]="states" [filter]='true' [(ngModel)]="selectedState" placeholder="Select a state" optionLabel="stateName" optionValue="stateName" [showClear]="true" (onChange)="change_state($event)" name='selectState'></p-dropdown>
+                        </div>
+                        <div class="select select-city" *ngIf='selectedState'>
+                            <p-dropdown [options]="cities" [filter]='true' [(ngModel)]="selectedCity" placeholder="Select a city" optionLabel="cityName" optionValue="cityName" [showClear]="true" (onChange)="change_city($event)"  name='selectCity'></p-dropdown>
+                        </div>
+                        <h4><small>Category</small></h4> 
+                        <div class="select select-country">
+                            <p-dropdown [options]="categories" [filter]='true' [(ngModel)]="selectedCategory" placeholder="Select a Category" optionLabel="title" optionValue="slug" [showClear]="true" (onChange)='change_category($event)' name='selectCategory'></p-dropdown>
+                        </div>
+                        <div class="apply">
+                            <button pButton type="text" (click)='apply()'  icon="pi pi-check-circle" label="apply" class='mt-3 p-button-warning'></button>
+                        </div>
+                    </form>
+            </p-sidebar>
+        </div>
+    </div> 
+</section>
+
+
+
+
+
+<section class='container-fluid'>
+    <div class="row">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto pt-5">
+            <div class="ad"> 
+                <div class="thumbnail">
+                    <div class="image">
+                        <img src="assets\images\banner2.jpg" alt="">
+                    </div>
+                    <div class="misc">
+                     <div class="buttons">
+                         <button pButton type="button" icon="pi pi-dollar" iconPos="left" class='p-button-raised p-button-rounded p-button-warning p-button-lg mr-1'></button>
+                         <button pButton type="button" icon="pi pi-eye" iconPos="left" class='p-button-raised p-button-rounded p-button-info p-button-lg mr-1'></button>
+                         <!--<button pButton type="button" icon="pi pi-share-alt" iconPos="left"    class='p-button-raised p-button-rounded p-button-info p-button-lg mr-1'></button>-->
+                     </div>
+                     <h4>Deepak Sharma</h4>
+                     <h4>Homeless</h4>
+                     <p class='title'><!--{{ ad.adTitle }} - {{ ad.city }}, {{ ad.state }} {{ ad.approvedOn | date:"medium" }}--></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>

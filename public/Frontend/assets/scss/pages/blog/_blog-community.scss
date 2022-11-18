@@ -1,0 +1,78 @@
+.blog-community {
+    background-color: #f9f9f9;
+}
+
+.blog-community-card {
+    border: 1px solid #c5c5c3;
+    background-color: #f1f1f1;
+    padding: 15px 60px 5px 10px;
+    @media (max-width: 767px) {
+       padding-right: 30px;
+    }
+
+    &--profile-image {
+        width: 39px;
+        height: 39px;
+        border-radius: 50%;
+        object-fit: contain;
+        border: 1px solid #474444;
+        @media (max-width: 767px) {
+            width: 29px;
+            height: 29px;
+        }
+    }
+
+    &--community-name {
+        @include font-style(16px, 400, #292727);
+        @media (max-width: 767px) {
+            font-size: 14px;
+        }
+    }
+
+    &--post-date{
+        color: #989797;
+        padding-left: 10px;
+    }
+
+    &--title{
+        @include font-style(22px, 600, #292727);
+        @media (max-width: 767px) {
+            font-size: 18px;
+        }
+    }
+
+    &--description{
+        @include font-style(16px, 400, #292727);
+        padding: 10px 0;
+        @media (max-width: 767px) {
+            font-size: 14px;
+        }
+    }
+
+    &--read-more-btn{
+        @include font-style(16px, 500, #000);
+        display: inline-block;
+        margin-bottom: 10px;
+        &:hover {
+            color: $color-cyan;
+            text-decoration: underline;
+        }
+    }
+
+    &--post-img {
+        border: 1px solid #606060;
+        border-radius: 3px;
+        background: #c5c5c3;
+        width: 100%;
+    }
+
+    &--action-btn {
+        color: #474444;
+        display: inline-block;
+        margin-top: 5px;
+
+        &:hover {
+            color: $color-pink;
+        }
+    }
+}

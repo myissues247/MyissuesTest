@@ -1,0 +1,203 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1" 
+          (click)="newProduct()"></button>
+      </ng-template>
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['title','country.name','representative.name','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Sponsors</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="btn-max"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Title
+          </th>
+          <th>Image</th>
+          <th>Status
+          </th>
+          <th>Actions
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Title</span>
+            {{product.title}}
+          </td>
+          <td> <span class="p-column-title">Image</span>
+            <img src="{{imagepath}}{{product.imagePath}}" [alt]="product.title" width="120" class="p-shadow-4" />
+          </td>
+          <td> <span class="p-column-title">Status</span>
+            <input type="hidden" value="{{product._id}}" #idInput name="id"><input type="hidden" value="{{product.description}}" #descInput name="description">
+            <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(idInput.value)"></button>
+            <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(idInput.value)"></button>
+          </td>
+          <td> <span class="p-column-title">Actions</span>
+            <!-- <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-mr-1" (click)="showProduct(product)"></button>
+            <button pButton pRipple icon="fa fa-pencil" class="p-button-rounded p-button-warning p-mr-1" (click)="editProduct(product)"></button>
+            <button pButton pRipple icon="fa fa-trash-o" class="p-button-rounded p-button-danger" (click)="deleteBanner(product)"></button> -->
+            <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+            <button class="btn rounded-circle text-center ml-1" (click)="editProduct(product)" style="background: #FBC02D;color:black;"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-danger rounded-circle text-center ml-1" (click)="deleteBanner(product)"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post.length : 0 }} Sponsor.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  
+  <!-- New Banner Creation Modal -->
+  <p-dialog header="Add Sponsor" [(visible)]="productDialog" [style]="{width: '550px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+      <div class="p-field">
+        <label for="Title">Title</label>
+        <input type="text" pInputText id="Title" name="title" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Title is required.</small>
+      </div>
+  
+      <div class="p-field">
+        <label for="Image">Image</label>
+        <p-fileUpload name="demo[]" (onSelect)="selectimage($event.files)" accept="image/*"
+          maxFileSize="1000000" [showUploadButton]="false" name="image[]">
+          <ng-template let-file pTemplate="file">
+            <div class="ui-fileupload-row " style="vertical-align: middle;">
+                <div><span class="p-mr-1">{{file.name}}</span>
+                </div>
+            </div>
+          </ng-template>
+        </p-fileUpload>
+        <small class="p-invalid" *ngIf="submitted">File is required.</small>
+      </div>
+  
+      <div class="p-field">
+        <label for="description">Description</label>
+        <input type="text" pInputText id="sequence" required autofocus name="description" [(ngModel)]="descProp"/>
+        <small class="p-invalid" *ngIf="submitted && !descProp">Description is required.</small>
+      </div>
+  
+      <div class="p-field">
+        <label for="Status">Status</label>
+        <p-selectButton [options]="stateOptions" name="status" [(ngModel)]="statusProp" optionLabel="label" optionValue="value"></p-selectButton>
+        <small class="p-invalid" *ngIf="submitted && !statusProp">Status is required.</small>
+      </div>
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="submit()"></button>
+    </ng-template>
+  
+  </p-dialog>
+  
+  <!-- End of  Add New Banner Modal -->
+  
+  <!-- Start of Edit Banner Modal -->
+  <p-dialog header="Edit Sponsor" [(visible)]="editDialog" [style]="{width: '550px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+      <img src="{{imagepath}}{{products.imagePath}}" [alt]="products.image" class="product-image" *ngIf="products.imagePath" width="80%" height="170" class="mx-auto d-block p-shadow-4">
+      <div class="p-field">
+        <label for="Title">Title</label>
+        <input type="text" pInputText id="Title" name="title" [(ngModel)]="products.title" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !products.title">Title is required.</small>
+      </div>
+  
+      <div class="p-field">
+        <label for="Image">Image</label>
+        <p-fileUpload name="demo[]" (onSelect)="editselectimage($event.files)" accept="image/*"
+          maxFileSize="1000000" [showUploadButton]="false" name="image[]">
+          <ng-template let-files pTemplate="file">
+            <div class="ui-fileupload-row " style="vertical-align: middle;">
+                <div><span class="p-mr-1">{{files.name}}</span>
+                </div>
+            </div>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+  
+      <div class="p-field">
+        <label for="description">Description</label>
+        <input type="text" pInputText id="description" required autofocus name="description" [(ngModel)]="products.description"/>
+        <small class="p-invalid" *ngIf="submitted && !products.description">Description is required.</small>
+      </div>
+  
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideEditDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="UpdateBanner()"></button>
+    </ng-template>
+  
+  </p-dialog>
+  
+  <!-- End of Edit Banner Modal -->
+  
+  <!-- Start of Show Banner Modal -->
+  <p-dialog header="Show Sponsor Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+      <img src="{{imagepath}}{{products.imagePath}}" [alt]="products.image" class="product-image" *ngIf="products.imagePath" width="90%" height="170" class="mx-auto d-block p-shadow-4">
+      <div class="p-field">
+        <label for="Title">Title</label>
+        <input type="text" pInputText id="Title" name="title" [disabled]="products.title" [(ngModel)]="products.title" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !products.title">Title is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="description">Description</label>
+        <input type="text" pInputText id="description" required autofocus name="description" [disabled]="products.description" [(ngModel)]="products.description"/>
+        <small class="p-invalid" *ngIf="submitted && !products.description">Description is required.</small>
+      </div>
+  
+  
+      <div class="p-field">
+        <label for="Status">Status</label>
+        <input type="text" pInputText id="Status" required autofocus name="status" [disabled]="products.sequence" value="{{products.status | statuschange}}"/>
+        <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+      </div>
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+    </ng-template>
+  
+  </p-dialog>
+  
+  <!-- End of Edit Banner Modal -->
+  
+  
+  
+  <!-- Confirm Dialog -->
+  
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  
+  <!-- Message -->
+  
+  <p-toast></p-toast>

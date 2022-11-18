@@ -1,0 +1,297 @@
+<div class="container-fluid d-flex justify-content-end">
+        <div class="p-2 bd-highlight">
+                <a class="btn custom" data-toggle="modal" data-target="#SignInModal"
+                        style="margin-bottom: 15px !important;" data-backdrop="false" #open *ngIf='!logged'>Sign In</a>
+        </div>
+        <div class="p-2 pl-3 pr-5">
+                <a href="javscript::void(0);" style='position: relative'>
+                  <img src="assets/images/cart.png" style='width: 25px; height: 22px;' alt="Cart">
+                  <span class="cart-number">1</span>
+                  <span class="cart-price">0.00</span>
+                </a>
+        </div>
+        <!-- <div class="p-2"><img src="assets/images/cart.png" alt="cart"  style='width: 25px; height: 22px;'></div> -->
+        <div class="p-2 mx-3" style='color: black'>E / F</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="SignInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Sign In into Your Account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeButton>
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                                <div class="form-group mt-4">
+                                                        <div class="p-inputgroup">
+                                                                <span class="p-inputgroup-addon">
+                                                                        <i class="pi pi-user"></i>
+                                                                </span>
+                                                                <span class="p-float-label">
+                                                                        <input id="float-input15" type="text" pInputText
+                                                                                name="Name" [(ngModel)]="mailProp">
+                                                                        <label for="float-input15">Mail Id</label>
+                                                                </span>
+                                                        </div>
+                                                        <small class="p-error" *ngIf="username">Mail Id is
+                                                                Required.</small>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                                <div class="form-group mt-4">
+                                                        <div class="p-inputgroup">
+                                                                <span class="p-inputgroup-addon">
+                                                                        <i class="pi pi-key"></i>
+                                                                </span>
+                                                                <span class="p-float-label">
+                                                                        <input id="float-input16" pInputText type="password"
+                                                                                name="last"
+                                                                                [(ngModel)]="passwordProp">
+                                                                        <label for="float-input16">Password</label>
+                                                                </span>
+                                                        </div>
+                                                        <small class="p-error" *ngIf="pass">Password is
+                                                                Required.</small>
+                                                </div>
+                                        </div>
+
+                                </div>
+                                <div class="row">
+                                        <div class="col-12" style="width: 100%;">
+                                                <div class="form-group mt-4">
+                                                  <div class="p-inputgroup">
+                                                      <span class="p-inputgroup-addon">
+                                                          <i class="pi pi-eye"></i>
+                                                      </span>
+                                                      <span class="p-float-label">
+                                                        <p-dropdown id="float-input1" [options]="role" optionLabel="name" autoWidth="false"  placeholder="Sign in as" [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="roleProp"></p-dropdown>
+                                                        <label for="float-input1"></label>
+                                                      </span>
+                                                  </div>  
+                                                  <small id="model" class="p-error" *ngIf="ifrole">Role is Required.</small>
+                                                </div>
+                                         </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-12" style="width: 100%;">
+                                                <div class="form-group mt-4">
+                                                        <a class="link" (click)="forgotPwd()">Forgot Password ?</a>
+                                                        <a class='link ml-2' *ngIf='resendVerification' (click)='showVerification()'>Resend Verification Link</a>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                                <div class="form-group mt-4"> -->
+                                                        <p id="err" class="p-error" ></p>
+                                                <!-- </div>
+                                        </div>
+                                </div> -->
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        id="close">Close</button>
+                                <button type="button" class="btn btn-primary" [disabled]='submitting' (click)="SignIn()">Sign In</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+
+<!-- Forgot Pasword Modal Start -->
+
+        <div  data-toggle="modal" data-target="#openPwdModal" data-backdrop="false" id="openforgotPwdModal">
+                
+        </div>
+
+
+<!-- Modal -->
+<div class="modal fade"  id="openPwdModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                                <div class="form-group mt-4">
+                                                        <div class="p-inputgroup">
+                                                                <span class="p-inputgroup-addon">
+                                                                        <i class="pi pi-user"></i>
+                                                                </span>
+                                                                <span class="p-float-label">
+                                                                        <input id="float-input17" type="email" pInputText
+                                                                                name="Name" [(ngModel)]="pwdMailProp">
+                                                                        <label for="float-input17">Mail Id</label>
+                                                                </span>
+                                                        </div>
+                                                        <small class="p-error" id="pwdErr"></small>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-12" style="width: 100%;">
+                                                <div class="form-group mt-4">
+                                                  <div class="p-inputgroup">
+                                                      <span class="p-inputgroup-addon">
+                                                          <i class="pi pi-eye"></i>
+                                                      </span>
+                                                      <span class="p-float-label">
+                                                        <p-dropdown id="float-input1" [options]="role" optionLabel="name" autoWidth="false"  placeholder="Role" [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="roleProp"></p-dropdown>
+                                                        <label for="float-input1"></label>
+                                                      </span>
+                                                  </div>  
+                                                  <small id="model" class="p-error" *ngIf="ifrole">Role is Required.</small>
+                                                </div>
+                                         </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        id="closePwdModal">Close</button>
+                                <button type="button" class="btn btn-primary" (click)="setPwd()">Send Reset Password Link</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+<!-- Mail Verification Modal Start -->
+
+        <div  data-toggle="modal" data-target="#mailVerification" data-backdrop="false" id="openMailVerificationModal">
+                
+        </div>
+
+
+<!-- Modal -->
+<div class="modal fade"  id="mailVerification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Email Verification</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                                <div class="form-group mt-4">
+                                                        <div class="p-inputgroup">
+                                                                <span class="p-inputgroup-addon">
+                                                                        <i class="pi pi-user"></i>
+                                                                </span>
+                                                                <span class="p-float-label">
+                                                                        <input id="float-input17" type="email" pInputText
+                                                                                name="Name" [(ngModel)]="pwdMailProp">
+                                                                        <label for="float-input17">Mail Id</label>
+                                                                </span>
+                                                        </div>
+                                                        <small class="p-error" id="pwdErr"></small>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-12" style="width: 100%;">
+                                                <div class="form-group mt-4">
+                                                  <div class="p-inputgroup">
+                                                      <span class="p-inputgroup-addon">
+                                                          <i class="pi pi-eye"></i>
+                                                      </span>
+                                                      <span class="p-float-label">
+                                                        <p-dropdown id="float-input1" [options]="role" optionLabel="name" autoWidth="false"  placeholder="Role" [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="roleProp"></p-dropdown>
+                                                        <label for="float-input1"></label>
+                                                      </span>
+                                                  </div>  
+                                                  <small id="model" class="p-error" *ngIf="ifrole">Role is Required.</small>
+                                                </div>
+                                         </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        id="closeemailModal">Close</button>
+                                <button type="button" class="btn btn-primary" (click)="resendVerificationLink()">Send Link</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+<!-- Forgot Pasword Modal End -->
+
+
+	<!-- Login Modal Start -->
+	<!-- <div class="modal fade" id="loginModal" aria-labelledby="loginModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                            <div class="modal-header cancer-patient">
+                              <h2 class="cancer-head">Login</h2>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="login-form">
+                                              <div class="row">
+                                                      <div class="col-md-12">
+                                                              <form>
+                                                                      <div class="form-group">
+                                                                              <label class="form-label">Username or E-mail</label>
+                                                                              <input class="form-control" type="text" name="username" placeholder="User Name">
+                                                                      </div>
+                                                                      <div class="form-group">
+                                                                              <label class="form-label">Password</label>
+                                                                              <input class="form-control" type="password" name="password" placeholder="Password">
+                                                                      </div>
+                                                                      <div class="row">
+                                                                              <div class="col-lg-6">
+                                                                                      <div class="form-group">
+                                                                                              <div class="city-checkbx-list">
+                                                                                                      <label class="city-checkbox">
+                                                                                                              Donner
+                                                                                                              <input type="radio" checked="checked" name="radio">
+                                                                                                              <span class="checkmark"></span>
+                                                                                                      </label>
+                                                                                              </div>
+                                                                                      </div>	
+                                                                              </div>
+                                                                              <div class="col-lg-6">
+                                                                                      <div class="form-group">
+                                                                                              <div class="city-checkbx-list">
+                                                                                                      <label class="city-checkbox">
+                                                                                                              Reciever
+                                                                                                              <input type="radio" name="radio">
+                                                                                                              <span class="checkmark"></span>
+                                                                                                      </label>
+                                                                                              </div>
+                                                                                      </div>	
+                                                                              </div>
+                                                                      </div>
+                                                                      <div class="form-group">
+                                                                              <input type="submit" value="Login" class="btn btn-login">
+                                                                      </div>
+                                                                      <a href="javascript:void(0);" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" class="register"> New to MyIssues? SignUp</a>
+                                                                      <a href="javascript:void(0);" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal" class="register link-forgot">Forgot your password?</a>
+                                                              </form>
+                                                      </div>
+                                              </div>
+                                      </div>
+                              </div>
+                  </div>
+                </div>
+      </div> -->
+      <!-- Login Modal End -->

@@ -1,0 +1,254 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <ng-template pTemplate="right">
+      </ng-template>
+    </p-toolbar>
+
+    <p-table [value]="post" dataKey="countryName" [rows]="4" styleClass="p-datatable-responsive-demo" [paginator]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem"></th>
+                <th >Province Name</th>
+                <th >Total Region</th>
+                <th >Total Cities</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-expanded="expanded" >
+            <tr>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="product" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td> <span class="p-column-title">Province Name</span>
+                  {{product.countryName}}</td>
+                  <td> <span class="p-column-title">Total Region</span>
+                    {{(product.data[0].states | json)!=null ?product.data.length:0}}
+                  </td>
+                    <td> <span class="p-column-title">Total City</span>
+                      {{product.cityCount}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-product>
+            <tr>
+                <td colspan="4">
+                    <div class="p-p-3">
+                        <p-table [value]="product.data" dataKey="stateName">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                  
+                                    <th style="width: 3rem"></th>
+                                    <th >Region Name</th>
+                                    <th >Total Cities</th>
+                                    <th >Actions</th>
+    
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-order let-order.viewDetails="false">
+                                <tr>
+
+                                    <td *ngIf="order.states.stateName"> <button type="button" pButton pRipple class="p-button-text p-button-rounded p-button-plain" [icon]="order.viewDetails ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" (click)="order.viewDetails = !order.viewDetails">
+                                           </button></td>
+                                    <td *ngIf="order.states.stateName"> <span class="p-column-title visibility-sm">Region Name</span>
+                                        {{order.states.stateName}}</td>
+                                    <td *ngIf="order.states.stateName">{{order.cities.length }}</td>
+                                    <td *ngIf="order.states.stateName">  <span class="p-column-title">Actions</span>
+                                      <button class="btn btn-success rounded-circle text-center " (click)="newCity(order.states,product)"><i class="fa fa-plus"></i></button>
+                                        <!-- <button pButton pRipple icon="fa fa-plus" class="p-button-rounded p-button-success p-mr-1" (click)="newCity(order.states,product)"></button> -->
+                                    </td>
+                                
+                                </tr>
+                                <ng-container *ngTemplateOutlet="extensiontemplate; context: order"></ng-container>
+                                <ng-template #extensiontemplate>
+                                        <tr *ngIf="order.viewDetails">
+                                            <td colspan="4">
+                                                <div class="p-p-3">
+
+                                                    <p-table [value]="order.cities" dataKey="cityName">
+                                                        <ng-template pTemplate="header">
+                                                            <tr>
+                                                                <th >Cities Name</th>
+                                                                <th >Status</th>
+                                                                <th >Actions</th>
+                                
+                                                            </tr>
+                                                        </ng-template>
+                                                        <ng-template pTemplate="body" let-orders>
+
+                                                            <tr>
+                                                                <td> <span class="p-column-title visibility-sm">Region Name</span>
+                                                                    {{orders.cityName}}</td>
+                                                                    <td> <span class="p-column-title">Status</span>
+                                                                        <input type="hidden" value="{{order.states.stateName}}" #idInput name="id"> <input type="hidden" value="{{product._id}}" #pidInput name="id"><input type="hidden" value="{{orders._id}}" #cidInput name="id">
+                                                                        <button pButton pRipple type="button" [disabled]="orders.status==true" label="Active" class="p-button-raised p-button-success btn-max" (click)="enable(pidInput.value,cidInput.value)"></button>
+                                                                        <button pButton pRipple type="button" [disabled]="orders.status==false" label="Deactive" class="p-button-raised p-button-danger btn-max" (click)="disable(pidInput.value,cidInput.value)"></button>
+                                                                      </td>
+                                                                      <td> <span class="p-column-title">Actions</span>
+                                                                        <!-- <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-mr-1" (click)="showProduct(orders,product,idInput.value)"></button>
+                                                                        <button pButton pRipple icon="fa fa-pencil" class="p-button-rounded p-button-warning p-mr-1" (click)="editProduct(orders,product,idInput.value)"></button>
+                                                                        <button pButton pRipple icon="fa fa-trash-o" class="p-button-rounded p-button-danger" (click)="deleteBanner(cidInput.value,pidInput.value)"></button> -->
+
+                                                                        <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(orders,product,idInput.value)"><i class="fa fa-eye"></i></button>
+                                                                        <button class="btn rounded-circle text-center ml-1" (click)="editProduct(orders,product,idInput.value)" style="background: #FBC02D;color:black;"><i class="fa fa-pencil"></i></button>
+                                                                        <button class="btn btn-danger rounded-circle text-center ml-1"(click)="deleteBanner(cidInput.value,pidInput.value)"><i class="fa fa-trash-o"></i></button>
+                                                                      </td>
+                                                            
+                                                            </tr>
+    
+                                                        </ng-template>
+                                                    </p-table>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </ng-template>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">There are no order for this product yet.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are {{post ? post.length : 0 }} Province.
+          </div>
+        </ng-template>
+    </p-table>
+  </div>
+
+
+
+
+ <!-- Start of New Province Creation Modal -->
+ <p-dialog header="Add City" [(visible)]="productDialog" [style]="{width: '550px'}" styleClass="p-fluid"
+ [modal]="true">
+ <ng-template pTemplate="content">
+    <div class="p-field">
+        <label for="state">Province Name</label><input type="hidden" value="{{countryId}}" #cidInput name="id">
+        <input type="text" pInputText id="state" name="countryName" [disabled]="countryName" [(ngModel)]="countryName" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !countryName">Province is required.</small>
+      </div>
+   
+   <div class="p-field">
+     <label for="state">Region Name</label><input type="hidden" value="{{products._id}}" #idInput name="id">
+     <input type="text" pInputText id="state" name="stateName" [disabled]="products.stateName" [(ngModel)]="products.stateName" required autofocus />
+     <small class="p-invalid" *ngIf="submitted && !products.stateName">Region is required.</small>
+   </div>
+
+   <div class="p-field">
+    <label for="state">City Name</label>
+    <input type="text" pInputText id="state" name="cityName" [(ngModel)]="cityName" required autofocus />
+    <small class="p-invalid" *ngIf="submitted && !scityName">City is required.</small>
+  </div>
+
+
+   <div class="p-field">
+     <label for="Status">Status</label>
+     <p-selectButton [options]="stateOptions" name="status" [(ngModel)]="statusProp" optionLabel="label" optionValue="value"></p-selectButton>
+     <small class="p-invalid" *ngIf="submitted && !statusProp">Status is required.</small>
+   </div>
+
+ </ng-template>
+
+ <ng-template pTemplate="footer">
+   <button pButton pRipple label="Cancel" icon="pi pi-times"
+     class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideDialog()"></button>
+   <button pButton pRipple label="Save" icon="pi pi-check"
+     class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="submit(products)"></button>
+ </ng-template>
+
+</p-dialog>
+
+ <!-- Start of Show Banner Modal -->
+ <p-dialog header="Show City Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+ [modal]="true">
+ <ng-template pTemplate="content">
+
+    <div class="p-field">
+        <label for="Title">Province Name</label>
+        <input type="text" pInputText id="Title" name="countryName" [disabled]="countryName" [(ngModel)]="countryName" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !countryName">Province is required.</small>
+      </div>
+
+   <div class="p-field">
+     <label for="Title">Region Name</label>
+     <input type="text" pInputText id="Title" name="stateName" [disabled]="stateName" [(ngModel)]="stateName" required autofocus />
+     <small class="p-invalid" *ngIf="submitted && !stateName">Region is required.</small>
+   </div>
+
+   <div class="p-field">
+    <label for="Title">City Name</label>
+    <input type="text" pInputText id="Title" name="products.cityName" [disabled]="products.cityName" [(ngModel)]="products.cityName" required autofocus />
+    <small class="p-invalid" *ngIf="submitted && !products.cityName">City is required.</small>
+  </div>
+
+   
+
+   <div class="p-field">
+     <label for="Status">Status</label>
+     <input type="text" pInputText id="Status" required autofocus name="status" [disabled]=true value="{{products.status | statuschange}}"/>
+     <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+   </div>
+ </ng-template>
+
+ <ng-template pTemplate="footer">
+   <button pButton pRipple label="Cancel" icon="pi pi-times"
+     class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+ </ng-template>
+
+</p-dialog>
+
+<!-- End of Edit Banner Modal -->
+
+ <!-- Start of Edit Banner Modal -->
+ <p-dialog header="Edit City" [(visible)]="editDialog" [style]="{width: '550px'}" styleClass="p-fluid"
+ [modal]="true">
+ <ng-template pTemplate="content">
+   <div class="p-field">
+     <label for="Title">Province Name</label>
+     <input type="text" pInputText id="Title" name="title" [disabled]="countryName" [(ngModel)]="countryName" required autofocus />
+     <small class="p-invalid" *ngIf="submitted && !countryName">Province is required.</small>
+   </div>
+
+   <div class="p-field">
+     <label for="Title">Region Name</label>
+     <input type="text" pInputText id="Title" name="stateName" [disabled]="stateName" [(ngModel)]="stateName" required autofocus />
+     <small class="p-invalid" *ngIf="submitted && !stateName">Region is required.</small>
+   </div>
+
+   <div class="p-field">
+    <label for="Title">City Name</label>
+    <input type="text" pInputText id="Title" name="cityName" [(ngModel)]="cityName" required autofocus />
+    <small class="p-invalid" *ngIf="submitted && !cityName">City is required.</small>
+  </div>
+
+ </ng-template>
+
+ <ng-template pTemplate="footer">
+   <button pButton pRipple label="Cancel" icon="pi pi-times"
+     class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideEditDialog()"></button>
+   <button pButton pRipple label="Save" icon="pi pi-check"
+     class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="UpdateBanner()"></button>
+ </ng-template>
+
+</p-dialog>
+
+<!-- End of Edit Banner Modal -->
+
+
+
+  <!-- Confirm Dialog -->
+  
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  
+  <!-- Message -->
+  
+  <p-toast></p-toast>
+

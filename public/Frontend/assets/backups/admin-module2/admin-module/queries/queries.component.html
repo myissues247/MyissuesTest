@@ -1,0 +1,116 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Queries</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="btn-max"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th >Name
+          </th>
+          <th>Email</th>
+
+          <th>Message
+          </th>
+          <th>Queried On</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Name</span>
+            {{product.name}}
+          </td>
+          <td> <span class="p-column-title">Email</span>
+            {{product.email}}
+          </td>
+          <td> <span class="p-column-title">Message</span>
+            {{product.message?.substr(0, 30) || ""}}
+          </td>
+          <td> <span class="p-column-title">Queried</span>
+            {{product.createdAt | date:"medium"}}
+          </td>
+          <td>  <span class="p-column-title">Actions</span>
+              <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center ml-1" (click)="showProduct(product)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post.length : 0 }} Queries.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+
+  
+<!-- Start of Show Withraw Request Modal -->
+<p-dialog header="Show Banner Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+  <img src="{{imagepath}}{{products.imagePath}}" [alt]="products.image" class="product-image" *ngIf="products.imagePath" width="90%" height="170" class="mx-auto d-block p-shadow-4">
+  <div class="p-field">
+    <label for="Name">Name</label>
+    <input type="text" pInputText id="Name" name="Name" [disabled]="products.name" [(ngModel)]="products.name" autofocus disabled />
+    
+  </div>
+  <div class="p-field">
+    <label for="email">Email</label>
+    <input type="text" pInputText id="email" name="email"  [(ngModel)]="products.email"  autofocus disabled />
+  </div>
+  <div class="p-field">
+    <label for="Mode">Message</label>
+    <textarea type="text" pInputText id="Mode" name="Mode"  [(ngModel)]="products.message" autofocus></textarea>
+  </div>
+  <div class="p-field">
+    <label for="Date">Queried On</label>
+    <input type="text" pInputText id="Date" name="Date"  value='{{products.createdAt | date:"medium"}}' autofocus disabled />
+  </div>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Show Withraw Request Modal -->
+
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+<!-- Cause  -->
+

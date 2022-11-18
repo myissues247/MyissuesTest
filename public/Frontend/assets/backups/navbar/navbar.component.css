@@ -1,0 +1,75 @@
+.btn.btn-outline-success:hover,
+.btn.btn-outline-success:focus,
+.btn.btn-outline-success:active,
+.btn.btn-outline-success.active {
+  color:white;
+  background-color:#962179;
+  /* border-color: pink; */
+}
+.btn.btn-outline-success{
+    border: 1px solid #962179;
+    color: #962179;;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.nav-link:hover,
+.nav-link:focus
+{
+    color: white !important;
+    background-color:#962179;
+}
+.nav-link{
+    font-weight:500;
+    color: #962179 !important;
+}
+
+p-dropdown {
+    min-width: 100%  !important;
+    overflow: visible !important;
+}
+
+progress {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  
+    margin: 1em auto 0;
+    width: 100%;
+    height: 0.5em;
+  
+    /* Applicable only to Firefox */
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  progress::-webkit-progress-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Webkit based browsers */
+progress[value="1"]::-webkit-progress-bar { background: red; }
+progress[value="2"]::-webkit-progress-bar { background: yellow; }
+progress[value="3"]::-webkit-progress-bar { background: orange; }
+progress[value="4"]::-webkit-progress-bar { background: green; }
+
+/*gecko based browsers */
+progress[value="1"]::-moz-progress-bar {background: red; }
+progress[value="2"]::-moz-progress-bar {background: yellow; }
+progress[value="3"]::-moz-progress-bar {background: orange; }
+progress[value="4"]::-moz-progress-bar {background: green; }
+
+.rounded {
+    border-radius: 15px !important;
+}
+
+@media screen and (max-width: 500px) {
+    .modal {
+        width: unset;
+        max-width: 99vw !important;
+    }
+}

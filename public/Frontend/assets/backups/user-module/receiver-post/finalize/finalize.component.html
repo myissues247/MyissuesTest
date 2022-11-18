@@ -1,0 +1,48 @@
+
+<section  [class.submitting]='submitting'>
+    <div class="card p-shadow-1" style="width: 100%;min-height: 100px;margin: 0 auto;">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+              <h4><strong>Advertisement</strong><span class="fixcolor"> {{ ad.categoryName }} / {{ad.city }}</span></h4>
+              <h1><span class="fixcolor">$00.00</span></h1>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+              <h4><strong>Advertisement Plan</strong><span class="fixcolor"></span></h4>
+              <h1><span class="fixcolor">${{ this.plan?.price  ? this.plan.price : "0.00" }}</span></h1>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h4><strong>Transactions fee</strong><span class="fixcolor"> You pay it if the total is less than $50.00</span></h4>
+             
+              <h1><span class="fixcolor">$0.00</span></h1>
+            </li>
+          </ul>
+    </div>
+    <div class="card mt-3 p-shadow-1" style="width: 100%;min-height: 100px;margin: 0 auto;">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+              <h4><strong>Sub Total</strong></h4>
+              <h1><span class="fixcolor">$0</span></h1>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h4><strong>Account Balance</strong></h4>
+             
+              <h1><span class="fixcolor">${{session.balance? (session.balance).toFixed(2): "0.00"}}</span></h1>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <h4><strong>Grand Total to Pay</strong></h4>
+             
+              <h1><span class="fixcolor">$0</span></h1>
+            </li>
+          </ul>
+          <div class="card-footer text-muted">
+            <div class="p-grid p-nogutter p-justify-end page-buttons row justify-content-between">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous'
+                    class='p-button-info' (click)='prevPage()'></button>
+                    <h5 class="fixcolor">All price are listed in <strong>CAD</strong></h5>
+                <button pButton type="button" label='Post Now'
+                    class='p-button-info' (click)='nextPage()'></button>
+            </div>
+        </div>
+    </div>
+
+</section>

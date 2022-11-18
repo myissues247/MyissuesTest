@@ -1,0 +1,220 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+    <img src="{{logo}}" width="120" height="60" class="d-inline-block align-top" alt="" routerLink='/'>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active pr-5">
+              <a class="nav-link" target='_blank' href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html?utm_campaign=not-applicable&utm_medium=vanity-url&utm_source=canada-ca_coronavirus" style="color: #cf261f !important; background-color: transparent;cursor: pointer;"><img src="assets/images/corona.png" style="width: 20px; max-height:20px; margin-right: 8px;" alt="Covid-19">COVID 19 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-lg-5">
+              <a class="nav-link" href='javascript:void(0)' routerLink="/">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-lg-5">
+              <a class="nav-link" href='javascript:void(0)' routerLink="/agencies">AGENCIES <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-lg-5">
+              <a class="nav-link" href='javascript:void(0)' routerLink="/foodbank">FOOD BANK <span class="sr-only">(current)</span></a>
+            </li>
+            <!-- <li class="nav-item pr-5">
+              <a class="nav-link" href='javascript:void(0)' routerLink="/myissues/how-it-works" >HOW IT WORKS <span class="sr-only">(current)</span></a>
+            </li> -->
+            <li class="nav-item dropdown-button pr-lg-5">
+							<div class="dropdown">
+								<a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									HOW IT WORKS
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="javascript:void(0)" routerLink="/myissues/how-it-works">
+										How Myissues Work
+									</a>
+									<a href="javascript:void(0)" routerLink='/myissues/ad-live-services' class="dropdown-item">
+										Liveservices
+									</a>
+									<a class="dropdown-item" href="javascript:void(0)" routerLink='/myissues/ad-foodbank'>
+										Foodbank
+									</a>
+									<a class="dropdown-item" href="javascript:void(0)" routerLink='/myissues/ad-donors'>
+										Your Donations
+									</a>
+									<a class="dropdown-item" href="javascript:void(0)" routerLink='/volunteer'>
+										Volunteer Now
+									</a>
+									<a class="dropdown-item" href="javascript:void(0)" routerLink='/myissues/about-us'>
+										About us
+									</a>
+								</div>
+							</div>
+						</li>
+            <li class="nav-item pr-lg-5">
+              <a class="btn btn-outline-success rounded"  href="#" data-toggle="modal" data-target="#SignUpModal" data-backdrop="false" #open *ngIf='!logged'>START YOUR ACCOUNT</a>
+              <a class="btn btn-outline-success rounded" (click)='dashboard()' *ngIf='logged'>GO TO DASHBOARD</a>
+            </li>
+        </ul>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Sign Up Model -->
+
+  
+  <!-- Modal -->
+<div class="modal fade" id="SignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style='z-index: 5555' [class.submitting]='submitting'>
+  <div class="modal-dialog modal-lg">
+    <form class="modal-content" #form='ngForm' (ngSubmit)='SignUp(form, close)'>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Your Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngIf='!(roleProp?.name == "Agency" || roleProp?.name == "Sponsor")'>
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <input id="float-input7" class='capitalize' autocapitalize="words" type="text" pInputText name="Name" [(ngModel)]="nameProp" #firstname='ngModel' required ngModel pattern='[a-zA-Z]+ *'> 
+                        <label for="float-input7">First Name*</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf="form.submitted && firstname.invalid">Please enter a valid First Name.</small>
+              </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group mt-4">
+              <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                      <i class="pi pi-user"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input id="float-input8" type="text" pInputText name="last" class='capitalize' autocapitalize="words"  [(ngModel)]="lastProp" #lastname='ngModel' required pattern='[a-zA-Z]+ *' ngModel> 
+                    <label for="float-input8" >Last Name*</label>
+                  </span>
+              </div>  
+              <small id="model" class="p-error" *ngIf="form.submitted && lastname.invalid">Please enter a valid Last Name</small>
+            </div>
+          </div>
+      </div>
+      <div class="row" *ngIf='roleProp?.name == "Sponsor" || roleProp?.name == "Agency"'>
+          <div class="col-md-12 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <input id="float-input7" class='capitalize' autocapitalize="words" type="text" pInputText name="Name" [(ngModel)]="titleProp" #title='ngModel' required ngModel pattern='[a-zA-Z ]+'> 
+                        <label for="float-input7">{{roleProp.name}} Title</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf="form.submitted && titleProp.invalid">Please enter a valid {{roleProp.name}} Title.</small>
+              </div>
+          </div>
+      </div>
+         <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-envelope"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input" type="mail" autocapitalize='off' pInputText name="mail" [(ngModel)]="mailProp" pattern='^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$' #email='ngModel' required ngModel> 
+                          <label for="float-input">Mail ID*</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf="form.submitted && email.invalid">Please enter a valid Mail ID.</small>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12" style="width: 100%;">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-eye"></i>
+                    </span>
+                    <span class="p-float-label">
+                      <p-dropdown id="float-input1" [options]="role" optionLabel="name" autoWidth="false"  placeholder="Select Your Role*" [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="roleProp"></p-dropdown>
+                      <label for="float-input1"></label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf="ifrole">Role is Required.</small>
+              </div>
+            </div>
+
+        </div>
+        
+        
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-key"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <!-- <input pPassword id="float-input9" type="password"  name="password" (keyup)='checkStrength($event)' #passw='ngModel' required ngModel title='Please enter a strong password'> -->
+                        <p-password [(ngModel)]="passwordProp" name='password'>
+                          <ng-template pTemplate="header">
+                              <h6>Pick a password</h6>
+                          </ng-template>
+                          <ng-template pTemplate="footer">
+                              <p-divider></p-divider>
+                              <p class="p-mt-2">Suggestions</p>
+                              <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                                  <li>At least one lowercase</li>
+                                  <li>At least one uppercase</li>
+                                  <li>At least one numeric</li>
+                                  <li>Minimum 8 characters</li>
+                              </ul>
+                          </ng-template>
+                      </p-password>
+                        <label for="float-input9" *ngIf='!passwordProp'>Password*</label>
+                    </span> 
+                </div>
+                <!-- <div *ngIf='passwordProp && false'>
+                  <progress max="4" id="password-strength-meter" [value]='meterValue'></progress>
+                  <p id="password-strength-text">{{ strengthText }}</p>
+                </div>   -->
+                <small id="model" class="p-error" *ngIf="(form.submitted && !passwordProp) || pass">Please Enter a Valid Password.</small>
+              </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group mt-4">
+              <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                      <i class="pi pi-key"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input id="float-input10" type="password" pInputText  name="confpassword" [(ngModel)]="confProp" #confirm required ngModel> 
+                    <label for="float-input10">Confirm Password*</label>
+                  </span>
+              </div>  
+              <small id="model" class="p-error" *ngIf="(form.submitted && confirm.invalid)">Confirm Password is Required.</small>
+              <small id="model" class="p-error" *ngIf="(form.submitted && confirm.value != passwordProp) || conf">Password and Confirm Password doesn't Match</small>
+            </div>
+          </div>
+
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="loader-spinner" *ngIf='submitting'></div>

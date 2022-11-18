@@ -1,0 +1,160 @@
+
+
+<form class="card mb-5" #form='ngForm' (ngSubmit)="submit(form)" [class.submitting]='submitting'>
+    <h2 class="px-3 pt-3 text-dark">Doner Verification</h2>
+    <div class="card-body">
+
+          <div class="group">
+            <div class="form-group">
+              <label for="float-input1">First Name*</label>
+              <input id="float-input1" type="text" pInputText #firstname='ngModel' name="firstname" [(ngModel)]="UserData.firstname" pattern='[a-zA-Z]+ *' class='form-control capitalize' autocapitalize="words" required ngModel> 
+              <div class="errors"  *ngIf='form.submitted && firstname.invalid'>
+                <span id="model" class="error" >Please enter a valid firstname</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="float-input2" >Last Name*</label>
+              <input id="float-input2" type="text" #lastname='ngModel' name="lastname" class='form-control capitalize' autocapitalize="words" pattern='[a-zA-Z]+ *' [(ngModel)]="UserData.lastname"> 
+              <div class="errors"  *ngIf='form.submitted && lastname.invalid'>
+                <span id="model" class="error" >Please enter a valid last name.</span>
+              </div>
+            </div> 
+          </div>
+          <div class="group">
+            <div class="form-group">
+                <label for="float-input3">Email*</label>
+                <input id="float-input3" type="email" pattern='^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$' [(ngModel)]='UserData.email' #email='ngModel' name="email" class='form-control' disabled ngModel> 
+                <div class="errors"  *ngIf='form.submitted && email.invalid'>
+                  <span id="model" class="error" >Please enter a valid email.</span>
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="float-input4" >Contact*</label>
+               <input id="float-input4" type="text" #contact='ngModel' class='form-control' pattern='[0-9]+' maxlength="10" name="contact" [(ngModel)]="UserData.contact" ngModel required> 
+               <div class="errors"  *ngIf='form.submitted  && contact.invalid'>
+                 <span id="model" class="error" >Please enter valid contact number</span>
+               </div>
+            </div> 
+          </div>
+          <div class="group">
+            <div class="form-group">
+              <!-- <input id="float-input5" type="text" pInputText name="DOB" [(ngModel)]="UserData.DOB">  -->
+                <label for="float-input5">DOB*</label>
+                <p-calendar id="float-input5" autoWidth="false" dateFormat="mm-dd-yy" [style]="{ width: '100%', overflow: 'visible' }" [(ngModel)]="UserData.dob" name="dob" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="navigators" #dob='ngModel'></p-calendar>
+                <div class="errors"  *ngIf='form.submitted  && !UserData.dob'>
+                  <span id="model" class="error" >Please enter valid date of birth.</span>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="float-input6" >Age*</label>
+              <input id="float-input6" class='form-control' type="number" #age='ngModel' name="age" [(ngModel)]="UserData.age" pattern='[0-9]+' min='0' ngModel required> 
+              <div class="errors"  *ngIf='form.submitted  && age.invalid'>
+                <span id="model" class="error" >Please enter a valid age above 0.</span>
+              </div>
+            </div> 
+          </div>
+          <div class="group">
+            <div class="form-group">
+              <label for="float-input8" >City*</label>
+              <input id="float-input8" type="text" class='form-control capitalize' autocapitalize="words" #city='ngModel' pattern='[a-zA-Z ]+' name="city" [(ngModel)]="UserData.city" ngModel required> 
+              <div class="errors"  *ngIf='form.submitted  && city.invalid'>
+                <span id="model" class="error" >Please enter a valid city.</span>
+              </div>
+            </div> 
+            <div class="form-group">
+              <label for="float-input0" >Area*</label>
+              <input id="float-input10" type="text" class='form-control capitalize' autocapitalize="words" #area='ngModel' pattern='[a-zA-Z,0-9 ]+' name="area" [(ngModel)]="UserData.area" ngModel required> 
+              <div class="errors"  *ngIf='form.submitted && area.invalid'>
+                <span id="model" class="error" >Please enter a valid area.</span>
+              </div>
+            </div>
+          </div>
+          <div class="group">
+            <div class="form-group">
+              <label for="float-input7">Address*</label>
+              <input id="float-input7" type="text" class='form-control capitalize' autocapitalize="words" #address='ngModel' pattern='[a-zA-Z,0-9]+' name="address" [(ngModel)]="UserData.address" #address='ngModel' ngModel required> 
+              <div class="errors"  *ngIf='form.submitted  && address.invalid'>
+                <span id="model" class="error" >Please enter a valid address.</span>
+              </div>
+            </div>
+          </div>
+
+            <div class="group">
+              <div class="form-group">
+                <label for="float-input5"> Your face views from different angles, {{(identityImages.length || 0) + (identityImagesServer?.length || 0)}} added</label>
+                <input id="float-input5" type="file" name="identityImages" #identityImages='ngModel' (change)='selectIdentityImages($event)' [required]='!(identityImagesServer?.length > 0)' ngModel accept='image/*' multiple='true' class='form-control'> 
+                <div class="errors"  *ngIf='form.submitted && identityImages.invalid'>
+                  <span id="model" class="error" >Please select your images.</span>
+                </div>
+              </div>
+            </div> 
+            <div class="group">
+              <div class="form-group mt-1">
+                <label for="">Identity Images - </label><br>
+                <div class="identityImages">
+                     <div class="image" *ngFor='let img of base64IdentityImages'>
+                        <img [src]='img' alt="identity images of user">
+                     </div>
+                     <div class="image" *ngFor='let img of identityImagesServer'>
+                        <img src='{{img | server}}' alt="identity images of user">
+                     </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-12 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <input id="float-input6" type="file" pInputText name="bankDetails" #bankDetails='ngModel' (change)='selectBankDetails($event)' accept='application/pdf, image/*' required ngModel> 
+                        <label for="float-input5">Bank details pdf/image</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf='bankDetails.dirty && bankDetails.invalid'>Please enter your bank details.</small>
+              </div>
+          </div>
+            <div class="col-md-12 col-sm-12"> 
+              <div class="form-group mt-1">
+                <label for="">Bank Detail - {{selectedBankData.type == "application/pdf"?  selectedBankData.name : ""}}</label><br>
+                <div class="identityImages" *ngIf='selectedBankData.base64BankImage != null'>
+                  <div class="image">
+                     <img [src]='selectedBankData.base64BankImage' alt="bank details image"> 
+                  </div>
+                </div>
+                                
+              </div>
+          </div> -->
+            <div class="group">
+              <div class="form-group">
+                <label for="float-input5">Identity pdf/image* (some identity proof to verify yourself)</label>
+                <input id="float-input6" type="file"  name="identity" #identity='ngModel' (change)='selectIdentity($event)' accept='application/pdf, image/*' [required]='!identityDetailsServer' ngModel  class='form-control' > 
+                <div class="errors"  *ngIf='form.submitted && identity.invalid'>
+                  <span id="model" class="error" >Please select an idenity proof(PDF/Image).</span>
+                </div>
+              </div>
+            </div>
+            <div class="group"> 
+              <div class="form-group mt-1" *ngIf='selectedIdentity.name'>
+                <label for="">Identity Proof - {{selectedIdentity.type == "application/pdf"?  selectedIdentity.name : ""}}</label><br>
+                <div class="identityImages" *ngIf='selectedIdentity.base64IdentityImage != null'>
+                  <div class="image">
+                     <img [src]='selectedIdentity.base64IdentityImage' alt="idenitity proof image"> 
+                  </div>
+                </div>                  
+              </div>
+              <div class="form-group mt-1" *ngIf='!selectedIdentity.name && identityDetailsServer.filepath'>
+                <label for="">Identity Proof - <a href='{{ identityDetailsServer.filepath | server}}' *ngIf='identityDetailsServer.mimetype == "application/pdf"'>Identity Proof Doc</a>  </label><br>
+                <div class="identityImages" *ngIf='identityDetailsServer.mimetype != "application/pdf"'>
+                  <div class="image">
+                     <img src='{{identityDetailsServer.filepath | server}}' alt="identity proof image"> 
+                  </div>
+                </div>                  
+              </div>
+            </div>
+      </div>
+      <div class="buttons text-center">
+        <button label="Submit" type='submit' class='btn btn-primary px-5 mb-3'>Submit</button>
+      </div>
+</form> 

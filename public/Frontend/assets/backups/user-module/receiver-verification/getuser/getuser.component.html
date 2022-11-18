@@ -1,0 +1,186 @@
+
+<form class="card mb-5"  #userForm='ngForm' (ngSubmit)="nextPage(userForm)" style="min-height: 450px;width: 100%;margin: 5px auto;">
+    <!-- <div class="card-header">
+    </div> -->
+    <div class="card-body">
+      <h2 class="pb-3">User Detail</h2>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-3">
+                  <label for="float-input1">First Name*</label>
+                  <input id="float-input1" type="text" class='form-control capitalize' autocapitalize="words"  #firstname='ngModel' name="firstname" [(ngModel)]="UserData.firstname" pattern='[a-zA-Z]+ *' required ngModel> 
+                  <small id="model" class="p-error" *ngIf='userForm.submitted && firstname.invalid' >First Name is Required.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+               <div class="form-group mt-3">
+                  <label for="float-input2" >Last Name*</label>
+                  <input id="float-input2" type="text" class='form-control capitalize' autocapitalize="words"  #lastname='ngModel' name="lastname" pattern='[a-zA-Z]+ *' [(ngModel)]="UserData.lastname"> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && lastname.invalid' >Last Name is Required.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-3">
+                  <label for="float-input3">Email*</label>
+                    <input id="float-input3" type="email" class='form-control capitalize'  #email name="email" [value]='UserData.email' required disabled> 
+                  <small id="model" class="p-error" *ngIf='userForm.submitted && email.invalid'>Email is Required.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input4" >Contact*</label>
+                <input id="float-input4" type="text" class='form-control capitalize' required #contact='ngModel' pattern='[\+0-9]+' maxlength="13" name="contact" [(ngModel)]="UserData.contact"> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && contact.invalid'>please enter valid conatat number</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-3">
+                          <!-- <input id="float-input5" type="text" pInputText name="DOB" [(ngModel)]="UserData.DOB">  -->
+                  <label for="float-input5">DOB*</label>
+                  <p-calendar id="float-input5" autoWidth="false" dateFormat="mm-dd-yy" [style]="{ width: '100%', overflow: 'visible' }" [(ngModel)]="UserData.dob" name="dob" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2030" inputId="navigators" #dob='ngModel'></p-calendar>
+                  <small id="model" class="p-error" *ngIf='userForm.submitted && dob.invalid' >enter valid date of birth.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input6" >Age*</label>
+                      <input id="float-input6" type="number" class='form-control capitalize' #age='ngModel' name="age" [(ngModel)]="UserData.age" min='0' required pattern='[0-9]+'> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && age.invalid'>Enter valid age above 0</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-3">
+                  <label for="float-input7">Address*</label>
+                          <input id="float-input7" type="text" class='form-control capitalize' autocapitalize="words" pInputText #address='ngModel' pattern='[a-zA-Z,0-9 ]+' name="address" [(ngModel)]="UserData.address" required> 
+                  <small id="model" class="p-error" *ngIf='userForm.submitted && address.invalid'>Address is Required.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input8" >City*</label>
+                      <input id="float-input8" type="text" class='form-control capitalize' autocapitalize="words" pInputText #city='ngModel' pattern='[a-zA-Z ]+' name="city" [(ngModel)]="UserData.city" required> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && city.invalid'>City is Required.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input9"  >ZipCode*</label>
+                <input id="float-input9" type="text"  class='form-control capitalize' #zipCode='ngModel' pattern='[a-zA-Z0-9]+' name="zipCode" [(ngModel)]="UserData.zipCode" required> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && zipCode.invalid'>Enter a valid zipcode.</small>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input0" >area*</label>
+                <input id="float-input10" type="text" class='form-control capitalize' autocapitalize="words" pInputText #area='ngModel' pattern='[a-zA-Z,0-9 ]+' name="area" [(ngModel)]="UserData.area" required> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && area.invalid'>Area is Required.</small>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input5">Identity Images (Min: 2, Max: 3)*</label>
+                <input id="float-input5" type="file" class='form-control capitalize' name="identityImages[]" #identityImages='ngModel' (change)='selectIdentityImages($event)' [required]='identityImages.length < 1 && identityImagesServer?.length < 1' ngModel accept='image/*' multiple='true' [min]='identityImagesServer?.length < 1 ? 2 : 0'> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted &&  (identityImages.invalid || (UserData.identityImages?.length < idenitityImagesCount.min && identityImagesServer?.length < 2))'>Please add required Identity Images.</small>
+              </div>
+          </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <div class='new-images border' *ngIf='base64IdentityImages?.length > 0'>
+                  <label for="">New Identity Images -</label><br>
+                  <div class="identityImages mt-2" *ngIf='base64IdentityImages?.length > 0'>
+                    <div class="image" *ngFor='let img of base64IdentityImages'>
+                      <div class='img'>
+                        <img [src]='img' alt="identity images of user">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uploaded-image border py-3" *ngIf='identityImagesServer?.length > 0'>
+                  <label for="">Uploaded Identity Images -</label><br>
+                  <div class="identityImages mt-2">
+                    <div class='image' *ngFor='let img of identityImagesServer; let i = index'>
+                      <a href="{{img | server}}" target='_blank' class='img'>
+                        <img src="{{ img | server }}" alt="identity images already at server">
+                      </a>
+                      <!-- <button type="button" icon="pi pi-times" pbutton="" ng-reflect-icon="pi pi-times" class="p-button p-component p-button-icon-only" (click)='deleteIdentityImage(img, i)'>
+                        <span class="p-button-icon pi pi-times" aria-hidden="true" style='font-size: 14px;'></span>
+                        <span aria-hidden="true" class="p-button-label">&amp;nbsp;</span>
+                      </button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group mt-3">
+                <label for="float-input5">Bank details pdf/image</label>
+                <input id="float-input6" type="file" class='form-control capitalize' name="bankDetails" #bankDetails='ngModel' (change)='selectBankDetails($event)'  accept='application/pdf, image/*' [required]='!bankDetailsServer?.filepath && !selectedBankData.name' ngModel>  
+                <small id="model" class="p-error" *ngIf='userForm.submitted && bankDetails.invalid'>Please enter your bank details.</small>
+              </div>
+          </div>
+            <div class="col-md-12 col-sm-12"> 
+              <div class="form-group mt-1 border"  *ngIf='selectedBankData.name'>
+                <label for="">Bank Detail - {{selectedBankData.type == "application/pdf"?  selectedBankData.name : ""}}</label><br>
+                <div class="identityImages" *ngIf='selectedBankData.base64BankImage != null'>
+                  <div class="image">
+                     <div class='img'>
+                      <img [src]='selectedBankData.base64BankImage' alt="bank details image">
+                     </div> 
+                  </div>
+                </div>                
+              </div>
+              <div class="form-group mt-1 border"  *ngIf='bankDetailsServer?.filepath && !selectedBankData.name'>
+                <label for="">Bank Detail - <a href='{{ bankDetails.filepath | server }}' target='_blank' *ngIf='bankDetailsServer.mimetype == "application/pdf"'>Bank details document</a></label><br>
+                <div class="identityImages" *ngIf='bankDetailsServer.mimetype != "application/pdf"'>
+                  <div class="image">
+                    <a href="{{bankDetailsServer.filepath | server}}" target='_blank' class='img'>
+                     <img src='{{bankDetailsServer.filepath | server}}' alt="bank details image"> 
+                    </a>
+                  </div>
+                </div>                
+              </div>
+          </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group mt-4">
+                <label for="float-input5">Identity proof pdf/image (some identity proof to verify yourself)</label>
+                <input id="float-input6" type="file" class='form-control capitalize' name="identity" #identity='ngModel' (change)='selectIdentity($event)' accept='application/pdf, image/*' [required]='!identityDetailsServer?.filepath && !selectedIdentity.name' ngModel> 
+                <small id="model" class="p-error" *ngIf='userForm.submitted && identity.invalid'>Please add identity proof details.</small>
+              </div>
+          </div>
+            <div class="col-md-12 col-sm-12"> 
+              <div class="form-group mt-1 border" *ngIf='selectedIdentity.name'>
+                <label for="">Identity Proof - {{selectedIdentity.type == "application/pdf"?  selectedIdentity.name : ""}}</label><br>
+                <div class="identityImages" *ngIf='selectedIdentity.base64IdentityImage != null'>
+                  <div class="image">
+                    <div class='img'>
+                     <img [src]='selectedIdentity.base64IdentityImage' alt="idenitity proof image"> 
+                    </div>
+                  </div>
+                </div>              
+              </div>
+              <div class="form-group mt-1 border" *ngIf='identityDetailsServer?.filepath && !selectedIdentity.name'>
+                <label for="">Identity Proof - <a href='{{identityDetailsServer.filepath | server }}' target='_blank' *ngIf='identityDetailsServer.mimetype == "application/pdf"'>Identity proof document</a></label><br>
+                <div class="identityImages" *ngIf='identityDetailsServer.mimetype != "application/pdf"'>
+                  <div class="image">
+                     <a href="{{identityDetailsServer.filepath | server}}" target='_blank' class='img'>
+                      <img src='{{identityDetailsServer.filepath | server}}' alt="identity proof image"> 
+                     </a>
+                  </div>
+                </div>
+                                
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="p-grid p-nogutter p-justify-end text-right p-3">
+      <button pButton label="Next" type='submit' icon="pi pi-angle-right" iconPos="right" class='btn'></button>
+    </div>
+</form>

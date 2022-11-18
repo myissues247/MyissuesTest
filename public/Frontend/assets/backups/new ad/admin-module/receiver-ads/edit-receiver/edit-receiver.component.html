@@ -1,0 +1,287 @@
+<form class="card" #adEdit='ngForm' (ngSubmit)='updateReceiver(adEdit)' [class.submitting]='loading'>
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+    </p-toolbar>
+  
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>User Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">User Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>First Name</strong>
+                            </td>
+                            <td>
+                                <input type="text" class='form-control' [(ngModel)]='product.firstname' name='firstname' ngModel required #firstname='ngModel' pattern="[a-zA-Z ]+" maxlength="100">
+                                <div class="errors" *ngIf='adEdit.submitted && firstname.invalid'>
+                                    <div class="error">Please enter a valid First Name</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last Name</strong>
+                            </td>
+                            <td>
+                                <input type="text" class='form-control' [(ngModel)]='product.lastname' name='lastname' ngModel required #lastname='ngModel' pattern="[a-zA-Z ]+" maxlength="100">
+                                <div class="errors" *ngIf='adEdit.submitted && lastname.invalid'>
+                                    <div class="error">Please enter a valid Last Name</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong>
+                            </td>
+                            <td>
+                                <input type="email" class='form-control' [(ngModel)]='product.email' name='email' ngModel required #email='ngModel' pattern='^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$' maxlength="100">
+                                <div class="errors" *ngIf='adEdit.submitted && email.invalid'>
+                                    <div class="error">Please enter a valid email</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contact No.</strong>
+                            </td>
+                            <td>
+                                <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='contactNumber' [(ngModel)]='product.contact'></p-inputMask>
+                                <div class="errors" *ngIf='adEdit.submitted && !product.contact'>
+                                    <span class='error'>Please enter valid contact number</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>DOB</strong>
+                            </td>
+                            <td>
+                                <p-calendar id="float-input5" autoWidth="false" dateFormat="mm-dd-yy" [style]="{ width: '100%', overflow: 'visible' }" [(ngModel)]="product.dob" name="dob" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="navigators" #dob='ngModel'></p-calendar>
+                                <div class="errors" *ngIf='adEdit.submitted && !product.dob'>
+                                    <div class="error">Please enter a valid Date of Birth</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Age</strong>
+                            </td>
+                            <td>
+                                <input type="number" class='form-control' [(ngModel)]='product.age' name='age' ngModel required #age='ngModel' pattern="[0-9]+" maxlength="100">
+                                <div class="errors" *ngIf='adEdit.submitted && age.invalid'>
+                                    <div class="error">Please enter a valid age</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong>
+                            </td>
+                            <td>
+                                <input id="float-input7" type="text" class='form-control capitalize' autocapitalize="words" #address='ngModel' pattern='[a-zA-Z,0-9 ]+' name="address" [(ngModel)]="product.address" required>
+                               <div class="errors" *ngIf='adEdit.submitted && address.invalid'>
+                                 <div class="error">Please enter a valid address</div>
+                               </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>City</strong>
+                            </td>
+                            <td>
+                                <input id="float-input8" type="text" class='form-control capitalize' autocapitalize="words"  #city='ngModel' pattern='[a-zA-Z ]+' name="city" [(ngModel)]="product.city" required>
+                                <div class="errors" *ngIf='adEdit.submitted && city.invalid'>
+                                 <div class="error">Please enter a valid city</div>
+                               </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zip Code</strong>
+                            </td>
+                            <td>
+                                <input id="float-input9" type="text"  class='form-control capitalize' #zipCode='ngModel' pattern='[a-zA-Z0-9]+' name="zipCode" [(ngModel)]="product.zipCode" required> 
+                                <div class="errors" *ngIf='adEdit.submitted && zipCode.invalid'>
+                                    <div class="error">Please enter a valid Zip Code</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created On</strong>
+                            </td>
+                            <td>
+                                {{product.createdOn | date: 'dd/MM/yyyy hh:mm'}}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>User Images</strong>
+                            </td>
+                            <td>
+                                <div style="display: flex; flex-wrap: wrap;">
+                                    <div class="image" *ngFor='let identityImage of product.identityImages'>
+                                        <a href="{{identityImage | server }}" target='_blank'>
+                                            <img src="{{identityImage | server }}" alt="User's identity Image" style='width: 100px; height: 100px; margin: 5px;'>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Identity Proof</strong>
+                            </td>
+                            <td>
+                            <div style="display: flex;  flex-wrap: wrap">
+                                <p *ngIf='product.identityProof && product?.identityProof?.mimetype == "application/pdf"'>
+                                  <a href="{{ product.identityProof?.filepath | server }}" target='_blank'>Identity Proof Doc</a>
+                                </p>
+                                <a href="{{product?.identityProof?.filepath | server}}" target='_blank' style='margin: 0px 2px' *ngIf='product.identityProof && product?.identityProof?.mimetype != "application/pdf"'>
+                                  <img src="{{ product.identityProof.filepath | server }}" alt="Identity Image" style='width: 80px; height: 80px;'>
+                                </a>
+                            </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-credit-card"></i>
+                <span>Referrence Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Referrence Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>First Referrence Name</strong>
+                            </td>
+                            <td>
+                                <input id="float-input1" type="text" class='form-control capitalize' autocapitalize="words" name="n1name" #name1='ngModel' pattern='[a-zA-Z ]+' [(ngModel)]="product.neighbours1.name" required>
+                                <div class="errors" *ngIf='adEdit.submitted && name1.invalid'>
+                                    <div class="error">Please enter a valid Referrence Name</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Referrence Contact No.</strong>
+                            </td>
+                            <td>
+                                <input id="float-input2" type="text" class='form-control' name="n1contact" #contact1='ngModel' pattern='[\+0-9]+' maxlength="13" [(ngModel)]="product.neighbours1.contact" required>
+                                <div class="errors" *ngIf='adEdit.submitted && contact1.invalid'>
+                                    <div class="error">Please enter a valid Referrence Contact</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Referrence Extension</strong>
+                            </td>
+                            <td>
+                                <input type="text" class='form-control' name="n1extension" [(ngModel)]="product.neighbours1.extension" #extension1='ngModel' pattern='[0-9a-zA-Z]+' required>
+                                <div class="errors" *ngIf='adEdit.submitted && extension1.invalid'>
+                                    <div class="error">Please enter a valid Referrence Extension</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Referrence Organization Name</strong>
+                            </td>
+                            <td>
+                                <input id="float-input5" type="text" class='form-control capitalize' autocapitalize="words" name="n1organization" [(ngModel)]="product.neighbours1.organization" #organization1='ngModel' pattern='[0-9a-zA-Z ]+' required>
+                                <div class="errors" *ngIf='adEdit.submitted && organization1.invalid'>
+                                    <div class="error">Please enter a valid Referrence Organization</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Referrence Occupation</strong>
+                            </td>
+                            <td>
+                                <input id="float-input4" type="text" class='form-control capitalize' autocapitalize="words"  name="n1occupation" [(ngModel)]="product.neighbours1.occupation" #occupation1='ngModel' pattern="[a-zA-Z0-9 ]+" required>
+                                <div class="errors" *ngIf='adEdit.submitted && occupation1.invalid'>
+                                    <div class="error">Please enter a valid Referrence Occupation</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Referrence Name</strong>
+                            </td>
+                            <td>
+                                <input id="float-input5" type="text" class='form-control capitalize' autocapitalize="words" name="n2name" [(ngModel)]="product.neighbours2.name" #name2='ngModel' pattern='[0-9a-zA-Z ]+' required>
+                                <div class="errors" *ngIf='adEdit.submitted && name2.invalid'>
+                                    <div class="error">Please enter a valid Referrence Name</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Referrence Contact No.</strong>
+                            </td>
+                            <td>
+                                <input id="float-input2" type="text" class='form-control' name="n2contact" #contact2='ngModel' pattern='[\+0-9]+' maxlength="13" [(ngModel)]="product.neighbours2.contact">
+                                <div class="errors" *ngIf='adEdit.submitted && contact2.invalid'>
+                                    <div class="error">Please enter a valid Referrence Contact</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Referrence Extension</strong>
+                            </td>
+                            <td>
+                                <input id="float-input3" type="text" class='form-control' name="n2extension" [(ngModel)]="product.neighbours2.extension" #extension2='ngModel' pattern='[0-9]+'>
+                                <div class="errors" *ngIf='adEdit.submitted && extension2.invalid'>
+                                    <div class="error">Please enter a valid Referrence Extension</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Referrence Occupation</strong>
+                            </td>
+                            <td>
+                                <input id="float-input4" type="text" class='form-control capitalize' autocapitalize="words"  name="n2occupation" [(ngModel)]="product.neighbours2.occupation" #occupation2='ngModel' pattern="[a-zA-Z0-9 ]+">
+                                <div class="errors" *ngIf='adEdit.submitted && occupation2.invalid'>
+                                    <div class="error">Please enter a valid Referrence Occupation</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Referrence Organization Name</strong>
+                            </td>
+                            <td>
+                                <input id="float-input5" type="text"  class='form-control capitalize' autocapitalize="words"  name="n2organization" [(ngModel)]="product.neighbours2.organization" #organization2='ngModel' pattern='[0-9a-zA-Z ]+'>
+                                <div class="errors" *ngIf='adEdit.submitted && organization2.invalid'>
+                                    <div class="error">Please enter a valid Referrence Organization</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button class="btn btn-danger px-4 mr-1" (click)='goBack()'>Cancel</button>
+                                <button class="btn btn-warning px-4" type='submit'>Edit</button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div> 
+        </p-tabPanel>
+    </p-tabView>
+</form>
+
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+   <!-- Message -->
+            
+   <p-toast></p-toast>

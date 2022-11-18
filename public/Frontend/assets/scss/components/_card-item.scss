@@ -1,0 +1,116 @@
+@import url(../abstracts/_mixins.scss);
+
+.card-item {
+    background: #f5f9fa;
+
+    .heading {
+        @include font-style(16px, 600, #585c56);
+        padding: 2rem 0;
+
+        @media (min-width: 768px){
+            font-size: 22px;
+        }
+    }
+    .card-title {
+        @include font-style(14px, 700, #343432);
+        text-transform: uppercase;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+
+        @media (min-width: 768px){
+            font-size: 20px;
+        }
+    }
+    .card-sub-title {
+        @include font-style(12px, 500, #a9a9a9);
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+
+        @media (min-width: 768px){
+            font-size: 15px;
+        }
+    }
+
+    // card-horizontal start
+    .card-horizontal {
+        background: $color-white;
+        border-radius: 4px;
+        box-shadow: 0px 0px 7.36px 0.64px rgba(0, 0, 0, 0.16);
+        overflow: hidden;
+        margin-bottom: 15px;
+
+        .thumbnail-img {
+            width: 165px;
+            @media (max-width: 767px){
+                width: 100px;
+            }
+        }
+
+        .icon {
+            @include font-style(18px, 600, #5f605d);
+            padding: 0 1rem;
+
+            @media (min-width: 768px){
+                font-size: 30px;
+            }
+        }
+
+        .text {
+            padding: 1rem;
+        }
+
+        &.card-horizontal-sm {
+            .thumbnail-img {
+                width: 100px;
+                @media (max-width: 767px){
+                    width: 70px;
+                }
+            }
+            .card-title {
+                -webkit-line-clamp: 1;
+                @media (max-width: 767px){
+                    margin-bottom: .2rem;
+                }
+            }
+        }
+    }
+    // card-horizontal end
+
+    // card-vertical start
+    .card-vertical {
+        border: none;
+        box-shadow: 0px 0px 7.36px 0.64px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        border-radius: 8px;
+
+        .card-img-overlay {
+            padding: 0;
+            display: grid;
+            place-items: end;
+            
+            .icon {
+                background: rgba($color-white, 0.9);
+                @include font-style(18px, 600, #5f605d);
+                padding: 0.5rem 1rem;
+                border-top-left-radius: 8px;
+    
+                @media (min-width: 768px){
+                    font-size: 30px;
+                }
+            }
+        }
+
+        .card-body {
+            @media (min-width: 768px){
+                padding: 1.5rem;
+            }
+        }
+        
+    }
+    // card-vertical end
+}
+  

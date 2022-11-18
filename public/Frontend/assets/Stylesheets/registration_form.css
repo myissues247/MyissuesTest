@@ -1,0 +1,357 @@
+/* --- Header Css Start --- */
+
+.new-page-header.login-header{
+	height: 90px;
+}
+
+.login-header .header-top ul li,
+.login-header .header-top ul li a{
+	font-size: 14px;
+	font-family: 'Lato';
+}
+
+.login-header .header-top{
+	position: relative;
+	top: 10px;
+}
+
+/* --- Header Css End --- */
+
+
+/* --- Login Css Start --- */
+a,
+a:hover,
+a:focus{
+	outline: none;
+	text-decoration: none;
+}
+
+.login-form{
+	padding: 50px 15px;
+}
+
+.login-form .col-md-6{
+	border: 1px solid #ccc;
+	padding: 30px 30px 20px;
+	background-color: #fff;
+}
+
+.login-form .form-control{
+	color: #3d3d3b;
+	border-radius: 0;
+	font-family: 'Poppins';
+	border: 2px solid #ddd !important;
+}
+
+.login-form .form-control:focus{
+	border-color: #3d3d3b !important;
+}
+
+.login-form .form-label{
+	color: #3d3d3b;
+	margin-bottom: 5px;
+	font-family: 'Poppins Semibold';
+}
+
+.login-form .city-checkbox{
+	font-size: 16px;
+	padding-left: 26px;
+}
+
+.login-form .city-checkbox .checkmark::after{
+	left: 0px;
+	top: 0px;
+	width: 5px;
+	height: 11px;
+	border-width: 0 2px 2px 0;
+}
+
+.login-form .checkmark{
+	width: 20px;
+	height: 20px;
+}
+
+.btn-login{
+	color: #fff;
+	width: 100%;
+	font-size: 18px;
+	border-radius: 0;
+	background: #01768a;
+	text-transform: uppercase;
+	font-family: 'poppins Semibold';
+}
+
+.btn-login:hover,
+.btn-login:focus{
+	background: #8d0b77;
+}
+
+.link-forgot{
+	float: right;
+}
+
+.register{
+	color: #3d3d3b;
+	font-family: 'Poppins';
+    font-size: 20px;
+}
+
+.register:hover,
+.register:focus{
+	color: #8d0b77;
+}
+
+#registerModal .modal-content,
+#shareModal .modal-content,
+#donationModal .modal-content{
+	height: 600px;
+	overflow-y: scroll;
+}
+
+.login-form .cust-file-label{
+	display: block;
+	color: #3d3d3d;
+	cursor: pointer;
+	padding: 6px 12px;
+	font-family: 'Poppins';
+	border: 2px solid #ddd;
+}
+
+/* --- Login Css End --- */
+
+/* --- Sign Up Free Css Start  --- */
+
+.sign-up-free{
+	padding: 80px 0;
+	text-align: center;
+	background-color: #fbf8f6;
+}
+
+.sign-up-free.login-form .col-md-8{
+	border: 1px solid #ccc;
+	padding: 10px 30px 20px;
+	background-color: #fff;
+	box-shadow: 0 .5rem 1.5rem 0 rgba(0,0,0,.1);
+}
+
+.sign-up-free.login-form .cancer-head{
+	line-height: 1;
+	padding: 30px 0;
+    font-weight: bolder;
+}
+
+.sign-up-free.login-form .register-head-des .cancer-head{
+	padding-bottom: 0;
+}
+
+.sign-up-free.login-form .register-head-des p{
+	padding-bottom: 20px;
+}
+
+.form-input .by-des{
+	font-size: 16px;
+	font-family: 'Lato';
+}
+
+.form-input .by-des a{
+	text-transform: capitalize;
+	font-family: 'Lato';
+	color: #222;
+}
+
+.sign-up-free .form-input .form-control{
+	background-color: #fff;
+}
+
+.sign-up-check{
+	position: relative;
+	display: block;
+	cursor: pointer;
+	font-size: 18px;
+	text-align: left;
+	user-select: none;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	font-family: 'Lato';
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+.sign-up-check input {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	border: 1px solid #01768a;
+}
+
+.sign-up-check input:checked ~ .checkmark {
+  	background-color: #01768a;
+}
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+.sign-up-check input:checked ~ .checkmark:after{
+  	display: block;
+}
+
+.sign-up-check .checkmark:after{
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.sign-up-free-form{
+	padding: 50px 0;
+	background: #fff;
+	box-shadow: 0 0 20px 0 rgba(0,0,0,0.1);
+}
+
+.sign-up-free-form form{
+	padding: 0 50px;
+}
+
+.sign-up-free-form h2{
+	color: #343434;
+	font-weight: 900;
+	font-family: 'Lato';
+	padding-bottom: 15px;
+}
+
+.sign-up-free-form p{
+	font-size: 20px;
+	font-weight: 300;
+	font-family: 'Lato';
+	padding: 10px 0 30px;
+}
+
+.sign-up-free-form .form-group{
+	margin-bottom: 30px;
+}
+
+.sign-up-free-form .form-control{
+	font-family: 'Lato';
+}
+
+.sign-up-free-form .form-control:not(textarea){
+	height: 50px;
+}
+
+.sign-up-note{
+	margin-top: 50px;
+	padding-top: 20px;
+	font-family: 'Lato';
+	border-top: 1px solid #dfdfdf;
+}
+
+.sign-up-note p{
+	color: #585858;
+	font-weight: 400;
+	font-family: 'Lato';
+}
+
+.sign-up-note p a{
+	color: #01768a;
+	font-family: 'Lato';
+}
+
+.ad-signup .cancer-head{
+	font-weight: 900;
+	font-family: 'Lato';
+}
+
+.login-form.sign-up-free input,
+.login-form.sign-up-free .form-label,
+.login-form.sign-up-free .city-checkbox{
+	text-align: left;
+	font-weight: 400;
+	font-family: 'Lato';
+}
+
+.login-form.sign-up-free .btn-login{
+	text-align: center;
+	font-weight: bold;
+}
+
+.login-form.sign-up-free .form-input .city-radio,
+.login-form.sign-up-free .form-input .city-checkbox{
+	text-align: left;
+}
+
+.login-form.sign-up-free .register{
+	float: left;
+}
+
+.login-form.sign-up-free .link-forgot{
+	float: right;
+}
+
+.login-form.sign-up-free .btn-login:hover,
+.login-form.sign-up-free .btn-login:focus{
+	color: #fff;
+}
+
+.ad-header-sign li p a{
+	display: inline-block;
+}
+
+.ad-header-sign li p a:hover,
+.ad-header-sign li p a:focus{
+	color: rgb(1, 118, 138) !important;
+}
+
+.ad-header-sign li p,
+.ad-header-sign li p a{
+	font-size: 16px !important;
+}
+
+/* --- Sign Up Free Css End  --- */
+
+
+:host ::ng-deep p-password {
+    width: 100%;
+}
+
+:host ::ng-deep .p-password {
+    width: 100%;
+    padding: 0px !important;
+    border: 0px !important;
+}
+
+:host ::ng-deep .p-password-input {
+    width: 100%;
+    color: #3d3d3b;
+    border-radius: 0;
+    font-family: 'Poppins';
+    border: 2px solid #ddd !important;
+    padding: .375rem .75rem;
+    font-size: 1rem !important;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+.error {
+    text-align: left;
+    font-size: 14px;
+}

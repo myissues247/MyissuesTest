@@ -1,0 +1,144 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="20" [paginator]="true" [totalRecords]='totalRecords'
+      [globalFilterFields]="['name','email', 'contact']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 30]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Reports</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)='search($event)'
+              placeholder="Search..." class="btn-max" autocapitalize="off"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th >Ad Id
+          </th>
+          <th >Name
+          </th>
+          <th>Email</th>
+
+          <th>Contact</th>
+
+          <th>Message
+          </th>
+          <th>Reported On</th>
+          <th style="width: 5rem;">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Ad Id</span>
+            {{product.adId}}
+          </td>
+          <td> <span class="p-column-title">Name</span>
+            {{product.name}}
+          </td>
+          <td> <span class="p-column-title">Email</span>
+            {{product.email}}
+          </td>
+          <td> <span class="p-column-title">Contact</span>
+            {{product.contact}}
+          </td>
+          <td> <span class="p-column-title">Message</span>
+            {{product.message?.substr(0, 30) || ""}}
+          </td>
+          <td> <span class="p-column-title">Reported On</span>
+            {{product.createdAt | date:"medium"}}
+          </td>
+          <td>  <span class="p-column-title">Actions</span>
+            <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+              <!-- <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center ml-1" (click)="showProduct(product)"></button> -->
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{totalRecords}} Reports.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+
+  
+<!-- Start of Show Withraw Request Modal -->
+<p-dialog header="Show Report Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+
+  <div class="p-field">
+    <label for="Name">Ad Id</label>
+    <p>{{ products.adId }}</p> 
+  </div>
+  <div class="p-field">
+    <label for="Name">User Id</label>
+    <p>{{ products.receiverId }}</p> 
+  </div>
+  <div class="p-field">
+    <label for="Name">User Type</label>
+    <p>{{ products.ownerType }}</p> 
+  </div>
+  <div class="p-field">
+    <label for="Name">Name</label>
+    <p>{{products.name}}</p>
+  </div>
+  <div class="p-field">
+    <label for="email">Email</label>
+    <p>{{products.email}}</p>
+  </div>
+  <div class="p-field">
+    <label for="contact">contact</label>
+    <p>{{products.contact}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Mode">Message</label>
+    <p>{{products.message}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Date">Reported On</label>
+    <p>{{products.createdAt | date:"medium"}}</p>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+  <button pButton pRipple label="Go To Ad" icon="pi pi-eye"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-primary" (click)='take_to_ad()'></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Show Withraw Request Modal -->
+
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+<!-- Cause  -->
+

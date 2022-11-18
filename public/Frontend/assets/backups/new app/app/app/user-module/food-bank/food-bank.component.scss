@@ -1,0 +1,97 @@
+@import '../../../assets/Stylesheets/responsive.scss';
+
+/* --- Food Bank Css Start --- */
+
+.food-box-des{
+	padding: 50px 15px;
+	text-align: center;
+	background: #f9f9f9;
+	font-family: 'Poppins';
+	border: 2px solid #ccc;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+}
+
+.food-box-des:hover,
+.food-box-des:focus{
+	cursor: pointer;
+	background-color: transparent;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.food-box-des h2{
+	color: #1a1d3e;
+	font-size: 26px;
+	font-family: 'Poppins';
+	text-transform: capitalize;
+}
+
+.food-box-des p{
+	color: #1a1d3e;
+	font-size: 16px;
+	padding-top: 10px;
+}
+
+.btn-shop{
+	color: #fff;
+	font-size: 18px;
+	margin-top: 50px;
+	background: #01768a;
+	font-family: 'Poppins';
+	text-transform: capitalize;
+}
+
+.btn-shop:hover,
+.btn-shop:focus{
+	color: #fff;
+	background-color: #93117b;
+}
+
+.food-banner img{
+	width: 100%;
+}
+
+.food-box .volunteer-bg{
+	padding: 30px;
+}
+
+.foodbank-img{
+    padding: 30px 200px 0 145px
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.volunteer-bg {
+    padding: 0 15px;
+    margin: 50px 0 0;
+    border-radius: 15px;
+    background-color: #fff;
+    border: 2px solid #ead2e8;
+    border-top: 10px solid #8d0b77;
+}
+
+@media only screen and (max-width: 991px){
+.foodbank-img {
+    padding: 0;
+	
+}
+.food-box .volunteer-bg {
+    padding: 30px 15px;
+	margin-top:0px !important;
+}
+}
+
+// @media screen and (max-width: 400px) {
+// 	.food-banner img {
+// 		width: 100%;
+// 		height: 50px;
+// 	}
+// }
+
+/* --- Food Bank Css End --- */

@@ -1,0 +1,63 @@
+.tabs {
+     padding: 15px 0px; 
+}
+
+.col-12 {
+  padding: 0px;
+  background: #fcfdf8
+}
+
+
+.card {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+:host ::ng-deep{
+    .p-card{
+        box-shadow: 0px 0px 4px  rgba(0, 0, 0, 0.3);
+    }
+
+.p-steps{
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 7px;
+  .p-steps-item{
+    padding-top: 5px;
+    padding-bottom: 5px;
+      overflow: hidden !important;
+  }
+  .p-steps-current{
+    overflow: hidden !important;
+
+    }
+  .p-steps-item::before{
+      bottom: 0;
+      top:0;
+      background: #ccc;
+      opacity: 50%;
+      color: black;
+     
+  }
+ 
+  .p-steps-current::before{
+    content: '';
+    opacity: 0%;
+  }
+ 
+ 
+ 
+}
+
+}
+
+@media screen and (max-width: 600px){
+  :host ::ng-deep{
+    .p-steps{
+      width:900px !important;
+    }
+  }
+  .py-3{
+    overflow: scroll !important;
+  }
+}
+  

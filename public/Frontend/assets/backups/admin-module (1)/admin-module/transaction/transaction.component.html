@@ -1,0 +1,173 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['_id','donerName','receiverName']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Donations</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="btn-max"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Transaction Id</th>
+          <th >User Name
+          </th>
+          <th>User Id</th>
+          <th>User Type</th>
+          <th>Transaction Type</th>
+
+          <th>Amount 
+          </th>
+          <th>Payment Method</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Transaction ID</span>
+            {{product._id}}
+          </td>
+          <td> <span class="p-column-title">User Name</span>
+            {{product.userName}}
+          </td>
+          <td> <span class="p-column-title">User ID</span>
+            {{product.userId}}
+          </td>
+          <td> <span class="p-column-title">User Type</span>
+            {{product.userType}}
+          </td>
+          <td><span class="p-column-title">Transaction Type</span>
+            {{product.type}}
+        </td>
+          <td><span class="p-column-title">Amount </span>
+            ${{product.amount}}
+        </td>
+          <td><span class="p-column-title">Payment Method </span>
+            {{product.paymentMode}}
+        </td>
+          <td><span class="p-column-title">Date</span>
+            {{product.createdAt | date:"medium"}}
+        </td>
+        <td>  <span class="p-column-title">Actions</span>
+          <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post.length : 0 }} Transactions.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+
+  
+<!-- Start of Show Withraw Request Modal -->
+<p-dialog header="Show Banner Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+  <img src="{{imagepath}}{{products.imagePath}}" [alt]="products.image" class="product-image" *ngIf="products.imagePath" width="90%" height="170" class="mx-auto d-block p-shadow-4">
+  <div class="p-field">
+    <label for="transactionId">Transaction ID</label>
+    <p>{{products._id}}</p>
+  </div>
+  <div class="p-field">
+    <label for="userName">User Name</label>
+    <p>{{products.userName}}</p>
+  </div>
+  <div class="p-field">
+    <label for="userID">User ID</label>
+    <p>{{products.userId}}</p>
+  </div>
+  <div class="p-field">
+    <label for="userType">User Type</label>
+    <p>{{products.userType}}</p>
+  </div>
+  <div class="p-field">
+    <label for="transType">Transaction Type</label>
+    <p>{{products.type}}</p>
+  </div>
+  <div class="p-field">
+    <label for="amount">Amount</label>
+    <p>${{products.amount}}</p>
+  </div>
+  <div class="p-field">
+      <label for="paymentMode">Payment Mode</label>
+      <p>{{ products.paymentMode }}</p>
+  </div>
+   <div class="p-field">
+      <label for="summary">Summary</label>
+      <p>${{products.summary}}</p>
+    </div>
+  <div class="p-field">
+    <label for="Date">Date</label>
+    <p>{{products.createdAt | date:"medium" }} </p>
+  </div>
+  <div class="donation" *ngIf='products.type == "Donation" && products.donation'>
+    <div class="p-field">
+      <label for="donationId">Donation ID</label>
+      <p>{{products.donation.donationId || "-"}}</p>
+    </div>
+    <div class="p-field">
+      <label for="receiverId">Receiver Id</label>
+      <p>{{products.donation.receiverId || "-"}}</p>
+    </div>
+    <div class="p-field">
+      <label for="receiverName">Receiver Name</label>
+      <p>{{products.donation.receiverName || "-"}}</p>
+    </div>
+    <div class="p-field">
+      <label for="advertisementId">Advertisement ID</label>
+      <p>{{products.donation.adId || "-"}}</p>
+    </div>
+  </div>
+  <div class="p-field">
+    <label for="paymentSecret">Payment Secret Token</label>
+    <p>{{products.paymentIntent || "-"}}</p>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Show Withraw Request Modal -->
+
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+<!-- Cause  -->
+

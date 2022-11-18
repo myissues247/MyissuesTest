@@ -1,0 +1,47 @@
+@import url(../abstracts/_mixins.scss);
+
+.filter {
+    background: #f5f9fa;
+    padding: 1rem 0;
+
+    .form-floating {
+        label {
+            @include font-style(16px, 600, #585c56);
+
+            @media (min-width: 768px){
+                font-size: 22px;
+                line-height: 1;
+            }
+        }
+
+        .form-control {
+            border-color: #c2c7be;
+        }
+    }
+
+    .btn {
+        @include font-style(16px, 600, #585c56);
+        padding: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (min-width: 768px){
+            font-size: 22px;
+        }
+
+        i {
+            font-size: 25px;
+        }
+                
+        &.btn-light {
+            background: #eef3f4;
+            border-color: #c2c7be;
+        }
+        &.btn-secondary {
+            background: #5f605d;
+            color: $color-white;
+        }
+    }
+
+}

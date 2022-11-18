@@ -1,0 +1,283 @@
+<section class='forBG'>
+<div class="card my-5"  style="min-height: 450px;" [class.submitting]='submitting'>
+    <!-- <div class="card-header">
+    </div> -->
+    <div class="card-body">
+        <section class="stepsdemo-content">
+            <form action="" class="input-container" #form='ngForm' ngForm (ngSubmit)='submit(form)'>
+                <h2 class='pb-3'>Agency Verification</h2>
+                <div class="group">
+                    <div class="form-group">
+                        <label for="agencyTitle">Agency Title*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="agencyTitle" placeholder="Only your agency title" pattern='[a-zA-Z ]+' [(ngModel)]='agencyData.agencyTitle' #agencyTitle='ngModel' required ngModel>
+                        <div class="errors" *ngIf='form.submitted && agencyTitle.invalid'>
+                            <span class='error'>Please enter a valid agency title (agency title should contain only alphanumeric characters)</span>
+                        </div>
+                    </div> 
+                </div> 
+                <div class="group">
+                    <div class="form-group">
+                        <label for="city">City*</label>
+                        <select name="city" class='form-control capitalize' id="city" #city='ngModel' ngModel (change)='selectCity($event);'>
+                            <option value="" selected='!agencyData.city'>Select a City</option>
+                            <ng-container *ngFor='let set of cities'>
+                                <ng-container *ngFor='let city of set'>
+                                    <option [value]="city.countryId || 'no country'" [selected]="agencyData.city==city.cityName">{{city.cityName}}</option>
+                                </ng-container>
+                            </ng-container>
+                        </select>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.city'>
+                            <span class='error'>Please select a city</span>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label for="category">Category*</label>
+                        <select name="category" class='form-control' id="category" (change)='selectCategory($event)' #category='ngModel' ngModel>
+                            <option value="" [selected]='!agencyData.categoryName' disabled>Select a Category</option>
+                            <ng-container *ngFor='let category of categories'>
+                                <option [value]="category._id" [selected]='agencyData.categoryName==category.title'>{{category.title}}</option>
+                            </ng-container>
+                        </select>
+                        <div class="errors" *ngIf='form.submitted && category.invalid'>
+                            <span class='error'>Please select a category</span>
+                        </div>
+                    </div> 
+                </div> 
+                <div class="group">
+                    <div class="form-group">
+                        <label for="officePhone">Office Phone*</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='contactNumber' [(ngModel)]='agencyData.officePhone'></p-inputMask>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.officePhone'>
+                            <span class='error'>Please enter valid office phone number</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fax">Fax*</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='fax' [(ngModel)]='agencyData.fax'></p-inputMask>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.fax'>
+                            <span class='error'>Please enter valid fax number</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group">
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" class='form-control' name="email" placeholder="abcd@abcd.abc" [(ngModel)]='agencyData.email' #email='ngModel' required>
+                        <div class="errors" *ngIf='form.submitted && email.invalid'>
+                            <span class='error'>Please enter valid email</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteURL">Website URL*</label>
+                        <input type="text" class='form-control' name="websiteURL" placeholder="(http(s)://www.)examplewebsite.com" [(ngModel)]='agencyData.websiteURL' #websiteURL='ngModel' ngModel required pattern='(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)'>
+                        <div class="errors" *ngIf='form.submitted && websiteURL.invalid'>
+                            <span class='error'>Please enter a valid website url</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group">
+                    <div class="form-group">
+                        <label for="boundaries">Boundaries*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="boundaries" placeholder="please enter the area for which your service is available" [(ngModel)]='agencyData.boundaries' #boundaries='ngModel' pattern='[a-zA-Z0-9 ]+' required>
+                        <div class="errors" *ngIf='form.submitted && boundaries.invalid'>
+                            <span class='error'>Please enter a valid string (only alphanumeric values allowed)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Opening Hours">Opening Hours*</label>
+                        <input type="text" class='form-control' name="hours" placeholder="ex: Mon-Fri 9am - 5pm" [(ngModel)]='agencyData.hours' #hours='ngModel'  pattern='[a-zA-Z0-9\.-]+' required>
+                        <div class="errors" *ngIf='form.submitted && hours.invalid'>
+                            <span class='error'>Please enter a valid string. (hours cannot contain special characters except hiphen, commas, dots)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group">
+                        <label for="gst">GST No.*</label>
+                        <input type="text" class='form-control' name="gst" placeholder="Enter GST No." [(ngModel)]='agencyData.GST' pattern='[0-9a-zA-Z]+ *' required #gst='ngModel'>
+                        <div class="errors" *ngIf='form.submitted && gst.invalid'>
+                            <span class='error'>Please enter a valid GST No.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group">
+                    <div class="form-group">
+                        <label for="address">Address*</label>
+                        <input class='form-control capitalize' autocapitalize="words" name="address" placeholder="Enter agency address" [(ngModel)]='agencyData.address' />
+                        <div class="errors" *ngIf='form.submitted && !agencyData.address'>
+                            <span class='error'>Please enter a valid address.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group">
+                        <label for="serviceContact">Service Contact*</label>
+                        <p-editor [(ngModel)]='agencyData.serviceContact' [style]="{'height':'200px'}" name="serviceContact"></p-editor>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.serviceContact'>
+                            <span class='error'>Please enter a valid service contact.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group">
+                        <label for="eligibility">Eligibility*</label>
+                        <p-editor [(ngModel)]='agencyData.eligibility' [style]="{'height':'200px'}" name="eligibility"></p-editor>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.eligibility'>
+                            <span class='error'>Please enter a valid eligibility string.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="form-group">
+                        <label for="services">Services*</label>
+                        <p-editor [(ngModel)]='agencyData.services' [style]="{'height':'200px'}" name="services"></p-editor>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.services'>
+                            <span class='error'>Please enter service details.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="form-group">
+                        <label for="howToApply">How To Apply*</label>
+                        <p-editor [(ngModel)]="agencyData.howToApply" [style]="{'height':'200px'}" name='howToApply'></p-editor>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.howToApply'>
+                            <span class='error'>Please enter a valid how to apply value.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="form-group">
+                        <label for="physicalAccess">Physical Access*</label>
+                        <p-editor [(ngModel)]="agencyData.physicalAccess" [style]="{'height':'200px'}" name='physicalAccess'></p-editor>
+                        <div class="errors" *ngIf='form.submitted && !agencyData.physicalAccess'>
+                            <span class='error'>Please enter a valid Physical Access value.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="form-group">
+                        <label for="legalStatus">Legal Status*</label>
+                        <input type="text" class='form-control capitalize' name="legalStatus" placeholder="Enter Legal Status" [(ngModel)]='agencyData.legalStatus' pattern="[0-9a-zA-Z' ]+" required #legalStatus='ngModel' ngModel>
+                        <div class="errors" *ngIf='form.submitted && legalStatus.invalid'>
+                            <span class='error'>Please enter a valid Legal Status.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="listingCopyRightTitle">Listing Copyright Title*</label>
+                        <input type="text" class='form-control capitalize' name="listingCopyRightTitle" placeholder="Enter Listing Copyright Title" [(ngModel)]='agencyData.listingCopyRightTitle' pattern="[0-9a-zA-Z' ]+" required #listingCopyRightTitle='ngModel' ngModel>
+                        <div class="errors" *ngIf='form.submitted && listingCopyRightTitle.invalid'>
+                            <span class='error'>Please enter a valid Listing Copyright Title</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="group">
+                    <div class="form-group">
+                        <label for="listingCopyRightURL">Listing Copyright URL*</label>
+                        <input type="text" class='form-control' name="listingCopyRightURL" placeholder="(http(s)://www.)examplewebsite.com" [(ngModel)]='agencyData.listingCopyRightURL' #listingCopyRightURL='ngModel' ngModel required pattern='(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)'>
+                        <div class="errors" *ngIf='form.submitted && listingCopyRightURL.invalid'>
+                            <span class='error'>Please enter a valid URL</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fees">Fees*</label>
+                        <input type="number" class='form-control' name="fees" placeholder="0.00" [(ngModel)]='agencyData.fees' #fees='ngModel' ngModel required pattern='[0-9]+.?[0-9]+'>
+                        <div class="errors" *ngIf='form.submitted && fees.invalid'>
+                            <span class='error'>Please enter a valid value for Fees(Only numbers)</span>
+                        </div>
+                    </div>
+                 </div>
+
+
+                <div class="group">
+                    <div class="form-group">
+                        <label for="bankDetails">Bank details PDF/Image*</label> 
+                        <input id="float-input6" type="file" name="bankDetails" #bankDetails='ngModel' (change)='selectBankDetails($event)' class='form-control' accept='application/pdf, image/*' [required]='!bankDetailsServer?.filepath' ngModel>
+                        <div class="errors" *ngIf='form.submitted && (bankDetails.invalid && !bankDetailsServer?.filepath)'>
+                            <span class='error'>Please select bank account information in pdf/image format.</span>
+                        </div> 
+                    </div>
+                </div>
+                
+                <div class="group">
+                    <div class="form-group border" *ngIf='selectedBankData.name'>
+                        <label for="">Bank Detail - {{selectedBankData.type == "application/pdf"?  selectedBankData.name : ""}}</label><br>
+                        <div class="identityImages" *ngIf='selectedBankData.base64BankImage != null && selectedBankData.type != "application/pdf"'>
+                          <div class="image">
+                              <div class='img'>
+                                  <img [src]='selectedBankData.base64BankImage' alt="bank details image"> 
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group border" *ngIf='bankDetailsServer.filepath && !selectedBankData.name'>                 
+                        <label for="">Bank Details - <a href="{{bankDetailsServer.filepath | server}}" *ngIf='bankDetailsServer.mimetype == "application/pdf"'>Bank Detail Doc</a> </label><br>
+                        <div class="identityImages" *ngIf='selectedBankData.base64BankImage == null && bankDetailsServer?.filepath && bankDetailsServer.mimetype != "application/pdf"'>
+                          <div class="image">
+                              <a href="{{bankDetailsServer.filepath | server}}" target='_blank' class='img'>
+                                  <img src='{{bankDetailsServer.filepath | server}}' alt="bank details image"> 
+                              </a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group mt-3">
+                    <div class="form-group">
+                        <label for="float-input5">Incorporation Certificate PDF/Image*</label>
+                        <input id="float-input6" type="file" name="incorpCertificate" #incorpCertificate='ngModel' (change)='selectincorpCertificate($event)' class='form-control' accept='application/pdf, image/*' [required]='!incorpServer?.filepath' ngModel> 
+                        <div class="errors" *ngIf='form.submitted && (incorpCertificate.invalid && !incorpServer?.filepath)'>
+                            <span class='error'>Please select incorporation certificate in PDF/Image format.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group border" *ngIf='selectedincorpCertificate.name'>
+                        <label for="">Incorporation Certificate- {{selectedincorpCertificate.type == "application/pdf"?  selectedincorpCertificate.name : ""}}</label><br>
+                        <div class="identityImages" *ngIf='selectedincorpCertificate.base64incorpCertificateImage != null'>
+                          <div class="image">
+                              <div class='img'>
+                                <img [src]='selectedincorpCertificate.base64incorpCertificateImage' alt="identity proof image" *ngIf='selectedincorpCertificate.name'> 
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group border" *ngIf='incorpServer?.filepath && !selectedincorpCertificate.name'>
+                        <label for="">Incorporation Certificate - <a href="{{incorpServer.filepath | server}}" *ngIf='incorpServer.mimetype == "application/pdf"'>Incorporation Certificate Doc</a> </label><br>
+
+                        <div class="identityImages" *ngIf='incorpServer.mimetype !="application/pdf"'>
+                          <div class="image">
+                              <a href="{{incorpServer?.filepath | server}}" target='_blank' class='img'>
+                                  <img src='{{incorpServer?.filepath | server}}' alt="identity proof image" > 
+                              </a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <p>
+                    <strong>Note: </strong>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos repudiandae sint ratione similique blanditiis et incidunt, odit, voluptate sunt, praesentium labore. Fuga praesentium enim sed nihil non consectetur libero modi.
+                </p> -->
+
+                <div class="form-group text-center">
+                    <button class="btn py-2 px-5 mt-4" type='submit'>Submit Request</button>
+                </div>
+            </form>
+
+       </section>
+    </div>
+  </div>
+</section>
+
+<div class="loader-spinner" *ngIf='loading || submitting'></div>
+
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

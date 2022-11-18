@@ -1,0 +1,33 @@
+@import url(../abstracts/_mixins.scss);
+
+.sponsore {
+    background: #f5f9fa;
+    padding: 1rem 0;
+    border-top: 1px solid #d2d2d1;
+    border-bottom: 1px solid #d2d2d1;
+
+    ul {
+        li {
+            @include font-style(16px, 600, $color-cyan);
+            margin: 0.3rem;
+
+            @media (min-width: 768px){
+                font-size: 22px;
+            }
+
+            &.vr {
+                width: 2px;
+                opacity: 1;
+                background: $color-cyan;
+            }
+
+            &:first-child {
+                color: $color-white;
+                background: $color-cyan;
+                cursor: default;
+                border-radius: 10px;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

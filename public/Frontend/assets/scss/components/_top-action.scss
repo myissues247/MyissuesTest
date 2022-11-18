@@ -1,0 +1,77 @@
+@import url(../abstracts/_mixins.scss);
+
+.top-action {
+    background: #f5f9fa;
+    border-top: 2px solid #5f605d;
+    border-bottom: 2px solid #5f605d;
+    .btn {
+        @include font-style(24px, unset, #5f605e);
+        height: 100%;
+        display: block;
+        border-radius: 0;
+        &:focus {
+            box-shadow: none;
+        }
+        &.border-end {
+            border-right: 1px solid #5f605d !important;
+            float: left;
+            position: relative;
+            z-index: 2;
+            @media (min-width: 768px){
+                line-height: 2;
+            }
+        }
+        &.border-start {
+            border-left: 1px solid #5f605d !important;
+        }
+
+        @media (min-width: 768px){
+            font-size: 36px;
+        }
+    }
+
+    .text {
+        padding: 10px 20px; 
+        padding-right: 150px;
+        .title {
+            @include font-style(16px, 700, #343432);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+        .sub-title {
+            @include font-style(11px, 500, #a9a9a9);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    }
+
+    @media (min-width: 768px){
+        .text{
+            padding: 20px 30px;
+            padding-right: 190px;
+            .title {
+                font-size: 22px;
+            }
+            .sub-title {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .button-next,
+    .button-prev {
+        background: #f5f9fa;
+        position: absolute;
+        right: 57px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+    .button-next {
+        right: 0px;
+    }
+}

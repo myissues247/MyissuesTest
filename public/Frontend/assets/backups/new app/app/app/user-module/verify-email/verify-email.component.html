@@ -1,0 +1,27 @@
+
+<section class="container-fluid" [class.submitting]='submitting'>
+    <div class="row">
+        <div class="col-12 bg-image">
+            <div class="content">
+                <h1 class='main-text text-center'>
+                    <div class='text-center'>
+                        <i class="icon" [class]="{'pi-check': verifySuccess, 'pi-times': verifyFail}"></i>
+                    </div>
+                    <span *ngIf='verifySuccess'>Email Verification Successful</span>
+                    <span *ngIf='verifyFail'>Email Verification Unsuccessful</span>
+                </h1>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 col-lg-6 mx-md-auto py-5 px-2">
+            <h2 class='text-center text-success py-3' *ngIf='verifySuccess'><small> 
+                Congratulations! your email is now verified, please <a (click)='sign_in()'>sign In</a> to continue
+            </small></h2>
+            <h2 class='text-center text-danger py-3' *ngIf='verifyFail'><small>{{ message }}</small></h2>
+            <div class="go-back text-center my-3">
+                <button class="btn btn-primary"  routerLink='/'><i class='fa fa-arrow-left'></i> Go Back</button>
+            </div>
+        </div>
+    </div> 
+</section>
+
+<div class="loader-spinner" *ngIf='submitting'></div>

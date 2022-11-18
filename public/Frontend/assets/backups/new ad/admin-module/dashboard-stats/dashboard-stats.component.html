@@ -1,0 +1,63 @@
+<div class="container" *ngIf='!stats'>
+  <div class="row">
+    <div class="col-12" style='display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px 0px;'>
+      <div class="loader-spinner" style='position: relative; top: unset; left: unset; transform: unset; width: 50px ;height: 50px'></div>
+      <div class='ml-1'>Please wait, generating stats...</div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf='stats'>
+    <div class="row">
+
+    <div class="col-md-3">
+        <div class="card-counter primary" routerLink='/admin-module/receiver-ads'>
+          <i class="fa fa-users"></i>
+          <span class="count-numbers">{{stats?.receivers}}</span>
+          <span class="count-name">Receivers</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter orange" routerLink='/admin-module/receiver-ads/ads'>
+          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+          <span class="count-numbers">{{stats?.ads}}</span>
+          <span class="count-name">Posts</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter bg-warning" routerLink='/admin-module/donner'>
+          <i class="fa fa-users"></i>
+          <span class="count-numbers">{{stats?.donors}}</span>
+          <span class="count-name">Donors</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter success" routerLink='/admin-module/donations'>
+          <i class="fa fa-usd" aria-hidden="true"></i>
+          <span class="count-numbers">{{stats?.donations}}</span>
+          <span class="count-name">Donations</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter info" routerLink='/admin-module/queries'>
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        <span class="count-numbers">{{stats?.queries}}</span>
+        <span class="count-name">Queries</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter danger" routerLink='/admin-module/reports'>
+        <i class="fa fa-flag" aria-hidden="true"></i>
+        <span class="count-numbers">{{stats?.reports}}</span>
+        <span class="count-name">Reports</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+

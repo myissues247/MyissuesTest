@@ -1,0 +1,77 @@
+.page-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+form {
+    width: 100%;
+}
+
+.select { 
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+ 
+:host ::ng-deep .p-dropdown {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+:host ::ng-deep .p-dropdown{
+    font-size: 16px;
+}
+
+form label {
+    color: #6b9bb2;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+form .group { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap : wrap;
+    justify-content: space-between;
+} 
+
+form .group .form-group{
+    flex: 1;
+    padding: 0px 2px;
+}
+
+.reference .form-group:nth-child(1) {
+    flex: 3 !important;
+}
+.reference .form-group:nth-child(2) {
+    flex: 2 !important;
+}
+.reference .form-group:nth-child(3){
+    flex: 1 !important;
+}
+
+.submitting {
+    position: relative
+}
+
+.submitting::before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    position : absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 1111;
+}
+
+.error {
+    color: red;
+}
+@media screen and (max-width: 550px){
+    .group .form-group{ 
+        min-width: 100%;
+        padding: 0px;
+    }
+}

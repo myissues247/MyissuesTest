@@ -1,0 +1,315 @@
+<form #adEdit='ngForm' class="card" (ngSubmit)='update_ad(adEdit)'>
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+    </p-toolbar>
+  
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>Adveritsement Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Advertisement Content</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>Ad Id</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product._id}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ad Title</strong>
+                            </td>
+                            <td>
+                              
+                                    <input type="text" class='form-control' [(ngModel)]='product.adTitle' name='adTitle' ngModel required #adTitle='ngModel' pattern="[a-zA-Z0-9 '-\.,]+" maxlength="100">
+                                    <div class="errors" *ngIf='adEdit.submitted && adTitle.invalid'>
+                                        <div class="error">Please enter a valid ad title</div>
+                                    </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Category</strong>
+                            </td>
+                            <td>
+                                <select name="category" id="category" class='form-control' (change)='change_category($event)' required>
+                                    <option value="">Select</option>
+                                    <ng-container *ngFor='let category of categories'>
+                                        <option value="{{category._id}}" [selected]="product.categoryName == category.title">{{category.title}}</option>
+                                    </ng-container>
+                                </select>
+                                <div class="errors" *ngIf='adEdit.submitted && !product.categoryName'>
+                                    <div class="error">Please select a category</div>
+                                </div>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Province</strong>
+                            </td>
+                            <td>
+                                <select name="province" id="province" class='form-control' (change)='change_country($event)' required>
+                                    <option value="">Select</option>
+                                    <ng-container *ngFor='let country of countries'>
+                                        <option value="{{country.countryName}}" [selected]="product.country == country.countryName">{{country.countryName}}</option>
+                                    </ng-container>
+                                </select>  
+                                <div class="errors" *ngIf='adEdit.submitted && !product.country'>
+                                    <div class="error">Please select a province</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Region</strong>
+                            </td>
+                            <td>
+                                <select  name="region" id="region" class='form-control' (change)='change_state($event)' required>
+                                    <option value="">Select</option>
+                                    <ng-container *ngFor='let state of states'>
+                                        <option value="{{state.stateName}}" [selected]="product.state == state.stateName">{{state.stateName}}</option>
+                                    </ng-container>
+                                </select>  
+                                <div class="errors" *ngIf='adEdit.submitted && !product.state'>
+                                    <div class="error">Please select a state</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>City</strong>
+                            </td>
+                            <td>
+                                <select name="city" id="city" class='form-control' (change)='change_city($event)' required>
+                                    <option value="">Select</option>
+                                    <ng-container *ngFor='let city of cities'>
+                                        <option value="{{city.cityName}}" [selected]="city.cityName == product.city">
+                                            {{city.cityName}}
+                                        </option>
+                                    </ng-container>
+                                </select>
+                                <div class="errors" *ngIf='adEdit.submitted && !product.city'>
+                                    <div class="error">Please select a city</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong>
+                            </td>
+                            <td>
+                                <p-editor [(ngModel)]='product.description' [style]="{'height':'250px'}" name='description'></p-editor>
+                                <div class="errors" *ngIf='adEdit.submitted && !product.description'>
+                                    <div class="error">Please write a description</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ad Images</strong>
+                            </td>
+                            <td >
+                                <div style='display: flex; flex-direction: column;'>
+                                    <div class="image py-1" style='display: flex; justify-content: space-between; align-items: center;' *ngFor='let image of product.adImages'>
+                                        <a href="{{image | server}}" target="_blank">
+                                            <img src="{{ image | server}}" alt="Ad Image added by the user" style='width: 100px; height: 100px; margin: 5px'>
+                                        </a>
+                                        <button type="button" icon="pi pi-times" pbutton="" ng-reflect-icon="pi pi-times" class="p-button p-component p-button-icon-only" (click)='deleteAdImage(image, i)'><span class="p-button-icon pi pi-times" aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Identity Images</strong>
+                            </td>
+                            <td>
+                                <div style='display: flex; flex-wrap: wrap'>
+                                    <div class="image" *ngFor='let image of product.identityImages'>
+                                        <a href="{{image | server}}" target="_blank">
+                                            <img src="{{ image | server}}" alt="Identity Image added by the user" style='width: 100px; height: 100px; margin: 5px;'>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Ad Video</strong>
+                            </td>
+                            <td>
+                                <video src="{{ product.adVideo | server }}" style="width:150px; height: 100px;"></video>
+                                <div>
+                                    <a href="{{ product.adVideo | server }}" target='_blank'>Click To Watch
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Total Donations</strong>
+                            </td>
+                            <td>
+                                ${{product.donations.amount}}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Total Donors</strong>
+                            </td>
+                            <td>
+                                {{product.donations.count}}
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Total Views</strong>
+                            </td>
+                            <td>
+                                {{product.viewsCount}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reports</strong>
+                            </td>
+                            <td style='cursor: pointer' [routerLink]="['/admin-module/reports/', product._id]">
+                                {{product.reports}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Published On</strong>
+                            </td>
+                            <td>
+                                {{product.publishedOn | date: "medium"}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Approved On</strong>
+                            </td>
+                            <td>
+                                {{product.approvedOn | date: "medium"}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>Sponsor Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">User Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>Sponsor Title</strong>
+                            </td>
+                            <td>
+                                    <input type="text" class='form-control' [(ngModel)]='product.sponsorTitle' name='sponsorTitle' ngModel required #sponsorTitle='ngModel' pattern='[a-zA-Z ]+'>
+                                    <div class="errors" *ngIf='adEdit.submitted && sponsorTitle.invalid'>
+                                        <div class="error">Please enter a valid Sponsor Title</div>
+                                    </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>First Name</strong>
+                            </td>
+                            <td>
+                                    <input type="text" class='form-control' [(ngModel)]='product.lastName' name='lastname' ngModel required #lastname='ngModel' pattern='[a-zA-Z]+ *'>
+                                    <div class="errors" *ngIf='adEdit.submitted && lastname.invalid'>
+                                        <div class="error">Please enter a valid last name</div>
+                                    </div>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Sponsor Id</strong>
+                            </td>
+                            <td>
+                                    {{product.receiverId ? product.receiverId : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contact No.</strong>
+                            </td>
+                            <td>
+                                <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='contactNumber' [(ngModel)]='product.contact'></p-inputMask>
+                                <div class="errors" *ngIf='adEdit.submitted && !product.contact'>
+                                    <div class="error">Please enter a valid contact</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>DOB</strong>
+                            </td>
+                            <td>
+                                <input type="date" class='form-control' name="dob" id="dob" [(ngModel)]='dobConverted' ngModel required #date='ngModel'>
+                                <div class="errors" *ngIf='adEdit.submitted && date.invalid'>
+                                    <div class="error">Please enter a valid date</div>
+                                </div>
+                            </td>
+                        </tr> -->
+                        <!-- <tr>
+                            <td><strong>Age</strong>
+                            </td>
+                            <td>
+                                <input type="number" class='form-control' [(ngModel)]='product.age' name='age' ngModel required #age='ngModel' pattern='[0-9]+'>
+                                <div class="errors" *ngIf='adEdit.submitted && age.invalid'>
+                                    <div class="error">Please enter a valid age</div>
+                                </div>
+                                
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Address</strong>
+                            </td>
+                            <td>
+                                <input type="text" name='address' class='form-control' id="address" [(ngModel)]='product.address' ngModel required #address='ngModel'>
+                                <div class="errors" *ngIf='adEdit.submitted && address.invalid'>
+                                    <div class="error">Please enter a valid address</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zip Code</strong>
+                            </td>
+                            <td>
+                                <input type="text" name='zipCode' class='form-control' id='zipCode' [(ngModel)]='product.zipCode' ngModel required #zipCode='ngModel'>
+                                <div class="errors" *ngIf='adEdit.submitted && zipCode.invalid'>
+                                    <div class="error">Please enter a valid zip code</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong>
+                            </td>
+                            <td>
+                                <button pButton pRipple type="submit" label="save" class="p-button-raised p-button-success"></button>
+                                <button pButton pRipple type="button" label="cancel" class="p-button-raised p-button-danger" [routerLink]='["/admin-module/sponsor/ad/", product._id]'></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>    
+        </p-tabPanel>
+    </p-tabView>
+</form>
+
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+   <!-- Message -->
+            
+   <p-toast></p-toast>
+
+

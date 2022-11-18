@@ -1,0 +1,80 @@
+.center {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+  }
+
+  .btn-purple{
+      background: #b367c9;
+      font-size: 20px;
+      font-weight: 900;
+      color: white;
+      padding: 10px 30px;
+  }
+.card-deck {
+    display: flex; 
+    flex-wrap: wrap;
+}
+.deck{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #737574;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #e3e3e3;
+    border-top: 5px solid #e3e3e3;
+    padding: 40px 10px;
+    border-radius: 5px;
+    min-width: 130px;
+    margin: 5px;
+    min-height: 140px;
+    width: auto;
+    flex: 1;
+}
+.deck .card-text{
+    color: #615f5f;
+   
+}
+.deck-link{
+    text-decoration: none;
+    outline: none;
+}
+.deck:hover{
+    border-top-width: 1px;
+    border-color: #58a788;
+    border-bottom: 5px solid #58a788;
+    color:#58a788 ;
+    cursor: pointer;
+}
+.active {
+    border-top-width: 1px;
+    border-color: #58a788;
+    border-bottom: 5px solid #58a788;
+    color:#58a788 ;
+}
+
+
+.card-body.hide{
+    display: none;
+}
+
+.bump-container{
+    width: 60%;
+    min-height: 100px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1150px){
+    .bump-container {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 600px){
+    .upgrade-card{ 
+        width: 95% !important;
+    }
+    .bump-container {
+        width: 99%;
+    }
+}

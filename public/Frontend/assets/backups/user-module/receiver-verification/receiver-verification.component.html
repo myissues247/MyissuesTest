@@ -1,0 +1,19 @@
+
+<section class='forBG' style='margin-left: 0px; margin-right: 0px; width: 100%' [class.submitting]='submitting'>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-9 mx-auto py-4">
+                <div class="card step-container">
+                    <p-steps [model]="items" [readonly]="true" class="customstepper" styleClass="dot-theme" [(activeIndex)]="activeIndex"></p-steps>
+                </div>
+                <div class="tabs">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="loader-spinner" *ngIf='loading'></div>
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

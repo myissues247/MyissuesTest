@@ -1,0 +1,38 @@
+.store {
+    &--title {
+        @include font-style(18px, 500, $color-black);
+    }
+
+    &--product-card {
+        .product-img {
+            img {
+                border: 7px solid #fff;
+                @media (max-width: 767px) {
+                    border: 6px solid #fff;
+                }
+            }
+        }
+        .product-name {
+            @include font-style(12px, 400, #423f3f);
+            text-transform: uppercase;
+            padding: 10px 0;
+        }
+        .product-info {
+            @include font-style(14px, 400, #949292);
+        }
+        .product-link {
+            @include font-style(12px, 400, $color-cyan);
+            display: block;
+        }
+    }
+
+    .owl-nav {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        button {
+            color: $color-cyan !important;
+            font-size: 30px !important;
+        }
+    }
+}

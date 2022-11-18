@@ -1,0 +1,13 @@
+.blog-article-heading {
+    &--title {
+        @include font-style(22px, 500, $color-black);
+    }
+    &--link {
+        @include font-style(16px, 400, #606060);
+        transition: all 0.2s linear;
+
+        &:hover {
+            color: $color-cyan;
+        }
+    }
+}

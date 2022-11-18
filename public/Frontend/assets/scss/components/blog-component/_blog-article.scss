@@ -1,0 +1,15 @@
+.blog-article-card {
+    &--title {
+        @include font-style(14px, 400, #000);
+    }
+    &--info {
+        @include font-style(12px, 400, #606060);
+        line-height: 15px;
+    }
+    .dropdown {
+        z-index: 2;
+        .dropdown-item {
+            @include font-style(12px, 400, #606060);
+        }
+    }
+}

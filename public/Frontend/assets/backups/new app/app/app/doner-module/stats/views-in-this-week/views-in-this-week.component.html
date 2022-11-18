@@ -1,0 +1,80 @@
+
+	<!-- Graph Sec Start -->
+	<section class="graph-sec">
+		<div class="graph-list-sec">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="graph-img">
+							<ul>
+								<li>
+									<a href="">
+										<i class="fa fa-angle-left"></i>
+									</a>
+									<img src="assets/images/dollor-icon.png" alt="">
+								</li>
+								<li>
+									Hello Donor	
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-4 ">
+						<div class="graph-des text-center">
+							<p>
+								<!-- Pan handlers / Greater toronto area -->
+								Donations For Current Week
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="graph-week text-right">
+							<a routerLink='../viewsInLastWeek/'>last week</a>
+							<a class="last-week-link" routerLink='../viewsInThisWeek/'>this week</a>
+							<a routerLink='../viewsInMonth/'>monthly</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="graph-bar">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="graph-view">
+					        <ul>
+					        	<li>
+					        		<img src="assets/images/dollor-icon.png" alt="Dollor Icons">
+					        	</li>
+					        	<li>
+					        		<span class="green-text">{{totalDonations}}</span>
+					        		Money Donated
+					        	</li>
+					        </ul>		
+					    </div>
+					</div>
+					<div class="col-lg-9">
+						<div id="demo" class="carousel slide" data-ride="carousel">
+							<!-- The slideshow -->
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<div class="graphbar-list">
+										<ul >
+											<li class="mon-bar" *ngFor="let data of donations">
+												<div class="line-green" [style.height.px]="((data.donations.donation*200)/heighestDonations) || 0" attr.jan-content="${{data.donations.donation || 0}}"></div>
+
+												<!-- <span>{{data.views | dayFormat}}</span> -->
+
+												<span>{{data.donations.dateISO | date:'EE'}}</span>
+											</li>
+										</ul> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Graph Sec End -->

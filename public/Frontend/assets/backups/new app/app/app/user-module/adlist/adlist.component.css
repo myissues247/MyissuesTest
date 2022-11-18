@@ -1,0 +1,24 @@
+.tooltipclassic-content  {
+    display: none
+}
+
+.show-dialog {
+    display: block;
+    opacity: 1;
+}
+
+.ad-pro-img {
+    position: relative;
+    opacity: 1;
+    min-height: 200px !important;
+}
+
+.pic-img {
+    min-height: 200px !important;
+    
+}
+
+
+/* .ad-pro-img {
+    background: rgba(255, 255, 255, 0.9)
+} */

@@ -1,0 +1,104 @@
+@import url(../abstracts/_mixins.scss);
+
+.section-title-cyan {
+    @include font-style(20px, 600, $color-cyan);
+    @media (min-width: 768px){
+        font-size: 30px;
+    }
+}
+
+
+// background
+.bg-light-gray {
+    background-color: #f5f9fa;
+}
+
+// background
+.bg-cyan {
+    background-color: $color-cyan;
+}
+
+
+// border-radius
+.border-radius-0 {
+    border-radius: 0;
+}
+
+
+// color
+.text-cyan {
+    color: $color-cyan;
+}
+
+
+// font-weight
+.fw-600{
+    font-weight: 600;
+}
+
+
+
+// ########## utility css start ##########
+////########### background
+.bg-light-1 {
+    background-color: $color-light-1;
+}
+.bg-light-2 {
+    background-color: $color-light-2;
+}
+.bg-light-4{
+    background-color: $color-light-4;
+}
+.bg-cyan {
+    background-color: $color-cyan;
+}
+
+
+//########### color
+.text-cyan {
+    color: $color-cyan;
+}
+.text-pink {
+    color: $color-pink;
+}
+.text-black {
+    color: $color-black;
+}
+
+
+//########### width
+.w-lg-50 {
+    @media (min-width: 992px) {
+        width: 50% !important;
+        max-width: 90%;
+    }
+}
+.w-lg-90 {
+    @media (min-width: 992px) {
+        width: 90% !important;
+        max-width: 90%;
+    }
+}
+
+
+
+//########### css grid
+.grid-item-5-responsive {
+    @media (min-width: 1200px) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    @media (min-width: 768px) and (max-width: 1199px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.ggy-5 {
+    grid-row-gap: 3rem;
+}
+
+.ggx-3 {
+    grid-column-gap: 1rem;
+}
+
+
+// ##########// end of utility css ##########

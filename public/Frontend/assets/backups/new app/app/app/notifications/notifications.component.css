@@ -1,0 +1,46 @@
+.notif {
+    position: relative;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+.notif:hover {
+    background: whitesmoke;
+}
+/* .notif::after {
+    content: " ";
+    height: 1px;
+    width: 80%;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+} */
+
+p {
+    text-align: justify;
+    font-size: 15px;
+    margin-bottom: 0px;
+    color: #222221;
+}
+
+strong {
+    color : #8d0b77;
+    font-weight: bolder;
+}
+.notif .details span {
+    font-size: 12px;
+    display: block;
+    text-align: right;
+    color: #222221;
+}
+
+.icon-image {
+    margin-right: 5px;
+}
+.icon {
+    width: 20px;
+    height: 20px;
+} 
+
+

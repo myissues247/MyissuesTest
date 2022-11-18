@@ -1,0 +1,30 @@
+<section class="stepsdemo-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Select Category
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+           Please select a relevant category.
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="categories">
+                <ng-container *ngFor='let category of categories'>
+                    <div pRipple class="category" [class.active]="category._id == selectedCategory" (click)='selectedCategory = category._id'> 
+                            <div class="category-image"> 
+                                <img src="{{category.imagePath? (category.imagePath|server2) : 'assets/images/banner1.jpg'}}" alt="{{ category.title }} image" class="image"> 
+                            </div>
+                            <div class="category-name">
+                                <p class='text-center'><small>{{ category.title }}</small></p>
+                            </div>
+                    </div> 
+                </ng-container>  
+            </div>
+        </ng-template>  
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end text-right">
+                <button pButton type="button" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info mr-1' (click)='nextPage()'></button>
+            </div>
+        </ng-template>
+    </p-card>
+</section> 
+

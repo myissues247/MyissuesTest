@@ -1,0 +1,45 @@
+<section class='container-fluid' style='padding:10px 0px'>
+    <div class="row w-100" style='margin: 0px;'>
+        <div class="col-12 notif well" *ngFor='let notif of notificationArray; let i = index'>
+             <div class="details px-1" (click)='check_notif(notif)' *ngIf='notif.type == "donated"'>
+                 <p>
+                     <i class='icon-image'><img class='icon' src="assets\images\cancel.png" alt="close icon"></i>
+                     <strong>{{notif.fromName || 'anonymous'}}</strong> {{notif.message.substr(0, 30)}}...
+                 </p>
+                 <span>{{ notif.createdOn | date:'medium' }}</span>
+             </div>
+             <div class="details px-1" (click)='check_notif(notif)' *ngIf='notif.type == "donated housing"'>
+                 <p>
+                     <i class='icon-image'><img class='icon' src="assets\images\cancel.png" alt="close icon"></i>
+                     <strong>{{notif.fromName || 'anonymous'}}</strong> {{notif.message.substr(0, 30)}}...
+                 </p>
+                 <span>{{ notif.createdOn | date:'medium' }}</span>
+             </div>
+             <div class="details px-1" (click)='check_notif(notif)' *ngIf='notif.type=="rejected"'>
+                <p>
+                    <i class='icon-image'><img class='icon' src="assets\images\cancel.png" alt="close icon"></i> <strong>From Admin: </strong>{{notif.message.substr(0, 30)}}...
+                </p>
+                <span>- {{ notif.createdOn | date:'medium' }}</span>
+             </div>
+             <div class="details px-1" (click)='check_notif(notif)' *ngIf='notif.type=="approved"'>
+                <p>
+                    <i class='icon-image'><img class='icon' src="assets\images\cancel.png" alt="close icon"></i> <strong>From Admin: </strong>{{notif.message.substr(0, 30)}}...
+                </p>
+                <span>- {{ notif.createdOn | date:'medium' }}</span>
+             </div>
+             <div class="details px-1" (click)='check_notif(notif)' *ngIf='notif.type=="info"'>
+                <p>
+                    <i class='icon-image'><img class='icon' src="assets\images\cancel.png" alt="close icon"></i> <strong>From Admin: </strong>{{notif.message.substr(0, 30)}}...
+                </p>
+                <span>- {{ notif.createdOn | date:'medium' }}</span>
+             </div>
+        </div>
+        <p *ngIf='!loading && notificationArray.length == 0'>You have 0 Notifications</p>
+        <div  style='display: flex; justify-content: center; align-items: center; width: 100%; padding: 15px 0px'>
+            <div class="loader-spinner" style='width: 60px; height: 60px; position: unset;' *ngIf='loading'></div>
+        </div>
+    </div>
+</section>
+
+
+  

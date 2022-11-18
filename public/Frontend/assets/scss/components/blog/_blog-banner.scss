@@ -1,0 +1,10 @@
+.blog-banner {
+    position: relative;
+   .blog-banner-title {
+        @include font-style(55px, 600, $color-white);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+   }
+}

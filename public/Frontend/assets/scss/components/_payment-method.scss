@@ -1,0 +1,97 @@
+@import url(../abstracts/_mixins.scss);
+
+// ########### pament method start ###########
+.payment-method{
+    .payment-option{
+        label {
+            @include font-style(18px, 500, $color-gray-2);
+        }
+
+        .form-control {
+            @include font-style(16px, 400, $color-gray-3);
+        }
+
+        .form-check-input:checked {
+            background-color: $color-cyan;
+            border-color: $color-cyan;
+        }
+
+        .heading{
+            @include font-style(20px, 600, $color-gray-2);
+            label {
+                font-weight: 400;
+            }
+        }
+
+        #payment-accordion{
+            .accordion-item{
+                background-color: transparent;
+                
+                .accordion-header{
+                    background-color: #faf9f9;
+                }
+            }
+        }
+    }
+
+    .payment-summary{
+        .user-profile{
+            .profile-img-box{
+                width: 30%;
+                .profile-img{
+                    width: 100%;
+                    height: 100%;
+                    max-width: 160px;
+                    max-height: 160px;
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+            }
+            .profile-info{
+                p{
+                    @include font-style(18px, 500, $color-gray-2);
+                }
+            }
+        }
+
+        .ongoing-support{
+            @include font-style(18px, 500, $color-gray-3);
+        }
+
+        .promocode-text{
+            i {
+                color: $color-light-3;
+            }
+        }
+
+        .service-fee-text {
+            @extend .promocode-text;
+
+        }
+        .service-fee-amount{
+            @include font-style(18px, 500, $color-gray-3);
+        }
+
+        .total-amount{
+            @include font-style(20px, 600, $color-gray-3);
+            padding-bottom: 40px;
+        }
+
+        .ssl-secure{
+            @include font-style(16px, 400, $color-gray-3);
+        }
+
+        .total-charge{
+            @include font-style(16px, 400, $color-gray-2);
+        }
+    }
+}
+
+.payment-method-footer{
+    @include font-style(16px, 400, $color-gray-2);
+
+    a:hover {
+        color: $color-pink;
+    }
+}
+// ########### pament method end ###########

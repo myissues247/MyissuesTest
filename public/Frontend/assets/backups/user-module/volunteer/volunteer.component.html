@@ -1,0 +1,357 @@
+
+<section class="">
+<img src="http://myissuesinc.ca/assets/frontend/volunteer/images/volunteer.jpeg" alt="banner image" style="width: 100%;">
+</section>
+<!-- Common Banner End -->
+
+<!-- Volunteer Start -->
+<section class="volunteer" [class.submitting]='submitting'>
+    <div class="container">
+        <div class="volunteer-bg">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="volunteer-des">
+                        <h1 class="volunteer-head">Make a difference</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <h2 class="volunteer-head">Benefits:</h2>
+                        <ul>
+                            <li>
+                                Work experience
+                            </li>
+                            <li>
+                                Reference letter and/or Referral letter
+                            </li>
+                            <li>
+                                Extra benefits for members of MyIssues such as a volunteer sticker on your profile on the website banner
+                            </li>
+                            <li>
+                                Bonus on cheque if you receive goverment addistant and qualify
+                            </li>
+                            <li>
+                                Meeting new people
+                            </li>
+                            <li>
+                                Having fun
+                            </li>
+                            <li>
+                                Pride in yourself and what you can accomplish
+                            </li>
+                            <li>
+                                Great work ethics
+                            </li>
+                            <li>
+                                Extra visits to on line food bank
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <div class="volunteer-form volunteer-des">
+                        <h1 class="volunteer-head">MyIssues volunteer request</h1>
+                        <p>
+                            Would you like to volunteer in your community? Then please accurately fill out the form below.
+                        
+                        
+                                                         </p>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <form class="form-input" id="volunteer_now_form" #volunteer='ngForm' (ngSubmit)='submit_volunteer(volunteer)'>
+                            <div class="form-group">
+                                <input type="text" placeholder="First Name" name="firstname" id="first_name" class="form-control capitalize" autocapitalize="words" [(ngModel)]='Volunteer.firstname' #firstname='ngModel' ngModel required pattern="[a-zA-Z]+ *">
+                                <div class="errors" *ngIf='volunteer.submitted && firstname.invalid'>
+                                    <span class="error">Please enter a valid first name</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Last Name"  [(ngModel)]='Volunteer.lastname' name="lastname" id="last_name" class="form-control capitalize" autocapitalize="words" #lastname='ngModel' ngModel required pattern="[a-zA-Z]+ *">
+                                <div class="errors" *ngIf='volunteer.submitted && lastname.invalid'>
+                                    <span class="error">Please enter a valid last name</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" name="email" id="email" class="form-control"  [(ngModel)]='Volunteer.email' #email='ngModel' ngModel required pattern='^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$'>
+                                <div class="errors" *ngIf='volunteer.submitted && email.invalid'>
+                                    <span class="error">Please enter a valid email</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Phone Number With Country Code" name="contact" class="form-control"  [(ngModel)]='Volunteer.contact' #contact='ngModel' required ngModel pattern='\+?[0-9]{12,13}'>
+                                <div class="errors" *ngIf='volunteer.submitted && contact.invalid'>
+                                    <span class="error">Please enter a valid phone number</span>
+                                </div>
+                            </div>
+                            
+                                                              <div class="form-group">
+                                <div class="select-wrap">
+                                     <select class="form-control" name="city"  (change)='select_city($event)' #city='ngModel' required ngModel>
+                                     <option value="">--Please Select City--</option>
+                                                                              <option value="Milton">Milton</option>
+                                                                              <option value="Calgary">Calgary</option>
+                                                                              <option value="Lethbridge">Lethbridge</option>
+                                                                              <option value="Medicine Hat">Medicine Hat</option>
+                                                                              <option value="Airdrie">Airdrie</option>
+                                                                              <option value="Banff/Canmore">Banff/Canmore</option>
+                                                                              <option value="Grande Prairie">Grande Prairie</option>
+                                                                              <option value="Brampton">Brampton</option>
+                                                                              <option value="City of Toronto">City of Toronto</option>
+                                                                              <option value="Durham Region">Durham Region</option>
+                                                                              <option value="Mississauga">Mississauga</option>
+                                                                              <option value="Oakville">Oakville</option>
+                                                                              <option value="North York">North York</option>
+                                                                              <option value="Markham">Markham</option>
+                                                                              <option value="Burlington">Burlington</option>
+                                                                              <option value="Newmarket">Newmarket</option>
+                                                                              <option value="Milton">Milton</option>
+                                                                              <option value="Oshawa">Oshawa</option>
+                                                                              <option value="Brantford-Woodstock">Brantford-Woodstock</option>
+                                                                              <option value="London">London</option>
+                                                                              <option value="Cambridge">Cambridge</option>
+                                                                              <option value="Barrie">Barrie</option>
+                                                                              <option value="Belleville">Belleville</option>
+                                                                              <option value="Hamilton">Hamilton</option>
+                                                                              <option value="Niagara Region">Niagara Region</option>
+                                                                              <option value="Vancouver">Vancouver</option>
+                                                                              <option value="North Shore">North Shore</option>
+                                                                              <option value="Richmond">Richmond</option>
+                                                                              <option value="Burnaby/NewWest">Burnaby/NewWest</option>
+                                                                              <option value="Delta/Surrey/Langley">Delta/Surrey/Langley</option>
+                                                                              <option value="Tricities/Pitt/Maple">Tricities/Pitt/Maple</option>
+                                                                              <option value="Fraser Valley">Fraser Valley</option>
+                                                                              <option value="Whistler">Whistler</option>
+                                                                              <option value="White Rock">White Rock</option>
+                                                                              <option value="Victoria">Victoria</option>
+                                                                              <option value="Nanaimo">Nanaimo</option>
+                                                                              <option value="Comox Valley">Comox Valley</option>
+                                                                              <option value="Sunshine Coast">Sunshine Coast</option>
+                                                                              <option value="Kamloops">Kamloops</option>
+                                                                              <option value="Kelowna">Kelowna</option>
+                                                                              <option value="Kootenays">Kootenays</option>
+                                                                              <option value="Cariboo">Cariboo</option>
+                                                                              <option value="Penticton">Penticton</option>
+                                                                              <option value="Verno">Verno</option>
+                                                                              <option value="Prince George">Prince George</option>
+                                                                              <option value="Peace River Country">Peace River Country</option>
+                                                                              <option value="Skeena-Bulkley">Skeena-Bulkley</option>
+                                                                              <option value="Fort St. John">Fort St. John</option>
+                                                                              <option value="Winnipeg">Winnipeg</option>
+                                                                              <option value="Brandon">Brandon</option>
+                                                                              <option value="Saint John">Saint John</option>
+                                                                              <option value="Moncton">Moncton</option>
+                                                                              <option value="Fredericton">Fredericton</option>
+                                                                              <option value="Dieppe">Dieppe</option>
+                                                                              <option value="Miramichi">Miramichi</option>
+                                                                              <option value="NB - Other Areas">NB - Other Areas</option>
+                                                                              <option value="St. John's">St. John's</option>
+                                                                              <option value="Newfoundland - Other Areas">Newfoundland - Other Areas</option>
+                                                                              <option value="Labrador City">Labrador City</option>
+                                                                              <option value="LAB - Other Areas">LAB - Other Areas</option>
+                                                                              <option value="Goose Bay">Goose Bay</option>
+                                                                              <option value="Yellowknife">Yellowknife</option>
+                                                                              <option value="NWT - Other Areas">NWT - Other Areas</option>
+                                                                              <option value="Halifax">Halifax</option>
+                                                                              <option value="Cape Breton - Sydney">Cape Breton - Sydney</option>
+                                                                              <option value="Halifax - Other Areas">Halifax - Other Areas</option>
+                                                                              <option value="Truro">Truro</option>
+                                                                              <option value="Iqaluit">Iqaluit</option>
+                                                                              <option value="Nunavut - Other Areas">Nunavut - Other Areas</option>
+                                                                              <option value="Charlottetown">Charlottetown</option>
+                                                                              <option value="Summerside">Summerside</option>
+                                                                              <option value="PEI - Other Areas">PEI - Other Areas</option>
+                                                                              <option value="Montreal">Montreal</option>
+                                                                              <option value="Quebec City">Quebec City</option>
+                                                                              <option value="Saquenay">Saquenay</option>
+                                                                              <option value="Sherbrooke">Sherbrooke</option>
+                                                                              <option value=" Trois Rivieres"> Trois Rivieres</option>
+                                                                              <option value="Laval">Laval</option>
+                                                                              <option value="Drummondville">Drummondville</option>
+                                                                              <option value="Granby">Granby</option>
+                                                                              <option value="Regina">Regina</option>
+                                                                              <option value="Moose Jaw">Moose Jaw</option>
+                                                                              <option value="Swift Current">Swift Current</option>
+                                                                              <option value="Estevan">Estevan</option>
+                                                                              <option value="Weyburn">Weyburn</option>
+                                                                              <option value="Yorkton">Yorkton</option>
+                                                                              <option value="Saskatoon">Saskatoon</option>
+                                                                              <option value="Prince Albert">Prince Albert</option>
+                                                                              <option value="North Battleford">North Battleford</option>
+                                                                              <option value="Lloydminster">Lloydminster</option>
+                                                                              <option value="Whitehorse">Whitehorse</option>
+                                                                              <option value="Yukon - Other Areas">Yukon - Other Areas</option>
+                                                                           </select>
+                                    <div class="errors" *ngIf='volunteer.submitted && city.invalid'>
+                                        <span class="error">Please select a city</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="form-head">How would you like to help?</h2>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Sign up people in your community that need help
+                                        <input type="checkbox" checked="checked" name="like_to_help[]" value="Sign up people in your community that need help" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Assitant in the food bank 
+                                        <input type="checkbox" name="like_to_help[]" value="Assitant in the food bank" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Flyer distribution in your community
+                                        <input type="checkbox" name="like_to_help[]" value="Flyer distribution in your community" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Delivery drivers on Crew chief drivers
+                                        <input type="checkbox" name="like_to_help[]" value="Delivery drivers on Crew chief drivers" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Volunteering in any capacity that's needed
+                                        <input type="checkbox" name="like_to_help[]" value="Volunteering in any capacity that's needed" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="errors" *ngIf='volunteer.submitted && Volunteer.helpIn?.length < 1'>
+                                        <span class="error">Please select atleast one option</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <h2 class="form-head">What days work best for your schedule?</h2>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Monday
+                                        <input type="checkbox" checked="checked" name="days_your_schedule" value="monday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Tuesday
+                                        <input type="checkbox" name="days_your_schedule" value="tuesday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Wednesday
+                                        <input type="checkbox" name="days_your_schedule" value="wednesday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Thursday
+                                        <input type="checkbox" name="days_your_schedule" value="thursday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Friday
+                                        <input type="checkbox" name="days_your_schedule" value="friday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Saturday
+                                        <input type="checkbox" name="days_your_schedule" value="saturday" #days='ngModel' ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Sunday
+                                        <input type="checkbox" name="days_your_schedule" value="sunday" #days='ngModel' ngModel (click)='daysControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>  
+                                <div class="errors" *ngIf='volunteer.submitted && !daysCount'>
+                                  <span class="error">Please select atleast one option</span>
+                                </div>
+                                </div>
+                            </div>
+                            <h2 class="form-head">What of day works best for your schedule?</h2>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Morning
+                                        <input type="checkbox" checked="checked"  name="time_your_schedule[]" value="morning" #time='ngModel' required ngModel (click)='timeControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Afternoon
+                                        <input type="checkbox"  name="time_your_schedule[]" value="afternoon" #time='ngModel' required ngModel (click)='timeControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="city-checkbx-list">
+                                    <label class="city-radio">
+                                        Evening
+                                        <input type="checkbox"  name="time_your_schedule[]" value="evening" #time='ngModel' required ngModel (click)='timeControl($event)'>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="errors" *ngIf='volunteer.submitted && !timeCount'>
+                                        <span class="error">Please select atleast one option</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="additional_comments"  rows="5"  [(ngModel)]='Volunteer.message' placeholder="Additional Comments" ngModel></textarea>
+                            </div>
+                            <button class="btn btn-submit" type='submit'>submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Volunteer End -->

@@ -1,0 +1,198 @@
+@import url(../abstracts/_mixins.scss);
+
+.post-details {
+    background: #f5f9fa;
+    // banner start
+    .banner{
+        position: relative;
+        margin-top: 15px;
+        border-radius: 15px;
+        overflow: hidden;
+        @media (min-width: 768px){
+            margin-top: 20px;
+        }
+
+        .button-prev,
+        .button-next {
+            font-size: 60px;
+            line-height: 60px;
+            color: #5f605e;
+            padding: 0;
+            width: 50px;
+            height: 75px;
+            background: $color-white;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            @media (min-width: 768px){
+                width: 80px;
+                height: 120px;
+                font-size: 90px;
+                line-height: 90px;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        .button-prev{
+            left: calc(0px - 10px);
+        }
+        .button-next{
+            right: calc(0px - 10px);
+        }
+
+        .pagination {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            z-index: 1;
+            @include font-style(16px, 600, $color-white);
+            background: #5f605e;
+            padding: 10px;
+            border-bottom-left-radius: 10px;
+            @media (min-width: 768px){
+               font-size: 24px;
+            }
+        }
+
+        .user-icon {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            @include font-style(16px, 600, $color-white);
+            background: #5f605e;
+            padding: 10px;
+            border-bottom-right-radius: 10px;
+            @media (min-width: 768px){
+                font-size: 24px;
+            }
+        }
+    }
+    // banner end
+
+    // video-picture start
+    .video-picture {
+        .card {
+            border-color: transparent;
+            box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.29);
+            padding: 15px;
+            height: 100%;
+            .heading {
+                @include font-style(16px, 600, #5f605e);
+                margin-bottom: 20px;
+                white-space: nowrap;
+                @media (min-width: 768px){
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .video {
+            width: 30%;
+            margin-right:  15px;
+            @media (min-width: 576px){
+                margin-right:  30px;
+                .card {
+                    padding-left: 30px;
+                    padding-right: 30px;
+                    padding-bottom: 30px;
+                }
+            }
+        }
+        .picture {
+            width: 70%;
+            img{
+                border: 1px solid #242122;
+                border-radius: 4px;
+            }
+        }
+    }
+    // video-picture end
+
+    // profile start
+    .profile {
+        .card {
+            border: none;
+            box-shadow: 0px 0px 7.36px 0.64px rgba(0, 0, 0, 0.16);
+
+            .profile-info {
+                label{
+                    @include font-style(14px, 400, #5f605e);
+                    @media(min-width: 768px){
+                        font-size: 22px;
+                    }
+                }
+                h2{
+                    @include font-style(16px, 700, #343432);
+                    &.text-pink{
+                        color: #872576;
+                    }
+                    @media(min-width: 768px){
+                        font-size: 24px;
+                    }
+                }
+            }
+
+            .btn {
+                font-size: 16px;
+                font-weight: 700;
+                width: 100%;
+                display: block;
+                padding: 1.2rem;
+                height: 100%;
+                box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.29);
+                transition: all 0.2s linear;
+                @media(min-width: 768px){
+                    font-size: 24px;
+                }
+
+                &.btn-warning{
+                    background: #fdb934;
+                    color: $color-white;
+                }
+                &.btn-info{
+                    background: #00768a;
+                    color: $color-white;
+                }
+                &.btn-light{
+                    background: #eff1ec;
+                    color: #5f605e;
+                }
+
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+        }
+
+        .profile-description {
+            .title{
+                @include font-style(19px, 600, #5f605e);
+                text-transform: uppercase;
+                @media(min-width: 768px){
+                    font-size: 30px;
+                }
+            }
+            .description{
+                @include font-style(12px, 400, #5f605e);
+                @media(min-width: 768px){
+                    font-size: 18px;
+                }
+            }
+            .btn-light {
+                font-size: 14px;
+                font-weight: 500;
+                color: #5f605e ;
+                @media(min-width: 768px){
+                    font-size: 20px ;
+                }
+            }
+        }
+    }
+    // profile end
+} 

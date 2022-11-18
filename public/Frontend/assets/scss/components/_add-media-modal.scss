@@ -1,0 +1,114 @@
+@import url(../abstracts/_mixins.scss);
+
+.add-media-modal{
+
+    .modal-content{
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .add-picture-heading{
+        @include font-style(20px, 700, #3c3738);
+        text-align: center;
+        @media (min-width: 768px){
+            font-size: 30px;
+        }
+    }
+    .add-video-heading{
+        @include font-style(16px, 700, $color-cyan);
+        @media (min-width: 768px){
+            font-size: 24px;
+        }
+    }
+
+    .add-media-img{
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    .form-check-input{
+        width: 20px;
+        height: 20px;
+        background-color: #7f7f7f;
+        border: 1px solid #f1f1f1;
+        cursor: pointer;
+        position: absolute;
+        margin-top: 0;
+        top: 10px;
+        right: calc(10px + 0.5rem);
+        border-radius: 50%;
+        @media (min-width: 768px){
+            width: 30px;
+            height: 30px;
+            right: calc(10px + .75rem);
+        }
+        @media (max-width: 375px){
+            width: 15px;
+            height: 15px;
+            top: 5px;
+            right: calc(5px + .75rem);
+        }
+    }
+    .form-check-input:checked {
+        background-color: #0d793f;
+        border-color: #0d793f;
+    }
+
+    .add-picture-input-label{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f1f1;
+        border: 1px solid #7f7f7f;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        @include font-style(15px, 600, #7f7f7f);
+        text-align: center;
+        @media (min-width: 768px){
+            font-size: 24px;
+        }
+        i{
+            display: block;
+        }
+        
+    }
+
+    .divider-line{
+        @include font-style(15px, 600, #7f7f7f);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        @media (min-width: 768px){
+            font-size: 24px;
+        }
+
+        &::before {
+            content: '';
+            width: 100%;
+            height: 1px;
+            background-color: #7f7f7f;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+    }
+
+    .modal-footer{
+        background-color: #f1f1f1;
+        .btn{
+            font-size: 22px;
+            border-radius: 10px;
+            @media (min-width: 768px){
+                font-size: 36px;
+            }
+        }
+    }
+}

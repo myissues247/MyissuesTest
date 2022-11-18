@@ -1,0 +1,72 @@
+
+
+<section class="stepsdemo-content" [class.submitting]='submitting'>
+    <form class="input-container" #sadForm='ngForm' (ngSubmit)='nextPage(sadForm)'>
+    <p-card>
+        <ng-template pTemplate="title">
+            Ad Content
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+           Enter relevant ad content here.
+        </ng-template>
+        <ng-template pTemplate="content">
+                <div class="form-group">
+                    <label for="adTitle">Advertisement Title</label>
+                    <input type="text" class='form-control' name="adTitle" placeholder="Max: 100 words" maxlength="100" [(ngModel)]='adContent.adTitle' #adTitle='ngModel' required ngModel>
+                    <div class="errors" *ngIf='(sadForm.submitted && adTitle.invalid)'>
+                        <span class="error">Please enter a valid advertisement title.</span>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="name">Name</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="name" placeholder="Only your first name" [(ngModel)]="adContent.firstName" #name='ngModel' pattern='[a-zA-Z]+ *' required ngModel>
+                        <div class="errors" *ngIf='(sadForm.submitted && name.invalid)'>
+                            <span class="error">Please enter a valid name. (Only alphabets)</span>
+                        </div>
+                    </div> 
+                    <div class="form-group" id='gender-input'>
+                        <label for="gender">Gender</label>
+                        <select name="gender" class='form-control' id="selectGender" [(ngModel)]="adContent.gender" #gender='ngModel' ngModel required>
+                            <option value="" [selected]="adContent.gender == ''" disabled>Select a Gender</option>
+                            <option value="male" [selected]="adContent.gender == 'male'">Male</option>
+                            <option value="female" [selected]="adContent.gender =='female'">Female</option>
+                            <option value="others" [selected]="adContent.gender == 'others'">Others</option>
+                        </select>
+                        <div class="errors" *ngIf='(sadForm.submitted && gender.invalid)'>
+                            <span class="error">Please select a gender</span>
+                        </div>
+                    </div> 
+                    <div class="form-group" id='age-input'>
+                        <label for="age">Age</label>
+                        <input type="number" class='form-control' name="age" pattern='[0-9]+' min=0 [(ngModel)]='adContent.age' #age='ngModel' required ngModel>
+                        <div class="errors" *ngIf='(sadForm.submitted && age.invalid && age > 0 && age < 150)'>
+                            <span class="error">Please enter a valid age. (Numeric age greater than 0)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id='name-input'>
+                    <label for="tag">Tag Line</label>
+                    <input type="text" class='form-control' name="tag" placeholder="Describe your best attribute in short and catchy way" [(ngModel)]='adContent.tagline' #tag='ngModel' required ngModel>
+                    <div class="errors" *ngIf='(sadForm.submitted && tag.invalid)'>
+                        <span class="error">Please enter a valid tag line.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <p-editor [(ngModel)]="adContent.description" [style]="{'height':'320px', 'font-size': '16px'}" name='description' ngModel></p-editor>
+                    <div class="errors" *ngIf='sadForm.submitted && !adContent.description'>
+                        <span class="error">Please enter a valid description.</span>
+                    </div>
+                </div>
+        </ng-template> 
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end page-buttons">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous' class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="submit" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info' ></button>
+            </div>
+        </ng-template>
+    </p-card>
+    </form>
+</section>
+

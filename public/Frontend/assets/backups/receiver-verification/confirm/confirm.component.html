@@ -1,0 +1,264 @@
+<div class="card"  style="min-height: 450px;width: 100%;margin: 10 auto;">
+    <div class="card-header">
+        <h4 class="card-title">Confirm Detail</h4>
+    </div>
+    <div class="card-header">
+        <h5 class="card-title">Personal Detail</h5>
+    </div>
+    <div class="card-body">
+      
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Name</label><br>
+                  <b>{{UserAllData.PersonalInfo.firstname}} {{UserAllData.PersonalInfo.lastname}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Email</label><br>
+                  <b>{{UserAllData.PersonalInfo.email}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Age</label><br>
+                  <b>{{UserAllData.PersonalInfo.age}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">DOB</label><br>
+                  <b>{{UserAllData.PersonalInfo.dob}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Contact No.</label><br>
+                  <b>{{UserAllData.PersonalInfo.contact}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Address</label><br>
+                  <b>{{UserAllData.PersonalInfo.address}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">City</label><br>
+                  <b>{{UserAllData.PersonalInfo.city}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">ZipCode</label><br>
+                  <b>{{UserAllData.PersonalInfo.zipCode}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Area</label><br>
+                  <b>{{UserAllData.PersonalInfo.area}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group mt-4">
+                <label for="">Identity Images</label><br>
+                <div class="identityImages">
+                    <div class="image" *ngFor='let img of base64IdentityImages'>
+                      <img [src]='img' alt="identity images of user">
+                    </div>
+                    <div class="image" *ngFor='let img of UserAllData.identityImagesServer'>
+                      <img src='{{img | server}}' alt="identity images of user">
+                    </div>
+                </div>
+                <b *ngIf='base64IdentityImages.length == 0 && UserAllData.identityImagesServer.length == 0'>no image selected</b>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12"> 
+              <div class="form-group mt-4" *ngIf='selectedBankData.name'>
+                <label for="">Bank Detail</label><br>
+                <b *ngIf='selectedBankData.type == "application/pdf"'>selectedBankData.name</b>
+                <div class="identityImages" *ngIf='selectedBankData.base64BankImage != null'>
+                  <div class="image">
+                     <img [src]='selectedBankData.base64BankImage' alt="bank details image"> 
+                  </div>
+                </div>                         
+              </div>
+              <div class="form-group mt-4" *ngIf='!selectedBankData && UserAllData.bankDetailsServer.filepath'>
+                <label for="">Bank Detail</label><br>
+                <b *ngIf='UserAllData.bankDetailsServer.mimetype == "application/pdf"'><a href='{{UserAllData.bankDetailsServer.filepath | server }}' target='_blank' *ngIf='UserAllData.bankDetailsServer.mimetype == "application/pdf"'>Bank Detail document</a></b>
+                <div class="identityImages" *ngIf='UserAllData.bankDetailsServer.filepath'>
+                  <div class="image">
+                     <img src='{{UserAllData.bankDetailsServer.file | server}}' alt="bank details image"> 
+                  </div>
+                </div>                         
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12"> 
+              <div class="form-group mt-4" *ngIf='selectedIdentity.name'>
+                <label for="">Identity Proof </label><br>
+                <b *ngIf='selectedIdentity.type == "application/pdf"'>selectedIdentity.name </b>
+                <div class="identityImages" *ngIf='selectedIdentity.base64IdentityImage != null'>
+                  <div class="image">
+                     <img [src]='selectedIdentity.base64IdentityImage' alt="idenitity proof image"> 
+                  </div>
+                </div>              
+              </div>
+              <div class="form-group mt-4" *ngIf='!selectedIdentity.name && UserAllData.identityDetailsServer?.filepath'>
+                <label for="">Identity Proof - <a href='{{UserAllData.identityDetailsServer.filepath | server }}' target='_blank' *ngIf='UserAllData.identityDetailsServer.mimetype == "application/pdf"'>Identity proof document</a></label><br>
+                <div class="identityImages" *ngIf='UserAllData.identityDetailsServer.mimetype != "application/pdf"'>
+                  <div class="image">
+                     <img src='{{UserAllData.identityDetailsServer.filepath | server}}' alt="identity proof image"> 
+                  </div>
+                </div>         
+              </div>
+          </div>
+
+  
+        </div>
+     
+    </div>
+    <div class="card-header">
+        <h5 class="card-title">Neighbour Detail</h5>
+    </div>
+    <div class="card-body">
+      
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">First Neighbour Name</label><br>
+                  <b>{{UserAllData.neighbours1.name}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">First Neighbour Contact No.</label><br>
+                  <b>{{UserAllData.neighbours1.contact}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">First Neighbour Extension</label><br>
+                  <b>{{UserAllData.neighbours1.extension}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">First Neighbour Organization Name</label><br>
+                  <b>{{UserAllData.neighbours1.organization}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">First Neighbour Occupation</label><br>
+                  <b>{{UserAllData.neighbours1.occupation}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Second Neighbour Name</label><br>
+                  <b>{{UserAllData.neighbours2.name}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Second Neighbour Contact No.</label><br>
+                  <b>{{UserAllData.neighbours2.contact}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Second Neighbour Extension</label><br>
+                  <b>{{UserAllData.neighbours2.extension}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Second Neighbour Organization Name</label><br>
+                  <b>{{UserAllData.neighbours2.Organization}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Second Neighbour Occupation</label><br>
+                  <b>{{UserAllData.neighbours2.occupation}}</b>
+                </div>
+            </div>
+  
+        </div>
+     
+    </div>
+    <div class="card-header">
+        <h5 class="card-title">Pet Detail</h5>
+    </div>
+    <div class="card-body">
+      
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Pet Name</label><br>
+                  <b>{{UserAllData.PetInfo.petName}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Pet Age</label><br>
+                  <b>{{UserAllData.PetInfo.petType}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Pet Ad Title</label><br>
+                  <b>{{UserAllData.PetInfo.petAdTitle}}</b>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Pet Issue Description</label><br>
+                  <b>{{UserAllData.PetInfo.petIssue}}</b>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <label for="">Pet Image</label><br>
+                  <img [src]='image' alt="petImage" style="max-width:120px; height: auto;" *ngIf='image'>
+                  <img src='{{UserAllData.petImageServer | server}}' alt="petImage" style="max-width:120px; height: auto;" *ngIf='!image && UserAllData.petImageServer'>
+                  <b *ngIf='!image && !UserAllData.petImageServer'>no image selected</b>
+                </div>
+            </div>
+  
+        </div>
+     
+    </div>
+    
+    <div class="card-footer">
+        <div class="p-grid p-nogutter p-justify-between" style='display: flex; flex-wrap: wrap; justify-content: space-between;'>
+            <button pButton label="Back" icon="pi pi-angle-left" (click)='prevPage()'></button>
+            <button pButton type="button"label="Complete" icon="pi pi-angle-right" class="p-button-raised p-button-success"  iconPos="right" (click)='submit()'></button>
+            </div>
+      </div>
+  </div>

@@ -1,0 +1,180 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['_id','donerName','receiverName']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Donations</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="btn-max"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Donation Id</th>
+          <th >Doner Name
+          </th>
+          <th>Receiver Name</th>
+
+          <th>Amount 
+          </th>
+          <th>Doner Type</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Donation Id</span>
+            {{product._id}}
+          </td>
+          <td> <span class="p-column-title">Doner Name</span>
+            {{product.donerName}}
+          </td>
+          <td> <span class="p-column-title">Receiver Name</span>
+            {{product.receiverName}}
+          </td>
+          <td><span class="p-column-title">Amount</span>
+            $ {{product.donationAmount}}
+        </td>
+          <td><span class="p-column-title">Doner Type</span>
+            {{product.guest? "Guest" : "Registered"}}
+        </td>
+          <td><span class="p-column-title">Date</span>
+            {{product.createdOn | date:"medium"}}
+        </td>
+        <td>  <span class="p-column-title">Actions</span>
+        
+              <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+            </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post.length : 0 }} Donations.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+
+  
+<!-- Start of Show Withraw Request Modal -->
+<p-dialog header="Show Banner Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+  <img src="{{imagepath}}{{products.imagePath}}" [alt]="products.image" class="product-image" *ngIf="products.imagePath" width="90%" height="170" class="mx-auto d-block p-shadow-4">
+  <div class="p-field">
+    <label for="Name">Donation ID</label>
+    <p>{{products._id}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Balance">Doner Name</label>
+    <p>{{products.donerName}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Mode">Receiver Name</label>
+    <p>{{products.receiverName}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Date">Donation Amount</label>
+    <p>${{products.donationAmount}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Doner Type</label>
+    <p>{{ products.guest? "Guest" : "Registered" }}</p>
+  </div>
+  <div class="p-field">
+    <label for="Status">Date</label>
+    <p>{{products.createdOn | date:"medium" }} </p>
+  </div>
+  <div class="guest" *ngIf='products.guest && products.guestDetails'>
+    <div class="p-field">
+      <label for="Amount">Guest Email</label>
+      <p>{{products.guestDetails?.email || "-"}}</p>
+    </div>
+    <div class="p-field">
+      <label for="Amount">Guest Country</label>
+      <p>{{products.guestDetails?.country || "-"}}</p>
+    </div>
+    <div class="p-field">
+      <label for="Amount">Guest State</label>
+      <p>{{products.guestDetails?.state || "-"}}</p>
+    </div>
+    <div class="p-field">
+      <label for="Amount">Guest Photo</label>
+      <p><img src="{{products.guestDetails.photo | server}}" alt="Guest Picture" style='width: 80px; height: 80px'></p>
+    </div>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Advertisement Title</label>
+    <p>{{products.adId}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Advertisement Title</label>
+    <p>{{products.adTitle}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Tip</label>
+    <p>${{products.tip}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Payment Mode</label>
+    <p>{{products.paymentMode || "-"}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Payment Secret Token</label>
+    <p>{{products.client_secret || "-"}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Payment IP</label>
+    <p>{{products.stripeIP || "-"}}</p>
+  </div>
+  <div class="p-field">
+    <label for="Amount">Payment Message</label>
+    <p>{{products.message || "-"}}</p>
+  </div>
+
+
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Show Withraw Request Modal -->
+
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+<!-- Cause  -->
+

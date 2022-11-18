@@ -1,0 +1,18 @@
+<div style="background-color: #01768a;width: 100%;min-height: 70px;line-height:60px;color: white;font-size: x-large;" class="font-weight-bold">
+    <div class="d-flex flex-row align-content-center flex-wrap ml-2 pr-5" >
+        <div class="p-2 text-center" routerLink='/ads/view'><span class="pl-3 pr-3">Ads</span></div>
+        <div class="p-2 text-center"> <img src="../../../assets/images/foodbank.png" alt=""height="30"></div>
+        <div class="p-2 text-center" style="position: relative;"><span class="pl-2 pr-4">Blog<span style="position:absolute;top: 0%;"><img src="../../../assets/images/youtube.png" alt=""height="20"></span></span></div>
+        <div class="p-2 text-center" ><img src="../../../assets/images/live-img.png" alt=""height="35"></div>
+        
+        <div style="width:55%; min-width:200px;line-height: 70px;" class="text-lg-right" >
+            <a class="btn btn-outline-success" (click)='take_to_home()' *ngIf='!hidden && session._id'><img src="../../../assets/images/graph-icon.png" alt=""height="33"> Ad Center</a>
+        </div>
+
+        <div class="ml-2" style="line-height: 70px;">
+            <a class="btn btn-outline-primary" (click)='take_to_post()' *ngIf='!hidden'>Post an Ad</a>
+        </div>
+       
+    </div>
+  
+  </div>

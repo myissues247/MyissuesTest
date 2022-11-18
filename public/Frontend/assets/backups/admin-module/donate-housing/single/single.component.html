@@ -1,0 +1,212 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+    </p-toolbar>
+  
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>Donation Details</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Donation Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>Donation ID</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product._id ||  ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intended Ad Id</strong>
+                            </td>
+                            <td style='cursor:pointer; color:#007bff' [routerLink]='["/admin-module/receiver-ads/full", product.intendedAdId]'>
+                               
+                                {{product.intendedAdId || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Receiver Id</strong>
+                            </td>
+                            <td style='cursor:pointer; color: #007bff' [routerLink]='["/admin-module/receiver-ads/single", product.intendedReceiverId]'>
+                               
+                                {{product.intendedReceiverId || ''}}
+                            </td>
+                        </tr>
+                         <tr>
+                            <td><strong>Donor Email</strong>
+                            </td>
+                            <td>
+                                {{ product.email || ""}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contact No.</strong>
+                            </td>
+                            <td>
+                                {{product.contact || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Housing Type</strong>
+                            </td>
+                            <td>
+                                {{product.housingType || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Furnished</strong>
+                            </td>
+                            <td class='capitalize'>
+                                {{product.furnished || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Friendly</strong>
+                            </td>
+                            <td class='capitalize'>
+                                {{product.petFriendly || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Available From</strong>
+                            </td>
+                            <td >
+                                {{product.availDate | date:"medium" || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Available End Date</strong>
+                            </td>
+                            <td >
+                                {{product.availEnd | date:"medium" || ''}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Description</strong>
+                            </td>
+                            <td >
+                                {{product.description || ''}}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Address</strong>
+                            </td>
+                            <td>
+                                {{product.address || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Street Number</strong>
+                            </td>
+                            <td>
+                                {{product.streetNumber || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Donate Address</strong>
+                            </td>
+                            <td>
+                                {{product.donateAddress || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Property Location</strong>
+                            </td>
+                            <td>
+                                {{product.propertyLocation || ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Province</strong>
+                            </td>
+                            <td>
+                                {{product.province}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>City</strong>
+                            </td>
+                            <td>
+                                {{product.city}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Postal Code</strong>
+                            </td>
+                            <td>
+                                {{product.postalCode || '' }}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>House Images</strong>
+                            </td>
+                            <td style='display: flex; flex-wrap: wrap'>
+                                <div class="image" *ngFor='let image of product.images'>
+                                    <a href="{{ image | server}}" target="_blank">
+                                        <img src="{{ image | server }}" alt="Donated House Image" style='width: 100px; height: 100px; margin: 5px;'>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" label="Allot intended" class="p-button-raised p-button-success" (click)="allot(product._id, product.intendedAdId, product.intendedReceiverId)" *ngIf="product.alloted==false"></button>
+                                <p *ngIf='product.alloted'>Alloted to receiverId <a [routerLink]='["/admin-module/receiver-ads/single", product.receiverId]'> {{ product.receiverId }} </a> for Ad <a [routerLink]='["/admin-module/receiver-ads/full", product.adId]'>{{product.adId}}</a></p>
+                                <!-- <button pButton pRipple type="button" label="Allot Another" class="p-button-raised p-button-danger" (click)="rejectAd(product._id)" *ngIf="product.approved==0"></button> -->
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+  </div>
+
+
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+   <!-- Message -->
+            
+   <p-toast></p-toast>
+
+
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center;">
+          <div class="p-inputgroup mt-3 mb-2">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-calendar"></i>
+            </span>
+            <span class="p-float-label">
+              <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+              [(ngModel)]="cause"></textarea>
+              <label for="float-input4">Write Cause/Reason For Reject this Ad</label>
+            </span>
+          </div>
+        </div>
+        <div class="modal-footer" style="margin: 0 auto;">
+          <button type="button" class="btn btn-primary" (click)="disableAd()">Submit</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

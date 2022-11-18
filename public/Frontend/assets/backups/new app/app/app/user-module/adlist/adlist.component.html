@@ -1,0 +1,270 @@
+<section class="d-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="graph-step-list delivery-step-list">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="../../../assets/images/manage-icon.png" alt="manage-icon">
+                                Manage Ads
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink='verification'>
+                                <img src="../../../assets/images/verified-icon.png" alt="verified-icon">
+                                Get verified
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="../../../assets/images/directory-icon.png" alt="directory-icon">
+                                Directory
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="javascript:void(0);">
+                                Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"> 
+                                Food Bank
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Verify Acount Start -->
+<section class="verify-account" *ngIf='session.verificationStatus != 2'>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="verify-des">
+                    <p>
+                        <img src="assets/images/verify-icon.png" alt="verify-icon">
+                        Verify your account to get more donations. <a routerLink='verification' *ngIf='session.verificationStatus == 0'>Get verified
+                            now!</a>
+                        <a routerLink='verification' *ngIf='session.verificationStatus == 1'>Verification is in process</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Verify Acount End -->
+
+
+<ng-container  *ngFor="let ad of ads; let i = index">
+<section class="ad-detail">
+    <div class="container-fluid">
+        <div class="ad-bg ad1">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="ad-profile">
+                        <div class="ad-pro-img unhide-post hide-post ">
+                            <img class="pic-img" [src]="(ad.adImages && ad.adImages[0])?( ad.adImages[0] | server) : 'assets/images/home-pic.jpg'" alt="Pic">
+                        </div>
+                        <div class="ad-profile-des">
+                            <p>
+                                Ad Position
+                            </p>
+                            <p>
+                                <a href="javascript:void(0);">
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="ad-detail-des">
+                        <div class="ad-hide-btn">
+                            <a [routerLink]="['stats/viewsInMonth/', ad._id]">
+                                <img src="../../../assets/images/status-icon-white.png" alt="status-icon-white">
+                                Status
+                            </a>
+                            <a class="btn btn-hide btn-edit btn-unhide" (click)='ad_status(ad._id, !ad.status, i)'>
+                                <i class="fa fa-eye"></i>
+                                {{ ad.status ? 'hide' : 'show' }}
+                            </a>
+                        </div>
+                        <h1>
+                        </h1>
+                        <p *ngIf='ad.ownerType=="receiver"'>{{ ad.categoryName? ad.categoryName : "No Category Chosen"}} / {{ad.city? ad.city : "No City Chosen"}} </p>
+                        <p *ngIf='ad.ownerType=="agency"'>{{ad.city? ad.city : "No City Chosen"}} </p>
+                        <p *ngIf='ad.ownerType=="sponsor"'>{{ad.city? ad.city : "No City Chosen"}} </p>
+                        <div class="buy-manage">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="buy-manage-list">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <ul>
+                                                    <li>
+                                                        <a (click)='view_ad(ad._id)' 
+                                                            class="btn btn-edit">
+                                                            <i class="fa fa-eye"></i>
+                                                            View
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a (click)='edit_ad(ad._id)'
+                                                            class="btn btn-edit">
+                                                            <i class="fa fa-pencil"></i>
+                                                            Edit
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <span
+                                                            class="btn btn-del btn-edit tooltipclassic tooltipclassic-effect-1">
+                                                            <span (click)='show_dialog($event)' class="tooltipclassic-item">
+                                                                <i class="fa fa-times"></i>
+                                                                Delete
+                                                            </span>
+                                                            <span class="tooltipclassic-content clearfix">
+                                                                <span class="tooltipclassic-text">
+                                                                    Are you sure you want to delete this ad?<br>
+                                                                     <a
+                                                                    (click)='delete_ad(ad._id, i)' >Yes,
+                                                                        Delete it</a>
+                                                                    <button class="btn btn-close" (click)='close_dialog($event)'>
+                                                                    <i class="fa fa-close"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <a (click)='copy_ad(ad._id)' class="btn btn-edit">
+                                                            <i class="fa fa-files-o"></i>
+                                                            Copy
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <!-- <a href="javascript:void(0);" class="btn-bump">
+                                                                    <img src="images/bump-icon-1.png" alt="bump">
+                                                                    bump
+                                                            </a> -->
+                                                        <span
+                                                            class="btn btn-bump tooltipclassic tooltipclassic-effect-1" (click)='bumpAd(ad._id)'>
+                                                            <span class="tooltipclassic-item">
+                                                                <img src="../../../assets/images/bump-icon-1.png" alt="bump-icon">
+                                                                Bump
+                                                            </span>
+                                                            <span *ngIf='false' class="tooltipclassic-content clearfix">
+                                                                <span class="tooltipclassic-text"> 
+                                                                <p>You will have 1 bumps left</p> <br>
+                                                                    <a href="#" class="bump-link">
+                                                                        <img src="../../../assets/images/bump-icon-1.png"
+                                                                            alt="bump-icon">
+                                                                        Bump it!
+                                                                    </a>
+                                                                    <a class="btn btn-bump-close">
+                                                                        <i class="fa fa-close"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </span>
+                                                        </span>
+                                                    </li>
+                                                    <li> 
+                                                        <a class="btn-upgrades" (click)='upgrade_plan(ad._id)'>
+                                                            Buy &amp; manage your upgrades
+                                                            <img src="../../../assets/images/right-arrow.png" alt="right-arrow">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="alert alert-success " role="alert">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        Your ad is now visible
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="auto-repost">
+    <div class="container-fluid">
+        <div class="auto-bg">
+            <div class="row">
+                <div class="col-lg-9 offset-lg-3">
+                    <div class="auto-list">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="auto-page-des page2-des">
+                                    <ul>
+                                        <li>
+                                            <img src="../../../assets/images/ad-icon.png" alt="Ad">
+                                        </li>
+                                        <li>
+                                            Page1
+                                            <span>Not purchased</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="auto-page-des auto-des">
+                                    <ul>
+                                        <li>
+                                            <img src="../../../assets/images/auto-respost.png" alt="auto-respost">
+                                        </li>
+                                        <li>
+                                            Auto repost
+                                            <span>Not purchased</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="auto-page-des featured-des">
+                                    <ul>
+                                        <li>
+                                            <img src="../../../assets/images/featured-icon.png" alt="featured-icon">
+                                        </li>
+                                        <li>
+                                            Main page
+                                            <span *ngIf='!ad.advertisePlanCheck'>Not purchased</span>
+                                            <span *ngIf='ad.advertisePlan?.inDays'>
+                                                {{ad.advertisePlan.days}} days
+                                            </span>
+                                            <span *ngIf='ad.advertisePlan?.inHours'>
+                                                {{ad.advertisePlan.hours}} hours
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="auto-page-des bump-ad-des" style="cursor: pointer">
+                                    <ul>
+                                        <li>
+                                            <img src="../../../assets/images/ad-bump-icon.png" alt="ad-bump-icon">
+                                        </li>
+                                        <li (click)='buyBumps()'>
+                                            Bump Ad
+                                            <span>{{ session.bumps }} bumps left</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</ng-container>

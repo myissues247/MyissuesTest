@@ -1,0 +1,30 @@
+.d-flex{
+    background-color: #962179;
+    width: 100%;
+    height: 50px;
+    color: white;
+}
+.p-2:hover{
+    /* color: black; */
+    /* background-color: black; */
+    cursor: pointer;
+}
+
+
+.btn.btn-outline-success:hover,
+.btn.btn-outline-success:focus,
+.btn.btn-outline-success:active,
+.btn.btn-outline-success.active {
+  color:#962179;
+  background-color:white;
+}
+.btn.btn-outline-success{
+    border: 1px solid white;
+    color: white;
+}
+
+
+
+.modal {
+    overflow-y:auto;
+  }

@@ -1,0 +1,125 @@
+.label {
+   color: #6b9bb2;
+   font-weight: bold;
+}
+/* header which contains control buttons */
+:host ::ng-deep .p-fileupload-buttonbar {
+     display: flex;
+     justify-content: flex-start;
+     flex-wrap: wrap;
+}
+
+/* button containers to have right margin */
+:host ::ng-deep .p-fileupload-buttonbar p-button {
+    margin:0px 7px 0px 0px;
+ }
+/* all buttons to take full space */
+:host ::ng-deep .p-fileupload-buttonbar button {
+    width: 100% !important;
+}
+
+/* inserted image container */
+:host ::ng-deep .p-fileupload-row .ng-star-inserted {
+   display: flex !important;
+   max-height: 40px;
+   justify-content: space-between;
+}
+
+/* divs in image insertion container */
+:host ::ng-deep .p-fileupload .p-fileupload-row > div {
+   text-align: center;
+   overflow: hidden;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-row > div:nth-child(4) {
+   text-align: right;
+}
+/* remove image button */
+:host ::ng-deep .p-button.p-button-icon-only{
+   width: 20px !important;
+   height: 20px;
+}
+
+.page-buttons {
+   display: flex;
+   justify-content: space-between;
+}
+
+.uploadedImages {
+   display: flex;
+   flex-direction: column;
+   padding: 0px 15px;
+}
+
+.uploadedImages .image {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 5px 0px;
+}
+
+.uploadedImages .image img {
+   width : 50px;
+   height: 50px;
+}
+
+video {
+   width: 150px;
+   height: auto;
+}
+
+@media screen and (max-width: 500px) {
+   /* other two buttons container */ 
+   :host ::ng-deep .p-fileupload-buttonbar p-button {
+       flex: 1;
+       margin: 2px 0px 0px 0px;
+    }
+
+    /* choose button container span */
+    :host ::ng-deep .p-fileupload-buttonbar span.p-button {
+        display: flex !important;
+        margin: 0px;
+        justify-content: flex-start;
+        flex: 1;
+        min-width: 100% !important;
+     }
+      
+     /* icon of choose button */
+     :host ::ng-deep .p-fileupload-buttonbar span.p-button span {
+        text-align: left;
+        margin-right: 0px;
+     }
+     /*text of choose button */
+     :host ::ng-deep .p-fileupload-buttonbar span.p-button .p-button-label{
+         flex: 2;
+         text-align: center;
+         margin-left: 0px;
+     }
+
+     /* divs in image insertion container */
+      :host ::ng-deep .p-fileupload .p-fileupload-row > div:nth-child(2) {
+         display: none;
+     }
+      :host ::ng-deep .p-fileupload .p-fileupload-row > div:nth-child(3) {
+         display: none;
+     }
+}
+
+.submitting {
+   position: relative
+}
+
+.submitting::before {
+   content: " ";
+   width: 100%;
+   height: 100%;
+   background: rgba(255, 255, 255, 0.6);
+   position : absolute;
+   top: 0%;
+   left: 0%;
+   z-index: 1111;
+}
+
+.error {
+   color: red;
+}

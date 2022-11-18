@@ -1,0 +1,128 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Volunteer</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="btn-max"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name
+          </th>
+          <th>Last Name</th> 
+          <th>Email ID
+          </th>
+          <th>Mob No.
+        </th>
+          <th>Actions
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">First Name</span>
+            {{product.firstname}}
+          </td>
+          <td> <span class="p-column-title">Last Name</span>
+            {{product.lastname}}
+          </td>
+          <td> <span class="p-column-title">Email ID</span>
+            {{product.email}}
+          </td>
+          <td> <span class="p-column-title">Mob No.</span>
+            {{product.contact}}
+          </td>
+          <!-- <td> <span class="p-column-title">Status</span>
+            <input type="hidden" value="{{product._id}}" #idInput name="id"><input type="hidden" value="{{product.description}}" #descInput name="description">
+            <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(idInput.value)"></button>
+            <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(idInput.value)"></button>
+          </td> -->
+          <td>  <span class="p-column-title">Actions</span>
+             
+              <!-- <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center" (click)="showProduct(product)">
+              </button> -->
+              <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+              <!-- <button class="btn btn-danger rounded-circle text-center ml-1"><i class="fa fa-trash-o"></i></button> -->
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post.length : 0 }} Volunteer.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+   <!-- Start of Show Banner Modal -->
+<p-dialog header="Show Volunteer Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+
+  <div class="p-field">
+    <label for="firstname">First Name</label>
+    <input type="text" pInputText id="firstname" name="firstname" [disabled]="products.firstname" [(ngModel)]="products.firstname" required autofocus />
+    <small class="p-invalid" *ngIf="submitted && !products.firstname">firstname is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="lastname">Last Name</label>
+    <input type="text" pInputText id="lastname" required autofocus name="lastname" [disabled]="products.lastname" [(ngModel)]="products.lastname"/>
+    <small class="p-invalid" *ngIf="submitted && !products.lastname">Lastname is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="contact">Mob. No.</label>
+    <input type="number" pInputText id="contact" required autofocus name="contact" [disabled]="products.contact" [(ngModel)]="products.contact"/>
+    <small class="p-invalid" *ngIf="submitted && !products.contact">contact is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="email">Email</label>
+    <input type="email" pInputText id="email" required autofocus name="email" [disabled]="products.email" [(ngModel)]="products.email"/>
+    <small class="p-invalid" *ngIf="submitted && !products.email">email is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="Status">Status</label>
+    <input type="text" pInputText id="Status" required autofocus name="status" [disabled]="products.email" value="{{products.status | statuschange}}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()" [disabled]='submitting'></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Edit Banner Modal -->
+
+
+
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>

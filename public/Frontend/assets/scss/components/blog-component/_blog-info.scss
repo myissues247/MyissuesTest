@@ -1,0 +1,32 @@
+.blog-info {
+    .info-profile-img {
+        width: 110px;
+        height: 110px;
+        border: 1px solid $color-cyan;
+        border-radius: 50%;
+        object-fit: contain;
+        @media (max-width: 767px){
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    .info-text {
+        .info-title {
+            @include font-style(36px, 400, #1d1d23);
+            @media (max-width: 767px){
+               font-size: 24px;
+            }
+        }
+        .info-description {
+            @include font-style(20px, 300, #000);
+            @media (max-width: 767px){
+                font-size: 18px;
+             }
+        }
+    }
+
+    .fa-check-circle {
+        @include font-style(24px, 700, #606060);
+    }
+}

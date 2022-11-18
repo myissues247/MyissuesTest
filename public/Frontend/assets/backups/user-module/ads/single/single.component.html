@@ -1,0 +1,431 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12 py-2">
+            <div class="ad" #AD>
+                <div class="banner">
+                    <h1>{{adData.categoryName}}</h1>
+                </div>
+                <div class="row main-info">
+                    <div class="thumbnail col-12 col-sm-6 col-lg-7">
+                        <div class="image">
+                            <img src="{{adData.adImages[0]? (adData.adImages[0]|server) : 'assets/images/banner1.jpg'}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-5 col-lg-4 details-container">
+                        <div class="details">
+                            <div class="group name">
+                                <h5 class='head'>Name</h5>
+                                <p class='value' *ngIf="adData.ownerType != 'agency' ">{{ adData.firstName + " " + adData.lastName }}</p>
+                                <p class='value capitalize' *ngIf="adData.ownerType == 'agency' ">{{ adData.agencyTitle }}</p>
+                                <p class='value capitalize' *ngIf="adData.ownerType == 'sponsor' ">{{ adData.sponsorTitle }}</p>
+                            </div>
+                            <div class="group Age" *ngIf='adData.ownerType != "agency" || adData.ownerType != "sponsor"'>
+                                <h5 class='head'>Age</h5>
+                                <p class='value'>{{ adData.age? adData.age : "-" }}</p>
+                            </div>
+                            <div class="group Age" *ngIf='adData.ownerType == "agency"'>
+                                <h5 class='head'>Type</h5>
+                                <p class='value'>Agency</p>
+                            </div>
+                            <div class="group Age" *ngIf='adData.ownerType == "sponsor"'>
+                                <h5 class='head'>Type</h5>
+                                <p class='value'>Sponsor</p>
+                            </div>
+                            <div class="group title">
+                                <h5 class='head'>City</h5>
+                                <p class='value captitalize'>{{ adData.city }}</p>
+                            </div>
+                            <div class="group date">
+                                <p class='value'>{{ adData.approvedOn | date: "medium" }}</p>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button pButton type="button" label='donate' icon="pi pi-dollar" iconPos="left" class='p-button-warning p-button-lg mr-1' (click)='donate(adData._id)'></button>
+                            <button pButton type="button" icon="pi pi-share-alt" iconPos="left" label='share' class='p-button-info p-button-lg mr-1' (click)='displaySocial = true'></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery p-md-3">
+                    <div class="text">
+                        <h4><i class='pi pi-images'></i> Pictures</h4>
+                    </div>
+                    <div class="photos">
+                        <div class="img" *ngFor='let image of adData.adImages'>
+                            <img src="{{ image | server }}" alt="">
+                        </div>
+                    </div>
+                </div> 
+                <div class="row full-info">
+                    <div class="col-12 col-lg-7 story">
+                        <h3 class='pl-2'><i class='pi pi-comment'></i> Story</h3>
+                        <div class="content">
+                            <h5 class='title'>{{adData.adTitle}}</h5>
+                            <p class='description' [innerHTML]="adData.description"></p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 map"> 
+                        <h3>Location <i class='pi pi-map-marker'></i></h3>
+                        <p>locations are approximate. click map to zoom.</p>
+                        <app-map></app-map>
+                    </div>
+                </div>
+                <div class="report-button text-center py-3">
+                    <button pButton type="button" label='Report Ad' icon="pi pi-flag" iconPos="left" class='p-button-danger p-button-lg' (click)='report_ad()'></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <p-dialog header="Social Share" position='right' [(visible)]="displaySocial" styleClass="mydialog"> -->
+    <!-- <a href="https://api.whatsapp.com/send?phone=&text=can you please donate some of your money to this needy guy" data-text="Take a look at this awesome website:" class="wa_btn wa_btn_s" target='_blank'>Share1</a> -->
+    <div class="modal fade sharemodal" [class.show]='displaySocial' id="shareModal" role="dialog" aria-labelledby="shareModal" [class.displaySocialShare]='displaySocial'>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style='overflow-x: hidden'>
+              <div class="modal-header cancer-patient">
+                  <h2 class="cancer-head text-center">Help by Sharing</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)='displaySocial = false;'>
+                        <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="share-sec text-center">
+                      <p>Fundraisers shared on social networks raise up to 5x more</p>
+                  </div>
+
+                  <div class="share-list">
+                  <div class="row">
+                          <div class="col-lg-3 col-md-6">
+                              <div class="share-modal-list">
+                                  <a title="Share it on Facebook" href="{{ facebookSharer }}" target="_blank"> 
+                                      <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                                      Facebook 
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                              <div class="share-modal-list">
+                                  <a href="{{ twitterSharer }}" target="_blank">
+                                      <i class="fa fa-twitter" aria-hidden="true"></i>
+                                      Twitter
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                              <div class="share-modal-list">
+                                  <a href='{{ emailSharer }}' target='_blank'>
+                                      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                      Email
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                              <div class="share-modal-list">
+                                  <a href='{{whatsappSharer}}' target='_blank'>
+                                      <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                      WhatsApp
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                              <div class="share-modal-list">
+                                  <a data-toggle="modal" data-target="#embedHtml" data-backdrop="static" (click)='displayEmbed = true'  target='_blank'>
+                                      <i class="fa fa-code" aria-hidden="true"></i>
+                                      Embed HTML
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-6">
+                              <div class="share-modal-list">
+                                  <a (click)="PrintDiv()">
+                                      <i class="fa fa-print" aria-hidden="true"></i>
+                                      Print Poster 
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  
+
+                  <form class="copy-form" abineguid="D6B5C739AF3C48CD9C5B4A5725D0D5F0">
+                      <label>Copy Link</label>
+                      <input type="text" class="form-control" id="copyTarget" placeholder="Copy Link" value="{{currentUrl}}" #input>
+                      <button class="btn btn-copy" type="button" id="copyButton" (click)='clipboard(input)'>Copy</button>
+                      <p class="copy-msg">
+                          <i class="fa fa-check"></i>Copy Link
+                      </p>
+                  </form>
+                  <div class="tip-sec">
+                      <p><strong>Tip:</strong>&nbsp;Paste this fundraiser link anywhere.</p>
+                      <ul>
+                          <li>
+                              <a href="javascript:void(0);">
+                                  <img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//instagram.png" alt="Tip Images">
+                              </a>
+                          </li>
+                          <li>
+                              <a href="javascript:void(0);">
+                                  <img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//slack.png" alt="Tip Images">
+                              </a>
+                          </li>
+                          <li>
+                              <a href="javascript:void(0);">
+                                  <img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//home-icon.png" alt="Tip Images">
+                              </a>
+                          </li>
+                          <li>
+                              <a href="javascript:void(0);">
+                                  <img src="http://myissuesinc.ca/assets/frontend/newpgasset/images/dot.png" alt="Tip Images">
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+<!-- </p-dialog> -->
+
+
+<div class="modal fade" [class.show]='displayEmbed' id="embedHtml" role="dialog" aria-labelledby="embedHtml">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content" style="height:700px;border:0px solid red;">
+      <div class="modal-header cancer-patient">
+          <h2 class="cancer-head"></h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)='displayEmbed = false;'>
+                    <span aria-hidden="true">×</span>
+              </button>
+        </div>
+            <div class="modal-body">
+              <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                          <div class="row">
+                              <div class="col-lg-12 col-md-12">
+                                  <label class="heading-2">Embed HTML</label>
+                              </div>
+                              <div class="col-lg-12 col-md-12">
+                                  <label>
+                                      <button class="mb a-button a-button--inline" type="button">
+                                          <input class="l-campaign-embed-form-inpu size" type="radio" name="size" id="" data-val="Large" checked="" (click)='embedChange("large")'>
+                                          <span class="ml"> Large </span>
+                                      </button>
+                                      <br>
+                                      <button class="mb a-button a-button--inline" type="button">
+                                          <input class="l-campaign-embed-form-input size" type="radio" name="size" id="size" data-val="Medium"  (click)='embedChange("medium")'>
+                                          <span class="ml"> Medium </span>
+                                      </button>
+                                      <br>
+                                      <button class="mb-three-halves a-button a-button--inline" type="button">
+                                          <input class="l-campaign-embed-form-input size" type="radio" name="size" id="size" data-val="Small" (click)='embedChange("small")'>
+                                          <span class="ml"> Small (Button only) </span>
+                                      </button>
+                                  </label>
+                                  <div class="show-for-medium mt0 a-rule a-rule--horizontal"></div>
+                              </div>	
+                              <div class="col-lg-12 col-md-12">
+                                  <div class="show-for-medium"><p>Copy and paste the following embed code:</p></div>	
+                                  <div class="l-campaign-embed-form-clipboard m-clipboard-field m-clipboard-field--stacked">
+                                      <div class="m-clipboard-field-inner">
+                                          <div class="m-clipboard-field-content" id="dynamic">
+                                              <pre class="a-code-block" id="abc" style="border:1px soli red;" data-element-id="input_share_embed_copy" data-analytic-event-listener="true"><code class="a-code-block-inner">&lt;div class="gfm-embed" data-url="{{ embedLink }}"&gt;&lt;/div&gt;&lt;script defer src="{{'assets/js/embed.js' | server}}"&gt;&lt;/script&gt;</code></pre>
+                                              <textarea #embedHTML style='display: none'>&lt;div class="gfm-embed" data-url="{{ embedLink }}"&gt;&lt;/div&gt;&lt;script defer src="{{'assets/js/embed.js' | server}}"&gt;&lt;/script&gt;</textarea>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!---generate js url-->
+                                  <p id="ur"></p>
+                                  <!---generate js url-->
+                                  <div>
+                                      <button aria-label="Copy to clipboard" class="m-clipboard-field-button a-button a-button--inline a-button--large a-button--hollow-green" data-element-id="btn_share_embed_copy" id="embed-to-clipboard-button" type="button" data-analytic-event-listener="true" (click)="clipboard(embedHTML)">Copy HTML code</button>
+                                      <br>
+                                      <span id="msg"></span>
+                                  </div>
+                                      <br>
+                                  <div class="show-for-medium mt">What is this? &nbsp;<a class="a-link" href="https://www.gofundme.com/c/donate-button-individuals" data-element-id="btn_embed_learn_more" target="_blank" data-analytic-event-listener="true">Learn more</a></div>
+                                  
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  
+                      
+                      <div class="col-lg-6 col-md-6">
+                          <div class="row">
+                              <div class="col-lg-12 col-md-12">
+                              <div class="l-campaign-embed-form-preview l-campaign-embed-form-preview-width">
+                              <div class="mb"><h2 class="heading-5 mb0">Preview</h2>
+                              
+                                  <span id="embd">
+                                        <div class="o-campaign-embed-image a-image a-image--background embedd" [class.show]='embed.large'>
+                                              <img style="width:100%;height:250px;" src="{{(adData.adImages?.length > 0)? (adData.adImages[0] | server) : 'assets/images/no-image.jpg' }}">
+                                          </div>
+                                          <div class="o-campaign-embed-content">
+                                              <h1 class="o-campaign-embed-heading embedd" [class.show]='embed.large || embed.medium'>{{adData.firstName}} {{ adData.adTitle }} </h1>
+                                              <div class="m-progress-meter embedd" [class.show]='embed.large || embed.medium'>
+                                                  <progress class="a-progress-bar a-progress-bar--green  " value="105.26315789473684" max="100"></progress>
+                                                  <h2 class="m-progress-meter-heading">${{(adData.donations?.amount) || "0"}}<span class="text-stat text-stat-title"> raised <!--of $9,500 goal--></span></h2>
+                                              </div> 
+                                              <div class="o-campaign-embed-cta embedd" [class.show]='embed.large || embed.small || embed.medium'>
+                                                  <button class="o-campaign-embed-button exp-gradient-gfm exp-gradient-gfm--donate ml0 mr0 a-button a-button--max-full a-button--large a-button--solid-yellow" type="button">Donate now</button>
+                                                  
+                                                  <div class="o-campaign-embed-logo ml">
+                                                      <svg class="a-logo color-green" height="69" viewBox="0 0 129 69" width="80">
+                                                      </svg><img src="assets/images/logo.png" alt="Logo" width="80px">
+                                                      
+                                                  </div>
+                                              </div>
+                                          </div>
+                                  </span>
+                              </div>
+                              
+                              </div>
+                              </div>
+                          </div>
+                      </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+  <div id="divToPrint" style="display:none;">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- Custom Css Start -->
+	<link rel="stylesheet"  href="/assets/Stylesheets/style.css">
+	<link rel="stylesheet"  href="/assets/Stylesheets/responsive.css">
+	<!-- Custom Css End -->
+	<!-- Profile Detail Start -->
+<style>
+.p-print-poster-page-tab-wrap {
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+height: 18.75rem;
+position: relative;
+}
+.p-print-poster-page-tab {
+height: 18.75rem;
+position: relative;
+-webkit-transform: rotate(90deg);
+transform: rotate(90deg);
+width: 7.25rem;
+}
+</style>
+		<section class="profile-detail" style="border:3x solid #8d0b77;text-align:center;">
+			<div class="container-fliud" style="border:0px solid red;">
+				<div class="row" style="border:0px solid red;">
+					<div class="col-lg-8" style="border:0px solid red; margin: 0px auto">
+						<h1><img src="assets/images/logo.png" alt="Logo" width="200px"></h1>
+						<hr>
+						<h2><b>Search Myissues.ca for</b></h2>
+						<h1><b>{{adData.firstName + " " + adData.adTitle}}</b></h1>
+					</div>
+					
+					<div class="col-lg-8" style="border:0px solid red; margin: 0px auto">
+						<div class="profile-img " style="border:0px solid red;">
+							<img src="{{adData.adImages && adData.adImages.length > 0? ( adData.adImages[0] | server ):'http://localhost:4200/assets/frontend/no-image.jpg'}}" style="height: 60%; width:100%;">
+
+							<hr><h2 style='text-align:center;'>Show your support by going to this link</h2>
+							&nbsp;
+							&nbsp;
+							&nbsp;
+							{{currentUrl}}<p></p>
+						</div>
+						
+						<div class="p-print-poster-page-tab-wrap" style='display: flex;'>
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="assets/images/logo.png" alt="Logo" width="129px">
+									
+									<div>{{currentUrl}}</div>
+								</div>
+							</div>
+							
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="assets/images/logo.png" alt="Logo" width="129px">
+									
+									<div>{{currentUrl}}</div>
+								</div>
+							</div>
+							
+							<!--<div class="p-print-poster-page-tab">
+								 <div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//logo.png" alt="Logo" width="129px">
+									
+									<div>http://myissuesinc.ca/profile/homeless-people/abc								</div>
+								</div>
+							</div> -->
+							
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="assets/images/logo.png" alt="Logo" width="129px">
+									
+									<div>{{currentUrl}}</div>
+								</div>
+							</div>
+							
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="assets/images/logo.png" alt="Logo" width="129px">
+									
+									<div>{{currentUrl}}</div>
+								</div>
+							</div>
+							
+							<!-- <div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//logo.png" alt="Logo" width="129px">
+									
+									<div>http://myissuesinc.ca/profile/homeless-people/abc								</div>
+								</div>
+							</div>
+							
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//logo.png" alt="Logo" width="129px">
+									
+									<div>http://myissuesinc.ca/profile/homeless-people/abc								</div>
+								</div>
+							</div>
+							
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//logo.png" alt="Logo" width="129px">
+									
+									<div>http://myissuesinc.ca/profile/homeless-people/abc								</div>
+								</div>
+							</div>
+							
+							<div class="p-print-poster-page-tab">
+								<div class="p-print-poster-page-rotate">
+									<svg class="p-print-poster-page-tab-logo color-green a-logo color-green" height="69" viewBox="0 0 129 69" width="129">
+										</svg><img src="http://myissuesinc.ca/assets/frontend/newpgasset/images//logo.png" alt="Logo" width="129px">
+									
+									<div>http://myissuesinc.ca/profile/homeless-people/abc								</div>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>

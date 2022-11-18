@@ -1,0 +1,69 @@
+
+
+<section class="stepsdemo-content" [class.submitting]='submitting'>
+    <form class="input-container" #sadForm='ngForm' ngForm (ngSubmit)='nextPage(sadForm.form)'>
+    <p-card>
+        <ng-template pTemplate="title">
+            Ad Content
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+           Enter relevant ad content here.
+        </ng-template>
+        <ng-template pTemplate="content">
+                <div class="form-group">
+                    <label for="adTitle">Advertisement Title</label>
+                    <input type="text" class='form-control' autocapitalize="on" name="adTitle" placeholder="Max: 100 words" maxlength="100" [(ngModel)]='adContent.adTitle' #adTitle='ngModel' required ngModel>
+                    <div class="errors" *ngIf='(sadForm.submitted && adTitle.invalid)'>
+                        <span class="error">Please enter an advertisement title.</span>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="name">Agency Title</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="on" name="name" placeholder="" [(ngModel)]="adContent.sponsorTitle" #name='ngModel' pattern='[a-zA-Z0-9 ]+' required ngModel>
+                        <div class="errors" *ngIf='(sadForm.submitted && name.invalid)'>
+                            <span class="error">Please fill Agency Title here.</span>
+                        </div>
+                    </div> 
+                    <!-- <div class="form-group" id='gender-input'>
+                        <label for="gender">Gender</label>
+                        <select name="gender" class='form-control' id="selectGender" [(ngModel)]="adContent.gender" #gender='ngModel' ngModel required>
+                            <option value="" [selected]="adContent.gender == ''" disabled>Select a Gender</option>
+                            <option value="male" [selected]="adContent.gender == 'male'">Male</option>
+                            <option value="female" [selected]="adContent.gender =='female'">Female</option>
+                            <option value="others" [selected]="adContent.gender == 'others'">Others</option>
+                        </select>
+                        <div class="errors" *ngIf='(sadForm.submitted && gender.invalid)'>
+                            <span class="error">Please select a gender</span>
+                        </div>
+                    </div> 
+                    <div class="form-group" id='age-input'>
+                        <label for="age">Age</label>
+                        <input type="number" class='form-control' name="age" min=0 pattern='[0-9]+' [(ngModel)]='adContent.age' #age='ngModel' required ngModel>
+                        <div class="errors" *ngIf='(sadForm.submitted && age.invalid)'>
+                            <span class="error">Please enter a valid age</span>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group" id='name-input'>
+                    <label for="tag">Tag Line</label>
+                    <input type="text" class='form-control' autocapitalize="on" name="tag" placeholder="Describe your best attribute in short and catchy way" [(ngModel)]='adContent.tagline' #tag='ngModel' required ngModel>
+                    <div class="errors" *ngIf='(sadForm.submitted && tag.invalid)'>
+                        <span class="error">Please enter a tag line</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <p-editor [(ngModel)]="adContent.description" [style]="{'height':'320px', 'font-size': '16px'}" name='description' ngModel></p-editor>
+                </div>
+        </ng-template> 
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end page-buttons">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous' class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="submit" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info' ></button>
+            </div>
+        </ng-template>
+    </p-card>
+    </form>
+</section>
+

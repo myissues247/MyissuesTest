@@ -1,0 +1,14 @@
+.identityImages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.identityImages .image {
+    margin: 5px;
+}
+
+
+img {
+    max-width: 150px;
+    height: auto;
+}
