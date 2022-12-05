@@ -14,10 +14,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
  
 // For production
-app.use(express.static(__dirname + '/public/Frontend'));
+app.use(express.static(__dirname + '/Frontend'));
 
 app.get('*', function(req, res){
-    res.sendFile(path.join(__dirname, 'public/Frontend/index.html'))
+    res.sendFile(path.join(__dirname, 'Frontend/index.html'))
 })
 
 //Start server
