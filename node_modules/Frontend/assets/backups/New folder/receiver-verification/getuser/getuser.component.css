@@ -1,0 +1,90 @@
+p-calendar {
+    min-width: 100%  !important;
+    overflow: visible !important;
+}
+
+.identityImages {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.identityImages .image {
+    background: #faf9f9;
+    margin: 2px 2px;
+    padding: 15px 0px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.identityImages .img {
+    width: 100%;
+    height: 100%;
+}
+
+.identityImages img {
+    width: 100%;
+    height: 100%;
+}
+
+.identityImages button {
+    display: block;
+    width: 20px;
+    height: 20px;
+    font-size: 7px !important;
+    padding: 2px !important;
+    overflow: visible;
+} 
+
+
+/* .uploaded-image .identityImages {
+    flex-direction:column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.uploaded-image .identityImages .image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    margin: 5px 0px;
+}
+
+.uploaded-image .identityImages .img {
+    max-width: 100px;
+    height: 100px;
+    background: #faf9f9; //comment
+} */
+
+
+.border {
+    padding: 20px 15px;
+    margin-bottom: 5px;
+    border-radius: 10px !important;
+}
+
+.file input {
+    border: 0px;
+    display: block;
+    margin: 0px !important;
+    padding: 0px !important;
+    color: white;
+}
+
+@media screen and (max-width: 400px) {
+    .identityImages {
+        justify-content: flex-start;
+        align-items: center;
+    }
+}

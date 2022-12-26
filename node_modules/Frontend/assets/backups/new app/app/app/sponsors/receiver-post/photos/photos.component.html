@@ -1,0 +1,61 @@
+<section class="stepsdemo-content" [class.submitting]='submitting'>
+    <p-card>
+        <ng-template pTemplate="title">
+            Upload Photos
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+           Please upload relevant photos.
+        </ng-template>
+        <ng-template pTemplate="content">
+            <p-tabView>
+                <p-tabPanel header="Ad Images">
+                    <p-fileUpload name="adImages[]" #adImageUpload customUpload='true' (uploadHandler)='uploadAdImages($event, adImageUpload)' multiple="multiple" accept="image/*" maxFileSize="100000" fileLimit='{{ maxAdImages }}' showCancelButton='true'>
+                        <ng-template pTemplate="content">
+                            <h5>Uploaded Images</h5>
+                            <div class="uploadedImages">
+                                <div class="image" *ngFor='let image of uploadedAdImages; let i = index' >
+                                    <a href="{{image | server}}" target='_blank'>
+                                        <img src="{{ image | server }}" alt="uploaded ad images">
+                                    </a>
+                                    <div><button type="button" icon="pi pi-times" pbutton="" ng-reflect-icon="pi pi-times" class="p-button p-component p-button-icon-only" (click)='deleteAdImage(image, i)'><span class="p-button-icon pi pi-times" aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button></div>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>maximum upload limit = 5 images</li>
+                                <!-- <li>{{ newlyAddedAdImages }} new images uploaded</li> -->
+                                <li>{{ uploadedAdImages.length}} images already uploaded</li>
+                            </ul>
+                        </ng-template>
+                      </p-fileUpload>
+                </p-tabPanel>
+                <p-tabPanel header="Ad Video">
+                    <ng-template pTemplate="content">
+                        <p-fileUpload name="adVideo[]" #adVideoUpload customUpload='true' (uploadHandler)='uploadAdVideo($event, adVideoUpload)' accept='video/mp4' maxFileSize="10000000" fileLimit='1' showCancelButton='true'>
+                            <ng-template pTemplate="content">
+                                <h5>Uploaded Video</h5>
+                                <div class="uploadedImages">
+                                    <div class="image" *ngIf='uploadedAdVideo'>
+                                        <a class='border' href="{{uploadedAdVideo | server}}" target='_blank'>
+                                            <video src="{{ uploadedAdVideo | server }}"></video>
+                                        </a>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>maximum upload limit = 1 images</li>
+                                    <li>{{uploadedAdVideo? '1' : '0'}} images already uploaded</li>
+                                </ul>
+                            </ng-template>
+                          </p-fileUpload>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </ng-template>  
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end page-buttons">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous' class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="button" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info' (click)='nextPage()'></button>
+            </div> 
+        </ng-template>
+    </p-card>
+</section>
+

@@ -1,0 +1,149 @@
+<section>
+    <div class="card p-shadow-1" style="width: 100%;min-height: 100px;margin: 0 auto;">
+        <div class="row mt-2" style="width: 100%;height: 90%;margin: 0 auto;">
+            <div class="col-sm-12 col-md-2 ml-2 mb-2  image">
+                <img src="{{(ad && ad.identityImages && ad.identityImages.length > 0)? (ad.identityImages[0] | server) : 'assets/images/home-pic.jpg'}}" class="img-fluid center mt-1 p-shadow-5" alt=""
+                    style="margin: 0 auto;">
+            </div>
+
+            <div class="col-sm-12 col-md-9 ml-2">
+                <div class="row mt-1 ml-1">
+                    <h3 style="color: #528294;text-transform: capitalize;">Hello {{ ad.adTitle }}</h3>
+                </div>
+                <div class="row ml-1">
+                    <h5 style="color: #a3a3a3;">{{ ad.categoryName + "-" + ad.city }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section [class.submitting]='submitting'> 
+    <div class="card p-shadow-1 mt-3" style="width: 100%;min-height: 100px;margin: 0 auto;">
+        <div class="alert alert-warning upgrade-card mt-2 ml-2" role="alert" style="width: 80%;background: #fdb933;">
+            <div class="row">
+                <div class="col-sm-12 col-md-2" style="display: flex;justify-content: center;align-items: center;">
+                    <h3><a href="" style="color: #017285 !important;font-size: 24px;font-weight: bold;">TIP</a></h3>
+                </div>
+                <div class="col-sm-12 col-md-10">
+                    <p><strong> Paid for features:</strong> money for ads will be deducted from your account at a later
+                        point in time if you choose to use these features.<br><br>
+
+                        By using this features it will help increase your chances of more people viewing your profile
+                        issues..</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="card upgrade-card p-shadow-1 mt-2 ml-2 mb-2" style="width: 80%;" *ngFor='let plan of adPlans; let i= index'>
+            <div class="card-header" style="background: #b367c9;">
+                <div class="row">
+                    <div class="col-1 mr-1" style="display:flex;justify-self: center;align-items:center;">
+                        <img src="../../../../assets/images/upgrade-1.png" class="center" alt="" style="width: 30px;">
+                    </div>
+                    <div class="col-10">
+                        <h2 style="font-weight: 800;color:white;">{{ plan.planName }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Do you want maximum for your ad ?</strong>Your ad will be displayed in our
+                    highest visiblit Featured Ad format in the panhandlers category of Greater Toronto Area.
+                </p>
+                <a class="btn btn-purple" *ngIf="plan._id != planId && !showPlan" (click)="upgrade()">Upgrade to {{plan.planName}} &nbsp;&nbsp;<i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="card-body"  [class.hide]="showPlan == false && plan._id != planId ">
+                <div class="card-deck row">
+                    <ng-container *ngFor='let category of plan.categories'>
+                        <div class="card deck col-sm-12 col-md-3" [class.active]='categoryId == category._id' (click)='select_plan(plan._id, category)'>
+                            <a class="deck-link"> 
+                                <div class="card-body">
+                                    <div class="row">
+                                        <p class="card-text" *ngIf='category.inDays'>{{category.days}} days</p>
+                                        <p class="card-text" *ngIf='category.inHours'>{{category.hours}} hours</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="card-text">{{category.priceType}}{{category.price}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div> 
+                    </ng-container>
+
+                    <div class="card deck col-sm-12 col-md-3">
+                        <a class="deck-link " (click)="cancelPlan()">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h1 class="card-text"><i class="fa fa-close"></i></h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div> -->
+        <div class="card upgrade-card p-shadow-1 mt-2 ml-2 mb-2" style="width: 80%;">
+            <div class="card-header" style="background: #b367c9;">
+                <div class="row">
+                    <div class="col-1 mr-1" style="display:flex;justify-self: center;align-items:center;">
+                        <img src="../../../../assets/images/upgrade-1.png" class="center" alt="" style="width: 30px;">
+                    </div>
+                    <div class="col-10">
+                        <h2 style="font-weight: 800;color:white;">Buy BumpUps</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Do you want maximum for your ad ?</strong>Your ad will be displayed in our
+                    highest visiblit Featured Ad format in the panhandlers category of Greater Toronto Area.
+                </p>
+                <a class="btn btn-purple" (click)='showBumps = !showBumps'>Buy Bump Ups &nbsp;&nbsp;<i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="card-body"  [class.hide]='showBumps == false'>
+                <div class="card-deck row">
+                    <ng-container *ngFor='let bump of bumps'>
+                        <div class="card deck col-sm-12 col-md-3"  (click)='buyBumps(bump)'>
+                            <a class="deck-link"> 
+                                <div class="card-body">
+                                    <div class="row">
+                                        <p class="card-text">{{bump.count}} bumps</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="card-text">$ {{bump.price}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-container>
+
+                    <div class="card deck col-sm-12 col-md-3">
+                        <a class="deck-link " (click)="showBumps = false">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h1 class="card-text"><i class="fa fa-close"></i></h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class="p-grid p-nogutter p-justify-end page-buttons row justify-content-between px-2">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous'
+                    class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="button" icon="pi pi-angle-right" iconPos="right" label='Next'
+                    class='p-button-info' (click)='nextPage()'></button>
+            </div>
+        </div>
+    </div>
+
+</section>
+

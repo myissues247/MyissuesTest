@@ -1,0 +1,91 @@
+<div class="card my-5"  style="min-height: 450px;" [class.submitting]="submitting">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <section class="stepsdemo-content">
+            <form action="" class="input-container" #withdraw='ngForm' ngForm  (ngSubmit)='submit(withdraw)'>
+                <h2 class='pb-3'>Withdrawl Request</h2>
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="firstname">First Name*</label>
+                        <input type="text" class='form-control' name="firstName" placeholder="Only your first name" pattern='[a-zA-Z]' [(ngModel)]='contact.firstname' disabled #firstName='ngModel' ngModel required>
+                        <div class="errors" *ngIf='withdraw.submitted && firstName.invalid'>
+                            <span class="error">Please enter a valid first name.</span>
+                        </div>
+                    </div> 
+                    <div class="form-group" id='gender-input'>
+                        <label for="lastname">Last Name*</label>
+                        <input type="text" class='form-control' name="lastName" placeholder="Only your last name" pattern='[a-zA-Z]' [(ngModel)]='contact.lastname' disabled #lastName='ngModel' ngModel required>
+                        <div class="errors" *ngIf='withdraw.submitted && lastName.invalid'>
+                            <span class="error">Please enter a valid last name.</span>
+                        </div>
+                    </div> 
+                </div> 
+                <div class="group">
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" disabled='true' class='form-control' name="email" placeholder="abcd@abcd.abc" [ngModel]='contact.email' #email='ngModel' ngModel required>
+                        <div class="errors" *ngIf='withdraw.submitted && email.invalid'>
+                            <span class="error">Please enter a valid email.</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id='name-input'>
+                        <label for="contactNumber">Contact Number*</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='contactNumber' [(ngModel)]='contact.contact'></p-inputMask>
+                        <div class="errors" *ngIf='withdraw.submitted && !contact.contact'>
+                            <span class="error">Please enter a valid contact number.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group">
+                    <div class="form-group">
+                        <label for="email">Amount To Withdraw*</label>
+                        <input type="number" class='form-control' name="amount" placeholder="0.00" [(ngModel)]='contact.amount' #amount='ngModel' ngModel required pattern='[0-9]+.?[0-9]*'>
+                        <div class="errors" *ngIf='withdraw.submitted && amount.invalid'>
+                            <span class="error">Please enter a valid amount.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group">
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class='form-control' name="message" placeholder="enter any message" [(ngModel)]='contact.message' rows=3></textarea>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                       <label for="identityProof">Identity Proof PDF / Image*</label>
+                       <input type='file' class='form-control' accept='application/pdf; image/*' name='identityProof' (change)='selectIdentityProof($event)' #identityProof='ngModel' ngModel required>
+                       <div class="errors" *ngIf='withdraw.submitted && identityProof.invalid '>
+                          <span class="error">Please select PDF / Image for identity proof.</span>
+                       </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="form-group py-2" id='name-input'>
+                       <label for="bankDetails">Bank Details PDF / Image*</label>
+                       <input type='file' class='form-control' accept='application/pdf; image/*' name='bankDetails' (change)='selectBankDetails($event)' #bankDetails='ngModel' ngModel required>
+                       <div class="errors" *ngIf='withdraw.submitted && bankDetails.invalid'>
+                           <span class="error">Please select PDF / Image for bank detail verification.</span>
+                       </div>
+                    </div>
+                </div>
+
+                <!-- <p>
+                    <strong>Note: </strong>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos repudiandae sint ratione similique blanditiis et incidunt, odit, voluptate sunt, praesentium labore. Fuga praesentium enim sed nihil non consectetur libero modi.
+                </p> -->
+
+                <div class="form-group text-center">
+                    <button class="btn py-2 px-4" type='submit'>Submit Request</button>
+                </div>
+            </form>
+
+       </section>
+    </div>
+  </div>
+

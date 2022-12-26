@@ -1,0 +1,167 @@
+
+<form class="card mb-5"  #form='ngForm' (ngSubmit)="nextPage(form)" style="min-height: 450px;width: 100%;margin: 10 auto;">
+    <div class="card-header">
+        <h5 class="card-title">Neighbour Detail</h5>
+    </div>
+    <div class="card-body">
+      
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input1" type="text" class='capitalize' autocapitalize="words" pInputText name="name1" #name1='ngModel' pattern='[a-zA-Z]+ ?[a-zA-Z]* *' [(ngModel)]="neighbours1.name" required> 
+                          <label for="float-input1">First Neighbour Name*</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf='form.submitted && name1.invalid'>First Neighbour Name is Required.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                      <input id="float-input2" type="text" pInputText name="contact1" #contact1='ngModel' pattern='[\+0-9]+' maxlength="13" [(ngModel)]="neighbours1.contact" required> 
+                      <label for="float-input2">First Neighbour Contact*</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf='form.submitted && contact1.invalid'>First Neighbour Contact Number is Required.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input3" type="text" pInputText name="extension1" [(ngModel)]="neighbours1.extension" #extension1='ngModel' pattern='[0-9]+' required> 
+                          <label for="float-input3">First Neighbour Extension*</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf='form.submitted && extension1.invalid'>First Neighbour Extension is Required.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                      <input id="float-input4" type="text" class='capitalize' autocapitalize="words" pInputText name="occupation1" [(ngModel)]="neighbours1.occupation" #occupation1='ngModel' pattern="[a-zA-Z0-9]+" required> 
+                      <label for="float-input4" >First Neighbour Occupation Name*</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf='form.submitted && occupation1.invalid' >First Neighbour Occupation Name is Required.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input5" type="text" class='capitalize' autocapitalize="words" pInputText name="organization1" [(ngModel)]="neighbours1.organization" #organization1='ngModel' pattern='[0-9a-zA-Z]+' required> 
+                          <label for="float-input5">First Neighbour Organization*</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf='form.submitted && organization1.invalid'>First Neighbour Organization is Required.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <input id="float-input1" type="text" class='capitalize' autocapitalize="words" pInputText name="name2" #name2='ngModel'  pattern='[a-zA-Z]+ ?[a-zA-Z]* *' [(ngModel)]="neighbours2.name"> 
+                        <label for="float-input1">Second Neighbour Name</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf='name2.dirty && name2.invalid'>Second Neighbour Name is Required.</small>
+              </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group mt-4">
+              <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                      <i class="pi pi-user"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input id="float-input2" type="text" pInputText name="contact2" #contact2='ngModel' pattern='[\+0-9]+' maxlength="13" [(ngModel)]="neighbours2.contact"> 
+                    <label for="float-input2">Second Neighbour Contact No.</label>
+                  </span>
+              </div>  
+              <small id="model" class="p-error" *ngIf='contact2.dirty && contact2.invalid' >Second Neighbour Contact No. is Required.</small>
+            </div>
+          </div>
+  
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group mt-4">
+              <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                      <i class="pi pi-user"></i>
+                  </span>
+                  <span class="p-float-label">
+                      <input id="float-input3" type="text" pInputText name="extension2" [(ngModel)]="neighbours2.extension" #extension2='ngModel' pattern='[0-9]+'> 
+                      <label for="float-input3">Second Neighbour Extension</label>
+                  </span>
+              </div>  
+              <small id="model" class="p-error" *ngIf='extension2.dirty && extension2.invalid'>Second Neighbour Extension is Required.</small>
+            </div>
+        </div>
+
+       <div class="col-md-6 col-sm-12">
+        <div class="form-group mt-4">
+          <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                  <i class="pi pi-user"></i>
+              </span>
+              <span class="p-float-label">
+                <input id="float-input4" type="text" class='capitalize' autocapitalize="words" pInputText name="occupation2" [(ngModel)]="neighbours2.occupation" #occupation2='ngModel' pattern="[a-zA-Z0-9]+"> 
+                <label for="float-input4" >Second Neighbour Occupation Name</label>
+              </span>
+          </div>  
+          <small id="model" class="p-error" *ngIf='occupation2.dirty && occupation2.invalid' >Second Neighbour Occupation Name is Required.</small>
+        </div>
+      </div>
+  
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group mt-4">
+          <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                  <i class="pi pi-user"></i>
+              </span>
+              <span class="p-float-label">
+                  <input id="float-input5" type="text"  class='capitalize' autocapitalize="words" pInputText name="organization2" [(ngModel)]="neighbours2.organization" #organization2='ngModel' pattern='[0-9a-zA-Z]+'> 
+                  <label for="float-input5">First Neighbour Organization</label>
+              </span>
+          </div>  
+          <small id="model" class="p-error" *ngIf='organization2.dirty && organization2.invalid'>First Neighbour Organization is Required.</small>
+        </div>
+    </div>
+  
+        </div>
+     
+    </div>
+    <div class="card-footer">
+        <div class="p-grid p-nogutter p-justify-between" style='display: flex; flex-wrap: wrap; justify-content: space-between;'>
+            <button pButton label="Back" (click)="prevPage()" icon="pi pi-angle-left"></button>
+            <button pButton label="Next" type='submit' icon="pi pi-angle-right" iconPos="right"></button>
+            </div>
+      </div>
+</form>

@@ -1,0 +1,53 @@
+
+.col-12 {
+    margin: 0px;
+}
+.bg-image {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: url('../../../assets/images/panhandlers1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+  
+.bg-image::before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background : rgba(0, 0, 0, 0.1);
+    z-index: 9;
+}
+
+.content {
+    z-index: 11;
+}
+
+i.icon {
+    width:  100px;
+    height: 100px;
+    color: whitesmoke
+}
+
+.main-text {
+    color: whitesmoke;
+    font-weight: bolder;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    font-weight: calc(30px + 5vw);
+}
+
+
+.color {
+    color: #962179;
+    font-weight: bold;
+}
+
+td:not(.color){
+    text-align: right;
+}

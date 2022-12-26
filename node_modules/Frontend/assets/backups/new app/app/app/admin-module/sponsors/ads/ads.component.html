@@ -1,0 +1,155 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="20" [paginator]="true" [totalRecords]='totalAds'
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 30]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Sponsor Ads</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)='search($event)'
+              placeholder="Search..." class="btn-max" autocapitalize="off"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4 rem;">Ad id
+          </th>
+          <th>Title</th>
+          <th>Sponsor Title</th>
+          <th>Province
+          </th>
+          <th>Region 
+          </th>
+          <th>City
+        </th>
+          <th>Published On
+          </th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Ad id</span>
+            {{product.id || product._id}}
+          </td>
+          <td> <span class="p-column-title">Title</span>
+            {{(product.adTitle).substr(0, 30)}}
+          </td>
+          <td><span class="p-column-title">Sponsor Title</span>
+            {{product.sponsorTitle}}
+           </td>
+          <td> <span class="p-column-title">Province</span>
+            {{product.country}}
+          </td>
+          <td> <span class="p-column-title">Region</span>
+            {{product.state}}
+          </td>
+          <td><span class="p-column-title">City</span>
+            {{product.city}}
+        </td>
+          <td><span class="p-column-title">Published On</span>
+            {{product.publishedOn  | date: 'dd/MM/yyyy HH:MM'}}
+        </td>
+          <td> <span class="p-column-title">Status</span>
+            <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(product._id)"></button>
+            <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(product._id)"></button>
+          </td>
+          <td>  <span class="p-column-title">Actions</span>
+             
+             
+              <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="approveAd(product._id)" [disabled]="product.approved==2"></button>
+              <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="rejectAd(product._id)" [disabled]="product.approved==1"></button>
+              <!-- <p *ngIf="product.approved==2">Approved</p>
+              <p *ngIf="product.approved==1">Rejected</p> -->
+              <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center ml-1" [routerLink]='["/admin-module/sponsor/ad/", product._id]'></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{ totalAds }} Sponsor Ads.
+        </div>
+      </ng-template> 
+    </p-table>
+  </div>
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+<!-- Cause  -->
+
+<div data-toggle="modal" data-target="#exampleModalCenter" id="click2">
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Write Cause/Reason For Reject this Ad</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="disableAd()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div data-toggle="modal" data-target="#exampleModalCenter1" id="click3">
+</div>
+
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Any Reason?</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="disableHandler()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close1">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

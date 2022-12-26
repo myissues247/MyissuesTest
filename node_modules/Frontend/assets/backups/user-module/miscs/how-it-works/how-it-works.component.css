@@ -1,0 +1,205 @@
+
+/* --- Found Work Css Start --- */
+
+.found-work{
+	padding: 50px 0;
+}
+
+.found-work-des{
+	text-align: center;
+}
+
+.found-work-des h2{
+	color: #36322f;
+	font-weight: 900;
+	font-family: 'Lato';
+}
+
+.found-work-des p{
+	font-size: 20px;
+	font-weight: 300;
+	font-family: 'Lato';
+	padding-bottom: 50px;
+}
+
+.found-work-des iframe{
+	height: 500px;
+}
+
+/* --- Found Work Css End --- */
+
+/* --- Start Sec Css Start --- */
+
+.start-sec{
+	margin-top: -150px;
+	background: #fcf8f5;
+	padding: 150px 0 100px;
+}
+
+.found-list span{
+	width: 60px;
+	height: 60px;
+	color: #01768a;
+	display: block;
+	font-size: 30px;
+	line-height: 55px;
+	text-align: center;
+	border-radius: 50%;
+	margin-bottom: 15px;
+	border: 2px solid #01768a;
+}
+
+.found-list h3{
+	font-weight: 300;
+	padding-bottom: 10px;
+}
+
+.found-list ul{
+	padding-left: 15px;
+}
+
+.found-list ul li{
+	padding-bottom: 10px;
+}
+
+.found-list a{
+	color: #01768a;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.btn-green,
+.btn-green-border{
+	display: block;
+	font-weight: 500;
+	padding: 10px 30px;
+	width: max-content;
+	border-radius: 5px;
+	margin: 50px auto 0;
+}
+
+.btn-green,
+.btn-green-border:hover,
+.btn-green-border:focus{
+	color: #fff;
+	background-color: #01768a;
+	border: 2px solid transparent;
+}
+
+.btn-green-border{
+	color: #01768a;
+	border: 2px solid #01768a;	
+}
+
+.btn-green:hover,
+.btn-green:focus,
+.btn-green-border{
+	border-color: #01768a;
+	background-color: transparent;
+}
+
+.btn-green:hover,
+.btn-green:focus{
+	color: #01768a;
+}
+
+/* --- Start Sec Css End --- */
+
+/* --- Fast Sec Css Start --- */
+
+.fast-sec .found-work-des p{
+	font-size: 20px;
+	font-weight: 300;
+	padding-bottom: 0;
+	font-family: 'Lato';
+}
+
+/* --- Fast Sec Css End --- */
+
+/* --- Testimonial Css Start --- */
+
+.testimonial{
+	padding: 50px 0;
+	background: #fcf8f5;
+}
+
+.testimonial-des h3{
+	font-size: 22px;
+	font-weight: 300;
+	font-style: italic;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.testimonial-des img{
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	display: block;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.testimonial-des p{
+	position: relative;
+	margin: 0 auto;
+	font-size: 20px;
+	padding-top: 15px;
+	font-weight: bold;
+	text-align: center;
+	width: max-content;
+	font-family: 'Lato';
+	text-transform: capitalize;
+}
+
+.testimonial-des p::after{
+	position: absolute;
+	top: 20px;
+	left: -30px;
+	bottom: 0;
+	content: '';
+	width: 20px;
+	height: 2px;
+	margin: auto 0;
+	background-color: #000;
+}
+
+.testimonial-des span{
+	display: block;
+	padding-top: 15px;
+	text-align: center;
+	font-family: 'Lato';
+}
+
+/* --- Testimonial Css End --- */
+
+/* --- Leader Css Start --- */
+
+.leader{
+	padding: 50px 0;
+}
+
+.leader .found-work-des{
+	padding-bottom: 35px;
+}
+
+.leader-icon i{
+	color: #01768a;
+	font-size: 40px;
+	text-align: center;
+}
+
+.leader-sub-des h4{
+	font-size: 20px;
+	font-weight: 900;
+	font-family: 'Lato';
+	padding-bottom: 10px;
+}
+
+.leader-sub-des p{
+	font-weight: 300;
+	font-family: 'Lato';
+	padding-bottom: 30px;
+}
+
+/* --- Leader Css End --- */

@@ -1,0 +1,138 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"  [totalRecords]="totalRecords" 
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']"
+      [rowHover]="true" dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {{totalRecords}} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadDonationHousing($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Donations</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)="search($event)"
+              placeholder="Search is case sensitive" class="btn-max" autocapitalize="off"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4 rem;">Donation ID
+          </th>
+          <th>For AD ID</th>
+          <th>For Receiver ID
+          </th>
+          <th>Received By</th>
+          <th>Donor Email
+          </th>
+          <th>Housing Type
+        </th>
+        <th>Province</th>
+          <th>City
+          </th>
+          <th>Donated On
+          </th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td><span class="p-column-title">Donation Id</span>
+            {{product._id}}
+          </td>
+          <td> <span class="p-column-title">For Ad ID</span>
+            {{product.intendedAdId}}
+          </td>
+          <td> <span class="p-column-title">For Receiver ID</span>
+            {{product.intendedReceiverId}}
+          </td>
+          <td> <span class="p-column-title">Receiver By</span>
+            {{product.receiverId}}
+          </td>
+          <td> <span class="p-column-title">Donor Email</span>
+            {{ product.email }}
+          </td>
+          
+          <td><span class="p-column-title">Housing Type</span>
+            {{product.housingType}}
+           </td>
+          <td><span class="p-column-title">Province</span>
+            {{product.province}}
+           </td>
+          <td> <span class="p-column-title">City</span>
+            {{product.city}}
+          </td>
+          <td><span class="p-column-title">Donated On</span>
+            {{product.createdAt  | date: 'dd/MM/yyyy HH:MM'}}
+        </td>
+           <td> <span class="p-column-title">Status</span>
+            <p *ngIf='product.alloted == false'>Unallocated</p>
+            <p *ngIf='product.alloted'>Allocated</p>
+            <!-- <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(product._id)"></button>
+            <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(product._id)"></button> -->
+          </td> 
+          <td>  <span class="p-column-title">Actions</span>
+               <!-- <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="approveAd(product._id)" *ngIf="product.approved==0"></button>
+              <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="rejectAd(product._id)" *ngIf="product.approved==0"></button>
+              <p *ngIf="product.approved==2">Approved</p>
+              <p *ngIf="product.approved==1">Rejected</p>  -->
+              <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center ml-1" [routerLink]='["/admin-module/donated-housings/full", product._id]'></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{ totalRecords }} Donated Housings.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+<!-- Cause  -->
+
+<div data-toggle="modal" data-target="#exampleModalCenter" id="click2">
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Write Cause/Reason For Reject this Ad</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

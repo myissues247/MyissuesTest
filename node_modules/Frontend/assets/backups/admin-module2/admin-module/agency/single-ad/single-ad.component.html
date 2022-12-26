@@ -1,0 +1,216 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+    </p-toolbar>
+  
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>Adveritsement Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Advertisement Content</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>Ad Id</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product._id}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ad Title</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.adTitle}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Agency Title</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.agencyTitle}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Category Name</strong>
+                            </td>
+                            <td>
+                                {{product.categoryName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Location</strong>
+                            </td>
+                            <td>
+                                {{product.country + " > " + product.state + " > " + product.city}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong>
+                            </td>
+                            <td>
+                                {{product.address}}
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Area</strong>
+                            </td>
+                            <td>
+                                {{product.area}}
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Description</strong>
+                            </td>
+                            <td [innerHTML]='product.description'>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ad Images</strong>
+                            </td>
+                            <td>
+                                <div style='display: flex'>
+                                    <div class="image" *ngFor='let image of product.adImages'>
+                                        <a href="{{image | server}}" target="_blank">
+                                            <img src="{{ image | server}}" alt="Ad Image added by the user" style='width: 100px; height: 100px; margin: 5px'>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Identity Images</strong>
+                            </td>
+                            <td style='display: flex'>
+                                <div class="image" *ngFor='let image of product.identityImages'>
+                                    <a href="{{image | server}}" target="_blank">
+                                        <img src="{{ image | server}}" alt="Identity Image added by the user" style='width: 100px; height: 100px; margin: 5px;'>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Ad Video</strong>
+                            </td>
+                            <td>
+                                <video src="{{ product.adVideo | server }}" style="width:150px; height: 100px;"></video>
+                                <div>
+                                    <a href="{{ product.adVideo | server }}" target='_blank'>Click To Watch
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Total Donations</strong>
+                            </td>
+                            <td>
+                                ${{product.donations.amount}}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Total Donors</strong>
+                            </td>
+                            <td>
+                                {{product.donations.count}}
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Total Views</strong>
+                            </td>
+                            <td>
+                                {{product.viewsCount}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Published On</strong>
+                            </td>
+                            <td>
+                                {{product.publishedOn | date: "medium"}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Approved On</strong>
+                            </td>
+                            <td>
+                                {{product.approvedOn | date: "medium"}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ad Status</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(product._id)"></button>
+                                <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(product._id)"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="approveAd(product._id)" *ngIf="product.approved==0"></button>
+                                <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="rejectAd(product._id)" *ngIf="product.approved==0"></button>
+                                <p *ngIf="product.approved==2">Approved</p>
+                                <p *ngIf="product.approved==1">Rejected</p> 
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="" ></button>
+                        </div>
+                    </ng-template>  -->
+                </p-table>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+  </div>
+
+
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+   <!-- Message -->
+            
+   <p-toast></p-toast>
+
+
+   
+<div data-toggle="modal" data-target="#exampleModalCenter" id="click2">
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Write Cause/Reason For Reject this Ad</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="disableAd()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+
+<section class="stepsdemo-content" [class.submitting]='submitting'>
+    <p-card>
+        <ng-template pTemplate="title">
+            Select Location
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+           Please select the region of your ad.
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="selector-container">
+                <div class="select select-country" *ngIf="countries.length != 0">
+                    <p-dropdown [options]="countries" [filter]='true' [(ngModel)]='selectedCountry' placeholder="Select a Country" optionLabel="countryName" [dataKey]='_id' optionValue="_id" [showClear]="true" (onChange)='change_country($event)' name='selectCountry'></p-dropdown> 
+                </div>
+                <div class="select select-state" *ngIf='selectedCountry'>
+                    <p-dropdown [options]="states" [filter]='true' [(ngModel)]='selectedState' placeholder="Select a state" optionLabel="stateName" optionValue="stateName" [showClear]="true" (onChange)="change_state($event)" name='selectState'></p-dropdown>
+                </div>
+                <div class="select select-city" *ngIf='showCity'>
+                    <p-dropdown [options]="cities" [filter]='true' [(ngModel)]='selectedCity' placeholder="Select a city" optionLabel="cityName" optionValue="cityName" [showClear]="true" (onChange)="change_city($event)" name='selectCity'></p-dropdown>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end page-buttons">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous' class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="button" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info' (click)='nextPage()'></button>
+            </div> 
+        </ng-template>
+    </p-card> 
+    <div class="loader-spinner" *ngIf='loading'></div>
+
+</section> 
+

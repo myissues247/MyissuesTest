@@ -1,0 +1,281 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+      <p-table [value]="post" dataKey="_id" styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm"
+      [lazy]="true" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [rows]="5"
+      [totalRecords]="totalRecords" [loading]="loading"  [rowHover]="true" 
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Doner</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)='search($event)'
+              placeholder="Search..." class="btn-max" autocapitalize="off"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name
+          </th>
+          <th>Last Name</th>
+          <th>Mob No.
+          </th>
+          <th>Email ID
+          </th>
+          <th style="width: 12rem; text-align: center;">Status
+        </th>
+          <th style="width: 7rem;text-align: center;">Full Info
+          </th>
+          <th style="width: 6rem;">Donations</th>
+          <th style="width: 14rem; text-align: center;">Access</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">First Name</span>
+            {{product?.firstname || "-"}}
+          </td>
+          <td> <span class="p-column-title">Last Name</span>
+            {{product?.lastname || "-"}}
+          </td>
+          <!-- <td> <span class="p-column-title">Image</span>
+            <img src="{{imagepath}}{{product.imagePath}}" [alt]="product.title" width="120" class="p-shadow-4" />
+          </td> -->
+          <td> <span class="p-column-title">Contact</span>
+            {{product?.contact || "-"}}
+          </td>
+          <td> <span class="p-column-title">Email ID</span>
+            {{product?.email || "-"}}
+          </td>
+          <td > <span class="p-column-title">Status</span>
+            <span style="text-align: center;">
+            <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id,product)" [disabled]='product.status == 1'></button>
+            <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" [disabled]='product.status == 0' (click)="disable(product._id,product)"></button>
+            <!-- <p *ngIf='product.status == 1'>Approved</p>
+            <p *ngIf='product.status == 0'>Reject</p> -->
+            </span>
+          </td>
+          <td >  <span class="p-column-title">Full Info</span>
+            <span style="text-align: center;">
+                <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+                <button class="btn rounded-circle text-center ml-1" [routerLink]="['/admin-module/edit-donor/', product._id]" style="background: #FBC02D;color:black;"><i class="fa fa-pencil"></i></button>
+                
+            
+            </span>
+          </td>
+          <td >  <span class="p-column-title">Donations</span>
+            <span style="text-align: center;">
+             
+                <button class="btn btn-primary rounded-circle text-center" (click)="showDonations(product._id)"><i class="fa fa-eye"></i></button>
+            </span>
+          </td>
+          <td><span class="p-column-title">Access</span>
+            <p-selectButton [options]="accessOption" name="access" [(ngModel)]="product.access" optionLabel="label" optionValue="value" [disabled]="false" (onOptionClick)="accessChange($event,product._id,product)"></p-selectButton>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post?.length : 0 }} Donors.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+   <!-- Start of Show Banner Modal -->
+<p-dialog header="Show Doner Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+  <!-- <img src="{{imagepath}}{{products.imagePath}}" [alt]="products.image" class="product-image" *ngIf="products.imagePath" width="90%" height="170" class="mx-auto d-block p-shadow-4"> -->
+  <div class="p-field">
+    <label for="firstname">First Name</label>
+    <input type="text" pInputText id="firstname" name="firstname" [disabled]="products.firstname" [(ngModel)]="products.firstname" required autofocus />
+  </div>
+  <div class="p-field">
+    <label for="lastname">Last Name</label>
+    <input type="text" pInputText id="lastname" required autofocus name="lastname" [disabled]="products.lastname" [(ngModel)]="products.lastname"/>
+    <small class="p-invalid" *ngIf="submitted && !products.lastname">Lastname is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="contact">Contact</label>
+    <input type="number" pInputText id="contact" required autofocus name="contact" [disabled]="products.contact" [(ngModel)]="products.contact"/>
+    <small class="p-invalid" *ngIf="submitted && !products.contact">Contact is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="email">Email</label>
+    <input type="email" pInputText id="email" required autofocus name="email" [disabled]="products.email" [(ngModel)]="products.email"/>
+    <small class="p-invalid" *ngIf="submitted && !products.email">Email is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="age">Age</label>
+    <input type="text" pInputText id="age" required autofocus name="age" [disabled]="products.age" [(ngModel)]="products.age"/>
+    <small class="p-invalid" *ngIf="submitted && !products.age">Age is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="address">Address</label>
+    <input type="text" pInputText id="address" required autofocus name="address" [disabled]="products.address" [(ngModel)]="products.address"/>
+    <small class="p-invalid" *ngIf="submitted && !products.address">Address is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="area">Area</label>
+    <input type="text" pInputText id="area" required autofocus name="area" [disabled]="products.area" [(ngModel)]="products.area"/>
+    <small class="p-invalid" *ngIf="submitted && !products.area">Area is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="city">City</label>
+    <input type="text" pInputText id="city" required autofocus name='city' [disabled]="products.city" [(ngModel)]="products.city"/>
+    <small class="p-invalid" *ngIf="submitted && !products.city">City is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="zipCode">Zip Code</label>
+    <input type="text" pInputText id="zipCode" required autofocus name='zipCode' [disabled]="products.zipCode" [(ngModel)]="products.zipCode"/>
+    <small class="p-invalid" *ngIf="submitted && !products.zipCode">Zip Code is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="dob">DOB</label>
+    <input type="text" pInputText id="dob" required autofocus name='dob' [disabled]="products.dob" value="{{products.dob | date:'medium'}}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.dob">DOB is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="balance">Balance ($)</label>
+    <input type="text" pInputText id="balance" required autofocus name='balance' [disabled]="products.balance >-1" [(ngModel)]="products.balance"/>
+    <small class="p-invalid" *ngIf="submitted && !products.balance">Balance is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="bumps">Bumps</label>
+    <input type="text" pInputText id="bumps" required autofocus name='bumps' [disabled]="products.bumps >-1" [(ngModel)]="products.bumps"/>
+    <small class="p-invalid" *ngIf="submitted && !products.bumps">Balance is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="joinedOn">Joined On</label>
+    <input type="text" pInputText id="joinedOn" required autofocus name='joinedn' [disabled]="products.createdOn" value="{{products.createdOn | date:'medium'}}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.joinedOn">DOB is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="status">Status</label>
+    <input type="text" pInputText id="status" required autofocus name="status" [disabled]="products.status > -1" value="{{products.status == 0? 'Rejected' : (products.status == 1? 'Approved' : 'Pending') }}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="access">Access</label>
+    <input type="text" pInputText id="access" required autofocus name="access" [disabled]="products.access" value="{{products.access==2?'Full Access' : (products.access == 1? 'Limited Access' : 'No Access') }}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.Access">
+      Access is required.</small>
+  </div>
+  <div class="p-field">
+    <label for="vs">Verification Status</label>
+    <input type="text" pInputText id="vs" required autofocus name="vs" [disabled]="products.verificationStatus" value="{{products.verificationStatus==2?'Verified' : (products.verificationStatus == 1? 'Pending' : 'Not Verified') }}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.verificationStatus">
+      Verification Status is required.</small>
+  </div>
+
+  <div class="p-field">
+    <label for="identityImages">Identity Images</label>
+    <p>
+      <ng-container *ngFor='let img of products.identityImages'>
+        <a href="{{img | server}}" target="_blank" style='margin: 0px 2px'>
+          <img src="{{ img | server }}" alt="Identity Image" style='width: 80px; height: 80px;'>
+        </a>
+      </ng-container>
+    </p>
+  </div>
+
+  <div class="p-field">
+    <label for="identityImages">Identity Proof</label>
+    <p *ngIf='products.identityProof?.mimetype == "application/pdf"'>
+      <a href="{{ products.identityProof.filepath | server }}" target='_blank'>Identity Proof Doc</a>
+    </p>
+    <a href="{{products?.identityProof?.filepath | server}}" target='_blank' style='margin: 0px 2px' *ngIf='products.identityProof?.mimetype != "application/pdf"'>
+      <img src="{{ img | server }}" alt="Identity Image" style='width: 80px; height: 80px;'>
+    </a>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Edit Banner Modal -->
+
+
+
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>
+
+
+<div data-toggle="modal" data-target="#exampleModalCenter" id="click2">
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Write Cause/Reason For Reject this Donor's Details</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="disableDonorHandler()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div data-toggle="modal" data-target="#exampleModalCenter1" id="click3">
+</div>
+
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Any Reason?</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="accessChangeHandler()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close1">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

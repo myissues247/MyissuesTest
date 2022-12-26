@@ -1,0 +1,97 @@
+.d-flex{
+    background-color: #962179;
+    width: 100%;
+    height: 50px;
+    color: white;
+}
+.p-2:hover{
+    /* color: black; */
+    /* background-color: black; */
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.btn.btn-outline-success:hover,
+.btn.btn-outline-success:focus,
+.btn.btn-outline-success:active,
+.btn.btn-outline-success.active {
+  color:#962179;
+  background-color:white;
+}
+.btn.btn-outline-success{
+    border: 1px solid white;
+    color: white;
+}
+
+.btn.custom {
+    color: white;
+    font-size: 18px !important;
+    padding: 0px !important;
+    margin: 0px !important
+}
+
+#float-input1 {
+    width: 100%;
+}
+
+
+.modal {
+    overflow-y:auto;
+  }
+
+@media screen and (max-width: 500px) {
+    .modal {
+        max-width: 99vw !important;
+
+    }
+}
+
+.cart-number {
+    position: absolute;
+    top: -5px;
+    right: -12px;
+    color: #fff;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
+.cart-price {
+    position: absolute;
+    top: 3px;
+    right: -51px;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    width: 35px;
+    text-align: center;
+    color: white;
+}
+
+.cart-price::before {
+    position: absolute;
+    top: 7px;
+    left: -3px;
+    content: '';
+    z-index: 1;
+    border-right: 4px solid #962179;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+
+.cart-price::after {
+    position: absolute;
+    top: 6px;
+    left: -5px;
+    content: '';
+    border-right: 5px solid #fff;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}

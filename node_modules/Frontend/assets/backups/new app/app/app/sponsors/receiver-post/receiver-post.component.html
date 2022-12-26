@@ -1,0 +1,216 @@
+<!-- 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-lg-10 mx-auto py-4">
+            <div class="card py-3">
+                <p-toast></p-toast>
+                <p-steps [activeIndex]='activeIndex' [model]="items" [readonly]="true" styleClass="p-shadow-3"></p-steps>
+            </div>
+            <div class="tabs">
+                <router-outlet></router-outlet>
+            </div>
+            <div class='preview-button-container text-center py-2 border'>
+                <button pButton type="button" label='preview' icon="pi pi-eye" iconPos="left" class='p-button-warning p-button mr-1' (click)='seePreview()'></button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 py-5">
+            <p-toast></p-toast>
+            <!-- <div class="card py-3">
+              
+                <div class="row">
+                    <div class="col-md-10 col-sm-12">
+                        <p-steps [activeIndex]='activeIndex' [model]="items" [readonly]="true" styleClass="p-shadow-3"></p-steps>
+                    </div>
+                    <div class="col-md-2 col-sm-12" style="display: flex; justify-content: center; align-items: center;">
+                        <a class="btn btn-outline-success btn-lg mt-1" (click)='seePreview()'>
+                            <i class="fa fa-eye"></i>
+                           Preview Ad</a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="tabs  col-lg-9 mx-auto pb-5">
+                <style type="text/css">
+                    .step-menu__list {
+                        display: -ms-flexbox;
+                        display: flex;
+                        background: #f2f2ed;
+                        border: 1px solid #ebebe6;
+                        margin: 0;
+                        list-style: none;
+                        border-radius: 6px;
+                        box-shadow: 0 1px 0 0 #fff, inset 0 1px 3px -2px rgba(0,0,0,.3);
+                        overflow: auto;
+                        padding-left: 0px;
+                        margin-top:20px;
+                    }
+                
+                    ul.step-menu__list::-webkit-scrollbar-thumb {
+                    background: #00000017;
+                }
+                ul.step-menu__list::-webkit-scrollbar {
+                    height: 7px;
+                    backface-visibility: visible;
+                    opacity: 1;
+                }
+                    .step-menu__item.active {
+                        background: #fff;
+                    }
+                    .step-menu__item:first-child {
+                        box-shadow: none;
+                        border-radius: 5px 0 0 5px;
+                    }
+                    .step-menu__item {
+                        float: left;
+                        padding: 15px 20px 15px 15px;
+                        position: relative;
+                        /*-ms-flex-positive: 1;*/
+                        flex-grow: 1;
+                        white-space: nowrap;
+                        /*-webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;*/
+                        user-select: none;
+                    }
+                    .step-menu__item:hover{
+                        background: #fff;
+                        color: #575757;
+                    }
+                    .step-menu__link:hover{
+                        color: #575757;
+                    }
+                    .step-menu__item.active a {
+                        color: #5e5e5e;
+                    }
+                    .step-menu__link {
+                        display: flex;
+                        align-items: center;
+                        line-height: 17px;
+                        text-decoration: none;
+                        font-weight: 700;
+                        font-size: 14px;
+                        color: #b8b8b4;
+                    }
+                    
+                    .step-menu__icon {
+                        float: left;
+                        margin-right: 8px;
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 75px;
+                        flex-shrink: 0;
+                        display: -ms-flexbox;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        line-height: 1;
+                        color: #fff;
+                        background: #5e5e5e;
+                    }
+                    .step-menu__icon i{
+                        font-style: normal;
+                        font-size: 20px;
+                    }
+                    .step-menu__icon.unpassed {
+                        background: #b8b8b4;
+                        color: #fff;
+                    }
+                    .step-menu__description {
+                        float: left;
+                    }
+                    .step-menu__icon.unpassed i {
+                        font-style: normal;
+                        font-size: 20px;
+                    }
+                    .step-menu__list .btn.btn-primary, .rewards .btn.btn-black:hover {
+                        background-color: #6d95aa;
+                        border-color: #6d95aa;
+                        margin: 0 8px;
+                        margin-top: 10px;
+                        padding: 0 12px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 16px;
+                        line-height: 40px;
+                        height: 42px;
+                        vertical-align: top;
+                    }
+                    .step-menu__icon.active1{
+                        background: green;
+                    }
+    
+                </style>
+                <div class="container-fluid mb-4" style='padding: 0px;'>
+                    <div class="">
+                        <ul class="step-menu__list">
+                            <!-- <li class="step-menu__item" [class.active]='currentPage == 1'>
+                                <a class="step-menu__link" >
+                                    <span class="step-menu__icon active" [class.active1]='currentPage > 1'>
+                                        <i class="number-1">1</i>
+                                    </span>
+                                    <span class="step-menu__description">Category</span>
+                                </a>
+                            </li> -->
+                            <li class="step-menu__item" [class.active]='currentPage == 2'>
+                                <a class="step-menu__link" >
+                                    <span class="step-menu__icon active" [class.active1]='currentPage > 2'>
+                                        <i class="number-1">1</i>
+                                    </span>
+                                    <span class="step-menu__description">Region</span>
+                                </a>
+                            </li>
+                            <li class="step-menu__item" [class.active]='currentPage == 3'>
+                                <a class="step-menu__link">
+                                    <span class="step-menu__icon active"  [class.active1]='currentPage > 3'>
+                                        <i class="number-2">2</i>
+                                    </span>
+                                    <span class="step-menu__description">Description</span>
+                                </a>
+                            </li>
+                            <li class="step-menu__item" [class.active]='currentPage == 4'>
+                                <a class="step-menu__link">
+                                    <span class="step-menu__icon active" [class.active1]='currentPage > 4'>
+                                        <i class="number-4">3</i>
+                                    </span>
+                                    <span class="step-menu__description">Upload <br>Your Images</span>
+                                </a>
+                            </li>
+                            <li class="step-menu__item" [class.active]='currentPage == 5'>
+                                <a class="step-menu__link">
+                                    <span class="step-menu__icon active" [class.active1]='currentPage > 5'>
+                                        <i class="number-2">4</i>
+                                    </span>
+                                    <span class="step-menu__description"> Contact Details</span>
+                                </a>
+                            </li>
+                            <li class="step-menu__item" [class.active]='currentPage == 6'>
+                                <a class="step-menu__link">
+                                    <span class="step-menu__icon active"  [class.active1]='currentPage > 6'>
+                                        <i class="number-5">5</i>
+                                    </span>
+                                    <span class="step-menu__description">Choose <br>Your Upgrades</span>
+                                </a>
+                            </li>
+                            <li class="step-menu__item"  [class.active]='currentPage == 7'>
+                                <a class="step-menu__link">
+                                    <span class="step-menu__icon active"  [class.active1]='currentPage > 7'>
+                                        <i class="number-6">6</i>
+                                    </span>
+                                    <span class="step-menu__description">Finalize <br>&amp; Post</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary" style='min-width: 150px !important;' (click)='seePreview()'><i class="fa fa-eye"></i> Preview Ad</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

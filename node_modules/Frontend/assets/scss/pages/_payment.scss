@@ -1,0 +1,196 @@
+@import url(../abstracts/_mixins.scss);
+
+
+// ########## payment-pagination css start ##########
+.payment-pagination{
+    .page-item{
+        .page-link{
+            @include font-style(18px, 500, $color-cyan);
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+
+            i {
+                font-size: 24px;
+                padding-right: 5px;
+            }
+
+            .arrow {
+                color: #606060;
+            }
+
+
+            @media (min-width: 768px) {
+                font-size: 26px;
+                white-space: nowrap;
+                padding: .75rem;
+
+                i {
+                    font-size: 40px;
+                }
+            }
+        }
+    }
+}
+// ##########// end of payment-pagination css ##########
+
+
+// ########## payment-profile css start ##########
+.payment-profile{
+    .user-profile{
+        .profile-img-box{
+            // width: 30%;
+            // @media (max-width: 575px){
+            //     width: 42%;
+            // }
+            .profile-img{
+                width: 100%;
+                height: 100%;
+                min-width: 150px;
+                max-width: 245px;
+                border-radius: 10px;
+                object-fit: cover;
+
+                @media (max-width: 767px){
+                    max-width: 150px;
+                    height: auto;
+                }
+            }
+        }
+        .profile-info{
+            p{
+                @include font-style(18px, 500, #606060);
+                @media (min-width: 768px){
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+    
+    .ongoing-support{
+        @include font-style(18px, 500, #4a4a4a);
+        @media (min-width: 768px){
+            font-size: 26px;
+        }
+    }
+}
+// ##########// end of payment-profile css ##########
+
+
+
+
+// ########## payment-option css start ##########
+.payment-option{
+    background:  #f4f2f2;
+    label {
+        @include font-style(18px, 500, #626468);
+        @media (min-width: 768px){
+            font-size: 22px;
+        }
+    }
+
+    .form-control {
+        @include font-style(16px, 400, #626468);
+        @media (min-width: 768px){
+            font-size: 20px;
+        }
+    }
+
+    .form-check-input:checked {
+        background-color: $color-cyan;
+        border-color: $color-cyan;
+    }
+
+    .heading{
+        @include font-style(20px, 600, #626468);
+        label {
+            font-weight: 400;
+        }
+        @media (min-width: 768px){
+            font-size: 26px;
+        }
+    }
+
+    #payment-accordion{
+        .accordion-item{
+            background-color: transparent;
+            
+            .accordion-header{
+                background-color: #faf9f9;
+            }
+        }
+    }
+}
+// ##########// end of payment-option css ##########
+
+
+// ########## payment-summary css start ##########
+.payment-summary{
+    .promocode-text{
+        cursor: pointer;
+        i {
+            color: #4a4a4a;
+        }
+    }
+
+    .service-fee-text {
+        @extend .promocode-text;
+
+    }
+    .promocode-text,
+    .service-fee-amount{
+        @include font-style(18px, 400, #4a4a4a);
+        @media(min-width: 768px){
+            font-size: 26px;
+        }
+    }
+
+    .total-amount{
+        @include font-style(18px, 600, #4a4a4a);
+        padding-bottom: 40px;
+        @media(min-width: 768px){
+            font-size: 26px;
+        }
+    }
+
+    .ssl-secure{
+        @include font-style(16px, 400, #4a4a4a);
+        @media(min-width: 768px){
+            font-size: 24px;
+        }
+    }
+
+    .total-charge{
+        @include font-style(16px, 400, #626468);
+        @media(min-width: 768px){
+            font-size: 24px;
+        }
+    }
+
+    .btn-cyan{
+        font-size: 18px;
+        font-weight: 500;
+        @media(min-width: 768px){
+            font-size: 26px;
+        }
+    }
+}
+// ##########// end of payment-summary css ##########
+
+
+
+// ########## payment-method-footer css start ##########
+.payment-method-footer{
+    @include font-style(14px, 400, #626468);
+    text-align: center;
+    @media(min-width: 768px){
+        font-size: 21px;
+    }
+
+    a:hover {
+        color: $color-pink;
+    }
+}
+// ##########// end of payment-method-footer css ##########

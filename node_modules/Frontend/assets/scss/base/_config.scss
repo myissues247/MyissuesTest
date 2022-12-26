@@ -1,0 +1,24 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  color: $color-black;
+  max-width: 991px;
+  margin: auto;
+}
+
+// ########## config css start ##########
+body {
+  font-family: 'Poppins', sans-serif;
+  color: $color-gray-2;
+}
+
+@media(min-width: 1200px) and (max-width: 1599px) {
+  .container {
+    max-width: 90%;
+  }
+}
+@media(min-width: 1600px) {
+  .container {
+    max-width: 80%;
+  }
+}
+// ##########// end of config css ##########

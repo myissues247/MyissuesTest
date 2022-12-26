@@ -1,0 +1,81 @@
+@import url(../abstracts/_mixins.scss);
+
+.top-pagination{
+    .pagination {
+        box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.09);
+        .page-item{
+            width: 100%;
+            filter: drop-shadow(0px 3px 5.52px rgba(0, 0, 0, 0.14));
+            margin-left: -5%;
+            position: relative;
+            &:nth-child(1){
+                z-index: 6;
+                margin-left: 0;
+            }
+            &:nth-child(2){
+                z-index: 5;
+            }
+            &:nth-child(3){
+                z-index: 4;
+            }
+            &:nth-child(4){
+                z-index: 3;
+            }
+            &:nth-child(5){
+                z-index: 2;
+            }
+            &:nth-child(6){
+                z-index: 1;
+            }
+              
+
+            .page-link{
+                padding: 1rem;
+                background: #f2f3ee;
+                border: none;
+                clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 0 50%, 0% 0%);
+                @media (max-width: 767px) {
+                    padding: 0.5rem;
+                    padding-right: 0;
+                }
+                
+                span{
+                    background: #b9bab5;
+                    padding: 0rem;
+                    width: 40px;
+                    height: 40px;
+                    margin: auto;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 50%;
+                    @include font-style(26px, 500, $color-white);
+                    @media (max-width: 767px) {
+                        font-size: 16px;
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+            }
+
+            &.active {
+                filter: drop-shadow(0px 3px 5.52px 0.48px rgba(0, 0, 0, 0.14));
+                .page-link{
+                    background: $color-white;
+                    span{
+                        background: #61605c;
+                    }
+                }
+            }
+        }
+    }
+
+    .btn {
+        background: $color-cyan;
+        color: $color-white;
+        @include font-style(13px, 500, $color-white);
+        @media (min-width: 768px) {
+            padding: .75rem .75rem;
+            font-size: 20px;
+        }
+    }
+}

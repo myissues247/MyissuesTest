@@ -1,0 +1,89 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Receiver</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="btn-max"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name
+          </th>
+          <th>Last Name</th>
+          <th>Mob No.
+          </th>
+          <th>Email ID
+          </th>
+          <th>Status
+        </th>
+        <th>Access
+        </th>
+          <th>Actions
+          </th>
+          <th>Ads List
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">First Name</span>
+            {{product.firstname || "-"}}
+          </td>
+          <td> <span class="p-column-title">Last Name</span>
+            {{product.lastname || "-"}}
+          </td>
+          <!-- <td> <span class="p-column-title">Image</span>
+            <img src="{{imagepath}}{{product.imagePath}}" [alt]="product.title" width="120" class="p-shadow-4" />
+          </td> -->
+          <td> <span class="p-column-title">Mob No.</span>
+            {{product.contact || "-"}}
+          </td>
+          <td> <span class="p-column-title">Email ID</span>
+            {{product.email || "-"}}
+          </td>
+          <td> <span class="p-column-title">Status</span>
+            <input type="hidden" value="{{product._id}}" #idInput name="id"><input type="hidden" value="{{product.description}}" #descInput name="description">
+            <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(idInput.value)"></button>
+            <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(idInput.value)"></button>
+          </td>
+          <td> <span class="p-column-title">Access</span>
+            {{product.access | accessChange}}
+          </td>
+          <td>  <span class="p-column-title">Actions</span>
+             
+              <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center" (click)="showProduct(product)"></button>
+          </td>
+          <td><span class="p-column-title">Ads list</span>
+            <button class="btn btn-primary rounded-circle text-center mx-auto" (click)='showAds(product._id)'><i class="fa fa-eye"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{post ? post.length : 0 }} Receiver.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+ 

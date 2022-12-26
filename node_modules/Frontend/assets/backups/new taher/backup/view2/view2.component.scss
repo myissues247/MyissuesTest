@@ -1,0 +1,16 @@
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.form-control:focus {
+    border: 3px solid #898a87 !important;
+    box-shadow: unset !important;
+}
+
+@media only screen and (max-width: 991px){
+  .city-list, .city-checkbx-list {
+    width: 100%;
+  }
+}

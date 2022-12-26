@@ -1,0 +1,124 @@
+
+	<!-- Graph Sec Start -->
+	<section class="graph-sec">
+		<div class="graph-list-sec">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="graph-img">
+							<ul>
+								<li>
+									<a href="">
+										<i class="fa fa-angle-left"></i>
+									</a>
+									<img src="{{imagepath}}{{imagePath ? imagePath :'assets/images/no-image.jpg'}}" alt="">
+								</li>
+								<li>
+									Hello {{categoryName ? categoryName : '-'}}	
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="graph-des text-center">
+							<p>
+								<!-- Pan handlers / Greater toronto area -->
+								{{adTitle ? adTitle :'-' }}
+								
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="graph-week text-right">
+							<a [routerLink]="['../../viewsInLastWeek/',adId]">last week</a>
+							<a [routerLink]="['../../viewsInThisWeek/',adId]">this week</a>
+							<a  class="last-week-link" [routerLink]="['../../viewsInMonth/',adId]">monthly</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="graph-bar">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="graph-view">
+							<ul>
+								<li>
+									<img src="assets/images/view-icons.png" alt="View Icons">
+								</li>
+								<li>
+									<span>{{totalViews}}</span>
+									Total Views
+								</li>
+							</ul>
+							<ul>
+					        	<li>
+					        		<img src="assets/images/reload-icon.png" alt="Reload Icons">
+					        	</li>
+					        	<li>
+					        		<span class="yellow-text">{{totalBumps}}</span>
+					        		Bumps &amp; Reposts
+					        	</li>
+					        </ul>
+					        <ul>
+					        	<li>
+					        		<img src="assets/images/dollor-icon.png" alt="Dollor Icons">
+					        	</li>
+					        	<li>
+					        		<span class="green-text">{{viewDetail?.donations?.amount?.toFixed(2) || '0'}}</span>
+					        		Money Donated
+					        	</li>
+					        </ul>
+						</div>
+					</div>
+					<div class="col-lg-9">
+						<div id="demo" class="carousel slide" data-ride="carousel">
+							<ul class="carousel-indicators">
+								<li data-target="#demo" data-slide-to="0" class="active"></li>
+								<li data-target="#demo" data-slide-to="1" class=""></li>
+							</ul>
+							<!-- The slideshow -->
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<div class="graphbar-list">
+										<ul>
+											<ng-container *ngFor="let data of views; let i = index">
+												<li class="mon-bar" *ngIf='i < 6'>
+													<div class="line-blue" [style.height.px]="((data.views*200)/highestViews) || 0" [attr.jan-content]="data.views || 0"></div>
+													<div class="line-yellow" [style.height.px]="((data.bumps*200)/heighestBumps) || 0" [attr.jan-content]="data.bumps || 0"></div>
+													<div class="line-green" [style.height.px]="((data.donations*200)/heighestDonations) || 0" attr.jan-content="${{data.donations || 0}}"></div>
+													<span >{{year[data._id.month-1]}}</span>
+												</li>
+											</ng-container>
+										</ul>
+									</div>
+								</div>
+								<div class="carousel-item">
+									<div class="graphbar-list">
+										<ul>
+											<ng-container *ngFor="let data of views; let i = index">
+												<li class="mon-bar" *ngIf='i >= 6'>
+													<div class="line-blue" [style.height.px]="((data.views*200)/highestViews) || 0" [attr.jan-content]="data.views"></div>
+													<div class="line-yellow" [style.height.px]="((data.bumps*200)/heighestBumps) || 0" [attr.jan-content]="data.bumps"></div>
+													<div class="line-green" [style.height.px]="((data.donations*200)/heighestDonations) || 0" attr.jan-content="${{data.donations}}"></div>
+													<span >{{year[data._id.month-1]}}</span>
+												</li>
+											</ng-container>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#demo" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a class="carousel-control-next" href="#demo" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Graph Sec End -->

@@ -1,0 +1,15 @@
+#second{
+    display: none;
+}
+#pic{
+    height: 60px;
+}
+@media (max-width:1010px){
+   #first{
+       display: none;
+   }
+   #second{
+       display: block;
+   }
+   
+}

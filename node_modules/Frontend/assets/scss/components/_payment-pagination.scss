@@ -1,0 +1,62 @@
+@import url(../abstracts/_mixins.scss);
+
+
+// ########## payment-pagination css start ##########
+.payment-pagination{
+    .page-item{
+        .page-link{
+            @include font-style(20px, 500, $color-cyan);
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+
+            i {
+                font-size: 30px;
+                padding-right: 5px;
+            }
+
+            .number {
+                width: 30px;
+                height: 30px;
+                background-color: $color-cyan;
+                border-radius: 50%;
+                display: inline-block;
+                font-size: 20px;
+                color: $color-white;
+                text-align: center;
+                line-height: 30px;
+                margin-right: 5px;
+            }
+
+            @media (max-width: 1199px) {
+                font-size: 14px;
+                white-space: nowrap;
+                padding: .75rem;
+
+                i {
+                    font-size: 20px;
+                }
+
+                .number {
+                    width: 20px;
+                    height: 20px;
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+            }
+        }
+
+
+        &.disabled{
+            .page-link{
+                color: $color-gray-2;
+
+                .number{
+                    background-color: $color-light-3;
+                }
+            }
+        }
+    }
+}
+// ##########// end of payment-pagination css ##########

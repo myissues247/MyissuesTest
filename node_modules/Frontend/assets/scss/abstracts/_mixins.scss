@@ -1,0 +1,15 @@
+@mixin font-style($font-size, $font-weight, $color) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    color: $color;
+}
+
+@mixin widget-box{
+    height: 100%;
+    background: #fafbf6;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    border-top-width: 5px;
+    text-align: center;
+}

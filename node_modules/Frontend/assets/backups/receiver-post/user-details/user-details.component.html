@@ -1,0 +1,206 @@
+
+
+
+<section class="stepsdemo-content" [class.submitting]='submitting'>
+    <form action="" class="input-container" #detailsForm='ngForm' (ngSubmit)='nextPage(detailsForm)'>
+    <p-card>
+        <ng-template pTemplate="title">
+            Ad Content
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+           Enter relevant ad content here.
+        </ng-template>
+        <ng-template pTemplate="content">
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="name">First Name*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="firstName" placeholder="Only your first name" pattern='[a-zA-Z]+ *' [(ngModel)]='contact.firstName' #firstName='ngModel' ngModel  disabled>
+                        <div class="errors" *ngIf='detailsForm.submitted && firstName.invalid'>
+                            <span class="error">Please enter a valid first name</span>
+                        </div>
+                    </div> 
+                    <div class="form-group" id='gender-input'>
+                        <label for="gender">Last Name*</label>
+                        <input type="text" class='form-control capitalize' name="lastName" autocapitalize="words" placeholder="Only your last name" pattern='[a-zA-Z]+' [(ngModel)]='contact.lastName' pattern='[a-zA-Z]+ *' #lastName='ngModel' ngModel required disabled>
+                        <div class="errors" *ngIf='detailsForm.submitted && lastName.invalid'>
+                            <span class="error">Please enter a valid last name</span>
+                        </div>
+                    </div> 
+                </div> 
+                <div class="group">
+                    <div class="form-group" #inputMask> 
+                        <label for="name">Date Of Birth*</label>
+                        <div class='p-inputmask-control'> 
+                            <p-inputMask inputId="inputmask" [styleClass]='"form-control"' placeholder='dd/mm/yyyy' name='dob1' mask="99/99/9999" styleClass='form-control' [(ngModel)]='contact.dob' #dob1='ngModel' ngModel></p-inputMask>
+                            <div class="error" *ngIf='detailsForm.submitted && !contact.dob'>
+                                <span class="error">Please enter a valid date of birth</span>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="form-group" id='gender-input'>
+                        <label for="age">Age*</label>
+                        <input type="number" min='0' class='form-control' name="age" placeholder="" [(ngModel)]='contact.age' #age='ngModel' pattern="[0-9]+" ngModel required>
+                        <div class="errors" *ngIf='detailsForm.submitted && age.invalid'>
+                            <span class="error">Please enter a valid age</span>
+                        </div>
+                    </div> 
+                </div>
+                <div class="group">
+                    <div class="form-group">
+                        <label for="selectCountry">Province*</label>
+                        <div class="select select-country form-group"> 
+                            <p-dropdown [options]="countries" [filter]='true' [(ngModel)]='contact.country' placeholder="Select a Country" optionLabel="countryName" [dataKey]='_id' optionValue="_id" [showClear]="false" (onChange)='change_country($event)' name='selectCountry'></p-dropdown> 
+                        </div>
+                        <div class="errors" *ngIf='detailsForm.submitted && !contact.country'>
+                            <span class="error">Please select a valid country</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State*</label>
+                        <div class="select select-state">
+                            <p-dropdown [options]="states" [filter]='true' [(ngModel)]='contact.state' placeholder="Select a state" optionLabel="stateName" optionValue="stateName" (onChange)="change_state($event)" name='selectState'></p-dropdown>
+                            <div class="errors" *ngIf='detailsForm.submitted && !contact.state'>
+                                <span class="error">Please select a valid state</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City*</label>
+                        <div class="select select-city">
+                            <p-dropdown [options]="cities" [filter]='true' [(ngModel)]='contact.city' placeholder="Select a city" optionLabel="cityName" optionValue="cityName" (onChange)="change_city($event)" name='selectCity'></p-dropdown>
+                            <div class="errors" *ngIf='detailsForm.submitted && !contact.city'>
+                                <span class="error">Please select a valid city</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="address">Address*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="address" placeholder="your address" [(ngModel)]='contact.address' #address='ngModel' ngModel required>
+                        <div class="errors" *ngIf='detailsForm.submitted && address.invalid'>
+                            <span class="error">Please enter a valid address</span>
+                        </div>
+                    </div>  
+                    <div class="form-group" id='name-input'>
+                        <label for="zipCode">Zip Code*</label>
+                        <input type="text" class='form-control' [(ngModel)]='contact.zipCode' name="zipCode" placeholder="" #zipCode='ngModel' ngModel required>
+                        <div class="errors" *ngIf='detailsForm.submitted && zipCode.invalid'>
+                            <span class="error">Please enter a valid zip code</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group"> 
+                        <label for="emergencyNumber">Emergency Number*</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='emergencyNumber' [(ngModel)]='contact.emergencyContact'></p-inputMask>
+                        <div class="errors" *ngIf='detailsForm.submitted && !contact.emergencyContact'>
+                            <span class="error">Please enter a valid emergency number</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id='name-input'>
+                        <label for="contactNumber">Contact Number*</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='contactNumber' [(ngModel)]='contact.contact'></p-inputMask>
+                        <div class="errors" *ngIf='detailsForm.submitted && !contact.contact'>
+                            <span class="error">Please enter a valid contact number</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" disabled='true' class='form-control' name="email" placeholder="abcd@abcd.abc" [(ngModel)]='contact.email' pattern='^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$' required>
+                    </div>
+                </div>
+                <p>
+                    <strong>Note: </strong>
+                    Provide Us with someone in the community that can verify that you're in crisis and need help. This person must work in the community in any capacity.
+                </p>
+                <h4><small><strong>Reference 1</strong></small></h4>
+                <div class="group reference">
+                    <div class="form-group name-input">
+                        <label for="name1">Name*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="name1" placeholder="full name" [(ngModel)]='contact.neighbours1.name' pattern='[a-zA-Z ]+' #name1='ngModel' ngModel required> 
+                        <div class="errors" *ngIf='detailsForm.submitted && name1.invalid'>
+                            <span class="error">Please enter a valid reference name(Only alphabets and numerics)</span>
+                        </div>
+                    </div>
+                    <div class="form-group contact-input">
+                        <label for="contactNumber1">Contact Number*</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='refContact1' [(ngModel)]='contact.neighbours1.contact' #refContact1='ngModel' ngModel required></p-inputMask>
+                        <div class="errors" *ngIf='detailsForm.submitted && !contact.neighbours1.contact'>
+                            <span class="error">Please enter a valid contact number</span>
+                        </div>
+                    </div>
+                    <div class="form-group ext-input">
+                        <label for="ext1">Ext.*</label>
+                        <input type="text" class='form-control' name="ext1" placeholder="" [(ngModel)]='contact.neighbours1.extension' #ext1='ngModel' ngModel required>
+                        <div class="errors" *ngIf='detailsForm.submitted && ext1.invalid'>
+                            <span class="error">Please enter a valid reference extension</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="occupation1">Occupation*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="occupation1" placeholder="" [(ngModel)]='contact.neighbours1.occupation' pattern='[a-zA-Z ]+' #occupation1='ngModel' ngModel required>
+                        <div class="errors" *ngIf='detailsForm.submitted && occupation1.invalid'>
+                            <span class="error">Please enter a valid Reference Occupation(Only alphabets and spaces)</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id='gender-input'>
+                        <label for="orgName">Organization Name*</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="orgName" placeholder="" [(ngModel)]='contact.neighbours1.organization' pattern='[a-zA-Z ]+' #orgName='ngModel' ngModel required>
+                        <div class="errors" *ngIf='detailsForm.submitted && orgName.invalid'>
+                            <span class="error">Please enter a valid Organization Name(Only alphabets and spaces)</span>
+                        </div>
+                    </div>  
+                </div> 
+                <h4><small><strong>Reference 2</strong></small></h4>
+                <div class="group reference">
+                    <div class="form-group name-input">
+                        <label for="name2">Name</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="name2" placeholder="full name" [(ngModel)]='contact.neighbours2.name' pattern='[a-zA-Z ]*' #name2='ngModel' ngModel> 
+                        <div class="errors" *ngIf='detailsForm.submitted && name2.invalid'>
+                            <span class="error">Please enter a valid reference name (Only Alphabets and spaces)</span>
+                        </div>
+                    </div>
+                    <div class="form-group contact-input">
+                        <label for="contactNumber2">Contact Number</label>
+                        <p-inputMask mask="(999) 999-9999" [styleClass]='"form-control"' placeholder="(999) 999-9999" name='refContact2' [(ngModel)]='contact.neighbours2.contact'></p-inputMask>
+                    </div>
+                    <div class="form-group ext-input"> 
+                        <label for="ext2">Ext.</label>
+                        <input type="text" class='form-control' name="ext2" placeholder="" [(ngModel)]='contact.neighbours2.extension' #ext2='ngModel' ngModel>
+                        <div class="errors" *ngIf='detailsForm.submitted && ext2.invalid'>
+                            <span class="error">Please enter a valid reference extension</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="form-group" id='name-input'>
+                        <label for="occupation2">Occupation</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="occupation2" placeholder="" [(ngModel)]='contact.neighbours2.occupation' pattern='[a-zA-Z ]*' #occupation2='ngModel' ngModel>
+                        <div class="errors" *ngIf='detailsForm.submitted && occupation2.invalid'>
+                            <span class="error">Please enter a valid reference occupation(Only alphabets and spaces)</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id='gender-input'>
+                        <label for="orgName2">Organization Name</label>
+                        <input type="text" class='form-control capitalize' autocapitalize="words" name="orgName2" placeholder="" [(ngModel)]='contact.neighbours2.organization' pattern='[a-zA-Z ]*' #ext2='ngModel' ngModel>
+                        <div class="errors" *ngIf='detailsForm.submitted && ext2.invalid'>
+                            <span class="error">Please enter a valid Organization Name(Only alphanumeric and spaces)</span>
+                        </div>
+                    </div> 
+                </div> 
+        </ng-template> 
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end page-buttons">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous' class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="submit" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info'></button>
+            </div>
+        </ng-template>
+    </p-card>
+    </form>
+</section>
+

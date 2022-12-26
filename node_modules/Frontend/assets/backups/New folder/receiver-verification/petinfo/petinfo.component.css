@@ -1,0 +1,43 @@
+.identityImages {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.petImage .image {
+    background: #faf9f9;
+    margin: 2px 2px;
+    padding:15px 0px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.identityImages .img {
+    width: 100%;
+    height: 100%;
+}
+
+.petImage img {
+    width: 100%;
+    height: 100%;
+}
+
+.border {
+    padding: 20px 15px;
+    border-radius: 10px !important;
+}
+
+@media screen and (max-width: 400px) {
+    .petImage {
+        justify-content: center;
+        align-items: center;
+    }
+}

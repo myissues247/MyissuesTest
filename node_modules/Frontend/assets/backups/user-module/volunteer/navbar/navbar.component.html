@@ -1,0 +1,155 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+    <img src="../assets/images/logo.png" width="120" height="60" class="d-inline-block align-top" alt="" >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active pr-5">
+              <a class="nav-link" href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html?utm_campaign=not-applicable&utm_medium=vanity-url&utm_source=canada-ca_coronavirus" style="color: red !important; background-color: transparent;cursor: pointer;">COVID 19 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="nav-link " routerLink="/">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="nav-link" routerLink="/agency">AGENCIES <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="nav-link" routerLink="/foodbank">FOOD BANK <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="nav-link" routerLink="/user" >HOW IT WORKS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="btn btn-outline-success"  href="#" data-toggle="modal" data-target="#SignUpModal" data-backdrop="false">Start Your Account</a>
+            </li>
+        </ul>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Sign Up Model -->
+
+  
+  <!-- Modal -->
+<div class="modal" id="SignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Your Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <input id="float-input7" type="text" pInputText name="Name" [(ngModel)]="nameProp"> 
+                        <label for="float-input7">First Name</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf="name">First Name is Required.</small>
+              </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group mt-4">
+              <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                      <i class="pi pi-user"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input id="float-input8" type="text" pInputText name="last"  [(ngModel)]="lastProp"> 
+                    <label for="float-input8" >Last Name</label>
+                  </span>
+              </div>  
+              <small id="model" class="p-error" *ngIf="last">Last Name is Required.</small>
+            </div>
+          </div>
+
+      </div>
+         <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-envelope"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input" type="mail" pInputText name="mail" [(ngModel)]="mailProp"> 
+                          <label for="float-input">Mail ID</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf="mail">Mail ID is Required.</small>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12" style="width: 100%;">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-eye"></i>
+                    </span>
+                    <span class="p-float-label">
+                      <p-dropdown id="float-input1" [options]="role" optionLabel="name" autoWidth="false"  placeholder="Select Your Role" [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="roleProp"></p-dropdown>
+                      <label for="float-input1"></label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf="ifrole">Role is Required.</small>
+              </div>
+            </div>
+
+        </div>
+        
+        
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-key"></i>
+                    </span>
+                    <span class="p-float-label">
+                        <input pPassword id="float-input9" type="password"  name="password" [(ngModel)]="passwordProp">
+                        <label for="float-input9">Password</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf="pass">Password is Required.</small>
+              </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group mt-4">
+              <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                      <i class="pi pi-key"></i>
+                  </span>
+                  <span class="p-float-label">
+                    <input id="float-input10" type="password" pInputText name="Name" name="confpassword" [(ngModel)]="confProp"> 
+                    <label for="float-input10">Confirm Password</label>
+                  </span>
+              </div>  
+              <small id="model" class="p-error" *ngIf="conf">Confirm Password is Required.</small>
+            </div>
+          </div>
+
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SignUp()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>

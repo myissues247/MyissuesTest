@@ -1,0 +1,28 @@
+.blog-navigation {
+    .nav {
+        .nav-item {
+            .dropdown-menu .dropdown-item,
+            .nav-link {
+                @include font-style(22px, 500, #606060);
+                @media (max-width: 767px) {
+                    font-size: 18px;
+                    padding: 0.5rem;
+                }
+                &.active {
+                    border-bottom: 3px solid $color-cyan;
+                    color: $color-black;
+                }
+                &:hover {
+                    color: $color-black;
+                }
+            }
+            
+            .dropdown-menu .dropdown-item {
+                &.active {
+                    color: $color-white;
+                    background: $color-cyan;
+                }
+            }
+        }
+    }
+}

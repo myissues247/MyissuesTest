@@ -1,0 +1,15 @@
+.para{
+    color: #565656;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-top: 15px;
+    width: 270px;
+
+}
+
+@media (max-width:770px){
+    .extra-info{
+        display: none;
+    }
+}

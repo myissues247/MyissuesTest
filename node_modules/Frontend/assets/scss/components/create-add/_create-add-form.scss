@@ -1,0 +1,137 @@
+@import url(../abstracts/_mixins.scss);
+
+.create-add-form{
+
+    label{
+        @include font-style(16px, 600, $color-cyan);
+        margin-bottom: 5x;
+        .label-indication{
+            @include font-style(12px, 400, #b7b8b3);
+        }
+    }
+    
+    .form-select,
+    .form-control {
+        font-size: 13px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #dbdcd7;
+        box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.09);
+        &::placeholder {
+            color: #aaaca8;
+        }
+    }
+
+    .error-message {
+        @include font-style(12px, 500, $color-white);
+        background-color: #fe8358;
+        border: 1px solid #b7b8b3;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin-top: 10px;
+        i {
+            padding-right: 10px;
+        }
+    }
+
+
+    &--heading-1{
+        @include font-style(18px, 600, #585757);
+    }
+    &--heading-2{
+        @include font-style(15px, 600, #585757);
+    }
+    &--description-muted{
+        @include font-style(12px, 400, #585757);
+    }
+
+    .badge-muted {
+        background: #b7b8b3;
+        @include font-style(10px, 600, $color-white);
+        display: grid;
+        place-items: center;
+        border-radius: 0;
+        text-transform: uppercase;
+    }
+
+    .range-result {
+        background: #f0f0f0;
+        border: 1px solid #b7b8b3;
+        @include font-style(10px, 400, #666762);
+        border-radius: 6px;
+        padding: 7.5px 10px;
+        margin-left: -1px;
+        white-space: nowrap;
+    }
+    
+
+    // ck-editor
+    .ck-editor__editable {
+        min-height: 250px;
+    }
+    .ck-editor {
+        box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.09);
+    }
+
+    // range input
+    #myRange {
+        height: 15px;
+        outline: none;
+        background-color: $color-white;
+        border: 1px solid #b7b8b3;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        -webkit-appearance: none;
+    }
+      
+    input[type='range']::-webkit-slider-thumb {
+        width: 15px;
+        height: 40px;
+        -webkit-appearance: none;
+        background: #f0f0f0;
+        border: 1px solid #b7b8b3;
+        border-radius: 4px;
+    }
+
+
+    //############# tablet mode css  #############//
+    @media(min-width: 768px){
+        label{
+            font-size: 24px;
+            .label-indication{
+                font-size: 18px;
+            }
+        }
+        .form-select,
+        .form-control {
+            font-size: 20px;
+            padding: 15px;
+        }
+        .error-message {
+            font-size: 18px;
+        }
+        .next-prev-btn {
+            .btn {
+                font-size: 55px;
+            }
+        }
+        &--heading-1{
+            @include font-style(30px, 600, #585757);
+        }
+        &--heading-2{
+            @include font-style(22px, 600, #585757);
+        }
+        &--description-muted{
+            @include font-style(20px, 400, #585757);
+        }
+
+        .badge-muted {
+            font-size: 16px;
+        }
+        .range-result{
+            font-size: 15px;
+            padding: 10px 15px;
+        }
+    
+    }
+} 

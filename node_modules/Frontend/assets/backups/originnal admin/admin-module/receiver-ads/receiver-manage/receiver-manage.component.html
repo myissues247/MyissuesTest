@@ -1,0 +1,155 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="5" [paginator]="true"
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalReceivers} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[5]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Receiver</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)="search($event)"
+              placeholder="Search..." class="btn-max"/>
+              <!--dt.filterGlobal($event.target.value, 'contains')-->
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name
+          </th>
+          <th>Last Name</th>
+          <th>Mob No.
+          </th>
+          <th>Email ID
+          </th>
+          <th>Status
+        </th>
+        <th>Access
+        </th>
+        <th style="width: 5rem;">Actions
+        </th>
+        <th style="width: 5rem;">Ads List
+        </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">First Name</span>
+            {{product.firstname}}{{product.receiverId}}
+          </td>
+          <td> <span class="p-column-title">Last Name</span>
+            {{product.lastname}}
+          </td>
+          <!-- <td> <span class="p-column-title">Image</span>
+            <img src="{{imagepath}}{{product.imagePath}}" [alt]="product.title" width="120" class="p-shadow-4" />
+          </td> -->
+          <td> <span class="p-column-title">Mob No.</span>
+            {{product.contact}}
+          </td>
+          <td> <span class="p-column-title">Email ID</span>
+            {{product.email}}
+          </td>
+          <td> <span class="p-column-title">Status</span>
+            <!-- <p *ngIf="product.status==1">Approved</p>
+            <p *ngIf="product.status==0">Rejected</p> -->
+          <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id,product)" [disabled]="product.status==1"></button>
+          <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="disable(product._id,product, closeButton)" [disabled]="product.status==0"></button>
+          </td>
+          <td> <span class="p-column-title">Access</span>
+            <p-selectButton [options]="accessOption" name="access" [(ngModel)]="product.access" optionLabel="label" optionValue="value" [disabled]="false" (onOptionClick)="accessChange($event,product._id,product)"></p-selectButton>
+            <!-- {{product.access }} -->
+          </td>
+          <td>  <span class="p-column-title">Actions</span>
+             
+              <!-- <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center" (click)="showProduct(product)"></button> -->
+              <button class="btn btn-primary rounded-circle text-center" [routerLink]="['single',product._id]"><i class="fa fa-eye"></i></button>
+          </td>
+          <td><span class="p-column-title">Ads list</span>
+            <button class="btn btn-primary rounded-circle text-center" [routerLink]="['ads',product._id]"><i class="fa fa-eye"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{totalReceivers }} Receiver.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+   
+  <!-- Confirm Dialog -->
+  
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  
+  <!-- Message -->
+  
+  <p-toast></p-toast>
+
+
+  
+<div data-toggle="modal" data-target="#exampleModalCenter" id="click2">
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Write Cause/Reason For Reject this Receiver's Details</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="disableReceiver()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div data-toggle="modal" data-target="#exampleModalCenter1" id="click3">
+</div>
+
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Any Reason?</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="accessChangeHandler()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close1">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

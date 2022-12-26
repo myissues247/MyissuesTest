@@ -1,0 +1,33 @@
+<section class="container-fluid" [class.submitting]='submitting'>
+    <div class="row">
+        <div class="col-12 bg-image">
+            <div class="content">
+                <h1 class='main-text text-center'>
+                    <div class='text-center'>
+                        <i class="icon" [class]="{'pi-check': success, 'pi-times': !success}"></i>
+                    </div>
+                    <span *ngIf='success'>Account Created</span>
+                    <span *ngIf='!success'>Couldn't Create Account</span>
+                </h1>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 col-lg-6 mx-md-auto py-5 px-2">
+            <h1 class='text-center text-success py-2'><small> 
+                Your account has been created, but you need to activate it.
+                
+                we've sent an activation to <span class='text-dark'>{{email}}</span>. Go ahead and check your inbox and spam folder now.
+            </small></h1>
+
+            <h4 class='text-center py-2 text-danger' *ngIf='message'><small>{{ message }}</small></h4>
+            
+            <h4 class='text-center text-primary my-3'><small><a href='javascript:void(0)' (click)='resend()'>Didn't Receiver? Resend</a></small></h4>
+
+
+            <div class="go-back text-center pt-1">
+                <button class="btn btn-primary" routerLink='/'><i class='fa fa-arrow-left'></i> Go Back</button>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<div class="loader-spinner" *ngIf='submitting'></div>

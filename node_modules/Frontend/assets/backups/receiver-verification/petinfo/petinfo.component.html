@@ -1,0 +1,106 @@
+<div class="card" style="min-height: 450px;width: 100%;margin: 10 auto;">
+    <div class="card-header">
+        <h5 class="card-title">Pet Detail</h5>
+    </div>
+    <div class="card-body">
+      
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input1" type="text" pInputText #petName='ngModel' name="petName" [(ngModel)]="PetData.petName" pattern='[a-zA-Z]+ ?[a-zA-Z]* *'> 
+                          <label for="float-input1">Pet Name</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf='petName.dirty && petName.invalid'>Please enter a valid pet name.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                      <input id="float-input2" type="text" pInputText name="PetType" #petType='ngModel' [(ngModel)]="PetData.petType" pattern='[a-zA-Z]+'> 
+                      <label for="float-input2">Pet Type</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf='petType.dirty && petType.invalid' >Please enter a valid Pet Type.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input3" type="text" pInputText #petAdTitle='ngModel' autocapitalize="on" name="petAdTitle" [(ngModel)]="PetData.petAdTitle"> 
+                          <label for="float-input3">Pet Ad Title</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf='petAdTitle.dirty && petAdTitle.invalid' >Please enter a valid Pet Ad Title.</small>
+                </div>
+            </div>
+  
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group mt-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="p-float-label">
+                      <input id="float-input4" type="text" pInputText name="petIssue" #petIssue='ngModel' [(ngModel)]="PetData.petIssue"> 
+                      <label for="float-input4" >Pet Issue Discription</label>
+                    </span>
+                </div>  
+                <small id="model" class="p-error" *ngIf='petIssue.dirty && petIssue.invalid'>Please enter a valid Pet Issue Discription.</small>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group mt-4">
+                  <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">
+                          <i class="pi pi-user"></i>
+                      </span>
+                      <span class="p-float-label">
+                          <input id="float-input5" type="file" pInputText name="petImage" #petImage='ngModel' (change)='selectPetImage($event)' [required]='!image && !petImageServer' ngModel accept='image/*' class='p-filled' > 
+                          <label for="float-input5">Pet Image</label>
+                      </span>
+                  </div>  
+                  <small id="model" class="p-error" *ngIf='petImage.dirty && petImage.invalid'>Please select a Pet Image.</small>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group border">
+                  <label for="">Pet Image</label><br>
+                  <div class="petImage">
+                       <div class="image">
+                           <img [src]='image' alt="petImage" *ngIf='image'>
+                           <b *ngIf='!image && !petImageServer'>no image selected</b>
+                           <img src='{{petImageServer | server}}' alt="petImage" style="max-width:150px; height: auto;" *ngIf='!image && petImageServer'>
+                       </div>
+                  </div>
+                </div>
+            </div>
+  
+        </div>
+     
+    </div>
+    <div class="card-footer">
+        <div class="p-grid p-nogutter p-justify-between" style='display: flex; flex-wrap: wrap; justify-content: space-between;'>
+            <button pButton label="Back" (click)="prevPage()" icon="pi pi-angle-left"></button>
+            <button pButton label="Skip" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></button>
+            <button pButton label="Next" (click)="nextPage()" icon="pi pi-angle-right" iconPos="right"></button>
+            </div>
+      </div>
+  </div>

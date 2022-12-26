@@ -1,0 +1,96 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="20" [paginator]="true" [totalRecords]='totalAds'
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 30]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Donate Housing Ads</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)='search($event)'
+              placeholder="Search..." class="btn-max" autocapitalize="off"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4 rem;">Ad id
+          </th>
+          <th>Title</th>
+          <th>Receiver Name</th>
+          <th>Province
+          </th>
+          <th>Region 
+          </th>
+          <th>City
+        </th>
+        <th>Category</th>
+          <th>Published On
+          </th>
+          <th style="width: 12rem;text-align: center;">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Ad id</span>
+            {{product._id}}
+          </td>
+          <td> <span class="p-column-title">Title</span>
+            {{(product.adTitle).substr(0, 30)}}
+          </td>
+          <td><span class="p-column-title">Receiver Name</span>
+            {{product.firstName || product.agencyTitle || product.sponsorTitle}}
+           </td>
+          <td> <span class="p-column-title">Province</span>
+            {{product.country}}
+          </td>
+          <td> <span class="p-column-title">Region</span>
+            {{product.state}}
+          </td>
+          <td><span class="p-column-title">City</span>
+            {{product.city}}
+        </td>
+        <td>
+          <span class='p-column-title'>Category</span>
+          {{product.categoryName}}
+        </td>
+          <td><span class="p-column-title">Published On</span>
+            {{product.publishedOn  | date: 'dd/MM/yyyy HH:MM'}}
+        </td>
+          <td> <span class="p-column-title">Actions</span>
+              <button class="btn btn-primary rounded-circle text-center ml-1"  [routerLink]='["/admin-module/donated-housings/ads/", product._id, houseId]' pTooltip="View" tooltipPosition="top"><i class="fa fa-eye"></i></button>
+
+              <button class="btn rounded-circle text-center ml-1" (click)='allot(product._id, product.receiverId, product.ownerType, houseId)' style="background: #FBC02D;color:black;" pTooltip="allot" tooltipPosition="top"><i class="fa fa-reply"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{ totalAds }} Receiver Ads.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+  
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>

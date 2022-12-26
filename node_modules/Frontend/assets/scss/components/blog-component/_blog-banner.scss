@@ -1,0 +1,17 @@
+.blog-banner {
+    position: relative;
+   .blog-banner-title {
+        @include font-style(60px, 600, $color-white);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        @media (max-width: 767px){
+            font-size: 48px;
+            left: 50%;
+            top: auto;
+            bottom: 10%;
+            transform: translateX(-50%);
+        }
+   }
+}

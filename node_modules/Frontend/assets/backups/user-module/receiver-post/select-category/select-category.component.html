@@ -1,0 +1,233 @@
+<!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" #modalButton style='display: none'>
+      Launch demo modal 
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Action</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           An Ad with this category is already present, Do you want to delete it and continue with this ad?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click)='delete_previous()'>Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+	<style type="text/css">
+		.category_img{
+			height: 100px !important;
+			width: 100px !important;
+			border-radius: 50%;
+		}
+		.owl-carousel.owl-theme {
+                      display: flex;
+                      flex-wrap: wrap;
+                      justify-content: space-between;
+                      padding: 10px 0px;
+                    }
+                
+                    .item {
+                        min-width: 16.66%;
+                    }
+                
+                    @media screen and (max-width: 700px) {
+                        .item {
+                            min-width: 40%;
+                        }
+                    }
+                    @media screen and (max-width: 500px) {
+                        .owl-carousel.owl-theme {
+                            justify-content: center;
+                        }
+                        .item {
+                            min-width: 52%;
+                        }
+                    }
+	</style>
+
+	<!-- Category Header Start -->
+	<section class="d-header cat-header" style='padding:0px'>
+			<div class="container-fluid" style='padding: 0px;'>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="delivery-form cat-form" style='margin-top: 0px;'>
+						   <h1 class='title pl-1 pt-2'>Select Category</h1>
+						   <p class='subtitle pl-1'>Please select a relevant category.</p>
+						<form>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="cat-list">
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+											<div class="owl-carousel owl-theme">
+												<ng-container *ngFor='let category of categories; let i = index'>
+													<div class="item" *ngIf='i < 12'>
+														<li class="nav-item" [class.active]='category._id == selectedCategory'>
+															<a class="nav-link" (click)='selectedCategory = category._id'>
+																<img src="{{category.imagePath? (category.imagePath|server) : 'assets/images/banner1.jpg'}}" alt="{{category.title}}" class="img-white category_img">
+																<img src="{{category.imagePath? (category.imagePath|server) : 'assets/images/banner1.jpg'}}" alt="{{category.title}}" class="img-red category_img">
+																{{category.title}}
+															</a>
+														</li>
+													</div>
+												</ng-container>					
+											</div>
+										</ul>
+									</div>
+									<div class="cat-list">
+										<div class="row">
+											<ng-container *ngFor='let category of categories; let i = index'>
+												<div class="col-lg-3 col-md-6" *ngIf='i >= 12' >
+													<div class="tab-list" [class.active]='selectedCategory == category._id' style="height:55px;" (click)='selectedCategory = category._id'>
+														<a>  {{ category.title }}	</a>
+													</div>
+												</div>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p-grid p-nogutter p-justify-end text-right pt-2">
+								<button pButton type="button" icon="pi pi-angle-right" iconPos="right" label='Next' class='p-button-info mr-1' (click)='nextPage()' [disabled]='submitting'></button>
+							</div>
+						</form>
+					</div>
+					<div class="agree-sec">
+						<div class="container">
+							<div class="agree-head">
+								<h4>
+									You agree to the following when on MyIssues.ca
+								</h4>
+								<p>
+									I agree to the <a href="javascript:void(0);" data-toggle="modal" data-target="#tcModal" data-dismiss="modal">Terms & Conditions,</a> <a href="javascript:void(0);" data-toggle="modal" data-target="#ppModal" data-dismiss="modal">Privacy Policy,</a> and <a href="javascript:void(0);" data-toggle="modal" data-target="#rulesModal" data-dismiss="modal">Rules</a> of this site.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="understand-sec">
+						<div class="container">
+							<div class="agree-head">
+								<p>
+									You understand and agree that any posts which do not comply with these terms aforementioned may result in the removal of the post without refund or warning.
+								</p>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="d-footer">
+						<ul>
+							<li>
+								<button class="btn btn-prev" disabled="disabled">
+									<i class="fa fa-angle-left"></i>
+									Previous step
+								</button>
+							</li>
+							<li>
+								<button class="btn btn-next" onclick="window.location.href='category-2.html'">
+									Next step
+									<i class="fa fa-angle-right"></i>
+								</button>
+							</li>
+						</ul>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Category Header End -->
+	<!-- Footer Start -->
+	
+
+	<!-- Terms & Condition Modal Start -->
+	<div class="modal fade bd-example-modal-lg" id="tcModal" aria-labelledby="tcModal" aria-hidden="true">
+  		<div class="modal-dialog modal-lg" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Terms & Condtition</h2>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="login-form">
+						<div class="row">
+							<div class="col-md-12">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Terms & Condition Modal End -->
+	<!-- Privacy Policy Modal Start -->
+	<div class="modal fade bd-example-modal-lg" id="ppModal" aria-labelledby="tcModal" aria-hidden="true">
+  		<div class="modal-dialog modal-lg" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Privacy Policy</h2>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="login-form">
+						<div class="row">
+							<div class="col-md-12">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Privacy Policy Modal End -->
+	<!-- Rules Modal Start -->
+	<div class="modal fade bd-example-modal-lg" id="rulesModal" aria-labelledby="tcModal" aria-hidden="true">
+  		<div class="modal-dialog modal-lg" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Rules</h2>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="login-form">
+						<div class="row">
+							<div class="col-md-12">
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+								<p>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Rules Modal End -->

@@ -1,0 +1,2167 @@
+:host ::ng-deep {    
+    .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+        display: none;
+    }
+}
+@media screen and (max-width:540px) {
+    .searchengine{
+        width: 95%;
+        padding-left:50px
+    }
+    .btn-max{
+        width: 100%;
+        padding-left: 1.7rem;
+        padding-right: 0;
+        margin: 0;
+    }
+    .btn-max::placeholder{
+        padding-left: 0rem;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 40rem) {
+    :host ::ng-deep {
+        .p-datatable {
+            &.p-datatable-responsive-demo {
+                .p-datatable-thead > tr > th,
+                .p-datatable-tfoot > tr > td {
+                    display: none !important;
+                }
+
+                .p-datatable-tbody > tr > td {
+                    text-align: left;
+                    display: block;
+                    width: 100%;
+                    float: left;
+                    clear: left;
+                    border: 0 none;
+
+                    .p-column-title {
+                        padding: .4rem;
+                        min-width: 30%;
+                        display: inline-block;
+                        margin: -.4em 1em -.4em -.4rem;
+                        font-weight: bold;
+                    }
+
+                    &:last-child {
+                        border-bottom: 1px solid var(--surface-d);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: 992px){
+    .buy-manage-list .col-lg-8{
+    	padding-right: 0;
+    }
+    .p-left{
+        padding-left: 0;
+    }
+    .ad-faq {
+		padding-left: 25px;
+		padding-right: 10px;
+	}
+	#dropdownModal .modal-lg{
+		max-width: 520px;
+	}
+}
+
+@media only screen and (min-width: 768px){
+	#donationModal .modal-dialog{
+		max-width: 600px;
+	}
+
+}
+
+@media only screen and (max-width: 1660px){
+	.header-bottom li a{
+		font-size: 20px;
+	}
+	.header .covid-link a img{
+		width: 40px;
+	}
+	.header .nav-item a,
+	.header .nav-item .dropdown-toggle{
+		font-size: 22px;
+	}
+	.header .covid-link{
+		padding-top: 5px;
+	}
+	.cancer-head{
+		font-size: 60px;
+	}
+	.profile-des p{
+		padding-bottom: 25px;
+	}
+	.btn-share,
+	.btn-donate{
+		padding: 20px 15px;
+	}
+	.story-bg{
+		min-height: 660px;
+	}
+	.grid-list li{
+		padding: 10px 43px;
+	}
+	.date-control{
+		width: 160px;
+	}
+	.credit-head{
+		font-size: 70px;
+	}
+	.delivery-step-list ul li{
+		padding: 10px;
+		font-size: 16px;
+	}
+	.delivery-step-list ul li span{
+		width: 40px;
+		height: 40px;
+		font-size: 24px;
+		line-height: 40px;
+	}
+	.delivery-step-list .btn-preview{
+		font-size: 18px;
+	}
+	.cat-header .delivery-step-list ul li span{
+		width: 30px;
+		height: 30px;
+		font-size: 16px;
+		line-height: 28px;
+	}
+	.new-page-header .nav-item .dropdown .dropdown-item{
+		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 1600px){
+	.date-control{
+		width: 150px;
+	}
+}
+
+@media only screen and (max-width: 1440px){
+	.profile-des p{
+		font-size: 20px;
+		padding-bottom: 15px;
+	}
+	.cancer-head{
+		font-size: 50px;
+	}
+	.sign-up-free.login-form .cancer-head{
+		font-size: 36px;
+	}
+	.back-to-head{
+		font-size: 26px;
+	}
+	.cancer-patient{
+		padding: 15px 0;
+	}
+	.picture-bg{
+	    padding: 25px 0;
+	}
+	.cancer-des ul{
+    	padding-top: 0;
+    	margin-bottom: 20px;
+    }
+	.credit-head{
+		font-size: 40px;
+	}
+	.credit,
+	.credit .profile-img{
+	    padding: 15px;
+	}
+	.pic-list li img{
+		width: 70px;
+		height: 70px;
+	}
+	.pic-list li .pic-overlay{
+		font-size: 26px;
+	}
+	.pic-list li .pic-overlay span{
+		font-size: 14px;
+	}
+	.pic-list li .pic-overlay{
+	    padding-top: 15px;
+	}
+	.btn-share,
+	.btn-donate{
+		font-size: 30px;
+	}
+	.pic-head{
+		font-size: 30px;
+	}
+	.location p{
+		font-size: 20px;
+	}
+	.grid-list{
+		padding-left: 0;
+	}
+	.grid-list li {
+	    font-size: 20px;
+    	height: 35px;
+    	line-height: 0;
+    	padding: 8px 48px;
+    }
+	.city-head{
+		font-size: 26px;
+	}
+	.city-checkbx-list{
+		padding-bottom: 5px;
+	}
+	.city-checkbox{
+		font-size: 16px;
+	}
+	.pan-handlers .btn.btn-link{
+		font-size: 18px;
+	}
+	.pan-handlers .card{
+		margin-bottom: 5px;
+	}
+	.pan-list .story-head{
+		font-size: 28px;
+	}
+	.panl-list-sec ul li{
+		font-size: 24px;
+	}
+	.panl-list-sec ul li p{
+		font-size: 16px;
+	}
+	.date-control{
+		width: 90px;
+		padding-left: 15px !important;
+	}
+	.credit-from .form-group span{
+		font-style: 46px;
+	}
+	.picture-bg{
+	    padding: 10px 15px;
+	}
+	.profile-des p{
+	    padding-bottom: 0;
+	}
+	.credit-from .form-control:not(textarea){
+	    height: 50px !important;
+	}
+	.credit-from .form-group{
+    	margin-bottom: 20px;
+    }
+    .header .nav-item a,
+    .header .nav-item .dropdown-toggle{
+		font-size: 18px;
+	}
+	.header .nav-item a i{
+		font-size: 28px;
+	}
+	.header-bottom li a{
+		font-size: 26px;
+		padding: 10px 15px;
+	}
+	.header-bottom li .btn-post{
+		font-size: 20px;
+		margin-top: 7px;
+		padding: 5px 15px;
+	}
+	.header .nav-item a img{
+		width: 40px;
+	}
+	.picture{
+    	padding: 20px 25px;
+    	background-color: #f0f0f0;
+    }
+	.header .covid-link a img{
+		width: 20px;
+	}
+	.pic-head img{
+    	width: 25px;
+    }
+	.pic-head{
+    	padding-top: 0;
+    	margin-bottom: 0;
+    	padding-bottom: 5px;
+    	font-size: 20px;
+    }
+	.location iframe{
+		height: 300px;
+	}
+	.story-bg{
+	    padding-left: 20px;
+		min-height: 500px;
+	}
+	.header .nav-item .dropdown .dropdown-item{
+		font-size: 16px;
+	}
+	.header .covid-link{
+		padding-right: 70px;
+	}
+	.btn-share,
+	.btn-donate{
+		padding: 10px 15px;
+	}
+	.cancer-des ul li img{
+		width: 30px;
+	}
+	.cancer-des ul li i{
+		font-size: 30px;
+	}
+	.header .navbar-brand img{
+    	width: 140px;
+    }
+    .picture .container{
+	    width: 70%;
+	    margin: 0;
+    }
+    .region-greater .form-control{
+    	height: 35px !important;
+    	line-height: 1;
+    	font-size: 16px;
+    }
+    .grid-list li a{
+    	display: block;
+    	margin-top: -3px;
+    	line-height: 1;
+    }
+    .story-head{
+        font-size: 30px;
+        padding-bottom: 10px;
+    }
+    .panl-list-sec ul{
+        margin-bottom: 15px;
+    }
+    .pic-list li{
+        margin-right: 5px;
+    }
+    .btn-transfer{
+        padding: 5px;
+    }
+    .btn-transfer img{
+    	width: 30px;
+    }
+    .blog-link a::after{
+		top: 5px;
+		right: 5px;
+		font-size: 12px;
+	}
+	.btn-help,
+	.btn-fav{
+		padding: 8px 0 0 !important;
+	}
+	.btn-fav .tooltipclassic-content{
+		top: 5px !important;
+		left: 47px !important;
+		bottom: 10px !important;
+		width: 120px !important;
+		margin: 0;
+		padding: 15px 10px 20px;
+	}
+	.btn-help .tooltipclassic-content{
+		top: 120%;
+		padding: 16px 5px;
+		width: 140px !important;
+		left: 45px !important;
+	}
+	.btn-help .tooltipclassic-content::before,
+	.btn-fav .tooltipclassic-content::before{
+    	top: 8px;
+    }
+    .blog-head{
+		padding: 10px 0 30px !important;
+	}
+	.profile-about .profile-label{
+		font-size: 18px;
+		line-height: 1.3;
+	}
+	.my-des{
+		font-size: 20px;
+	}
+	.thanks-des p,
+	.donate-amount p{
+		font-size: 16px;
+	}
+	.pay-head{
+		font-size: 24px;
+		padding-bottom: 10px;
+	}
+	.donate-payment{
+		margin-top: 80px;
+	}
+	.credit-new .credit-from .btn-donate{
+		width: 220px;
+		font-size: 26px;
+	}
+	.form-label{
+		font-size: 16px;
+	}
+	.modal .login-form{
+		padding: 0 15px;
+	}
+	.modal .login-form .form-group{
+		margin-bottom: 10px;
+	}
+	.modal .cancer-head{
+		font-size: 32px;
+		padding: 15px 0;
+	}
+	.modal .form-control:not(textarea){
+		height: 40px !important;
+	}
+	.city-list{
+		padding: 10px;
+	}
+	.btn-edit{
+		width: 165px;
+	}
+	.dropdown-menu.show{
+		transform: translate3d(0px, 35px, 0px) !important;
+	}
+	.graphbar-list li{
+		font-size: 24px;
+	}
+	.graphbar-list li div::after{
+		font-size: 20px;
+	}
+	.graphbar-list .mon-bar .line-green::after,
+	.graphbar-list .sat-bar .line-green::after{
+		left: -10px;
+	}
+	.graph-img ul li{
+		font-size: 22px;
+		padding-top: 5px;
+	}
+	.graph-des,
+	.graph-week{
+		font-size: 22px;
+		padding-top: 30px;
+	}
+	.graph-week a{
+		font-size: 16px;
+		margin-right: 5px;
+		padding: 10px 15px;
+	}
+	.graph-view ul{
+		padding-left: 10px;
+	}
+	.ad-hide-btn a,
+	.ad-detail-des ul li a,
+	.ad-detail-des .buy-manage-list .tooltipclassic-item{
+		font-size: 16px !important;
+	}
+	.ad-detail-des h1,
+	.ad-detail-des p{
+		font-size: 20px;
+	}
+	.ad-profile-des p{
+		font-size: 20px;
+	}
+	.ad-profile-des a img{
+		width: 25px;
+	}
+	.auto-repost{
+		margin-top: -120px;
+	}
+	.verify-des p{
+		font-size: 22px;
+	}
+	.verify-des p img{
+		width: 40px;
+		margin-right: 10px;
+	}
+	.food-box-des h2{
+		font-size: 28px;
+	}
+	.food-box-des p{
+		font-size: 16px;
+	}
+	.food-box-des{
+		padding: 50px 30px;
+	}
+	.volunteer-form .form-input .city-radio{
+		padding-bottom: 0;
+	}
+	.volunteer-head{
+		font-size: 30px;
+	}
+	.form-head{
+		font-size: 20px;
+	}
+	.ad-detail-des .buy-manage .alert{
+		top: -150px;
+		right: 130px;
+	}
+	.ad-pro-img::after{
+		height: 100px;
+		font-size: 120px;
+	}
+	.ad-detail-des ul li .btn-del{
+		line-height: 13px;
+	}
+	.ad-detail-des .btn-bump{
+		padding: 6px 10px;
+	}
+	.ad-detail-des .btn-bump .btn-bump-close{
+		height: 40px;
+		line-height: 1;
+	}
+	.ad-detail-des .btn-del .btn-close{
+		padding: 4px 10px;
+	}
+	.ad-detail-des ul li .btn-del{
+		position: relative;
+		top: 2px;
+		padding: 10px 5px;
+	}
+	.cat-header ul li .col-lg-10{
+		top: 0;
+		padding-left: 30px; 
+	}
+	.cat-header ul li .col-lg-2{
+		padding-right: 0;
+	}
+	.upgrades-invoice-sticky{
+		width: 19.4%;
+	}
+	.favorites-tab-list ul{
+		margin-bottom: 30px;
+	}
+	.create-ad-list ul li:nth-child(2)::after{
+		top: -13px;
+		height: 94px;
+	}
+	.select-video-ad-list ul li:nth-child(2)::after{
+		top: -17px;
+		height: 104px;
+	}
+	.create-ad-list .btn-select,
+	.create-ad-list .btn-view{
+		top: 20px;
+		height: 50px;
+		line-height: 30px;
+		font-size: 20px;
+		padding: 10px 20px;
+	}
+	.select-video-ad-list .btn-select,
+	.select-video-ad-list .btn-view{
+		top: 25px;
+	}
+	.faq-stick-links{
+		width: 15%;
+	}
+}
+
+@media only screen and (max-width: 1430px){
+	.btn-edit{
+		width: 160px;
+	}
+}
+
+@media only screen and (max-width: 1366px){
+	.grid-list li{
+		padding: 10px 40px;
+	}
+	.btn-edit{
+	    width: 162px;
+	    margin: 15px 5px 15px 0;
+	}
+	.share-modal-list{
+		padding: 30px 0 0;
+	}
+	.copy-form{
+		margin-top: 25px;
+	}
+	.share-list{
+		padding-bottom: 15px;
+	}
+	#registerModal .modal-content{
+    	height: 500px;
+    }
+    .upgrades-invoice-sticky{
+		width: 20.4%;
+	}
+}
+
+@media only screen and (max-width: 1360px){
+	.credit-from .nav-tabs li{
+		width: 350px;
+	}
+}
+
+@media only screen and (max-width: 1358px){
+	.btn-edit{
+		width: 155px;
+	}
+}
+
+@media only screen and (max-width: 1310px){
+	.grid-list li{
+		padding: 10px 30px;
+	}
+	.btn-edit{
+		width: 143px;
+	}
+	.cat-list .nav li a{
+		padding: 30px 15px;
+	}
+}
+
+@media only screen and (max-width: 1280px){
+	.profile-img img{
+		min-height: 570px;
+		object-fit: cover;
+	}
+	.blog-post-head{
+		font-size: 28px;
+	}
+	.blog-post-des{
+		font-size: 16px;
+	}
+	.graph-img ul li img{
+		width: 40px;
+		height: 40px;
+		margin: 0 5px 0 0;
+		vertical-align: baseline;
+	}
+	.graph-img ul li{
+		font-size: 18px;
+	}
+	.graph-des,
+	.graph-week{
+		font-size: 20px;
+	}
+	.graphbar-list li{
+		padding: 0 15px;
+	}
+	.graph-week a{
+		font-size: 14px;
+		margin-right: 0;
+		padding: 10px;
+	}
+}
+
+
+@media only screen and (max-width: 1265px){
+	.btn-edit{
+		width: 138px;
+	}
+}
+
+@media only screen and (max-width: 1250px){
+	.grid-list li{
+		padding: 10px 25px;
+	}
+}
+
+@media only screen and (max-width: 1220px){
+	.btn-edit{
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 1360px){
+	.credit-from .nav-tabs li{
+		width: 250px;
+	}
+}
+
+@media only screen and (max-width: 1199px){
+	.pic-list li img{
+		width: 130px;
+		height: 130px;
+	}
+	.pic-list li .pic-overlay{
+		font-size: 40px;
+		padding-top: 30px;
+	}
+	.pic-list li .pic-overlay span{
+		font-size: 26px;
+	}
+	.story-bg{
+		font-size: 16px;
+	}
+	.hello-head{
+		font-size: 20px;
+	}
+	.credit-head{
+		font-size: 50px;
+	}
+	.picture .container{
+    	width: 100%;
+    }
+    .delivery-step-list .btn-preview{
+    	margin-left: 0;
+    }
+    .date-control{
+    	width: 70px;
+    }
+    .donat-news-form .nav-tabs li,
+    .credit-from .nav-tabs li{
+    	width: 240px !important;
+    }
+    #registerModal .modal-content,
+    #shareModal .modal-content,
+    #donationModal .modal-content{
+		height: auto;
+	}
+	.graph-view li img{
+		width: 40px;
+		margin-right: 5px;
+	}
+	.graph-view li span{
+		font-size: 22px;
+	}
+	.graph-view li,
+	.graphbar-list li{
+		font-size: 16px;
+	}
+	.graph-des,
+	.graph-week{
+		font-size: 16px;
+	}
+	.graph-step-list ul li{
+		padding: 15px 20px !important;
+	}
+	.auto-page-des ul li{
+		font-size: 18px;
+		padding-left: 5px;
+	}
+	.auto-page-des span{
+		font-size: 14px;
+	}
+	.ad-detail-des ul li a.btn-upgrades{
+		padding: 12px 10px;
+	}
+	.verify-des p{
+		font-size: 18px;
+	}
+	.ad-detail-des ul li{
+		padding-bottom: 15px;
+	}
+	.ad-detail-des ul li:last-child{
+		float: none;
+	}
+	.auto-repost{
+		margin-top: -40px;
+	}
+	.food-box-des h2{
+		font-size: 24px;
+	}
+	.food-box-des p{
+		font-size: 14px;
+	}
+	.food-box-des{
+		padding: 50px 15px;
+	}
+	.volunteer-form{
+		padding: 50px 30px;
+	}
+	.volunteer-des p,
+	.volunteer-des ul li,
+	.volunteer-form .form-input .city-radio{
+		font-size: 14px;
+	}
+	.form-head{
+		font-size: 20px;
+	}
+	.volunteer-form .form-input .city-radio{
+		margin-bottom: 0;
+	}
+	.ad-detail-des .buy-manage .alert{
+		top: -218px;
+		right: 130px;
+	}
+	.ad-pro-img::after{
+		height: 60px;
+		font-size: 90px;
+	}
+	.cat-header .delivery-step-list ul li{
+		font-size: 12px;
+	}
+	.cat-header .delivery-step-list ul li span{
+		vertical-align: middle;
+	}
+	.cat-list .nav li a img{
+		width: 35px;
+	}
+	.page-hide-sec ul li a{
+		padding: 15px 50px;
+	}
+	.description-form .nav-tabs .nav-link{
+		width: 220px;
+		font-size: 18px;
+	}
+	.your-balance .nav-link{
+		min-width: 150px;
+		min-height: 100px;
+		padding: 25px 40px 10px;
+	}
+	.bitcoin-cur{
+		padding: 20px;
+	}
+	.location-icons img{
+	    width: 35px;
+	}
+	.location-icons{
+	    font-size: 18px;
+	    min-width: 120px;
+	    padding: 20px 15px;
+	}
+	.btn-text-enable{
+		font-size: 18px;
+	}
+	.get-pos{
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 1160px){
+	.grid-list li{
+		font-size: 22px;
+		line-height: 1.7;
+	}
+	.credit-list li input{
+		width: 200px;
+	}
+}
+
+@media only screen and (max-width: 1074px){
+	.grid-list li{
+		padding: 10px 20px;
+	}
+	.credit-from .col-lg-2,
+	.credit-from .col-lg-5,
+	.credit-from .col-lg-7{
+		width: 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+	.credit-from .form-group img{
+		margin-left: 10px;
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+	.date-control{
+		width: 100%;
+	}
+	.date-control:first-child{
+		margin-bottom: 30px;
+	}
+	.credit-from .form-group span{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 1062px){
+	.btn-edit{
+		padding: 10px 15px;
+	}
+	.graph-week a{
+		font-size: 14px;
+		padding: 5px;
+	}
+	.graph-img ul li{
+		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 1024px){
+	.ad-detail-des .buy-manage .alert{
+		top: -248px;
+	}
+}
+
+@media only screen and (max-width: 1000px){
+	.your-balance .nav-link{
+		min-width: 180px;
+		padding: 25px 30px 10px;
+	}
+}
+
+@media only screen and (max-width: 992px){
+	.grid-list li{
+		padding: 10px 19px;
+	}
+}
+
+@media only screen and (max-width: 991px){
+	.cancer-head{
+		font-size: 40px;
+	}
+	.header .nav-item{
+		display: inline-block;
+	}
+	.header .navbar-nav{
+		display: inherit !important;
+	}
+	.header .nav-item a i{
+		font-size: 32px;
+		vertical-align: middle;
+	}
+	.header .nav-item:last-child{
+		float: right;
+	}
+	.grid-list li{
+		width: 50%;
+		text-align: center;
+	}
+	.city-list,
+	.city-checkbx-list{
+		float: left;
+	}
+	.city-checkbx-list{
+		width: 50%;
+	}
+	.city-list{
+		margin-top: 0;
+		border-top: 1px solid #e3e4df;
+	}
+	.header .navbar{
+		padding-left: 10px;
+	}
+	.story{
+		padding-left: 0;
+	}
+	.story-bg{
+		min-height: auto;
+		padding: 30px;
+		text-align: center;
+	}
+	.story-head{
+		padding-bottom: 10px;
+	}
+	.location-space{
+		text-align: center;
+	}
+	.back-to-head{
+		font-size: 22px;
+	}
+	.credit-head{
+		font-size: 30px;
+	}
+	.credit{
+		padding: 30px 0;
+		/*margin-top: 70px;*/
+	}
+	.donate-payment{
+		margin-top: 70px;
+	}
+	.credit-from{
+		padding-right: 0;
+	}
+	.credit-from .btn-donate{
+		text-align: center;
+		margin: 0 auto 20px;
+		padding: 5px 10px;
+		width: 150px;
+	}
+	.profile-des p{
+		/*font-size: 20px;*/
+		padding-bottom: 0;
+	}
+	.profile-des .profile-label{
+		font-size: 16px;
+	}
+	.credit .profile-img,
+	.credit .credit-new .profile-img{
+		padding: 20px;
+	}
+	.credit-from .form-group{
+		margin-bottom: 20px;
+	}
+	.buy-manage-list .btn-buy,
+	.buy-manage-list .btn-bump{
+		margin-bottom: 20px;
+	}
+	.btn-edit{
+		margin-bottom: 30px;
+	}
+	.header-bottom li a{
+		font-size: 20px;
+	}
+	.back-to-pan .row{
+		display: block;
+	}
+	.back-list{
+		padding: 30px 0 40px;
+	}
+	.back-list li{
+		display: block;
+	}
+	.back-list li:nth-child(2){
+		padding: 0;
+	}
+	.btn-arrow{
+		font-size: 20px;
+	}
+	.btn-arrow i{
+		font-size: 30px;
+	}
+	.back-to-head{
+		width: 100%;
+	}
+	.header-bottom li .btn-post{
+		font-size: 16px;
+		margin-top: 6px;
+	}
+	.btn.btn-edit.tooltipclassic.tooltipclassic-effect-1{
+		margin-top: 17px !important;
+		display: inline-block;
+	}
+	.blog-post-head{
+		font-size: 24px;
+	}
+	.blog-post-des{
+		font-size: 16px;
+	}
+	.city-radio{
+		font-size: 14px;
+	}
+	.credit .container{
+		max-width: 100%;
+	}
+	.credit-bg{
+		margin: 0;
+	}
+	.credit-bg .credit-list li,
+	.credit-bg .credit-list li input{
+		font-size: 60px;
+	}
+	.usefb{
+		display: block;
+		padding-top: 10px;
+	}
+	.credit-bg .btn-donate{
+		margin: 20px auto;
+	}
+	.green-bar{
+		width: 280px;
+	}
+	.credit-border{
+		margin-bottom: 30px;
+	}
+	.credit-donate{
+		padding: 50px 0;
+	}
+	/*.d-header,
+	.blog-head,
+	.back-to-pan,
+	.region-greater{
+		margin-top: 130px;
+	}*/
+	.credit .credit-new{
+		margin: 0;
+		padding: 15px;
+	}
+	.credit-donate{
+		padding: 30px 0;
+	}
+	.modal .cancer-head{
+		font-size: 28px;
+	}
+	.modal .login-form{
+		padding: 0 15px 20px;
+	}
+	.credit-head{
+		font-size: 26px !important;
+	}
+	.tip-sec ul li{
+		padding: 0 10px;
+	}
+	.sharemodal .modal-body{
+		padding: 30px;
+	}
+	.graph-step-list ul li a{
+		font-size: 18px;
+	}
+	.graph-step-list ul li a img{
+		width: 20px;
+	}
+	.graph-step-list ul li{
+		padding: 15px !important;
+	}
+	.graphbar-list{
+		border-left: 0;
+	}
+	.graph-img ul li{
+		display: block;
+	}
+	.graph-img,
+	.graph-week{
+		text-align: center !important;
+	}
+	.graph-des,
+	.graph-week{
+		padding-top: 10px;
+	}
+	.graph-week{
+		padding-bottom: 30px;
+	}
+	.ad-detail-des{
+		padding-top: 30px;
+	}
+	.auto-page-des{
+		text-align: center;
+	}
+	.auto-page-des ul li{
+		text-align: left;
+		padding-bottom: 30px;
+	}
+	.pro-detail-head{
+		font-size: 38px;
+	}
+	.food-box-des{
+		padding: 30px 15px;
+		margin-bottom: 30px;
+	}
+	.btn-shop{
+		margin-top: 10px;
+	}
+	.food-box{
+		padding: 40px 0;
+	}
+	.volunteer-des{
+		padding: 30px 0;
+	}
+	.form-head{
+		clear: both;
+	}
+	.volunteer-form .form-input .city-radio{
+		margin-bottom: 10px;
+	}
+	.volunteer-form{
+		padding-left: 15px !important;
+		padding-right: 15px !important;
+	}
+	.ad-detail-des .buy-manage .alert{
+		top: -180px;
+	}
+	.ad-detail-des ul li .btn.btn-edit.tooltipclassic.tooltipclassic-effect-1{
+		margin-top: 0 !important;
+	}
+	.price-btn{
+		padding-top: 0;
+		margin: 10px 0 50px;
+		text-align: center !important;
+	}
+	.ad-sub-list ul li{
+		font-size: 18px;
+	}
+	.cat-header ul li .col-lg-10{
+		padding-left: 15px;
+		text-align: center;
+	}
+	.cat-header ul li .col-lg-2{
+		padding-right: 15px;
+		text-align: center;
+		padding-bottom: 10px;
+	}
+	.cat-header .delivery-step-list ul li span{
+		display: block;
+		text-align: center;
+		margin: 0 auto 5px;
+	}
+	.upgrades-invoice-sticky{
+		position: relative;
+		width: 100%;
+	}
+	.upgrades-invoice{
+		margin-left: 0;
+	}
+	.bump-tab-list{
+		display: block;
+	}
+	.bump-tab-list li{
+		width: auto;
+		margin-right: 0;
+		margin-bottom: 20px;
+		display: block !important;
+	}
+	.cat-header .delivery-step-list .btn-preview{
+		margin: auto;
+	}
+	.page-hide-sec ul li a{
+		padding: 15px 20px;
+	}
+	.favorites-tab-list ul li:nth-child(4),
+	.favorites-tab-list ul li:last-child{
+		float: none;
+	}
+	.favorites-tab-list ul li{
+		display: block;
+		text-align: center;
+		padding: 10px;
+	}
+	.favorites-tab-list ul li:nth-child(4){
+		width: max-content;
+		min-height: auto;
+		line-height: 1;
+		margin: 0 auto;
+		padding-left: 15px;
+		border-left: none;
+	}
+	.favorites-tab-list .offline-des p{
+		text-align: center;
+	}
+	.favorites-tab-list .offline-des p span{
+		margin: 0 auto;
+	}
+	.favorites-form .tab-pane{
+		padding: 15px;
+	}
+	.description-form .nav-tabs .nav-link{
+		width: 160px;
+		font-size: 14px;
+		padding: 10px 5px;
+	}
+	.balance-div{
+		border-radius: 30px;
+	}
+	.location-des ul li{
+		padding: 15px;
+		width: 300px;
+	}
+	.dropdown-list,
+	.dropdown-sub-list{
+		padding-bottom: 0;
+	}
+	.dropdown-modal .modal-lg{
+		left: 0;
+	}
+	.ad-faq .card-header .btn{
+		font-size: 16px;
+	}
+	.start-sec{
+		text-align: center;
+	}
+	.start-sec span{
+		margin: 15px auto;
+	}
+	.faq-stick-links{
+		position: relative;
+	}
+	.faq-links,
+	.faq-stick-links{
+		width: 100%;
+	}
+	.faq-stick-links{
+		margin: 30px 0;
+	}
+	.browse-room-list .favorites-tab-list ul{
+		padding: 15px 0 30px;
+	}
+	.browse-room-list .favorites-tab-list ul li{
+		margin-top: 0;
+	}
+	.around-des h4{
+		padding: 15px;
+		font-size: 12px;
+	}
+	.back-top{
+		display: none;
+	}
+	.new-contact-list ul li:last-child{
+		top: 0;
+		float: none;
+		margin-top: 15px;
+		padding-left: 0 !important;
+	}
+	.btn-store{
+		font-size: 16px;
+		padding: 5px 10px;
+	}
+}
+
+@media only screen and (max-width: 950px){
+	.ad-hide-btn{
+		float: none;
+		margin: 10px 0 30px;
+	}
+	.ad-detail-des .buy-manage .alert{
+		top: -264px;
+		right: 0;
+		left: 270px;
+		margin: 0;
+	}
+}
+
+@media only screen and (max-width: 940px){
+	.ad-detail-des .buy-manage .alert{
+		top: -320px;
+		width: 50%;
+	}
+	.new-header-bt ul li:last-child{
+		margin-top: -3px;
+		padding-right: 20px;
+	}
+	.location-des ul li{
+		width: 200px;
+	}
+}
+
+@media only screen and (max-width: 768px){
+	.header .covid-link{
+		padding-right: 50px;
+	}
+	.btn-share,
+	.btn-donate{
+		padding: 10px 15px;
+		font-size: 26px;
+	}
+	.pic-list li{
+		display: block;
+		margin-right: 0;
+		margin-bottom: 15px;
+	}
+	.pic-list li img{
+		width: 100%;
+		height: 180px;
+	}
+	.pic-list li .pic-overlay{
+		padding-top: 50px;
+	}
+	.picture{
+		padding: 40px;
+	}
+	.new-header-bt ul li a img{
+		width: 105px;
+	}
+	.new-header-bt ul{
+		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 767px){
+	.blog-list{
+		text-align: center;
+	}
+	.blog-post-des{
+		font-size: 14px;
+	}
+	.my-des{
+		font-size: 16px;
+	}
+	.header{
+		position: relative;
+	}
+	.d-header,
+	.blog-head,
+	.back-to-pan,
+	.region-greater{
+		margin-top: 0;
+	}
+	.credit,
+	.donate-payment{
+		margin-top: 0;
+	}
+	.btn-add img{
+		width: 15px;
+	}
+	.header-bottom li .btn-post{
+		padding: 5px 5px;
+	}
+	.volunteer-head{
+		font-size: 24px;
+	}
+	.volunteer-des ul{
+		padding: 20px 30px;
+	}
+	.yes-radio,
+	.cat-list .cat-label{
+		font-size: 18px;
+	}
+	.cat-list iframe{
+		height: 300px;
+	}
+	.ad-sub-list ul li:last-child{
+		float: none;
+		padding-top: 15px;
+		font-size: 30px;
+	}
+	.ad-sub-list ul li sup{
+		font-size: 18px;
+	}
+	.upload-img ul li{
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.d-footer .btn{
+		font-size: 14px;
+		padding: 10px 15px;
+	}
+	.hide-sec-des{
+		margin-bottom: 30px;
+	}
+	.up-common-header ul li:last-child{
+		top: 0;
+		float: none;
+	}
+	.description-form .nav-tabs .nav-link{
+		width: 100%;
+		padding: 15px 10px;
+	}
+	.leader-des{
+		text-align: center;
+	}
+	.ad-position-alert{
+		padding: 30px 0;
+		border-bottom: 1px solid #bfbfbf;
+	}
+	.setting-title-border h1{
+		font-size: 28px;
+	}
+	.psw-btn{
+		padding: 10px;
+	}
+	.browse-room{
+		margin-bottom: 15px;
+	}
+	.ad-about-grid-des{
+		min-height: auto;
+		padding: 30px 15px;
+		margin-bottom: 50px;
+	}
+	.around-des{
+		margin: 20px 0;
+	}
+	.ad-about-banner-des{
+		margin-top: -150px;
+		padding: 140px 0 50px;
+	}
+	.about-des{
+		padding: 15px 0;
+	}
+	.add-fav-des h2,
+	.add-fav-header h2{
+		font-size: 22px;
+	}
+	.btn-text-enable{
+		width: 100%;
+		margin-right: 0;
+		margin-top: 20px;
+	}
+	.ad-new-position{
+		padding: 50px 0;
+	}
+	.create-ad-list ul li:nth-child(2){
+		top: 10px;
+	}
+	.select-video-ad-list .btn-select,
+	.select-video-ad-list .btn-view{
+		top: 0;
+	}
+	.favorites-tab-list ul li:nth-child(4){
+		width: 100%;
+	}
+	.panl-list-sec ul li:last-child{
+		padding-left: 14px;
+	}
+}
+
+@media only screen and (max-width: 720px){
+	.graphbar-list li{
+		display: block;
+		padding-bottom: 50px;
+	}
+	.graph-sec{
+		padding: 30px 15px;
+	}
+	.location-des ul li{
+		width: 100%;
+		display: block;
+	}
+	.location-des h3{
+		font-size: 20px;
+	}
+}
+
+@media only screen and (max-width: 650px){
+	.header .covid-link{
+		padding-right: 0;
+	}
+	.header .nav-item{
+		display: block;
+	}
+	.header .nav-item:last-child{
+		float: none;
+	}
+	.header .nav-item a,
+	.header .nav-item .dropdown-toggle{
+		font-size: 18px;
+	}
+	.header .nav-item .dropdown-toggle{
+		padding: 0;
+	}
+	.result-bottom-header li:last-child{
+		padding-right: 10px;
+	}
+	.result-bottom-header li:nth-child(4){
+		padding-right: 20px;
+	}
+	.btn-edit{
+		display: block;
+		width: 100%;
+	}
+	.btn-edit .tooltipclassic-content{
+		width: 400px;
+		margin: 0 0 20px -180px;
+	}
+	.btn-edit .tooltipclassic-text a{
+		margin-top: 10px;
+		display: block;
+	}
+	.btn-edit:nth-child(4) img{
+		vertical-align: middle;
+	}
+	.btn.btn-edit.tooltipclassic.tooltipclassic-effect-1{
+		margin-top: 0 !important;
+	}
+	.btn-edit{
+		margin-top: 0;
+		margin-bottom: 20px;
+	}
+	.btn-edit:nth-child(4){
+		margin-bottom: 20px;
+	}
+}
+
+@media only screen and (max-width: 590px){
+	.cat-sub-list li{
+		display: block;
+		text-align: center;
+		padding-bottom: 10px;
+	}
+	.favorites-tab .nav-tabs{
+		text-align: center;
+	}
+	.favorites-tab .nav-tabs li{
+		margin-bottom: 15px;
+	}
+	.favorites-tab .nav-tabs li a{
+		display: block;
+		width: 100%;
+	}
+	.fav-head{
+		padding-left: 0;
+		text-align: center;
+		padding-bottom: 10px;
+	}
+}
+
+@media only screen and (max-width: 575px){
+	.ad-new-des h5{
+		top: 10px;
+	}
+	.food-donate{
+		position: relative;
+		right: 0;
+		text-align: left;
+		padding-top: 10px;
+	}
+}
+
+@media only screen and (max-width: 570px){
+	.delivery-step-list ul{
+		text-align: left;
+	}
+	.delivery-step-list ul li{
+		display: block;
+	}
+	.d-header{
+		padding: 0;
+	}
+	.delivery-form .form-head{
+		font-size: 22px;
+	}
+	.form-note p{
+		font-size: 14px;
+		padding-bottom: 10px;
+	}
+	.d-footer ul li:last-child,
+	.c-footer ul li:first-child{
+		float: none;
+	}
+	.c-footer ul li:nth-child(2){
+		padding: 0 10px;
+	}
+	.d-footer{
+		text-align: center;
+		padding: 0 15px;
+	}
+	.d-footer .btn{
+		padding: 10px;
+		font-size: 16px;
+	}
+	.comment_dontaee{
+		border-left: 0;
+	}
+	.ad-detail,
+	.verify-account,
+	.auto-repost{
+		padding: 0;
+	}
+	.cat-header .delivery-step-list ul li{
+		text-align: center;
+	}
+	.description-form .nav-tabs{
+		display: block;
+	}
+	.description-form .nav-tabs .nav-link{
+		display: block;
+		margin-bottom: 15px;
+	}
+	.btn-back{
+		font-size: 20px;
+	}
+	.btn-back img{
+		width: 20px;
+	}
+	.right-icon img{
+		top: 25px;
+		width: 20px;
+	}
+	.ad-post-des h2{
+		line-height: 1;
+		font-size: 22px;
+	}
+	.ad-post-des h2 img{
+		width: 50px !important;
+		height: auto !important;
+		display: block !important;
+		margin: 0 auto 10px !important;
+	}
+	.description-form .nav-tabs .nav-item:last-child .nav-link{
+		margin: 0 0 20px;
+	}
+	.found-work-des h2{
+		font-size: 26px;
+	}
+	.fast-sec .found-work-des p{
+		font-size: 16px;
+	}
+	.testimonial-des h3{
+		font-size: 18px;
+	}
+	.found-work-des iframe{
+		height: 300px;
+	}
+	.sign-up-free-form{
+		padding: 20px 0;
+	}
+	.sign-up-free-form form{
+		padding: 0 15px;
+	}
+	.sign-up-free-form h2{
+		font-size: 22px;
+	}
+	.sign-up-free-form p{
+		font-size: 16px;
+		padding: 0 15px;
+	}
+	.result-bottom-header ul li a img,
+	.new-header-bt ul li a img{
+		width: 100px;
+	}
+	.ad-about-banner h1,
+	.ad-about-trust h2,
+	.exclusive-team h2{
+		font-size: 28px;
+	}
+	.ad-about-banner-des{
+		margin-top: -100px;
+		padding: 70px 0 50px;
+	}
+}
+
+@media only screen and (max-width: 560px){
+	.credit-from .nav-tabs li{
+		width: auto;
+		min-width: 160px;
+	}
+	.ad-hide-btn{
+		float: none;
+		padding: 10px 0 30px;
+	}
+	.ad-detail-des h1{
+		font-size: 20px;
+	}
+	.ad-detail-des p{
+		font-size: 16px;
+	}
+	.ad-detail-des ul li{
+		display: block;
+		padding-right: 0;
+		text-align: center;
+	}
+	.ad-detail-des{
+		text-align: center;
+	}
+	.ad-hide-btn a{
+		display: block;
+	}
+	.ad-hide-btn a:first-child{
+		margin-right: 0;
+		margin-bottom: 15px;
+	}
+	.ad-bg{
+		padding: 15px;
+	}
+	.ad-detail-des ul li a.btn-upgrades{
+		line-height: 1.2;
+	}
+	.auto-page-des{
+		text-align: left;
+		padding: 0 20px;
+	}
+	.ad-detail-des .btn-edit{
+		display: block !important;
+	}
+	.ad-detail-des .buy-manage .alert{
+		left: 0;
+		top: -500px;
+		width: 95%;
+		margin: 0 auto;
+	}
+	.new-header-bt ul li:last-child{
+		float: none;
+		display: block;
+		margin: 0 auto 0;
+		padding-right: 0;
+		text-align: center;
+		padding-bottom: 20px;
+	}
+}
+
+@media only screen and (max-width: 550px){
+	.result-bottom-header li:last-child,
+	.result-bottom-header li:nth-child(4){
+		float: none;
+		display: block;
+		padding-right: 0;
+		text-align: center;
+	}
+	.result-bottom-header ul{
+		margin-bottom: 0;
+		padding: 0 20px 20px;
+		text-align: center;
+	}
+	.credit-bg .credit-list li,
+	.credit-bg .credit-list li input{
+		font-size: 36px;
+	}
+	.credit-bg,
+	.donat-news-form{
+		padding: 30px 15px;
+	}
+	.fundme-des{
+		margin: 30px 15px 0;
+	}
+	.donation-head{
+		font-size: 24px;
+		margin: 15px 15px 0;
+	}
+	.credit-bg .credit-list{
+		padding: 20px 15px 10px;
+	}
+	.credit-bg .credit-list li input{
+		width: 120px;
+	}
+	.credit-bg .profile-img{
+		padding: 0;
+	}
+	.top-tip{
+		padding: 10px;
+	}
+	.up-common-header{
+		font-size: 22px;
+	}
+	.common-page-des p{
+		font-size: 16px;
+	}
+	.common-page-des .btn{
+		font-size: 13px;
+		padding: 5px 10px;
+	}
+	.common-page-des .btn i{
+		font-size: 20px;
+		vertical-align: sub;
+	}
+	.up-common-header ul li:last-child{
+		top: 0;
+		float: none;
+	}
+}
+
+@media only screen and (max-width: 480px){
+	.cancer-head{
+		font-size: 28px;
+	}
+	.cancer-patient{
+		padding: 30px 0;
+	}
+	.back-to-head{
+		font-size: 16px;
+	}
+	.profile-detail{
+		padding: 10px 15px;
+	}
+	.profile-img img{
+		min-height: auto;
+	}
+	.picture{
+		padding: 20px 15px;
+	}
+	.region-greater{
+		padding: 20px 0;
+	}
+	.pan-handlers{
+		padding: 15px 0;
+	}
+	.city-list,
+	.city-checkbx-list{
+		float: none;
+	}
+	.city-checkbx-list{
+		width: 100%;
+	}
+	.panl-list-sec ul li img{
+		width: 100%;
+		height: 100%;
+	}
+	.cancer-des{
+		position: relative;
+		top: 0;
+		padding: 10px 0;
+	}
+	.btn-edit,
+	.buy-manage-list .btn-buy,
+	.buy-manage-list .btn-bump{
+		font-size: 14px;
+	}
+	.ad-position{
+		margin-top: 30px;
+	}
+	.btn-edit .tooltipclassic-content{
+		width: 290px;
+		margin: 0 0 20px -140px;
+	}
+	.cancer-des .tooltipclassic-content{
+		width: 250px;
+		margin: 0 0 20px -127px;
+	}
+	.btn-bump .tooltipclassic-content{
+		width: 310px;
+		margin: 0px 0 20px -157px;
+	}
+	.blog-head{
+		padding: 10px 0 !important;
+	}
+	.login-form .col-md-6{
+		padding: 30px 15px 20px;
+	}
+	.blog{
+		padding: 20px 0;
+	}
+	.blog .blog-list{
+		padding: 20px 15px;
+	}
+	.credit-from .nav-tabs li{
+		min-width: 100px;
+		padding-right: 0;
+	}
+	.credit-from .nav-tabs .nav-link{
+		font-size: 12px;
+		padding: 10px 5px;
+	}
+	.credit-from .tab-content{
+		padding: 20px 15px;
+		border-radius: 0;
+	}
+	.credit-from .form-control{
+		font-size: 18px;
+	}
+	.share-pic{
+		font-size: 12px;
+	}
+	.privacy-des{
+		font-size: 18px;
+		padding: 20px 0;
+	}
+	.credit-list{
+		padding: 30px 10px 20px;
+	}
+	.credit-head{
+		font-size: 26px;
+	}
+	.credit-list li,
+	.credit-list li input{
+		font-size: 30px;
+	}
+	.credit-list li{
+		padding-left: 15px;
+	}
+	.credit-list li input{
+		width: 120px;
+	}
+	.credit-list li span{
+		left: -10px;
+		font-size: 20px;
+	}
+	.memory-sec .profile-des{
+		padding: 10px;
+	}
+	.raised-des{
+		font-size: 34px;
+	}
+	.share-pic{
+		padding: 0 10px;
+	}
+	.donat-news-form .nav-tabs li,
+	.credit-from .nav-tabs li{
+    	width: 100px !important;
+    	min-width: 110px !important;
+    }
+    .modal .cancer-head{
+		font-size: 20px;
+	}
+	.form-label,
+	.register{
+		font-size: 14px;
+	}
+	.modal .login-form{
+		padding: 0 0 20px;
+	}
+	.ad-hide-btn a,
+	.ad-detail-des ul li a,
+	.ad-detail-des .buy-manage-list .tooltipclassic-item{
+		font-size: 14px !important;
+	}
+	.cust-breadcrumb li,
+	.cust-breadcrumb li a{
+		font-size: 16px;
+	}
+	.pro-detail-head{
+		font-size: 28px;
+	}
+	.register.link-forgot{
+		float: none;
+		display: block;
+	}
+	.volunteer-head{
+		font-size: 20px;
+	}
+	.form-head{
+		font-size: 16px;
+	}
+	.btn-del .tooltipclassic-text{
+		font-size: 14px;
+	}
+	.cat-list .nav li a{
+		padding: 30px 0;
+	}
+	.cat-sub-list li img{
+		display: block;
+		margin: 0 auto 10px;
+	}
+	.cat-sub-list li{
+		font-size: 16px;
+	}
+	.cat-seledt-link a{
+		font-size: 16px;
+	}
+	.cat-select-head{
+		font-size: 20px;
+	}
+	.agree-sec,
+	.understand-sec{
+		padding: 15px;
+	}
+	.price-btn a{
+		width: 90%;
+		display: block;
+		margin: 0 auto 15px;
+	}
+	.price-sec a{
+		width: 40px;
+		height: 40px;
+		font-size: 22px;
+		line-height: 40px;
+		margin-right: 5px;
+	}
+	.price-sec{
+		font-size: 16px;
+	}
+	.img-sub-list ul li img{
+		width: 75px;
+		height: 75px;
+		margin-right: 10px;
+	}
+	.img-sub-list ul li .minus-btn{
+		width: 40px;
+		height: 40px;
+		font-size: 40px;
+		line-height: 34px;
+	}
+	.img-sub-list ul li a{
+		padding-right: 15px;
+	}
+	.var-sub-head{
+		font-size: 18px;
+	}
+	.var-head,
+	.ref-head{
+		font-size: 26px;
+	}
+	.page-hide-sec .nav-tabs{
+		display: block;
+	}
+	.page-hide-sec .nav-tabs .nav-item{
+		display: block;
+		margin-bottom: 15px;
+	}
+	.page-tab-des ul li:last-child{
+		float: none;
+		padding-top: 10px;
+	}
+	.upgrade-list .cancer-des{
+		top: 0;
+		text-align: center;
+	}
+	.upgrade-list ul li p{
+		top: 20px;
+	}
+	.upgrade-list ul li:last-child{
+		text-align: center;
+		width: 100%;
+	}
+	.ad-post-des img{
+		height: 80px;
+		object-fit: cover;
+	}
+	.ad-post-des p{
+		font-size: 18px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.your-balance .nav,
+	.your-balance .nav-item{
+		display: block;
+	}
+	.your-balance .nav-item{
+		padding-right: 0;
+		padding-bottom: 15px;
+	}
+	.your-balance .nav-link{
+		min-width: 100%;
+	}
+	.bitcoin-cur{
+		padding: 15px;
+	}
+	.current-rate-sec .copy-text{
+		width: 100%;
+		display: block;
+		word-wrap: break-word;
+	}
+	.current-rate-sec h4{
+		font-size: 20px;
+	}
+	.qr-code h5{
+		font-size: 16px;
+	}
+	.current-rate-sec .btn-copy{
+		width: 100%;
+	}
+	.choose-currency .btn.btn-submit{
+		min-width: 100%;
+	}
+	.transactions-des ul li:last-child{
+		top: 0;
+		float: none;
+	}
+	.current-rate{
+		text-align: center;
+	}
+	.current-rate img{
+		float: none;
+		display: block;
+		margin: 10px auto 0;
+	}
+	.transactions-des ul li{
+		font-size: 16px;
+	}
+	.bitcoin-cur img{
+		width: 35px;
+	}
+	.header .new-dropdown{
+		width: 100%;
+	}
+	.cust-drop-setting ul li{
+		padding: 10px 10px;
+	}
+	.modal-btn-list a{
+		font-size: 14px;
+		padding: 5px 10px;
+		margin-right: 10px;
+	}
+}
+
+@media only screen and (max-width: 460px){
+	.header-bottom li:last-child{
+		float: none;
+		padding-right: 0;
+		text-align: center;
+		margin: 0 auto 0;
+		display: block;
+		padding-bottom: 20px;
+	}
+	.header-bottom ul{
+		text-align: center;
+		padding: 0 15px;
+	}
+	.c-footer ul li{
+		display: block;
+		width: 100%;
+		padding: 10px 20px !important;
+	}
+	.c-footer .btn{
+		width: 100%;
+	}
+	.new-header-bt li{
+		width: 130px;
+	}
+}
+
+@media only screen and (max-width: 360px){
+	.green-bar{
+		width: 100%;
+	}
+	.green-bar,
+	.green-bar .fill{
+		background-size: contain;
+	}
+	.gallery img{
+		width: 100%;
+		margin-right: 0;
+	}
+	#copyButton{
+		position: relative;
+		width: 100%;
+		margin-top: 15px;
+	}
+	.img-sub-list ul li img{
+		width: 55px;
+		height: 55px;
+		margin-right: 5px;
+	}
+	.img-sub-list ul li .minus-btn{
+		top: 10px;
+		width: 30px;
+		height: 30px;
+		font-size: 30px;
+		line-height: 27px;
+	}
+	.d-footer{
+		padding: 0;
+	}
+}

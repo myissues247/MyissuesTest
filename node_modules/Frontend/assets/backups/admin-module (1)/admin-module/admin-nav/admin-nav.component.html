@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="../assets/images/logo.png" width="120" height="50" class="d-inline-block align-top" alt="" >
+
+    </a>
+    <button pButton pRipple type="button" icon="pi pi-bars" class="navbar-toggler p-button-outlined p-button-raised p-button-help border border-light rounded mb-1" (click)="display()" styleClass="p-button-sm">
+
+    </button>
+</nav>
+
+<p-sidebar [(visible)]="displaysidebar" [style]="{width:'70%','height':'100%'}" [modal]="false"
+    appendTo="body" [autoZIndex]="false" [baseZIndex]="false" >
+    <h1 style="font-weight:normal">Menu</h1>
+    <p-panelMenu [model]="items" [multiple]="false" ></p-panelMenu>
+</p-sidebar>

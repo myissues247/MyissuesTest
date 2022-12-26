@@ -1,0 +1,257 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+    </p-toolbar>
+  
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>Sponsor Details</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Sponsor Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>Sponsor Title</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.sponsorTitle ? product.sponsorTitle : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sponsor Id</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.id || product._id}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.email ? product.email : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office Phone</strong>
+                            </td>
+                            <td>
+                                {{ product.officePhone || ""}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Service Contact</strong>
+                            </td>
+                            <td>
+                                {{product.serviceContact ? product.serviceContact : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Website URL</strong>
+                            </td>
+                            <td>
+                                <a href="{{product.websiteURL }}" target='_blank'>{{product.websiteURL}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office Fax</strong>
+                            </td>
+                            <td>
+                                {{product.fax ? product.fax : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong>
+                            </td>
+                            <td>
+                                {{product.address ? product.address : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>City</strong>
+                            </td>
+                            <td>
+                                {{product.city || ""}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Boundaries</strong>
+                            </td>
+                            <td>
+                                {{product.boundaries || ""}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Boundaries</strong>
+                            </td>
+                            <td>
+                                {{product.boundaries || ""}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Working Hours</strong>
+                            </td>
+                            <td>
+                                {{product.hours|| '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>GST</strong>
+                            </td>
+                            <td>
+                                {{product.GST ? product.GST: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>How To Apply</strong>
+                            </td>
+                            <td>
+                                {{product.howToApply ? product.howToApply: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Services</strong>
+                            </td>
+                            <td>
+                                {{product.services ? product.services: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eligibility</strong>
+                            </td>
+                            <td>
+                                {{product.eligibility ? product.eligibility: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>PhysicalAccess</strong>
+                            </td>
+                            <td>
+                                {{product.eligibility ? product.eligibility: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fees</strong>
+                            </td>
+                            <td>
+                                {{product.fees ? product.fees: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Legal Status</strong>
+                            </td>
+                            <td>
+                                {{product.legalStatus ? product.legalStatus: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Listing Copyright Title</strong>
+                            </td>
+                            <td>
+                                {{product.listingCopyRightTitle ? product.listingCopyRightTitle: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Listing Copyright URL</strong>
+                            </td>
+                            <td>
+                                {{product.listingCopyRightURL ? product.listingCopyRightURL: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bumps Purchased</strong>
+                            </td>
+                            <td>
+                                {{product.bumps}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Balance</strong>
+                            </td>
+                            <td>
+                                ${{product.balance || "0"}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created On</strong>
+                            </td>
+                            <td>
+                                {{product.createdOn | date: 'dd/MM/yyyy hh:mm'}}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Bank Details</strong>
+                            </td>
+                            <td>
+                                <div style='display: flex;'>
+                                    <p *ngIf='product.bankDetails?.mimetype == "application/pdf"'>
+                                      <a href="{{ product.bankDetails.filepath | server }}" target='_blank'>Bank Details</a>
+                                    </p>
+                                    <a href="{{product.bankDetails.filepath | server}}" target='_blank' style='margin: 0px 2px' *ngIf='product.bankDetails?.mimetype != "application/pdf"'>
+                                      <img src="{{ product.bankDetails.filepath | server }}" alt="Bank Details" style='width: 100px; height: 100px;'>
+                                    </a>
+                                </div>
+                                </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Incorporation Certificate</strong>
+                            </td>
+                            <td>
+                                <div  style='display: flex;'>
+                                    <p *ngIf='product.incorporationCertificate?.mimetype == "application/pdf"'>
+                                      <a href="{{ product.incorporationCertificate.filepath | server }}" target='_blank'>Identity Proof Doc</a>
+                                    </p>
+                                    <a href="{{product.incorporationCertificate.filepath | server}}" target='_blank' style='margin: 0px 2px' *ngIf='product.incorporationCertificate?.mimetype != "application/pdf"'>
+                                      <img src="{{ product.incorporationCertificate.filepath | server }}" alt="Incorporation Certificate" style='width: 100px; height: 100px;'>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Admin Message</td>
+                            <td>{{ product.adminMessage }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id)" [disabled]="product.status==1"></button>
+                                <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="disable(product._id)" [disabled]="product.status==0"></button>
+                                <!-- <p *ngIf='product.status == 1'>Approved</p>
+                                <p *ngIf='product.status == 0'>Rejected</p> -->
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="" ></button>
+                        </div>
+                    </ng-template>  -->
+                </p-table>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+  </div>
+
+
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+   <!-- Message -->
+            
+<p-toast></p-toast>

@@ -1,0 +1,378 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1" 
+          routerLink='new'></button>
+      </ng-template>
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="20" [paginator]="true" [totalRecords]='totalAgencies'
+    [globalFilterFields]="['firstname','lastname','email','status']" [(selection)]="selectedProducts"
+    [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 30]"
+    styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadAgency($event)" [loading]="loading">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">Manage Agency</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (keyup)='search($event)'
+            placeholder="Search..." class="btn-max" autocapitalize="off"/>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID
+        </th>
+        <th>Agency Title
+        </th>
+        <th>Email
+        </th>
+       
+        <th>City
+        </th>
+        <th>Category
+        </th>
+        <th style="width: 12rem; text-align: center;">Status
+      </th>
+        <th style="width: 8rem;text-align: center;">Actions
+        </th>
+        <th style="width: 5rem;">Ads List
+        </th>
+        <th style="width: 14rem; text-align: center;">Access
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td> <span class="p-column-title">Agency Id</span>
+          {{product.id || product._id}}
+        </td>
+        <td> <span class="p-column-title">Agency Title</span>
+          {{product.agencyTitle}}
+        </td>
+        <td> <span class="p-column-title">Email</span>
+          {{product.email}}
+        </td>
+        <td> <span class="p-column-title">City</span>
+          {{product.city}}
+        </td>
+        <td> <span class="p-column-title">Category</span>
+          {{product.categoryName}}
+        </td>
+        <td> <span class="p-column-title">Status</span>
+          <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id,product)" [disabled]="product.status==1"></button>
+          <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="disable(product._id,product)" [disabled]="product.status==0"></button>
+        </td>
+        <td>  <span class="p-column-title">Actions</span>
+           
+          <button class="btn btn-primary rounded-circle text-center" [routerLink]="['full-info',product._id]"><i class="fa fa-eye"></i></button>
+          <button class="btn btn-warning rounded-circle text-center ml-2" [routerLink]="['/admin-module/agency/','edit',product._id]"><i class="fa fa-pencil"></i></button>
+          <button pButton pRipple icon="fa fa-info" class="p-button-rounded p-button-info p-text-center" [routerLink]='["/admin-module/logs/", product._id]'></button>
+        </td>
+        <td><span class="p-column-title">Ads list</span>
+          <button class="btn btn-primary rounded-circle text-center" [routerLink]="['ads', product._id]"><i class="fa fa-eye"></i></button>
+        </td>
+        <td><span class="p-column-title">Access</span>
+          <p-selectButton [options]="accessOption" name="access" [(ngModel)]="product.access" optionLabel="label" optionValue="value" [disabled]="false" (onOptionClick)="accessChange($event,product._id,product)"></p-selectButton>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        In total there are {{totalAgencies}} Agencies.
+      </div>
+    </ng-template>
+  </p-table>
+  </div>
+  
+  
+  <!-- New Banner Creation Modal -->
+  <p-dialog header="Add Agency" [(visible)]="productDialog" [style]="{width: '750px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+     
+      <div class="p-field">
+        <div class="p-inputgroup mt-4">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-map-marker"></i>
+          </span>
+          <span class="p-float-label">
+              <p-dropdown [options]="city" optionLabel="name" autoWidth="false"
+                  [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="cityProp" inputId="city"></p-dropdown>
+              <label for="float-city">Select Your City</label>
+          </span>
+      </div>
+        <small class="p-invalid" *ngIf="submitted && !titleProp">City is required.</small>
+      </div>
+      <div class="p-field">
+      
+        <div class="p-inputgroup mt-5">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-map-marker"></i>
+          </span>
+          <span class="p-float-label">
+              <p-dropdown [options]="city" optionLabel="name" autoWidth="false"
+                  [style]="{ width: '100%', overflow: 'visible' }" name="role" [(ngModel)]="category" inputId="Category"></p-dropdown>
+              <label for="Category">Select Your Category</label>
+          </span>
+      </div>
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Category is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Title">Agency Title</label>
+        <input type="text" pInputText id="Title" name="title" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Title is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Address">Address</label>
+        <input type="text" pInputText id="Address" name="Address" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Address is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Office-Phone">Office Phone</label>
+        <input type="text" pInputText id="Office-Phone" name="Office-Phone" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Office Phone is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="FAX">FAX</label>
+        <input type="text" pInputText id="FAX" name="FAX" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">FAX is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Email">Email</label>
+        <input type="email" pInputText id="Email" name="Email" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Office Phone is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="URl">Website URL</label>
+        <input type="email" pInputText id="URL" name="URL" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Website URL is required.</small>
+      </div>
+
+      <div class="p-field">
+        <label for="Service">Service Contact</label>
+        <!-- <input type="email" pInputText id="URL" name="URL" [(ngModel)]="titleProp" required autofocus /> -->
+        <p-editor [(ngModel)]="titleProp" [style]="{'height':'250px'}" name='Service'></p-editor>
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Website URL is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Hours">Hours</label>
+        <input type="text" pInputText id="Hours" name="Hours" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Hours is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Boundaries">Boundaries</label>
+        <input type="text" pInputText id="Boundaries" name="Boundaries" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Boundaries is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Eligibility">Eligibility</label>
+        <input type="text" pInputText id="Eligibility" name="Eligibility" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Eligibility is required.</small>
+      </div>
+
+      <div class="p-field">
+        <label for="Services">Services</label>
+        <!-- <input type="email" pInputText id="URL" name="URL" [(ngModel)]="titleProp" required autofocus /> -->
+        <p-editor [(ngModel)]="titleProp" [style]="{'height':'250px'}" name='Services'></p-editor>
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Website URL is required.</small>
+      </div>
+
+      <div class="p-field">
+        <label for="Apply">How To Apply</label>
+        <!-- <input type="email" pInputText id="URL" name="URL" [(ngModel)]="titleProp" required autofocus /> -->
+        <p-editor [(ngModel)]="titleProp" [style]="{'height':'250px'}" name='Apply'></p-editor>
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Website URL is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Languages">Languages (Enter Languages Separate By Comma)</label>
+        <input type="text" pInputText id="Languages" name="Languages" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Languages is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Fees">Fees</label>
+        <input type="text" pInputText id="Fees" name="Fees" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Fees is required.</small>
+      </div>
+
+      <div class="p-field">
+        <label for="access">Physical access</label>
+        <!-- <input type="email" pInputText id="URL" name="URL" [(ngModel)]="titleProp" required autofocus /> -->
+        <p-editor [(ngModel)]="titleProp" [style]="{'height':'250px'}" name='access'></p-editor>
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Physical access is required.</small>
+      </div>
+
+      <div class="p-field">
+        <label for="Legal">Legal status</label>
+        <input type="text" pInputText id="Legal" name="Legal" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Fees is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Copyright">Listing Copyright Title</label>
+        <input type="text" pInputText id="Copyright" name="Copyright" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Fees is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Copyright_URL">Listing Copyright URL</label>
+        <input type="text" pInputText id="Copyright_URL" name="Copyright_URL" [(ngModel)]="titleProp" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Fees is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Status">Status</label>
+        <p-selectButton [options]="stateOptions" name="status" [(ngModel)]="statusProp" optionLabel="label" optionValue="value"></p-selectButton>
+        <small class="p-invalid" *ngIf="submitted && !statusProp">Status is required.</small>
+      </div>
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="submit()"></button>
+    </ng-template>
+  
+  </p-dialog>
+  
+  <!-- End of  Add New Banner Modal -->
+  
+  <!-- Start of Edit Banner Modal -->
+  <p-dialog header="Edit Agency" [(visible)]="editDialog" [style]="{width: '550px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+      <div class="p-field">
+        <label for="Title">Title</label>
+        <input type="text" pInputText id="Title" name="title" [(ngModel)]="products.title" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !products.title">Title is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="city">City</label>
+        <input type="text" pInputText id="city" name="city" [(ngModel)]="products.city" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">City is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="Title">Category</label>
+        <input type="category" pInputText id="category" name="category" [(ngModel)]="products.category" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !titleProp">Category is required.</small>
+      </div>
+  
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideEditDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="UpdateBanner()"></button>
+    </ng-template>
+  
+  </p-dialog>
+  
+  <!-- End of Edit Banner Modal -->
+  
+  <!-- Start of Show Banner Modal -->
+  <p-dialog header="Show Agency Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+      <div class="p-field">
+        <label for="Title">Title</label>
+        <input type="text" pInputText id="Title" name="title" [disabled]="products.title" [(ngModel)]="products.title" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !products.title">Title is required.</small>
+      </div>
+      
+      <div class="p-field">
+        <label for="Title">City</label>
+        <input type="text" pInputText id="city" name="city" [disabled]="products.city" [(ngModel)]="products.city" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !products.city">City is required.</small>
+      </div>
+  
+      <div class="p-field">
+        <label for="Title">Country</label>
+        <input type="text" pInputText id="country" name="country" [disabled]="products.country" [(ngModel)]="products.country" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !products.country">Country is required.</small>
+      </div>
+  
+      <div class="p-field">
+        <label for="Status">Status</label>
+        <input type="text" pInputText id="Status" required autofocus name="status" [disabled]="products.sequence" value="{{products.status | statuschange}}"/>
+        <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+      </div>
+    </ng-template>
+  
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times"
+        class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()"></button>
+    </ng-template>
+  
+  </p-dialog>
+  
+  <!-- End of Edit Banner Modal -->
+  
+  
+  
+  <!-- Confirm Dialog -->
+  
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+  
+  <!-- Message -->
+  
+  <p-toast></p-toast>
+
+
+  
+<div data-toggle="modal" data-target="#exampleModalCenter" id="click2">
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Write Cause/Reason For Reject this Agency's Details</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="disableAgency()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div data-toggle="modal" data-target="#exampleModalCenter1" id="click3">
+</div>
+
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center;">
+        <div class="p-inputgroup mt-3 mb-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-calendar"></i>
+          </span>
+          <span class="p-float-label">
+            <textarea inputId="float-input4" rows="2" pInputTextarea name="sports"
+            [(ngModel)]="cause"></textarea>
+            <label for="float-input4">Any Reason?</label>
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin: 0 auto;">
+        <button type="button" class="btn btn-primary" (click)="accessChangeHandler()">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close1">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

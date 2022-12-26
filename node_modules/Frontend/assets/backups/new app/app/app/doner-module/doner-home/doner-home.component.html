@@ -1,0 +1,60 @@
+<section class="d-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="graph-step-list delivery-step-list">
+                    <ul>
+                        <li>
+                            <a routerLink='/doner/stats/viewsInThisWeek'>
+                                <img src="../../../assets/images/manage-icon.png" alt="manage-icon">
+                                Manage Donation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="../../../assets/images/verified-icon.png" alt="verified-icon" routerLink='/verification'>
+                                Get verified
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="../../../assets/images/directory-icon.png" alt="directory-icon">
+                                Directory
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="javascript:void(0);">
+                                Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"> 
+                                Food Bank
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Verify Acount Start -->
+<section class="verify-account" *ngIf='session.verificationStatus != 2'>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="verify-des">
+                    <p>
+                        <img src="assets/images/verify-icon.png" alt="verify-icon">
+                        Verify your account to get more donations. <a routerLink='verification' *ngIf='session.verificationStatus == 0'>Get verified
+                            now!</a>
+                         <a routerLink='verification' *ngIf='session.verificationStatus == 1'>Verification is in process</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Verify Acount End -->
+

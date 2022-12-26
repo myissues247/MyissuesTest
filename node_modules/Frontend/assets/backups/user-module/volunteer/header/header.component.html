@@ -1,0 +1,75 @@
+<div class="container-fluid d-flex justify-content-end">
+    <div class="p-2 bd-highlight">
+            <a class="btn btn-outline-success" data-toggle="modal" data-target="#SignInModal"
+                    style="margin-bottom: 15px !important;" data-backdrop="false">Sign In</a>
+    </div>
+    <div class="p-2">Cart</div>
+    <div class="p-2 mr-5">E/f</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="SignInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sign In into Your Account</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                    <div class="p-inputgroup">
+                                                            <span class="p-inputgroup-addon">
+                                                                    <i class="pi pi-user"></i>
+                                                            </span>
+                                                            <span class="p-float-label">
+                                                                    <input id="float-input15" type="text" pInputText
+                                                                            name="Name" [(ngModel)]="mailProp">
+                                                                    <label for="float-input15">UserName</label>
+                                                            </span>
+                                                    </div>
+                                                    <small class="p-error" *ngIf="username">UserName is
+                                                            Required.</small>
+                                            </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                    <div class="p-inputgroup">
+                                                            <span class="p-inputgroup-addon">
+                                                                    <i class="pi pi-key"></i>
+                                                            </span>
+                                                            <span class="p-float-label">
+                                                                    <input id="float-input16" type="password"
+                                                                            pPassword name="last"
+                                                                            [(ngModel)]="passwordProp">
+                                                                    <label for="float-input16">Password</label>
+                                                            </span>
+                                                    </div>
+                                                    <small class="p-error" *ngIf="pass">Password is
+                                                            Required.</small>
+                                            </div>
+                                    </div>
+
+                            </div>
+                            <!-- <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                            <div class="form-group mt-4"> -->
+                                                    <p id="err" class="p-error" ></p>
+                                            <!-- </div>
+                                    </div>
+                            </div> -->
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    id="close">Close</button>
+                            <button type="button" class="btn btn-primary" (click)="SignIn()">Sign In</button>
+                    </div>
+            </div>
+    </div>
+</div>

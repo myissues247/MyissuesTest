@@ -1,0 +1,317 @@
+<section class="find_services">
+    <div class="container">
+       <div class="find_ser">
+          <h4>Find Services <a href="#" style="color: black;"><span>Search Tips</span></a></h4>
+          <br>
+          <form action="http://myissuesinc.ca/agencies-search" method="post" id="agency_form">
+             <div class="row">
+                <div class="col-md-4">
+                   <div class="serch_topic">
+                      <span>Select City <span style="color: #f00">*</span></span>
+                      <div class="form-group">
+                            <select class="form-control" name="city_id" [(ngModel)]='selectedCity'>
+                                <option value="" [selected]='!selectedCity'>--Please Select City--</option>
+                                <ng-container *ngFor='let set of cities'>
+                                    <ng-container *ngFor='let city of set'>
+                                        <option [value]="city.cityName">{{city.cityName}}</option>
+                                    </ng-container>
+                                </ng-container>                  
+                            </select>
+                        <!--  <span><input type="checkbox" class="custom-control-input" id="customCheck" name=""> Remember this location </span> -->
+                      </div>
+                   </div>
+                </div>
+                <div class="col-md-1">
+                   <div class="and">
+                      <h4>AND</h4>
+                   </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="postal_comm">
+                      <span>Select Category <span style="color: #f00">*</span></span>
+                      <div class="form-group">
+                            <select class="form-control" name="category_id" (change)='select_category($event)'>
+                              <option value="" [selected]='!selectedCategory'>--Please Select Category--</option>
+                              <ng-container *ngFor='let category of categories'>
+                                <option [value]="category._id">{{category.title}}</option>
+                              </ng-container>                         
+                            </select>
+                                   
+                      </div>
+                   </div>
+                </div>
+                <div class="col-md-3">
+                   <div class="gobtn">
+                      <input type="button" (click)='get_agencies()' name="submit" class="btn btn" value="GO" style="color: #337ab7;text-decoration: none;">  
+                   </div>
+                </div>
+             </div>
+          </form>
+       </div>
+    </div>
+ </section>
+ <section class="find_by_topic" id="section_agency_search_list">
+    <div class="container search_by_hed" *ngIf='agencies && agencies.length == 0'>
+       <p class='text-danger'>No agency found</p>
+    </div>
+     <div class="container search_by_hed" *ngIf='agencies && agencies.length >  0'>
+     <h4>Search Results</h4>
+     <div>
+        <p>Search Results</p>
+        <p>There are {{agencies.length}} results matching <b>{{agencies[0].categoryName}}</b> located in <b>{{selectedCity}}</b>.</p>
+        <p>This list below shows 1 to 1 of {{agencies.length}} records. The map only shows results where a physical address is available.</p>
+        <!-- <p>
+        <form>Show results:  <input type="radio" name="seaech" value="yes" checked="">
+           located in my community  <input type="radio" name="seaech" value=" no">
+           serving my community
+           </form></p> -->
+     
+     </div>
+     <div>
+        <div id="exTab2" class="container">
+           <ul class="nav nav-tabs">
+              <li (click)='tab=1'>
+                 <a class='mr-1' [class.active]='tab == 1'>List</a>
+              </li>
+              <li  (click)='tab=2'>
+                  <a [class.active]='tab == 2'>Map</a>
+              </li>
+           </ul>
+           <div class="tab-content ">
+              <div class="tab-pane" id="1" [class.active]='tab == 1'>
+                 <table class="table table-striped primary">
+                    <thead>
+                       <tr>
+                          <th></th>
+                          <th>Sort by Organization</th>
+                          <th>Sort by Community</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let agency of agencies'>
+                          <td>1</td>
+                          <td><a href="http://myissuesinc.ca/agency-details/test" target="_blank">{{agency.agencyTitle}}</a><br>{{agency.categoryName}}  | <a href="{{agency.websiteURL}}" target="_blank">Website</a></td>
+                          <td>{{agency.city}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+              <div class="tab-pane" id="2" [class.active]='tab == 2'>
+                 <div class="row">
+                    <div class="col-md-6">
+                       <table class="table table-striped primarynd">
+                          <thead>
+                          </thead>
+                          <tbody *ngIf='agencies'>
+                            <tr *ngFor='let agency of agencies; let i = index;'>
+                                <td class="map_number">{{ i }}</td>
+                                <td class="map_icon"><img src="http://myissuesinc.ca/assets/frontend/images/marker_a.png"></td>
+                                <td class="map_text"><a [routerLink]='["/agency", agency.agencyTitle]' target="_blank">{{agency.agencyTitle}}</a></td>
+                            </tr>
+                                                  </tbody>
+                       </table>
+                    </div>
+                   
+                    <div class="col-md-6">
+                       <div id="mapCanvas" style="position: relative; overflow: hidden;"><div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;"><div tabindex="0" aria-label="Map" aria-roledescription="map" role="group" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: pan-x pan-y;"><div style="z-index: 1; position: absolute; left: 50%; top: 50%; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"></div></div><div class="gm-style-pbc" style="z-index: 2; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;"><p class="gm-style-pbt"></p></div><div style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;"><div style="z-index: 4; position: absolute; left: 50%; top: 50%; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div></div><iframe aria-hidden="true" frameborder="0" tabindex="-1" style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe><div style="pointer-events: none; width: 100%; height: 100%; box-sizing: border-box; position: absolute; z-index: 1000002; opacity: 0; border: 2px solid rgb(26, 115, 232);"></div></div></div><div style="background-color: white; font-weight: 500; font-family: Roboto, sans-serif; padding: 15px 25px; box-sizing: border-box; top: 5px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 5px; left: 50%; max-width: 375px; position: absolute; transform: translateX(-50%); width: calc(100% - 10px); z-index: 1;"><div><img alt="" src="https://maps.gstatic.com/mapfiles/api-3/images/google_gray.svg" draggable="false" style="padding: 0px; margin: 0px; border: 0px; height: 17px; vertical-align: middle; width: 52px; user-select: none;"></div><div style="line-height: 20px; margin: 15px 0px;"><span style="color: rgba(0, 0, 0, 0.87); font-size: 14px;">This page can't load Google Maps correctly.</span></div><table style="width: 100%;"><tr><td style="line-height: 16px; vertical-align: middle;"><a href="https://developers.google.com/maps/documentation/javascript/error-messages?utm_source=maps_js&amp;utm_medium=degraded&amp;utm_campaign=keyless#api-key-and-billing-errors" target="_blank" rel="noopener" style="color: rgba(0, 0, 0, 0.54); font-size: 12px;">Do you own this website?</a></td><td style="text-align: right;"><button class="dismissButton">OK</button></td></tr></table></div></div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <style type="text/css">
+        #mapCanvas{
+        width: 100%;
+        height: 650px;
+        }
+     </style>
+     <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;callback=initMap"></script>
+     <script> 
+        function initMap() {
+            var map;
+            var bounds = new google.maps.LatLngBounds();
+            var mapOptions = {
+                mapTypeId: 'roadmap'
+            };
+                            
+            // Display a map on the web page
+            map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
+            map.setTilt(50);
+                
+            // Multiple markers location, latitude, and longitude
+            var markers = [
+                 ["test", , ],       ];
+                                
+            // Info window content
+            var infoWindowContent = [
+                                  ['<div class="info_content">' +
+                        '<h3>test</h3>' +
+                         '</div>'],
+                       ];
+                
+            // Add multiple markers to map
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+            
+            // Place each marker on the map  
+            for( i = 0; i < markers.length; i++ ) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0]
+                });
+                
+                // Add info window to marker    
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                    }
+                })(marker, i));
+        
+                // Center the map to fit all markers on the screen
+                map.fitBounds(bounds);
+            }
+        
+            // Set zoom level
+            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                this.setZoom(14);
+                google.maps.event.removeListener(boundsListener);
+            });
+            
+        }
+        
+        // Load initialize function
+        google.maps.event.addDomListener(window, 'load', initMap);
+     </script> -->
+     </div>
+ </section>
+ 
+<div class="col-12 col-md-11 col-lg-9 mx-auto">
+    <p-carousel [value]="sponsors" [autoplayInterval]="3000" [circular]="true" numVisible='{{sponsors.length < 4? sponsors.length : 4}}' numScroll='1' [responsiveOptions]='responsiveOptions'>
+        <ng-template pTemplate="header">
+           <div class="Whom_Heading Heading_Border text-center pb-6">
+               <h2>OUR SPONSORS</h2>
+           </div>
+        </ng-template>
+        <ng-template let-sponsor pTemplate="item">
+            <div class="logo border text-center"><img src='{{sponsor.imagePath | server}}' alt="{{sponsor.title}}" title="{{sponsor.title}}"/></div>
+        </ng-template>
+    </p-carousel>
+</div>
+ 
+
+<!--  
+
+     <option value="36">Milton</option>
+                                                       <option value="41">Calgary</option>
+                                                       <option value="42">Lethbridge</option>
+                                                       <option value="43">Medicine Hat</option>
+                                                       <option value="44">Airdrie</option>
+                                                       <option value="45">Banff/Canmore</option>
+                                                       <option value="57">Grande Prairie</option>
+                                                       <option value="58">Brampton</option>
+                                                       <option value="59">City of Toronto</option>
+                                                       <option value="60">Durham Region</option>
+                                                       <option value="61">Mississauga</option>
+                                                       <option value="62">Oakville</option>
+                                                       <option value="63">North York</option>
+                                                       <option value="65">Markham</option>
+                                                       <option value="66">Burlington</option>
+                                                       <option value="69">Newmarket</option>
+                                                       <option value="70">Milton</option>
+                                                       <option value="71">Oshawa</option>
+                                                       <option value="72">Brantford-Woodstock</option>
+                                                       <option value="75">London</option>
+                                                       <option value="80">Cambridge</option>
+                                                       <option value="81">Barrie</option>
+                                                       <option value="82">Belleville</option>
+                                                       <option value="94">Hamilton</option>
+                                                       <option value="95">Niagara Region</option>
+                                                       <option value="97">Vancouver</option>
+                                                       <option value="98">North Shore</option>
+                                                       <option value="99">Richmond</option>
+                                                       <option value="100">Burnaby/NewWest</option>
+                                                       <option value="102">Delta/Surrey/Langley</option>
+                                                       <option value="103">Tricities/Pitt/Maple</option>
+                                                       <option value="104">Fraser Valley</option>
+                                                       <option value="105">Whistler</option>
+                                                       <option value="106">White Rock</option>
+                                                       <option value="107">Victoria</option>
+                                                       <option value="108">Nanaimo</option>
+                                                       <option value="109">Comox Valley</option>
+                                                       <option value="110">Sunshine Coast</option>
+                                                       <option value="111">Kamloops</option>
+                                                       <option value="112">Kelowna</option>
+                                                       <option value="113">Kootenays</option>
+                                                       <option value="114">Cariboo</option>
+                                                       <option value="115">Penticton</option>
+                                                       <option value="116">Verno</option>
+                                                       <option value="117">Prince George</option>
+                                                       <option value="118">Peace River Country</option>
+                                                       <option value="119">Skeena-Bulkley</option>
+                                                       <option value="120">Fort St. John</option>
+                                                       <option value="121">Winnipeg</option>
+                                                       <option value="122">Brandon</option>
+                                                       <option value="123">Saint John</option>
+                                                       <option value="124">Moncton</option>
+                                                       <option value="125">Fredericton</option>
+                                                       <option value="126">Dieppe</option>
+                                                       <option value="127">Miramichi</option>
+                                                       <option value="128">NB - Other Areas</option>
+                                                       <option value="129">St. John's</option>
+                                                       <option value="130">Newfoundland - Other Areas</option>
+                                                       <option value="131">Labrador City</option>
+                                                       <option value="132">LAB - Other Areas</option>
+                                                       <option value="133">Goose Bay</option>
+                                                       <option value="134">Yellowknife</option>
+                                                       <option value="135">NWT - Other Areas</option>
+                                                       <option value="136">Halifax</option>
+                                                       <option value="137">Cape Breton - Sydney</option>
+                                                       <option value="138">Halifax - Other Areas</option>
+                                                       <option value="139">Truro</option>
+                                                       <option value="140">Iqaluit</option>
+                                                       <option value="141">Nunavut - Other Areas</option>
+                                                       <option value="142">Charlottetown</option>
+                                                       <option value="143">Summerside</option>
+                                                       <option value="144">PEI - Other Areas</option>
+                                                       <option value="145">Montreal</option>
+                                                       <option value="146">Quebec City</option>
+                                                       <option value="147">Saquenay</option>
+                                                       <option value="148">Sherbrooke</option>
+                                                       <option value="149"> Trois Rivieres</option>
+                                                       <option value="150">Laval</option>
+                                                       <option value="151">Drummondville</option>
+                                                       <option value="152">Granby</option>
+                                                       <option value="153">Regina</option>
+                                                       <option value="154">Moose Jaw</option>
+                                                       <option value="155">Swift Current</option>
+                                                       <option value="157">Estevan</option>
+                                                       <option value="158">Weyburn</option>
+                                                       <option value="159">Yorkton</option>
+                                                       <option value="160">Saskatoon</option>
+                                                       <option value="161">Prince Albert</option>
+                                                       <option value="162">North Battleford</option>
+                                                       <option value="163">Lloydminster</option>
+                                                       <option value="164">Whitehorse</option>
+                                                       <option value="165">Yukon - Other Areas</option>
+
+
+
+
+
+                                                       <option value="20">Social Services</option>
+                                                       <option value="21">Food Bank</option>
+                                                       <option value="22">Food Kitchens</option>
+                                                       <option value="23">Hostels</option>
+                                                       <option value="24">Shelters for women</option>
+                                                       <option value="25">Shelters for Men</option>
+                                                       <option value="26">YMCA</option>
+                                                       <option value="27">I.D Clinics</option>
+                                                       <option value="28">Free Medical</option>
+                                                       <option value="29">LGBTCommunities</option>
+                                                       <option value="30">Housing</option>
+                                                       <option value="31">Dispensaries</option>
+-->

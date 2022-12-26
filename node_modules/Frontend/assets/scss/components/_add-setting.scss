@@ -1,0 +1,346 @@
+@import url(../abstracts/_mixins.scss);
+
+
+
+.add-setting{
+    .bg-pink{background: #b367c9;}
+    .bg-gray{background: #4d493c;}
+    .bg-green{background: #76bd5d;}
+    .bg-blue{background: #59a8ea;}
+
+
+    &--card{
+        border-top: 1px solid #dbdcd7;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.09);
+
+        .card-header{
+            .icon{
+                width: 20px;
+                @media (min-width: 768px){
+                    width: 30px;
+                }
+            }
+            .card-header-title{
+                @include font-style(19px, 600, $color-white);
+                @media (min-width: 768px){
+                    font-size: 30px;
+                }
+                .badge{
+                    border-radius: 0;
+                    background: #fff296;
+                    @include font-style(13px, 500, #5e5f5b);
+                    @media (min-width: 768px){
+                        font-size: 20px;
+                    }
+                }
+            }
+            .card-header-sub-title{
+                @include font-style(13px, 400, $color-white);
+                @media (min-width: 768px){
+                    font-size: 20px;
+                }
+
+                strong{
+                    font-size: 14px;
+                    font-weight: 700;
+                    @media (min-width: 768px){
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+
+        .card-body{
+            .close-description{
+                @include font-style(12px, 400, #5e5f5b);
+                @media (min-width: 768px){
+                    font-size: 16px;
+                }
+
+                strong{
+                    font-size: 14px;
+                    @media (min-width: 768px){
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .add-setting-details-btn{
+                @include font-style(13px, 600, $color-white);
+                border-radius: 7px;
+                white-space: nowrap;
+                @media (min-width: 768px){
+                    font-size: 21px;
+                }
+            }
+        }
+
+        //############# main page start #############
+        &.main-page {
+            .day-select {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100px;
+                @include widget-box;
+                @media (min-width: 768px){
+                    min-height: 150px;
+                }
+
+                &.remove-btn{
+                    border-color: $color-cyan;
+                    border-top-width: 1px;
+                    border-bottom-width: 5px;
+                    box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.2);
+                }
+
+                i,
+                .day,
+                .price{
+                    @include font-style(16px, 600, #73726f);
+                    @media (min-width: 768px){
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+        //############# End of main page #############
+
+
+         //############# page-1 start #############
+         &.page-1{
+             .page-1-title{
+                @include font-style(14px, 500, #4d493c);
+                @media (min-width: 768px){
+                    font-size: 20px;
+                }
+             }
+             .item-select{
+                 padding: 10px 10px;
+                 border-radius: 5px;
+                 box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.13);
+                 display: grid;
+                 place-items: center;
+                 @include font-style(13px, 600, #898b83);
+                 @media (min-width: 768px){
+                     font-size: 20px;
+                     padding: 15px 20px;
+                 }
+
+                 &.active {
+                     color: $color-cyan;
+                 }
+             }
+         }
+        //############# End of page-1 #############
+
+
+
+        
+        //############# auto-repost start #############
+        &.auto-repost {
+            .top-heading {
+                @include font-style(14px, 500, #4d493c);
+                line-height: 19px;
+                background: rgba(#76bd5d, 0.2);
+                .text-green{
+                    color: #76bd5d;
+                    font-weight: 600;
+                }
+                @media (min-width: 768px){
+                    font-size: 20px;
+                }
+            }
+
+            .auto-repost-title{
+                @include font-style(14px, 600, #4d493c);
+                @media (min-width: 768px){
+                    font-size: 20px;
+                }
+            }
+
+            .how-many-time-box{
+                @include widget-box;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 30px 10px;
+                @media (min-width: 768px){
+                    padding: 40px 30px;
+                }
+
+                .time-repeated-title{
+                    @include font-style(18px, 700, #787978);
+                    @media (min-width: 768px){
+                        font-size: 30px;
+                    }
+                }
+
+                .price{
+                    @include font-style(12px, 600, #787978);
+                    @media (min-width: 768px){
+                        font-size: 18px;
+                    }
+
+                    .badge{
+                        background-color: #ee6253;
+                    }
+                }
+            }
+
+            .what-time-box{
+                @include widget-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0.5rem;
+                min-height: 40px;
+                white-space: nowrap;
+                @include font-style(14px, 600, #737574);
+                @media (min-width: 768px){
+                    font-size: 22px;
+                    min-height: 65px;
+                }
+
+                .delete-btn {
+                    color: #d0d2d0;
+                    padding-left: 5px;
+                    @media (min-width: 768px){
+                        padding-left: 15px;
+                    }
+                }
+            }
+
+            .card-footer{
+                background-color: $color-white;
+                border-top: 1px solid #dbdcd7;
+
+                .day-select-box{
+                    @include widget-box;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 0.5rem;
+                    min-height: 35px;
+                    white-space: nowrap;
+                    @include font-style(12px, 600, #737574);
+                    @media (min-width: 768px){
+                        font-size: 20px;
+                        min-height: 55px;
+                    }
+
+                    &.remove-btn{
+                        border-color: $color-cyan;
+                        border-top-width: 1px;
+                        border-bottom-width: 5px;
+                        box-shadow: 0px 0px 5.52px 0.48px rgba(0, 0, 0, 0.2);
+                    }
+                }
+
+                .auto-repost-summary{
+                    @include font-style(12px, 400, #525254);
+                    text-align: center;
+                    @media (min-width: 768px){
+                        font-size: 18px;
+                    }
+                    strong{
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+        //############# End of auto-repost #############
+
+
+
+         //############# bumps start #############
+         &.bumps {
+             .bumps-title{
+                @include font-style(14px, 600, #525254);
+                @media (min-width: 768px){
+                    font-size: 20px;
+                }
+             }
+
+             .table > :not(caption) > * > *{
+                @media (max-width: 767px){
+                    padding: 0.25rem;
+                }
+             }
+
+             .bump-item{
+                @include widget-box;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                white-space: nowrap;
+                min-height: 70px;
+                padding: 0.25em;
+                @media (min-width: 768px){
+                    min-height: 110px;
+                    padding: 0.0rem;
+                }
+
+                .bump-name{
+                    @include font-style(12px, 600, #525254);
+                    @media (min-width: 768px){
+                        font-size: 18px;
+                    }
+                }
+
+                .bump-price{
+                    @include font-style(10px, 400, #525254);
+                    @media (min-width: 768px){
+                        font-size: 16px;
+                    }
+                    del{
+                        @include font-style(7.5px, 400, #dad8d2);
+                        text-decoration: line-through;
+                        text-decoration-color: #ee6253;
+                        @media (min-width: 768px){
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                .offer-badge{
+                    @include font-style(7.5px, 600, $color-white);
+                    padding: 2px 10px;
+                    width: 90%;
+                    display: inline-block;
+                    margin: 0 auto ;
+                    background-color: #ee6253;
+                    @media (min-width: 768px){
+                        font-size: 12px;
+                        padding: 2px 30px;
+                    }
+                }
+
+                .delete-btn{
+                    @extend .bump-price;
+                    padding: 1rem;
+                }
+
+             }
+
+             .card-footer {
+                 background: #fff296;
+                 border-top: 1px solid #ecd63b;
+             }
+         }
+        //############# End of bumps #############
+
+    }
+}
+
+  

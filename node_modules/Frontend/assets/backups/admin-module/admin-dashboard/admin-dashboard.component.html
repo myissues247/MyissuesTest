@@ -1,0 +1,88 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+        <ng-template pTemplate="left">
+            <p-breadcrumb [model]="items"></p-breadcrumb>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+            <button pButton pRipple label="Edit" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                (click)="editProduct(product)"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="product" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+        dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true" styleClass="p-datatable-striped">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Admin Detail</h5>
+                <span class="p-input-icon-left">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><h5><strong> Total Balance</strong></h5></span>
+                        <input type="text" pInputText placeholder="Website" [disabled]="true" class="p-inputtext-lg">
+                    </div>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td style="width: 3rem">
+                </td>
+                <td><strong>FirstName</strong>
+                </td>
+                <td>{{product.firstname}}</td>
+            </tr>
+            <tr>
+                <td style="width: 3rem">
+                </td>
+                <td><strong>Lastname</strong>
+                </td>
+                <td>{{product.lastname}}</td>
+            </tr>
+            <tr>
+                <td style="width: 3rem">
+                </td>
+                <td><strong>Email</strong>
+                </td>
+                <td>{{product.email}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                We Can Write Something Here
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+
+
+<p-dialog header="Edit Admin" [(visible)]="productDialog" [style]="{width: '450px'}" styleClass="p-fluid"
+    [modal]="true">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="firstname">FirstName</label>
+            <input type="text" pInputText id="firstname" [(ngModel)]="newfirstname" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !products[0].firstname">Firstame is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="lastname">LastName</label>
+            <input type="text" pInputText id="lastname" [(ngModel)]="newlastname" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !products[0].lastname">Lastname is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="email">Email</label>
+            <input type="email" pInputText id="email" [(ngModel)]="newemail" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !products[0].email">Email is required.</small>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times"
+            class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check"
+            class="p-shadow-8 p-button-outlined p-button-raised p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+
+</p-dialog>

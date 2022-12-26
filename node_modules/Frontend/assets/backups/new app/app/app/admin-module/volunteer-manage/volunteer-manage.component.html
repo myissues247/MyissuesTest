@@ -1,0 +1,383 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+      <!-- <ng-template pTemplate="right">
+        <button pButton pRipple label="Add New" icon="pi pi-plus" class="p-button-success p-mr-1"
+          (click)="newProduct()"></button>
+      </ng-template> -->
+    </p-toolbar>
+  
+    <p-table #dt [value]="post" [rows]="20" [paginator]="true" [totalRecords]='totalVolunteers'
+      [globalFilterFields]="['firstname','lastname','email','status','sequence']" [(selection)]="selectedProducts"
+      [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 30]"
+      styleClass="p-datatable-gridlines p-datatable-responsive-demo p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Volunteer</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (keyup)="search($event)"
+              placeholder="Search..." class="btn-max" autocapitalize="off"/>
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>First Name
+          </th>
+          <th>Last Name</th> 
+          <th>Email ID
+          </th>
+          <th>Mob No.
+        </th>
+        <th style="width: 4rem;">View</th>
+          <th style="width: 14rem;text-align: center;">Actions
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td> <span class="p-column-title">Volunteer Id</span>
+            {{product._id}}
+          </td>
+          <td> <span class="p-column-title">First Name</span>
+            {{product.firstname}}
+          </td>
+          <td> <span class="p-column-title">Last Name</span>
+            {{product.lastname}}
+          </td>
+          <td> <span class="p-column-title">Email ID</span>
+            {{product.email}}
+          </td>
+          <td> <span class="p-column-title">Mob No.</span>
+            {{product.contact}}
+          </td>
+          <!-- <td> <span class="p-column-title">Status</span>
+            <input type="hidden" value="{{product._id}}" #idInput name="id"><input type="hidden" value="{{product.description}}" #descInput name="description">
+            <button pButton pRipple type="button" [disabled]="product.status==true" label="Active" class="p-button-raised p-button-success" (click)="enable(idInput.value)"></button>
+            <button pButton pRipple type="button" [disabled]="product.status==false" label="Deactive" class="p-button-raised p-button-danger" (click)="disable(idInput.value)"></button>
+          </td> -->
+          <td>  <span class="p-column-title">View</span>
+             
+              <!-- <button pButton pRipple icon="fa fa-eye" class="p-button-rounded p-button-info p-text-center" (click)="showProduct(product)">
+              </button> -->
+              <button class="btn btn-primary rounded-circle text-center" (click)="showProduct(product)"><i class="fa fa-eye"></i></button>
+              <!-- <button class="btn btn-warning rounded-circle text-center" (click)="showEditProduct(product)"><i class="fa fa-eye"></i></button> -->
+              <!-- <button class="btn btn-danger rounded-circle text-center ml-1"><i class="fa fa-trash-o"></i></button> -->
+          </td>
+          <td>  <span class="p-column-title">Actions</span>
+            <input type="hidden" value="{{product._id}}" #idInput name="id">
+            <input type="hidden" value="{{product.description}}" #descInput name="description">
+
+            <button pButton pRipple type="button" [disabled]="product.approved==2" label="Approved" class="p-button-raised p-button-success" (click)="enable(idInput.value)"></button>
+
+            <button pButton pRipple type="button" [disabled]="product.approved==1" label="Rejected" class="p-button-raised p-button-danger" (click)="disable(idInput.value)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{ totalVolunteers }} Volunteer.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+   <!-- Start of Show Banner Modal -->
+<p-dialog header="Show Volunteer Detail" [(visible)]="showDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+
+  <div class='form-group'>
+    <label for="id">Volunteer Id</label>
+    <input type="text" class='form-control' id="id" name="id" disabled value="{{products._id}}" required autofocus />
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.firstname">firstname is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="firstname">First Name</label>
+    <input type="text" class='form-control' id="firstname" name="firstname" disabled value="{{products.firstname}}" required autofocus />
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.firstname">firstname is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="lastname">Last Name</label>
+    <input type="text" class='form-control' id="lastname" required autofocus name="lastname" disabled value="{{products.lastname}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.lastname">Lastname is required.</small> -->
+  </div>
+
+  <div class='form-group'>
+    <label for="contact">Contact</label>
+    <input type="text" class='form-control' id="contact" required autofocus name="contact" disabled value="{{products.contact}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.contact">contact is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="email">Email</label>
+    <input type="email" class='form-control' id="email" required autofocus name="email" disabled value="{{products.email}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.email">email is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="city">City</label>
+    <input type="city" class='form-control' id="city" required autofocus name="city" disabled value="{{products.city}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.city">City is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="message">Message</label>
+    <input type="text" class='form-control' id="message" required autofocus name="message" disabled value="{{products.message}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="helpIn">Help In</label>
+    <textarea type="text" class='form-control' id="helpIn" required autofocus name="helpIn" disabled value="{{products.helpIn}}" rows='3'></textarea>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="days">days</label>
+    <input type="text" class='form-control' id="days" required autofocus name="days" [disabled]="products.days" [(ngModel)]="products.days"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small> -->
+  </div>
+  <div class='form-group'>
+    <label for="time">Time</label>
+    <input type="text" id="time" class='form-control' required autofocus name="time" disabled value="{{products.time}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small> -->
+  </div>
+
+  <div class='form-group'>
+    <label for="createdOn">RequestedOn</label>
+    <input type="text" class='form-control' id="createdOn" required autofocus name="createdOn" disabled value="{{products.createdOn | date:'medium'}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small> -->
+  </div>
+
+  <div class='form-group'>
+    <label for="approvedOn">Approved On</label>
+    <input type="text" class='form-control' id="approvedOn" required autofocus name="approvedOn" disabled value="{{products.approvedOn | date:'medium'}}"/>
+    <!-- <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small> -->
+  </div>
+
+  <!-- <div class="p-field">
+    <label for="Status">Status</label>
+    <input type="text" pInputText id="Status" required autofocus name="status" [disabled]="products.email" value="{{products.status | statuschange}}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+  </div> -->
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()" [disabled]='submitting'></button>
+</ng-template>
+
+</p-dialog>
+
+   <!-- Start of Show Banner Modal -->
+<p-dialog header="Edit Volunteer" [(visible)]="showEditDialog" [style]="{width: '600px'}" styleClass="p-fluid"
+[modal]="true">
+<ng-template pTemplate="content">
+  <form class="form-input" id="volunteer_now_form" #volunteer='ngForm' (ngSubmit)='submit_volunteer(volunteer)'>
+  <div class='form-group'>
+    <label for="firstname">First Name</label>
+    <input type="text" class='form-control' id="firstname" name="firstname" [(ngModel)]="products.firstname" required autofocus />
+    <small class="p-invalid" *ngIf="submitted && !products.firstname">firstname is required.</small>
+  </div>
+  <div class='form-group'>
+    <label for="lastname">Last Name</label>
+    <input type="text" class='form-control' id="lastname" required autofocus name="lastname" [(ngModel)]="products.lastname"/>
+    <small class="p-invalid" *ngIf="submitted && !products.lastname">Lastname is required.</small>
+  </div>
+
+  <div class='form-group'>
+    <label for="contact">Contact</label>
+    <input type="text" class='form-control' id="contact" required autofocus name="contact" [(ngModel)]="products.contact"/>
+    <small class="p-invalid" *ngIf="submitted && !products.contact">contact is required.</small>
+  </div>
+  <div class='form-group'>
+    <label for="email">Email</label>
+    <input type="email" class='form-control' id="email" required autofocus name="email" [(ngModel)]="products.email"/>
+    <small class="p-invalid" *ngIf="submitted && !products.email">email is required.</small>
+  </div>
+  <div class='form-group'>
+    <label for="city">City</label>
+    <input type="city" class='form-control' id="city" required autofocus name="city" [(ngModel)]="products.city"/>
+    <small class="p-invalid" *ngIf="submitted && !products.city">City is required.</small>
+  </div>
+  <div class='form-group'>
+    <label for="message">Message</label>
+    <input type="text" class='form-control' id="message" required autofocus name="message" [(ngModel)]="products.message"/>
+    <small class="p-invalid" *ngIf="submitted && !products.message">email is required.</small>
+  </div>
+  <h2 class="form-head">How would you like to help?</h2>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Sign up people in your community that need help
+              <input type="checkbox"  name="like_to_help[]" value="Sign up people in your community that need help" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+              <span class="checkmark" [class.checked]='helpInPreset[0]'></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Assitant in the food bank 
+              <input type="checkbox"  name="like_to_help[]" value="Assitant in the food bank" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+              <span class="checkmark" [class.checked]='helpInPreset[1]'></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Flyer distribution in your community
+              <input type="checkbox"  name="like_to_help[]" value="Flyer distribution in your community" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+              <span class="checkmark" [class.checked]='helpInPreset[2]'></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Delivery drivers on Crew chief drivers
+              <input type="checkbox"  name="like_to_help[]" value="Delivery drivers on Crew chief drivers" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+              <span class="checkmark" [class.checked]='helpInPreset[3]'></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Volunteering in any capacity that's needed
+              <input type="checkbox" name="like_to_help[]" value="Volunteering in any capacity that's needed" #likeToHelp='ngModel' ngModel required (click)="helpControl($event)">
+              <span class="checkmark"  [class.checked]="helpInPreset[4]"></span>
+          </label>
+          <div class="errors" *ngIf='submitted && products.helpIn?.length < 1'>
+              <span class="error">Please select atleast one option</span>
+          </div>
+      </div>
+  </div>
+  
+
+  <h2 class="form-head">What days work best for your schedule?</h2>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Monday
+              <input type="checkbox" name="days_your_schedule" value="monday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.monday"></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Tuesday
+              <input type="checkbox" name="days_your_schedule"  value="tuesday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.tuesday"></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Wednesday {{products.days.wednesday}}
+              <input type="checkbox" name="days_your_schedule"  value="wednesday"  required ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.wednesday"></span>
+          </label>
+      </div>  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Thursday
+              <input type="checkbox" name="days_your_schedule"   value="thursday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.thursday"></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Friday
+              <input type="checkbox" name="days_your_schedule"  value="friday" #days='ngModel' required ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.friday"></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Saturday
+              <input type="checkbox" name="days_your_schedule"  value="saturday" #days='ngModel' ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.saturday"></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="city-checkbx-list">
+          <label class="city-radio">
+              Sunday
+              <input type="checkbox" name="days_your_schedule"  value="sunday" #days='ngModel' ngModel (click)='daysControl($event)'>
+              <span class="checkmark" [class.checked]="products.days.sunday"></span>
+          </label>  
+      <div class="errors" *ngIf='submitted && !daysCount'>
+        <span class="error">Please select atleast one option</span>
+      </div>
+    </div>
+  </div>
+  <h2 class="form-head">What of day works best for your schedule?</h2>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Morning
+              <input type="checkbox"  name="time_your_schedule[]" value="morning" #time='ngModel' required ngModel (click)='timeControl($event)'>
+              <span class="checkmark" [class.checked]='products.time.morning'></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Afternoon
+              <input type="checkbox"  name="time_your_schedule[]" value="afternoon" #time='ngModel' required ngModel (click)='timeControl($event)'>
+              <span class="checkmark" [class.checked]="products.time.afternoon" ></span>
+          </label>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="city-checkbx-list">
+          <label class="city-radio">
+              Evening
+              <input type="checkbox"  name="time_your_schedule[]"  value="evening" #time='ngModel' required ngModel (click)='timeControl($event)'>
+              <span class="checkmark"  [class.checked]="products.time.evening"></span>
+          </label>
+          <div class="errors" *ngIf='submitted && !timeCount'>
+              <span class="error">Please select atleast one option</span>
+          </div>
+      </div>
+  </div>
+  <!-- <div class="p-field">
+    <label for="Status">Status</label>
+    <input type="text" pInputText id="Status" required autofocus name="status" [disabled]="products.email" value="{{products.status | statuschange}}"/>
+    <small class="p-invalid" *ngIf="submitted && !products.status">Status is required.</small>
+  </div> -->
+  </form>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <button pButton pRipple label="Cancel" icon="pi pi-times"
+    class="p-shadow-8 p-button-outlined p-button-raised p-button-text p-button-danger" (click)="hideshowDialog()" [disabled]='submitting'></button>
+</ng-template>
+
+</p-dialog>
+
+<!-- End of Edit Banner Modal -->
+
+
+
+<!-- Confirm Dialog -->
+
+<p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<!-- Message -->
+
+<p-toast></p-toast>

@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[89],{UaS6:function(n,o,t){"use strict";t.r(o),t.d(o,"AdlistModule",(function(){return s}));var e=t("ofXK"),i=t("H116"),r=t("qxW0"),u=t("fXoL");let s=(()=>{class n{}return n.\u0275mod=u.Ib({type:n}),n.\u0275inj=u.Hb({factory:function(o){return new(o||n)},imports:[[e.b,i.AdlistRoutingModule,r.a]]}),n})()}}]);

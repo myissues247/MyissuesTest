@@ -1,0 +1,49 @@
+@import url(../abstracts/_mixins.scss);
+
+.business-advertising {
+    background: url(../images/Sponsor-Logo/Map.png) no-repeat center center/cover;
+    text-align: center;
+    padding: 60px 0;
+    @media (min-width: 768px){
+        padding-top: 120px;
+    }
+
+    &--title {
+        @include font-style(55px, 600, $color-cyan);
+        padding-bottom: 60px;
+        @media (max-width: 767px){
+            white-space: pre-line;
+           font-size: 36px;
+           line-height: 36px;
+        }
+    }
+
+    .sponsor-logo-tab {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        grid-gap: 20px;
+    }
+    .sponsor-logo-mobile {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        grid-gap: 30px;
+    }
+
+    a {
+        @include font-style(24px, 600, $color-black);
+        display: inline-block;
+        border-bottom: 1px solid $color-black;
+        padding-top: 60px;
+        @media (min-width: 768px){
+            font-size: 30px;
+        }
+
+        i {
+            padding-left: 5px;
+        }
+    }
+}

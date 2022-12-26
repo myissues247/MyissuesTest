@@ -1,0 +1,243 @@
+<section>
+    <div class="card p-shadow-1" style="width: 100%;min-height: 100px;margin: 0 auto;">
+        <div class="row mt-2" style="width: 100%;height: 90%;margin: 0 auto;">
+            <div class="col-sm-12 col-md-2 ml-2 mb-2  image">
+                <img src="{{(ad && ad.identityImages && ad.identityImages.length > 0)? (ad.identityImages[0] | server) : 'assets/images/home-pic.jpg'}}" class="img-fluid center mt-1 p-shadow-5" alt=""
+                    style="margin: 0 auto;">
+            </div>
+
+            <div class="col-sm-12 col-md-9 ml-2">
+                <div class="row mt-1 ml-1">
+                    <h3 style="color: #528294;text-transform: capitalize;">Hello {{ ad.adTitle }}</h3>
+                </div>
+                <div class="row ml-1">
+                    <h5 style="color: #a3a3a3;">{{ ad.categoryName + "-" + ad.city }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section [class.submitting]='submitting'> 
+    <div class="card p-shadow-1 mt-3" style="width: 100%;min-height: 100px;margin: 0 auto;">
+        <div class="alert alert-warning upgrade-card mt-2 ml-2" role="alert" style="width: 80%;background: #fdb933;">
+            <div class="row">
+                <div class="col-sm-12 col-md-2" style="display: flex;justify-content: center;align-items: center;">
+                    <h3><a href="" style="color: #017285 !important;font-size: 24px;font-weight: bold;">TIP</a></h3>
+                </div>
+                <div class="col-sm-12 col-md-10">
+                    <p><strong> Paid for features:</strong> money for ads will be deducted from your account at a later
+                        point in time if you choose to use these features.<br><br>
+
+                        By using this features it will help increase your chances of more people viewing your profile
+                        issues..</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="card upgrade-card p-shadow-1 mt-2 ml-2 mb-2" style="width: 80%;" *ngFor='let plan of adPlans; let i= index'>
+            <div class="card-header" style="background: #b367c9;">
+                <div class="row">
+                    <div class="col-1 mr-1" style="display:flex;justify-self: center;align-items:center;">
+                        <img src="../../../../assets/images/upgrade-1.png" class="center" alt="" style="width: 30px;">
+                    </div>
+                    <div class="col-10">
+                        <h2 style="font-weight: 800;color:white;">{{ plan.planName }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Do you want maximum for your ad ?</strong>Your ad will be displayed in our
+                    highest visiblit Featured Ad format in the panhandlers category of Greater Toronto Area.
+                </p>
+                <a class="btn btn-purple" *ngIf="plan._id != planId && !showPlan" (click)="upgrade()">Upgrade to {{plan.planName}} &nbsp;&nbsp;<i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="card-body"  [class.hide]="showPlan == false && plan._id != planId ">
+                <div class="card-deck row">
+                    <ng-container *ngFor='let category of plan.categories'>
+                        <div class="card deck col-sm-12 col-md-3" [class.active]='categoryId == category._id' (click)='select_plan(plan._id, category)'>
+                            <a class="deck-link"> 
+                                <div class="card-body">
+                                    <div class="row">
+                                        <p class="card-text" *ngIf='category.inDays'>{{category.days}} days</p>
+                                        <p class="card-text" *ngIf='category.inHours'>{{category.hours}} hours</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="card-text">{{category.priceType}}{{category.price}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div> 
+                    </ng-container>
+
+                    <div class="card deck col-sm-12 col-md-3">
+                        <a class="deck-link " (click)="cancelPlan()">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h1 class="card-text"><i class="fa fa-close"></i></h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div> -->
+        <div class="card upgrade-card p-shadow-1 mt-2 ml-2 mb-2" style="width: 80%;">
+            <div class="card-header" style="background: #b367c9;">
+                <div class="row">
+                    <div class="col-1 mr-1" style="display:flex;justify-self: center;align-items:center;">
+                        <img src="../../../../assets/images/upgrade-1.png" class="center" alt="" style="width: 30px;">
+                    </div>
+                    <div class="col-10">
+                        <h2 style="font-weight: 800;color:white;">Buy BumpUps</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Do you want maximum for your ad ?</strong>Your ad will be displayed in our
+                    highest visiblit Featured Ad format in the panhandlers category of Greater Toronto Area.
+                </p>
+                <a class="btn btn-purple" (click)='showBumps = !showBumps'>Buy Bump Ups &nbsp;&nbsp;<i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="card-body"  [class.hide]='showBumps == false'>
+                <div class="card-deck row">
+                    <ng-container *ngFor='let bump of bumps'>
+                        <div class="card deck col-sm-12 col-md-3" (click)='showPaymentOptions(bump)'>
+                            <a class="deck-link"> 
+                                <div class="card-body">
+                                    <div class="row">
+                                        <p class="card-text">{{bump.count}} bumps</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="card-text">$ {{bump.price}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-container>
+
+                    <div class="card deck col-sm-12 col-md-3">
+                        <a class="deck-link " (click)="showBumps = false">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h1 class="card-text"><i class="fa fa-close"></i></h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class="p-grid p-nogutter p-justify-end page-buttons row justify-content-between px-2">
+                <button pButton type="button" icon="pi pi-angle-left" iconPos="left" label='Previous'
+                    class='p-button-info' (click)='prevPage()'></button>
+                <button pButton type="button" icon="pi pi-angle-right" iconPos="right" label='Next'
+                    class='p-button-info' (click)='nextPage()'></button>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+<a #paymentOption style='visibility: hidden' href="javascript:void(0)" data-toggle="modal" data-target="#reportModal" class="btn btn-report">
+</a>
+
+	<!-- Payment Option Modal Start -->
+	<div class="modal fade" id="reportModal" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header cancer-patient">
+                  <h3 class="cancer-head pl-3">Payment Options</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" #optionClose (click)='close_modal()'>
+                        <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="login-form">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <form>
+                                <h3><small>Pay using card or account balance.</small></h3>
+                                 <button class="btn btn-success w-100 text-center py-2 my-1 font-xl" (click)='showConfirm = true'><h4><i class='pi pi-dollar'></i> <small>Current Balance: ${{balance.toFixed(2)}}</small></h4></button>
+                                 <button class="btn btn-primary w-100 text-center py-2 my-1 font-xl" (click)='buyBumps()'><h4><i class='pi pi-payment'></i> <small>Pay With Card</small></h4> </button>
+
+                                 <div class="form-group mt-2" *ngIf='showConfirm'>
+                                     <p class='text-danger'>You will be charge ${{selectedBump.price}} for {{selectedBump.count}} bumps from your balance.</p>
+                                     <button class='btn btn-danger px-3 mr-1' (click)='close_modal()'>Cancel</button>
+                                     <button class='btn btn-warning text-center px-3' (click)='buyBumpWithBalance()'>Pay</button>
+                                 </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <!-- Payment Option Modal End -->
+
+
+
+
+  <a #paymentStatus style='visibility: hidden' href="javascript:void(0)" data-toggle="modal" data-target="#paymentStatus" class="btn btn-report">
+</a>
+
+	<!-- Payment Option Modal Start -->
+	<div class="modal fade" id="paymentStatus" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header cancer-patient">
+                  <h3 class="cancer-head pl-3">Payment Status</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" #optionClose>
+                        <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="login-form">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <form>
+                                 <h2 class='text-center text-dark'><small>Bumps Purchased</small></h2>
+
+                                 <table class='table my-2'>
+                                     <tr>
+                                         <td class='color'>Transaction Id</td>
+                                         <td>{{transactionDetails.transactionId}}</td>
+                                     </tr>
+                                     <tr >
+                                         <td class='color'>Bumps Count</td>
+                                         <td>{{transactionDetails.count}}</td>
+                                     </tr>
+                                     <tr>
+                                         <td class='color'>Bump Price</td>
+                                         <td>{{transactionDetails.price}}</td>
+                                     </tr>
+                                     <tr>
+                                         <td class='color'>Date</td>
+                                         <td>{{transactionDetails.date | date:"medium"}}</td>
+                                     </tr>
+                                     <tr>
+                                         <td></td>
+                                         <td></td>
+                                     </tr>
+                                 </table>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <!-- Payment Option Modal End -->

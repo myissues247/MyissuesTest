@@ -1,0 +1,161 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+        <ng-template pTemplate="left">
+            <p-breadcrumb [model]="items"></p-breadcrumb>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Edit" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                (click)="OpenEditSiteDialog()" [disabled]="DisableEditButton"></button>
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-danger p-mr-1"
+                (click)="hideDialog()" *ngIf="HideCancelButton"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+        dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true" styleClass="p-datatable-striped">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Site Details</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td><strong>Contact No.</strong>
+                </td>
+                <td>
+                    <input type="text"  id="contact" name="contact" [disabled]="HideInput"
+                        [(ngModel)]="product.contactNo" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Email</strong>
+                </td>
+                <td>
+                    <input type="email" id="email" name="email" [disabled]="HideInput"
+                        [(ngModel)]="product.email" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Address</strong>
+                </td>
+                <td>
+                    <input type="text" id="location" name="location" [disabled]="HideInput"
+                        [(ngModel)]="product.location" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>office Timing</strong>
+                </td>
+                <td>
+                    <input type="text" id="officeTiming" name="officeTiming" [disabled]="HideInput"
+                        [(ngModel)]="product.officeTiming" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <!-- <td style="width: 3rem">
+                </td> -->
+                <td><strong>Copyright</strong>
+                </td>
+                <td>
+                    <input type="text" id="copyright" name="copyright" [disabled]="HideInput"
+                        [(ngModel)]="product.copyright" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <!-- <td style="width: 3rem">
+                </td> -->
+                <td><strong>About Us</strong>
+                </td>
+                <td>
+                    <input type="text" id="aboutUs" name="aboutUs" [disabled]="HideInput"
+                        [(ngModel)]="product.aboutUs" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Facebook</strong>
+                </td>
+                <td>
+                    <input type="url" id="facebook" name="facebook" [disabled]="HideInput"
+                        [(ngModel)]="product.facebook" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Twitter</strong>
+                </td>
+                <td>
+                    <input type="url" id="twitter" name="twitter" [disabled]="HideInput"
+                        [(ngModel)]="product.twitter" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Instagram</strong>
+                </td>
+                <td>
+                    <input type="url" pInputText id="instagram" name="instagram" [disabled]="HideInput"
+                        [(ngModel)]="product.instagram" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Google Plus</strong>
+                </td>
+                <td>
+                    <input type="url"  id="googlePlus" name="googlePlus" [disabled]="HideInput"
+                        [(ngModel)]="product.googlePlus" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Before Footer Content</strong>
+                </td>
+                <td>
+                    <input type="text"  id="accreditations" name="accreditations" [disabled]="HideInput"
+                        [(ngModel)]="product.accreditations" required autofocus class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Logo</strong>
+                </td>
+                <td>
+                    <img src="{{imagepath}}{{product.imagePath}}" [alt]="product.imagePath" width="120"
+                        class="p-shadow-4" *ngIf="HideLogo" />
+                    <p-fileUpload name="demo[]" (onSelect)="selectimage($event.files)" accept="image/*"
+                        maxFileSize="1000000" [showUploadButton]="false" name="image[]" *ngIf="HideFileInput">
+                        <ng-template let-file pTemplate="file">
+                            <div class="ui-fileupload-row " style="vertical-align: middle;">
+                                <div><span class="p-mr-1">{{file.name}}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-fileUpload>
+                </td>
+            </tr>
+            <tr>
+
+                <td><strong>Video</strong>
+                </td>
+                <td>
+                    <div id="ytubevid" *ngIf="HideLogo">
+                        <iframe width="90%" height="215" [src]="mesg" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <input type="text" pInputText id="youtubeVideo" name="youtubeVideo" [disabled]="HideInput"
+                        [(ngModel)]="product.youtubeVideo" required autofocus class="tdinput" *ngIf="HideFileInput"
+                        placeholder="Only paste embed src" />
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-text-right mb-1">
+                <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                    (click)="updateSite(siteDetail)" *ngIf="HideCancelButton"></button>
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<!-- Message -->
+
+<p-toast></p-toast>

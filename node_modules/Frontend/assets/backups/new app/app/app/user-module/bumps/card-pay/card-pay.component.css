@@ -1,0 +1,16 @@
+@import '../../donations/card/card.component.css';
+
+.card-body {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+body {
+    padding: 0px;
+}
+
+.error {
+    color: red !important;
+}

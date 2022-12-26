@@ -1,0 +1,78 @@
+@import url(../abstracts/_mixins.scss);
+
+.footer {
+    background: $color-white url(../images/footer-BG.png) no-repeat bottom center/cover;
+    padding-top: 40px;
+    @media(max-width: 767px){
+        background: $color-white url(../images/footer-BG-mobile.png) no-repeat bottom center/cover;
+    }
+
+    .footer-description {
+        @include font-style(18px, 300, $color-black);
+        line-height: 30px;
+        margin: 40px 0;
+        @media(min-width: 768px){
+            font-size: 25px;
+            line-height: 35px;
+        }
+    }
+    .link-heading {
+        @include font-style(22px, 600, $color-black);
+        border-bottom: 1px solid $color-black;
+        display: inline-block;
+        margin-bottom: 20px;
+        @media(min-width: 768px){
+            font-size: 35px;
+        }
+    }
+    ul {
+        margin-bottom: 30px;
+        .footer-link {
+            @include font-style(18px, 300, $color-black);
+            margin: 5px 0;
+            display: inline-block;
+            &:hover {
+                opacity: .8;
+            }
+            @media(min-width: 768px){
+                font-size: 30px;
+                margin: 10px 0;
+            }
+        }
+        &.pink {
+            .footer-link {
+                color: $color-pink;
+                i {
+                    padding-right: 10px;
+                }
+            }
+        }
+        &.cyan {
+            .footer-link {
+                color: $color-cyan;
+                i {
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+   
+    .btn.outline-info {
+        @include font-style(18px, 500, $color-cyan);
+        border: 1px solid $color-cyan;
+        border-radius: 25px;
+        @media(max-width: 767px){
+            width: 100%;
+        }
+    }
+
+    .copyright {
+        @include font-style(22px, 300, $color-black);
+        text-align: center;
+        background: rgba(#006f85, 0.07);
+        padding: 30px 0 20px 0;
+        @media(max-width: 767px){
+            background: rgba(#006f85, 0.14);
+        }
+    }
+}

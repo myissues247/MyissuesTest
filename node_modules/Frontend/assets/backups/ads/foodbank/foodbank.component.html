@@ -1,0 +1,629 @@
+	<!-- Region Greater Start -->
+	<section class="region-greater ad-online-new-sec">
+		<div class="container-fluid">
+			<form>
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group" >
+							<button type="button" class="select-wrap form-control btn-dropdown" (click)='showRegion= !showRegion'>
+								Region : <span id="region_name">{{ selectedStateName }}</span>
+							</button>
+							<div class="cust-dropdown" [class.show]='showRegion'>
+								<div id="accordion">
+									<div class="card" *ngFor='let country of countries'>
+										<div class="card-header capitalize" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">
+											{{country.countryName}}
+										</div>
+										<div id="collapse0" class="collapse" data-parent="#accordion">
+											<ng-container *ngFor='let state of country.states'>
+												<div class="card-body" (click)='change_state(country._id, state.stateName)'>
+													<a class="drop-link capitalize" href="javascript:void(0)">{{state.stateName}}	</a>
+												</div>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="select-wrap">
+								<select class="form-control">
+									<option>
+										Region Greater Toronto A...
+									</option>
+									<option>
+										Region Greater Toronto A...
+									</option>
+									<option>
+										Region Greater Toronto A...
+									</option>
+								</select>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+							<div class="dropdown">
+								<button id="dLabel" class="form-control select-wrap btn-category" type="button"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Category: <span id="catval" class='capitalize'>{{selectedCategory}}</span>
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dLabel">
+									<ng-container *ngFor='let category of categories'>
+										<a class='capitalize' href="javascript:void(0);" (click)='change_category(category.title)'>
+											<img src="{{category.imagePath | server}}" style="width: 35px; height: 35px; border-radius: 50%">
+											{{category.title}}
+										</a>
+									</ng-container>
+                                </div>
+							</div>
+							<!-- <div class="select-wrap">
+								<select class="form-control">
+									<option>
+										Category
+									</option>
+									<option>
+										Category
+									</option>
+									<option>
+										Category
+									</option>
+								</select>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+							<i class="fa fa-search"></i>
+							<input type="text" name="looking" id="loking_for_ad_title" class="form-control looking-text"
+								placeholder="Who are you looking for?" (keyup)="search($event)">
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<ul class="grid-list">
+							<li [class.active]='layout == "list"' id="list" (click)="layout='list'">
+								<a>
+									<i class="fa fa-bars" aria-hidden="true"></i>
+									List
+								</a>
+							</li>
+							<li [class.active]='layout == "grid"' id="grid" (click)="layout = 'grid'">
+								<a>
+									<i class="fa fa-th-large" aria-hidden="true"></i>
+									Grid
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-12">
+						<button class="btn btn-transfer">
+							<img src="assets/images/transfer-1.png" alt="transfer">
+						</button>
+					</div>
+					<div class="col-md-6 offset-md-6">
+						<div class="cust-nav">
+							<button class="btn btn-nav mr-1">
+								<i class="fa fa-angle-left"></i> Prev
+							</button>
+							<button class="btn btn-nav">
+								Next <i class="fa fa-angle-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<!-- Region Greater End -->
+
+	<!-- Panhandlers Start -->
+	<section class="pan-handlers new-pan-online">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="browse-room-grid" [style.display]='layout=="grid"? "block" : "none"'>
+						<div class="row">
+							<div class="col-md-4" *ngFor='let ad of ads; let i = index'>
+								<label>{{ad.approvedOn | date:"medium"}}</label>
+								<div class="browse-room" (click)='open_ad(i)' data-toggle="modal" data-target="#detailModal" data-dismiss="modal">
+									<img 
+									src="{{(ad.identityImages?.length > 0)? (ad.identityImages[0] | server) : defaultImage}}" 
+									alt="Images"
+									>
+									<div class="browse-des">
+										<h5>
+											{{ad.adTitle}}
+										</h5>
+										<p>
+											— {{ad.agencyTitle || ad.sponsorTitle || ad.firstName}}
+										</p>
+										<span>
+											{{ad.city}}
+										</span>
+									</div>
+									<div class="browse-icons">
+										<a href="javascript:void(0);">
+											<img src="assets/images/room-1.png" alt="Icons">
+										</a>
+										<a href="javascript:void(0);">
+											<img src="assets/images/room-2.png" alt="Icons">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="browse-room-list"  [style.display]='layout=="list"? "block" : "none"'>
+						<div class="panl-list-sec select-video-ad-list favorites-tab-list create-ad-list">
+							<ul class="cancer-des ad-online-new">
+                                <li>
+                                	<span class="new-badge">New</span>
+                                    <img src="assets/images/online_img.png" alt="Images">
+                                </li>
+                                <li>
+                                    <div class="cancer-des">
+                                        Priority Services
+                                        <span class="new-online-badge">
+                                        	<img src="assets/images/covid19.png" alt="Images">
+                                        	Covid-19 Priority!
+                                        </span>
+                                        <p>
+                                            COVID-19 Safe Online Services
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                	<img src="assets/images/online_arrow.png" class="arrow-img" alt="Images">
+                                </li>
+                            </ul>
+                        </div>
+                        <label>Food Bank</label>
+						<div class="ad-new-online-list"  *ngFor='let ad of ads; let i = index'>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="ad-new-img">
+										<img 
+                                        src="{{(ad.identityImages?.length > 0)? (ad.identityImages[0] | server) : defaultImage}}" 
+										alt="Images">
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="ad-new-des">
+										<h2 (click)='open_ad(i)' data-toggle="modal" data-target="#detailModal" data-dismiss="modal">
+											{{ad.adTitle}}
+										</h2>
+                                        <p [innerHtml]='ad.description'></p>
+										<h5>
+											<a href="#">{{ad.receiverId}}</a>
+											-{{ad.firstName || ad.sponsorTitle || ad.agencyTitle}}- {{ad.city}}
+										</h5>
+										<label class="city-checkbox">
+											<input type="checkbox" name="adToCart" (click)='ad_to_donation_cart($event, ad._id, ad.amount)'>
+											<span class="checkmark"></span>
+										</label>
+										<div class="food-donate">
+											<h4>Food Donated <span>${{ad.amount - ad.amountReceived}}</span></h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-md-12 text-right" [style.display]='layout=="list"? "block" : "none"'>
+								<h1>
+									Total Amount ${{totalToDonate}}
+								</h1>
+								<div class="btn btn-donate px-5 py-2 hover-bg-transparent" (click)='donate_ads()'>Donate Selected</div>
+							</div>
+						</div>
+					</div>
+					<div class="cust-nav">
+						<button class="btn btn-nav mr-1">
+							<i class="fa fa-angle-left"></i>Prev
+						</button>
+						<button class="btn btn-nav">
+							Next <i class="fa fa-angle-right"></i>
+						</button>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="city-list" style="min-height:200px">
+						<h2 class="city-head">
+							Priority Services
+							<span class="new-badge">New</span>
+						</h2>
+						<div class="city-checkbx-list">
+							<label class="city-checkbox">
+								Any
+								<input type="radio" checked="checked" name="radio">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="city-checkbx-list">
+							<label class="city-checkbox">
+								Seniors
+								<span class="new-online-badge">
+                                	<img src="assets/images/covid19.png" alt="Images">
+                                	Covid-19 Priority
+                                </span>
+								<input type="radio" checked="checked" name="radio">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="city-checkbx-list">
+							<label class="city-checkbox">
+								Single Parent
+								<span class="new-online-badge">
+                                	<img src="assets/images/covid19.png" alt="Images">
+                                	Covid-19 Priority
+                                </span>
+								<input type="radio" checked="checked" name="radio">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="city-checkbx-list">
+							<label class="city-checkbox">
+								Homeless People
+								<span class="new-online-badge">
+                                	<img src="assets/images/covid19.png" alt="Images">
+                                	Covid-19 Priority
+                                </span>
+								<input type="radio" checked="checked" name="radio">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div class="city-list">
+						<h2 class="city-head">Cities</h2>
+						<div class="city-checkbx-list">
+							<label class="city-checkbox">
+								All
+								<input type="radio" name="cityname" checked="checked" value="-1"
+									onclick="getAllCause()">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="city-checkbx-list" *ngFor='let city of cities'>
+							<label class="city-checkbox capitalize">
+								{{city.cityName}}
+								<input type="radio" name="cityname" value="-1"
+									(click)="change_city(city.stateName, city.cityName)">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div class="online-new-img">
+						<img src="assets/images/online_img_1.jpeg" alt="Images">
+						<img src="assets/images/online_img_2.jpeg" alt="Images">
+						<img src="assets/images/online_img_3.jpeg" alt="Images">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Panhandlers End -->
+	
+	
+    
+        <!-- Back to top Start -->
+        <div class="back-top">
+            <a href="javascript:void(0);" class="btn-back-top btn-take">
+                Take Cover! <span class="badge">esc</span>
+            </a>
+            <a href="javascript:void(0);" class="btn-back-top">
+                <i class="fa fa-arrow-up"></i>Back to top
+            </a>
+        </div>
+        <!-- Back to top End -->
+
+	<!-- Login Modal Start -->
+	<div class="modal fade" id="loginModal" aria-labelledby="loginModal" aria-hidden="true">
+  		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Login</h2>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="login-form">
+						<div class="row">
+							<div class="col-md-12">
+								<form>
+									<div class="form-group">
+										<label class="form-label">Username or E-mail</label>
+										<input class="form-control" type="text" name="username" placeholder="User Name">
+									</div>
+									<div class="form-group">
+										<label class="form-label">Password</label>
+										<input class="form-control" type="password" name="password" placeholder="Password">
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="city-checkbx-list">
+													<label class="city-checkbox">
+														Donner
+														<input type="radio" checked="checked" name="radio">
+														<span class="checkmark"></span>
+													</label>
+												</div>
+											</div>	
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="city-checkbx-list">
+													<label class="city-checkbox">
+														Reciever
+														<input type="radio" name="radio">
+														<span class="checkmark"></span>
+													</label>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Login" class="btn btn-login">
+									</div>
+									<a href="javascript:void(0);" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" class="register"> New to MyIssues? SignUp</a>
+									<a href="javascript:void(0);" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal" class="register link-forgot">Forgot your password?</a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Login Modal End -->
+
+	<!-- Register Modal Start -->
+	<div class="modal fade" id="registerModal">
+  		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Register</h2>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="login-form">
+						<div class="row">
+							<div class="col-md-12">
+								<form>
+									<div class="form-group">
+										<label class="form-label">User Name</label>
+										<input class="form-control" type="text" name="username" placeholder="User Name">
+									</div>
+									<div class="form-group">
+										<label class="form-label">First Name</label>
+										<input class="form-control" type="text" name="firstname" placeholder="First Name">
+									</div>
+									<div class="form-group">
+										<label class="form-label">Last Name</label>
+										<input class="form-control" type="text" name="lastname" placeholder="Last Name">
+									</div>
+									<div class="form-group">
+										<label class="form-label">E-mail Address</label>
+										<input class="form-control" type="email" name="email" placeholder="E-mail Address">
+									</div>
+									<div class="form-group">
+										<label class="form-label">Password</label>
+										<input class="form-control" type="password" name="password" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<label class="form-label">Confirm Password</label>
+										<input class="form-control" type="password" name="cpassword" placeholder="Confirm Password">
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="city-checkbx-list">
+													<label class="city-checkbox">
+														Donner
+														<input type="radio" checked="checked" name="radio">
+														<span class="checkmark"></span>
+													</label>
+												</div>
+											</div>	
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="city-checkbx-list">
+													<label class="city-checkbox">
+														Reciever
+														<input type="radio" name="radio">
+														<span class="checkmark"></span>
+													</label>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Register" class="btn btn-login">
+									</div>
+									<a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" class="register">Existing User? Login</a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Register Modal End -->
+
+	<!-- Forgot Password Modal Start -->
+	<div class="modal fade" id="forgotModal">
+  		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Forgot Password</h2>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="login-form">
+						<div class="row">
+							<div class="col-md-12">
+								<form>
+									<div class="form-group">
+										<label class="form-label">Enter your register email address</label>
+										<input class="form-control" type="email" name="email" placeholder="Email Address">
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Submit" class="btn btn-login">
+									</div>
+									<a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" class="register">Have an Account? Login</a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	<!-- Forgot Password Modal End -->
+
+	<!-- Model Detail Modal Start -->
+	<div class="modal fade" id="detailModal" aria-labelledby="detailModal" aria-hidden="true">
+  		<div class="modal-dialog modal-lg" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header cancer-patient">
+	        		<h2 class="cancer-head">Campaign Organizer Details</h2>
+	        		<p>
+	        		2062610 | FoodBank. Toronto, ON | ID. 98928
+	        		</p>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close" #donateModalClose>
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		<div class="modal-body">
+        			<div class="detail-model-des text-center">
+        				<div class="row">
+        					<!-- <div class="col-md-12">
+		        				<h2 class="cancer-head">
+		        					Warning!!!
+		        				</h2>
+		        				<p>
+		        					If anyone ask you to deposit upfront money by Gift Car, Cash App, Venmo, Zelle App, Bitcoin or by any other way. Don’t make ant deposit. They can be scammers, They will take your money and will never respond your messages. If someone ask you to come to any oether website out of myissues.io and ask you to signup with your credit or debit card, don’t do that as well because they can also store your Card Details to make unauthorized payments. Try to stay away from such scammers. myissues won’t be responsible for ant fraud if you ignore this warning.
+		        				</p>
+		        			</div> -->
+		        			<div class="col-md-12">
+		        				<div class="model-img">
+		        					<img 
+                                    src="{{openedAd?.identityImages?.length > 0? (openedAd.identityImages[0] | server) : defaultImage}}" alt="Images">
+		        				</div>
+		        			</div> 
+		        			<div class="col-md-12">
+		        				<div class="model-about">
+		        					<h3>
+		        						About: {{ openedAd?.firstName || openedAd?.agencyTitle || openedAd?.sponsorTitle}}
+		        					</h3>
+		        					<p [innerHtml]='openedAd?.description'></p>
+		        				</div>
+		        			</div>
+		        			<div class="col-md-6">
+		        				<div class="model-about">
+		        					<h3>
+		        						Info 
+		        					</h3>
+		        					<p>
+		        						<span>Location</span>
+		        						{{openedAd?.city}}
+		        					</p>
+		        					<p>
+		        						<span>Household</span>
+		        						{{openedAd?.householdMembers?.numAdults ? openedAd.householdMembers.numAdults + ' adults' : ''}}
+										{{openedAd?.householdMembers?.numChildren ? openedAd?.householdMembers?.numChildren + ' children' : ''}}
+										{{openedAd?.householdMembers?.numSeniors ? openedAd?.householdMembers?.numSeniors + ' senior citizens': ''}}
+		        					</p>
+		        				</div>
+		        			</div>
+		        			<div class="col-md-6">
+		        				<div class="model-about">
+		        					<h3>
+		        						Your Donation
+		        					</h3>
+		        					<p>
+		        						<span>Amount</span>
+		        						${{openedAd?.amount - openedAd?.amountReceived}} 
+		        					</p>
+		        					<input 
+									type="number"
+									name='donationAmount' 
+									placeholder="Enter Your Amount" 
+									class="form-control" 
+									[(ngModel)]='amountEntered'
+									>
+		        				</div>
+		        			</div>
+		        			
+		        			<div class="col-md-12">
+		        				<div class="cancer-des modal-cancer-des">
+									<ul>
+										<li>
+		        							<div class="modal-btn-list">
+							        			<a (click)='donate_single()'>Donate Now</a>
+							        			<a href="javascript:void(0)">Share</a>
+							        		</div> 
+		        						</li>
+										<li>
+											<span class="btn-heart tooltipclassic tooltipclassic-effect-1" style='display:none'>
+												<span class="tooltipclassic-item">
+													<i class="fa fa-heart checkfstatus favorite "></i>
+												</span>
+												<span class="spanmessage">
+													<span class="tooltipclassic-content smufntooltip clearfix">
+														<span class="tooltipclassic-text">
+															<i class="fa fa-info-circle"></i>
+															Remove from favorites?
+															<br>
+															<button class="btn btn-yes bg-remove custbtnremove">
+																Yes,Remove
+															</button>
+															<button class="btn btn-yes custbtncancel">
+																No,Cancel
+															</button>
+														</span>
+													</span>
+													<span class="tooltipclassic-content smfntooltip clearfix">
+														<span class="tooltipclassic-text">
+															Ad was successfully added to favorites						
+														</span>
+													</span>
+													<span class="tooltipclassic-content ufntooltip clearfix">
+														<span class="tooltipclassic-text">
+															Remove								
+														</span>
+													</span>
+													<span class="tooltipclassic-content fntooltip clearfix">
+														<span class="tooltipclassic-text">	
+														
+														Click to add this Ad to favorites				
+														</span>
+													</span>
+												</span>
+											</span>
+										</li>
+										
+										<li>
+										    <a href="#" data-toggle="tooltip" title="This person is a volunteer">
+										        <img src="assets/images/user.png" alt="Profile">
+										    </a>
+										</li>
+										<li>  
+										</li>
+									</ul>
+								</div>
+				        	</div>
+		        		</div>
+        			</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+

@@ -1,0 +1,286 @@
+// Tooltip Js Start
+
+jQuery(".btn-bump").click(function () {
+    jQuery(".btn-bump .tooltipclassic-content").toggleClass('bump-content');
+    jQuery(".btn-heart .tooltipclassic-content").removeClass('heart-content');
+    jQuery(".btn-del .tooltipclassic-content").removeClass('del-content');
+});
+
+jQuery(document).on('click', '.checkfstatus', function () {
+    jQuery(".tooltipclassic-content").removeClass('heart-content');
+    if (jQuery(".btn-heart .tooltipclassic-item i").hasClass("favorite")) {
+        jQuery(".checkfstatus").addClass("unfavorite");
+        jQuery(".checkfstatus").removeClass("favorite");
+
+        /* Add ajax call here */
+        jQuery(".btn-heart .smfntooltip").toggleClass('heart-content');
+    } else {
+        jQuery(".checkfstatus").addClass("favorite");
+        jQuery(".checkfstatus").removeClass("unfavorite");
+        jQuery(".btn-heart .smufntooltip").toggleClass('heart-content');
+    }
+});
+
+jQuery(document).on('click', '.custbtnremove', function () {
+    jQuery(".btn-heart .fa-heart").removeClass("unfavorite");
+    jQuery(".btn-heart .fa-heart").addClass("favorite");
+    jQuery(".tooltipclassic-content").removeClass('heart-content');
+    /* Ajax call */
+
+});
+
+// Cancel favorite 
+jQuery(document).on('click', '.custbtncancel', function () {
+    jQuery(this).prev(".smufntooltip").removeClass('heart-content');
+    jQuery(this).prev(".tooltipclassic-content").removeClass('heart-content');
+
+    /* jQuery(".smufntooltip").removeClass('heart-content');    
+     jQuery(".tooltipclassic-content").removeClass('heart-content'); 
+     */
+});
+
+
+jQuery(document).on('mouseover', '.btn-heart', function () {
+    if (jQuery(".btn-heart .tooltipclassic-item i").hasClass("favorite")) {
+        jQuery(".btn-heart .fntooltip").toggleClass('heart-content');
+    } else {
+        if (jQuery(".smufntooltip").hasClass("heart-content")) {
+        } else {
+            jQuery(".btn-heart .ufntooltip").toggleClass('heart-content');
+        }
+    }
+});
+
+jQuery(document).on('mouseleave', '.btn-heart', function () {
+    jQuery(".smfntooltip").removeClass('heart-content');
+    jQuery(".ufntooltip").removeClass('heart-content');
+    jQuery(".fntooltip").removeClass('heart-content');
+});
+
+
+jQuery(".btn-del").click(function () {
+    jQuery(".btn-del").toggleClass('btn-hove-del');
+    jQuery(".btn-del .tooltipclassic-content").toggleClass('del-content');
+    jQuery(".btn-heart .tooltipclassic-content").removeClass('heart-content');
+    jQuery(".btn-bump .tooltipclassic-content").removeClass('bump-content');
+});
+
+/* New Favorite */
+jQuery(document).on('mouseover', '.custbtn-heart', function () {
+    var attr_id = $(this).attr('attr_id');
+    if (jQuery(this).find("i").hasClass("favorite")) {
+        jQuery(this).find(".fntooltip"+attr_id).toggleClass('heart-content');
+    } else {
+        if (jQuery(this).find(".smufntooltip"+attr_id).hasClass("heart-content")) {
+        } else {
+            jQuery(this).find(".ufntooltip"+attr_id).toggleClass('heart-content');
+        }
+    }
+});
+
+jQuery(document).on('mouseleave', '.custbtn-heart', function () {
+    var attr_id = $(this).attr('attr_id');
+    jQuery(".smfntooltip"+attr_id).removeClass('heart-content');
+    jQuery(".ufntooltip"+attr_id).removeClass('heart-content');
+    jQuery(".fntooltip"+attr_id).removeClass('heart-content');
+});
+
+jQuery(document).on('click', '.custcheckfstatus', function () {
+    var attr_id = $(this).attr('attr_id');
+    jQuery(".tooltipclassic-content").removeClass('heart-content');
+    if (jQuery(this).hasClass("favorite")) {
+        jQuery(this).addClass("unfavorite");
+        jQuery(this).removeClass("favorite");
+        /* Add ajax call here */
+        jQuery(".smfntooltip"+attr_id).toggleClass('heart-content');
+    } else {
+        jQuery(this).addClass("favorite");
+        jQuery(this).removeClass("unfavorite");
+        jQuery(".smufntooltip"+attr_id).toggleClass('heart-content');
+    }
+});
+
+jQuery(document).on('click', '.custbtnremove', function () {
+    var attr_id = $(this).attr('attr_id');
+    jQuery(".custcheckfstatus"+attr_id).removeClass("unfavorite");
+    jQuery(".custcheckfstatus"+attr_id).addClass("favorite");
+    jQuery(".tooltipclassic-content").removeClass('heart-content');
+    /* Ajax call */    
+    $('.showfvrt'+attr_id).hide( "slow" );
+//    jQuery('.showfvrt'+attr_id).html('');
+    setTimeout(function(){ jQuery('.showfvrt'+attr_id).html(''); }, 1000);
+});
+
+// Cancel favorite 
+jQuery(document).on('click', '.custbtncancel', function () {
+    var attr_id = $(this).attr('attr_id');
+    jQuery(".smufntooltip"+attr_id).removeClass('heart-content');    
+    jQuery(".tooltipclassic-content").removeClass('heart-content'); 
+     
+});
+
+// Tooltip Js End
+
+// List active Js Start
+
+jQuery('.grid-list li').on('click', function (e) {
+    e.preventDefault();
+    jQuery('.grid-list li.active').removeClass('active');
+    jQuery(this).addClass('active');
+});
+
+// List active Js End
+
+// Hide-Unhide Alert Msg Start
+
+jQuery(document).ready(function () {
+    jQuery('.alert-yellow').css('opacity', '1');
+    setTimeout(function () {
+        jQuery('.alert-yellow').css('opacity', '0');
+    }, 3000);
+});
+
+jQuery('.btn-hide').on('click', function (e) {
+    var proid = jQuery(this).attr('proid');
+    var mainclass = '.ad' + proid;
+    jQuery(mainclass + ' .alert-success').css('opacity', '1');
+    if (jQuery(this).hasClass('btn-unhide')) {
+        jQuery(mainclass + ' .btn-hide').removeClass('btn-unhide');
+        jQuery(mainclass + ' .btn-hide').html('<i class="fa fa-eye-slash"></i> Unhide');
+        jQuery(mainclass + ' .ad-pro-img').removeClass('hide-post');
+        jQuery(mainclass + ' .alert-success').removeClass('alert-yellow-1');
+        jQuery(mainclass + ' .alert-success').html('<i class="fa fa-eye-slash" aria-hidden="true"></i> Your ad is now hidden');
+
+    } else {
+        jQuery(mainclass + ' .btn-hide').addClass('btn-unhide');
+        jQuery(mainclass + ' .btn-hide').html('<i class="fa fa-eye"></i> Hide');
+        jQuery(mainclass + ' .ad-pro-img').addClass('hide-post');
+        jQuery(mainclass + ' .alert-success').addClass('alert-yellow-1');
+        jQuery(mainclass + ' .alert-success').html('<i class="fa fa-eye" aria-hidden="true"></i> Your ad is now visible');
+    }
+
+    setTimeout(function () {
+        jQuery(mainclass + ' .alert-success').css('opacity', '0');
+    }, 6000);
+    jQuery('.unhide-post').toggleClass('hide-post');
+    jQuery('.btn-hide').toggleClass('btn-unhide');
+    jQuery(".btn-hide").html('<i class="fa fa-eye-slash"></i> Unhide');
+    jQuery(".btn-unhide").html('<i class="fa fa-eye"></i> Hide');
+    jQuery('.alert-success').css('opacity', '1');
+
+    jQuery('.alert-success').toggleClass('alert-yellow-1');
+
+    jQuery(".alert-success").html('<i class="fa fa-eye-slash" aria-hidden="true"></i> Your ad is now hidden');
+
+    jQuery(".alert-success.alert-yellow-1").html('<i class="fa fa-eye" aria-hidden="true"></i> Your ad is now visible');
+
+    setTimeout(function () {
+        jQuery('.alert-success').css('opacity', '0');
+    }, 6000);
+});
+
+
+// Hide-Unhide Alert Msg End
+
+// File Upload with filename Start
+
+jQuery('.cust-file-upload').change(function () {
+    var i = jQuery(this).prev('label').clone();
+    var file = jQuery('.cust-file-upload')[0].files[0].name;
+    jQuery(this).prev('label').text(file);
+});
+
+// File Upload with filename End
+
+// File Upload width img preview Start
+
+jQuery(function () {
+    var imagesPreview = function (input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    jQuery($.parseHTML('<span></span><img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    jQuery('#gallery-photo-add').on('change', function () {
+        imagesPreview(this, 'div.gallery-img');
+    });
+});
+
+// File Upload width img preview End
+
+// Copy Link Start
+
+document.getElementById("copyButton").addEventListener("click", function () {
+    copyToClipboard(document.getElementById("copyTarget"));
+});
+
+function copyToClipboard(elem) {
+    // create hidden text element, if it doesn't already exist
+    var targetId = "_hiddenCopyText_";
+    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+    var origSelectionStart, origSelectionEnd;
+    if (isInput) {
+        // can just use the original source element for the selection and copy
+        target = elem;
+        origSelectionStart = elem.selectionStart;
+        origSelectionEnd = elem.selectionEnd;
+    } else {
+        // must use a temporary form element for the selection and copy
+        target = document.getElementById(targetId);
+        if (!target) {
+            var target = document.createElement("textarea");
+            target.style.position = "absolute";
+            target.style.left = "-9999px";
+            target.style.top = "0";
+            target.id = targetId;
+            document.body.appendChild(target);
+        }
+        target.textContent = elem.textContent;
+    }
+    // select the content
+    var currentFocus = document.activeElement;
+    target.focus();
+    target.setSelectionRange(0, target.value.length);
+
+    // copy the selection
+    var succeed;
+    try {
+        succeed = document.execCommand("copy");
+    } catch (e) {
+        succeed = false;
+    }
+    // restore original focus
+    if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+    }
+
+    if (isInput) {
+        // restore prior selection
+        elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+    } else {
+        // clear temporary content
+        target.textContent = "";
+    }
+    return succeed;
+}
+
+jQuery(".btn-copy").click(function () {
+    jQuery(".copy-msg").css('opacity', '1');
+    setTimeout(function () {
+        jQuery(".copy-msg").css('opacity', '0');
+    }, 2000);
+});
+
+// Copy Link End

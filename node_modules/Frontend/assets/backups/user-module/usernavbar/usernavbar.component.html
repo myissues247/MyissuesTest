@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; height: 100px;">
+    <img src="{{logo}}" width="120" height="60" class="d-inline-block align-top" id='logo' alt="">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active pr-5">
+              <a class="nav-link" href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html?utm_campaign=not-applicable&utm_medium=vanity-url&utm_source=canada-ca_coronavirus" style="color: #cf261f !important; background-color: transparent;cursor: pointer;font-weight: 650;font-size: large;">
+                <img src="../../../assets/images/corona.png" alt="" class="mr-3 image">
+                COVID-19 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5" *ngIf='session._id'>
+              <a class="nav-link " routerLink="/" style="color: rgba(0,0,0,.5) !important;font-size: larger;font-weight: 650;">Balance $ {{(session.balance).toFixed(2)}} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pr-5" id='notifications' *ngIf='session._id'>
+              <a class="nav-link" (click)='showNotification = !showNotification'>
+                <img src="../../../assets/images/speaker.png" alt="" width="40px"></a>
+                <div class="upArrow" *ngIf='showNotification'></div>
+                <div class="notifs"  *ngIf='showNotification'>
+                  <app-notifications [db]='db'></app-notifications>
+                </div>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="nav-link" routerLink="/foodbank">
+               <span style="color: #8d0b77 !important;"> <i class="fa fa-heart fa-2x" aria-hidden="true"></i></span>
+             </a>
+            </li>
+            <li class="nav-item pr-5">
+              <a class="nav-link clickable" routerLink="/receiver" (click)='login()' >
+                <span style="color: #8d0b77 !important;"> <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i></span>
+            </a>
+            </li>
+
+            <li class="nav-item pr-3" *ngIf='!session._id' (click)='signUp()'>
+              <a class='nav-link' style='cursor: pointer;'>
+                <span style="font-size:x-large;font-weight: 700;"> Sign Up</span>
+              </a>
+            </li>
+
+            <li class="nav-item pr-5" *ngIf='!session._id' (click)='login()'>
+              <a class='nav-link' style='cursor: pointer;'>
+                <span style="font-size:x-large;font-weight: 700;" > Login</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown" *ngIf='session._id'>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span style="font-size:x-large;font-weight: 700;" *ngIf='session.type == "receiver" || session.type == "doner" '> {{session.firstname + " " + session.lastname}}</span>
+                <span style="font-size:x-large;font-weight: 700;" *ngIf='session.type == "agency"'> {{session.agencyTitle}}</span>
+                <span style="font-size:x-large;font-weight: 700;" *ngIf='session.type == "sponsor"'> {{session.sponsorTitle}}</span>
+              </a>
+              <div class="dropdown-menu" id='profile-drop'>
+                <a class="dropdown-item" (click)='account()'>My Account</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink='withdraw' *ngIf='session?.type == "receiver"'>Withdraw Request</a>
+                <div class="dropdown-divider" *ngIf='session?.type == "receiver"'></div>
+                <a class="dropdown-item" (click)='logout()'>Logout</a>
+              </div>
+            </li>
+        </ul>
+      </form>
+    </div>
+  </nav>
+
+
+
+  

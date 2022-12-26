@@ -1,0 +1,28 @@
+.btn.btn-outline-success:hover,
+.btn.btn-outline-success:focus,
+.btn.btn-outline-success:active,
+.btn.btn-outline-success.active {
+  color:white;
+  background-color:#962179;
+  /* border-color: pink; */
+}
+.btn.btn-outline-success{
+    border: 1px solid #962179;
+    color: #962179;;
+}
+
+.nav-link:hover,
+.nav-link:focus
+{
+    color: white !important;
+    background-color:#962179;
+}
+.nav-link{
+    font-weight:500;
+    color: #962179 !important;
+}
+
+p-dropdown {
+    min-width: 100%  !important;
+    overflow: visible !important;
+}

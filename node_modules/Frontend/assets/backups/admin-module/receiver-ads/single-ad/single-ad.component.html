@@ -1,0 +1,473 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-1">
+      <ng-template pTemplate="left">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </ng-template>
+  
+    </p-toolbar>
+  
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-user"></i>
+                <span>User Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">User Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>First Name</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.firstname ? product.firstname : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last Name</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.lastname ? product.lastname : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.email ? product.email : ''}}
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td><strong>Category Name</strong>
+                            </td>
+                            <td>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td><strong>Contact No.</strong>
+                            </td>
+                            <td>
+                                {{product.contact ? product.contact : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>DOB</strong>
+                            </td>
+                            <td>
+                                {{product.dob | date: 'dd/MM/yyyy hh:mm'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Age</strong>
+                            </td>
+                            <td>
+                                {{product.age ? product.age : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong>
+                            </td>
+                            <td>
+                                {{product.address ? product.address : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>City</strong>
+                            </td>
+                            <td>
+                                {{product.city}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zip Code</strong>
+                            </td>
+                            <td>
+                                {{product.zipCode ? product.zipCode: '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created On</strong>
+                            </td>
+                            <td>
+                                {{product.createdOn | date: 'dd/MM/yyyy hh:mm'}}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>User Images</strong>
+                            </td>
+                            <td>
+                                <div style="display: flex;">
+                                    <div class="image" *ngFor='let identityImage of product.identityImages'>
+                                        <a href="{{identityImage | server }}" target='_blank'>
+                                            <img src="{{identityImage | server }}" alt="User's identity Image" style='width: 100px; height: 100px; margin: 5px;'>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Identity Proof</strong>
+                            </td>
+                            <td>
+                            <div style="display: flex;">
+                                <p *ngIf='product.identityProof?.mimetype == "application/pdf"'>
+                                  <a href="{{ product.identityProof.filepath | server }}" target='_blank'>Identity Proof Doc</a>
+                                </p>
+                                <a href="{{product.identityProof.filepath | server}}" target='_blank' style='margin: 0px 2px' *ngIf='product.identityProof?.mimetype != "application/pdf"'>
+                                  <img src="{{ product.identityProof.filepath | server }}" alt="Identity Image" style='width: 80px; height: 80px;'>
+                                </a>
+                            </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id)" *ngIf="product.status==2"></button>
+                                <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="disable(product._id)" *ngIf="product.status==2"></button>
+                                <p *ngIf='product.status == 1'>Approved</p>
+                                <p *ngIf='product.status == 0'>Rejected</p>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="" ></button>
+                        </div>
+                    </ng-template>  -->
+                </p-table>
+            </div>
+            
+            
+           
+            
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-credit-card"></i>
+                <span>Neighbour Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Neighbour Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>First Neighbour Name</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.neighbours1 ? product.neighbours1.name : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Neighbour Contact No.</strong>
+                            </td>
+                            <td>
+                               
+                                {{product.neighbours1 ? product.neighbours1.contact : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Neighbour Extension</strong>
+                            </td>
+                            <td>
+                               
+                                {{product.neighbours1 ? product.neighbours1.extension : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Neighbour Organization Name</strong>
+                            </td>
+                            <td>
+                                {{product.neighbours1 ? product.neighbours1.organization : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>First Neighbour Occupation</strong>
+                            </td>
+                            <td>
+                                {{product.neighbours1 ? product.neighbours1.occupation : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Neighbour Name</strong>
+                            </td>
+                            <td>
+                              
+                                {{product.neighbours1 ? product.neighbours2.name : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Neighbour Contact No.</strong>
+                            </td>
+                            <td>
+                               
+                                {{product.neighbours2 ? product.neighbours2.contact : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Neighbour Extension</strong>
+                            </td>
+                            <td>
+                               
+                                {{product.neighbours2 ? product.neighbours2.extension : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Neighbour Occupation</strong>
+                            </td>
+                            <td>
+                                {{product.neighbours2 ? product.neighbours2.organization: ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Second Neighbour Organization Name</strong>
+                            </td>
+                            <td>
+                                {{product.neighbours2 ? product.neighbours2.occupation : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id)" *ngIf="product.status==2"></button>
+                                <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="disable(product._id)" *ngIf="product.status==2"></button>
+                                <p *ngIf='product.status == 1'>Approved</p>
+                                <p *ngIf='product.status == 0'>Rejected</p>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="updateSite(siteDetail)" *ngIf="HideCancelButton"></button>
+                        </div>
+                    </ng-template> -->
+                </p-table>
+            </div> 
+        </p-tabPanel>
+        <p-tabPanel header="Header III">
+            <ng-template pTemplate = "header">
+                <i class="fa fa-paw"></i>
+                <span>Pet Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Pet Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>User Have Pet</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.pets?'Yes':'No'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Name</strong>
+                            </td>
+                            <td>
+                               
+                                {{product.pets ? product.pets.petName :' '}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Age</strong>
+                            </td>
+                            <td>
+                               
+                                {{product.pets? product.pets.petAge: ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Ad Title</strong>
+                            </td>
+                            <td>
+                                {{product.pets? product.pets.petAdTitle : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Issue Description</strong>
+                            </td>
+                            <td>
+                                {{product.pets? product.pets.petIssue : ''}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Image</strong>
+                            </td>
+                            <td>
+                                <div class="image">
+                                    <a href="{{ product.pets.petImage | server }}" target='_blank'>
+                                        <img src="{{ product.pets.petImage | server }}" alt="User's pet image" style='width: 100px; height: 100px'>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Action</strong></td>
+                            <td>
+                                <button pButton pRipple type="button" label="Approve" class="p-button-raised p-button-success" (click)="enable(product._id)" *ngIf="product.status==2"></button>
+                                <button pButton pRipple type="button" label="Reject" class="p-button-raised p-button-danger" (click)="disable(product._id)" *ngIf="product.status==2"></button>
+                                <p *ngIf='product.status == 1'>Approved</p>
+                                <p *ngIf='product.status == 0'>Rejected</p>
+                            </td>
+                        </tr>
+                       
+                    
+                    </ng-template>
+                    <!-- <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="updateSite(siteDetail)" *ngIf="HideCancelButton"></button>
+                        </div>
+                    </ng-template> -->
+                </p-table>
+            </div>
+            
+        </p-tabPanel>
+    </p-tabView>
+  </div>
+
+  <p-confirmDialog [style]="{width: '65vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+   <!-- Message -->
+            
+   <p-toast></p-toast>
+
+
+
+   <!--         <p-tabPanel header="Header IV">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-credit-card"></i>
+                <span>Bump Up Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">BumpUp Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>User Have BumpUp Plan?</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.bumps==0 ? 'No': 'Yes'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bump Price</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.lastname}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>BumpUp Counter</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.email}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bump Up Auto Renewal</strong>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    
+                    </ng-template>
+                     <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="updateSite(siteDetail)" *ngIf="HideCancelButton"></button>
+                        </div>
+                    </ng-template> -->
+                <!-- </p-table>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Header V">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-credit-card"></i>
+                <span>Advertise Detail</span>
+            </ng-template>
+            <div class="card">
+                <p-table #dt [value]="siteDetail" [rows]="5" [paginator]="false" [(selection)]="selectedProducts" [rowHover]="true"
+                    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true" styleClass="p-datatable-striped ">
+                    <ng-template pTemplate="caption" >
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Advertise Details</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td><strong>User Have Advertise Plan?</strong>
+                            </td>
+                            <td>
+                              
+                                    {{product.firstname}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>advertise Price</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.lastname}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Advertise Counter Days</strong>
+                            </td>
+                            <td>
+                               
+                                    {{product.email}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Advertise Auto Renewal</strong>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    
+                    </ng-template> -->
+                    <!-- <ng-template pTemplate="summary">
+                        <div class="p-text-right mb-1">
+                            <button pButton pRipple label="Update" icon="pi pi-pencil" class="p-button-success p-mr-1"
+                                (click)="updateSite(siteDetail)" *ngIf="HideCancelButton"></button>
+                        </div>
+                    </ng-template> -->
+                <!-- </p-table>
+            </div> 
+        </p-tabPanel>  -->

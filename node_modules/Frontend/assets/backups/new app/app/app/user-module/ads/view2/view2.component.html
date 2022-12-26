@@ -1,0 +1,178 @@
+<div class="row main-row" >
+	<!-- Region Greater Start -->
+	<section class="region-greater" style="width: 100%;">
+		<div class="container-fluid">
+			<form>
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group" >
+							<button type="button" class="select-wrap form-control btn-dropdown" (click)='showRegion= !showRegion'>
+								Region : <span id="region_name">{{ selectedStateName }}</span>
+							</button>
+							<div class="cust-dropdown" [class.show]='showRegion'>
+								<div id="accordion">
+									<div class="card" *ngFor='let country of countries'>
+										<div class="card-header capitalize" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">
+											{{country.countryName}}
+										</div>
+										<div id="collapse0" class="collapse" data-parent="#accordion">
+											<ng-container *ngFor='let state of country.states'>
+												<div class="card-body" (click)='change_state(country._id, state.stateName)'>
+													<a class="drop-link capitalize" href="javascript:void(0)">{{state.stateName}}	</a>
+												</div>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="select-wrap">
+								<select class="form-control">
+									<option>
+										Region Greater Toronto A...
+									</option>
+									<option>
+										Region Greater Toronto A...
+									</option>
+									<option>
+										Region Greater Toronto A...
+									</option>
+								</select>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+							<div class="dropdown">
+								<button id="dLabel" class="form-control select-wrap btn-category" type="button"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Category: <span id="catval" class='capitalize'>{{selectedCategory}}</span>
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dLabel">
+									<ng-container *ngFor='let category of categories'>
+										<a class='capitalize' href="javascript:void(0);" (click)='change_category(category.title)'>
+											<img src="{{category.imagePath | server}}" style="width: 35px; height: 35px; border-radius: 50%">
+											{{category.title}}
+										</a>
+									</ng-container>
+                                </div>
+							</div>
+							<!-- <div class="select-wrap">
+								<select class="form-control">
+									<option>
+										Category
+									</option>
+									<option>
+										Category
+									</option>
+									<option>
+										Category
+									</option>
+								</select>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="form-group">
+							<i class="fa fa-search"></i>
+							<input type="text" name="looking" id="loking_for_ad_title" class="form-control looking-text"
+								placeholder="Who are you looking for?" (keyup)="search($event)">
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<ul class="grid-list">
+							<li [class.active]='layout == "list"' id="list" (click)="layout='list'">
+								<a>
+									<i class="fa fa-bars" aria-hidden="true"></i>
+									List
+								</a>
+							</li>
+							<li [class.active]='layout == "grid"' id="grid" (click)="layout = 'grid'">
+								<a>
+									<i class="fa fa-th-large" aria-hidden="true"></i>
+									Grid
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-12">
+						<button class="btn btn-transfer">
+							<img src="../../../../assets/images/transfer-1.png" alt="transfer">
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<!-- Region Greater End -->
+	<!-- Panhandlers Start -->
+	<section class="pan-handlers" style="width: 100%;">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="pan-list">
+						<h1 class="story-head capitalize">{{selectedCategory}}</h1>
+						<div class="panl-list-sec" [class.submitting]='submitting'>
+							<div id="posts" class="row mt-4">
+								<div class="item col-sm-12 mb-3" *ngFor='let ad of ads' [class]='{"col-md-12": layout=="list", "col-md-4": layout=="grid"}'>
+									<a href="javascript:void(0);" (click)='view_full(ad._id)'>
+										<ul>
+											<li>
+												<img src="{{ad.identityImages?.length > 0 ? (ad.identityImages[0] | server) : defaultImage}}">
+											</li>
+											<li>
+												<div class="cancer-des">
+													{{ad.categoryName}} <p>
+														{{ad.adTitle.substr(0, 30)}}...<br>
+														<mark style="background: #fcf8e3;
+														color: #8d0b77;">{{ad.receiverId}}</mark> <br>
+														{{ad.firstName || ad.agencyTitle || ad.sponsorTitle}}
+														{{ad.city}}
+													</p>
+												</div>
+											</li>
+										</ul>
+									</a>
+								</div>
+								<div class="loader-spinner" *ngIf='loading'></div>
+							</div>
+						</div>
+					</div>
+					<div style="margin:0 auto;" class="col-12 col-md-10 col-lg-9 col-xl-7 mt-1 mb-3">
+						<p-paginator [rows]="20" [totalRecords]="totalRecords" [showCurrentPageReport]="true"  
+						currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+					[showPageLinks]="true" (onPageChange)="paginate($event)"  ></p-paginator>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="city-list" id="load_selected_cities">
+						<h2 class="city-head">Cities</h2>
+						<div class="city-checkbx-list">
+							<label class="city-checkbox">
+								All
+								<input type="radio" name="cityname" checked="checked" value="-1"
+									onclick="getAllCause()">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="city-checkbx-list" *ngFor='let city of cities'>
+							<label class="city-checkbox capitalize">
+								{{city.cityName}}
+								<input type="radio" name="cityname" value="-1"
+									(click)="change_city(city.stateName, city.cityName)">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Panhandlers End -->
+
+
+</div>
+
+
+
+

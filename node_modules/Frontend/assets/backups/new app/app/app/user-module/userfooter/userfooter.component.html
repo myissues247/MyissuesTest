@@ -1,0 +1,154 @@
+<footer class="custom-footer">
+    <div class="upper-footer">
+        <div class="container">
+            <div class="upper-footer-inner-content">
+                <div class="row">
+                    <div class="col-md-4 mb-30">
+                        <div class="custom-footer-logo">
+                            <a routerLink='/' class="custom-logo-link" rel="home"><img width="200"
+                                    height="98" src="{{siteSetting.imagePath | server}}"
+                                    class="custom-logo" alt="My Issues"></a>
+                            <section id="text-2" class="widget widget_text">
+                                <div class="textwidget">
+                                    <p>We feed the hungry today and create solutions that will end hunger tomorrow</p>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="social-media">
+                            <ul id="menu-social-menu" class="menu">
+                                <li id="menu-item-79" class="fa fa-facebook">
+                                    <a target="_blank" href="{{siteSetting.facebook}}">Facebook</a>
+                                </li>
+                                <li id="menu-item-80" class="fa fa-twitter">
+                                    <a target="_blank" href="{{siteSetting.twitter}}">Twitter</a>
+                                </li>
+                                <li id="menu-item-81" class="fa fa-instagram">
+                                    <a target="_blank" href="siteSetting.instagram">Instagram</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-30">
+                        <div class="custom-footer-menu-links custom-footer-links">
+                            <section id="nav_menu-2" class="widget widget_nav_menu">
+                                <h5 class="widget-title">Quick Links</h5>
+                                <div class="menu-quick-links-container">
+                                    <ul id="menu-quick-links" class="menu">
+                                        <li id="menu-item-94"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94">
+                                            <a href="javascript:void(0)" routerLink='/myissues/about-us'>About us</a>
+                                        </li>
+                                        <li id="menu-item-83"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83">
+                                            <a href="javascript:void(0)" routerLink='/myissues/ad-foodbank'>Food Bank</a>
+                                        </li>
+                                        <li id="menu-item-82"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82">
+                                            <a href="javascript:void(0)" routerLink='/agencies'>Agencies</a>
+                                        </li>
+                                        <li id="menu-item-85"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85">
+                                            <a href="javascript:void(0)" routerLink="/myissues/how-it-works">How it Works</a>
+                                        </li>
+                                        <li id="menu-item-22131"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22131">
+                                            <a href="javascript:void(0)" routerLink='/ads/view'>Advertising</a>
+                                        </li>
+                                        <li id="menu-item-91"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-91">
+                                            <a href="javascript:void(0)" routerLink='/myissues/privacy-policy'>Privacy Policy</a>
+                                        </li>
+                                        <li id="menu-item-90"
+                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-90">
+                                            <a href="javascript:void(0)">Contact us</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-30">
+                        <div class="custom-footer-links">
+                            <section id="text-3" class="widget widget_text">
+                                <h5 class="widget-title">Get In Touch</h5>
+                                <div class="textwidget">
+                                    <div role="form" class="wpcf7" id="wpcf7-f5-o1" lang="en-US" dir="ltr">
+
+                                        <form id="join_discussion" class="wpcf7-form" #QueryForm='ngForm' (ngSubmit)='submit_query(QueryForm)'>
+                                            <!-- <div style="display: none;">
+                                                <input type="hidden" name="_wpcf7" value="5">
+                                                <input type="hidden" name="_wpcf7_version" value="5.1.7">
+                                                <input type="hidden" name="_wpcf7_locale" value="en_US">
+                                                <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f5-o1">
+                                                <input type="hidden" name="_wpcf7_container_post" value="0">
+                                            </div> -->
+                                            <div class="custom-footer-form">
+                                                <div class="form-group">
+                                                    <span class="wpcf7-form-control-wrap your-name"><input type="text"
+                                                            name="name" id="name" pattern="[a-zA-Z ]+" value="" size="40"
+                                                            class="wpcf7-form-control wpcf7-text form-control capitalize"  
+                                                            aria-invalid="false" placeholder="Name" #name='ngModel' ngModel required>
+                                                        <span class='error' *ngIf='QueryForm.submitted && name.invalid'>Please enter a valid Name</span>
+                                                        </span>
+                                                    
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="wpcf7-form-control-wrap email">
+                                                        <input type="email" name="email" value="" id="email" size="40" pattern='^([a-z0-9_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$' 
+                                                            class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control"
+                                                            aria-required="true" aria-invalid="false"
+                                                            placeholder="Enter Email" #email='ngModel' ngModel required>
+                                                            <span class='error' *ngIf='QueryForm.submitted && email.invalid'>Please enter a valid Email</span>
+                                                        </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="wpcf7-form-control-wrap Message"><textarea
+                                                            name="message" id="comment" cols="40" rows="10"
+                                                            class="wpcf7-form-control wpcf7-textarea form-control"
+                                                            aria-invalid="false"
+                                                            placeholder="Message" #message='ngModel' ngModel required></textarea>
+                                                            <span class='error' *ngIf='QueryForm.submitted && message.invalid'>Please enter a valid message</span>
+                                                        </span>
+                                                </div>
+                                                <p> <input value="Submit" type='submit'
+                                                        class="wpcf7-form-control wpcf7-submit submit-btn hvr-buzz-out"><span
+                                                        class="ajax-loader"></span>
+                                                </p>
+                                            </div>
+                                            <div class="wpcf7-response-output wpcf7-display-none"></div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="custom-footer-address-links custom-footer-links">
+                            <section id="text-4" class="widget widget_text">
+                                <h5 class="widget-title">Contact</h5>
+                                <div class="textwidget">
+                                    <ul>
+                                        <li><i class="fa fa-map-marker"></i> {{siteSetting.location}}</li>
+                                        <li><a class='link' href="{{'tel:' + siteSetting.contactNo}}"><i class="fa fa-phone"></i>{{siteSetting.contactNo}}</a></li>
+                                        <li><a  class='link' href="{{'mailto:' + siteSetting.email}}"><i
+                                                    class="fa fa-envelope"></i>{{siteSetting.email}}</a></li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lower-footer">
+        <div class="container">
+            <div class="copy">
+                <p>{{ siteSetting.copyright }} </p>
+            </div>
+        </div>
+    </div>
+</footer>

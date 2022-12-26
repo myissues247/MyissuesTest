@@ -1,0 +1,64 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/images/logo-myissue.jpg" width="120" height="60" class="d-inline-block align-top" alt="">
+    
+    </a>
+  </nav>
+<div class="container-fluid">
+   
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-5 bg-dark" style="margin: 0 auto;"></div>
+    <div class="col-sm-12 col-md-5" style="margin: 0 auto;">
+        <div class="card bg-light">
+            <div class="card-header">
+               <h4>Login</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="p-fluid">
+                  
+                    <div class="form-group mt-4">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon">
+                                <i class="pi pi-envelope"></i>
+                            </span>
+                            <span class="p-float-label">
+                                <input id="float-input" type="mail" pInputText name="email" [(ngModel)]="mailProp"> 
+                                <label for="float-input">Mail Id</label>
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <div class="form-group mt-4">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon">
+                                <i class="pi pi-key"></i>
+                            </span>
+                            <span class="p-float-label">
+                                <input id="float-input1" type="password" pInputText name="password" [(ngModel)]="passProp"> 
+                                <label for="float-input1">Password</label>
+                            </span>
+                        </div>
+                        <h6 class="mt-1"><a href="" routerLink="/signup">Forgot Password?</a></h6>
+                    </div>
+                    <div class="form-group mt-4">
+                        <div class="p-field-checkbox">
+                            <p-checkbox  binary="true" inputId="binary"></p-checkbox>
+                            <label for="binary" class="ml-2 pt-2">Remember Me</label>
+                        </div>
+                    </div>
+                    <div class="form-group mt-4">
+                      
+                            <button pButton pRipple type="button" label="Sign In" class="p-button-raised  p-button-help" (click)="signin()"></button>
+                    
+                    </div>
+      
+                </div> 
+
+        </div>
+        
+    </div>
+         
+   </div>
+    
+</div>
